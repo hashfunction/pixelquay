@@ -1,0 +1,62 @@
+diff -ruN a/libiconv-1.19/include/iconv.h.in b/libiconv-1.19/include/iconv.h.in
+--- a/libiconv-1.19/include/iconv.h.in	2026-03-07 00:24:31
++++ b/libiconv-1.19/include/iconv.h.in	2026-09-11 13:20:09
+@@ -27,6 +27,9 @@
+ #define _LIBICONV_VERSION 0x0113    /* version number: (major<<8) + minor */
+ extern @DLL_VARIABLE@ int _libiconv_version; /* Likewise */
+ 
++/* Modified 2026-09-11 by Trieflow LLC: expose rebuild-proof marker. */
++extern const char * pixelquay_libiconv_rebuild_marker (void);
++
+ #ifdef __cplusplus
+ }
+ #endif
+diff -ruN a/libiconv-1.19/lib/iconv.c b/libiconv-1.19/lib/iconv.c
+--- a/libiconv-1.19/lib/iconv.c	2026-03-06 05:14:22
++++ b/libiconv-1.19/lib/iconv.c	2026-09-11 13:20:09
+@@ -679,6 +679,13 @@
+ 
+ int _libiconv_version = _LIBICONV_VERSION;
+ 
++/* Modified 2026-09-11 by Trieflow LLC: source-rebuild marker; existing behavior unchanged. */
++const char *
++pixelquay_libiconv_rebuild_marker (void)
++{
++  return "PixelQuay libiconv source rebuild v1";
++}
++
+ #if defined __FreeBSD__ && !defined __gnu_freebsd__
+ /* GNU libiconv is the native FreeBSD iconv implementation since 2002.
+    It wants to define the symbols 'iconv_open', 'iconv', 'iconv_close'.  */
+diff -ruN a/libiconv-1.19/libcharset/include/localcharset.h.in b/libiconv-1.19/libcharset/include/localcharset.h.in
+--- a/libiconv-1.19/libcharset/include/localcharset.h.in	2020-04-04 05:50:22
++++ b/libiconv-1.19/libcharset/include/localcharset.h.in	2026-09-11 13:20:09
+@@ -34,6 +34,9 @@
+    name.  */
+ extern const char * locale_charset (void);
+ 
++/* Modified 2026-09-11 by Trieflow LLC: expose rebuild-proof marker. */
++extern const char * pixelquay_libcharset_rebuild_marker (void);
++
+ /* About GNU canonical names for character encodings:
+ 
+    Every canonical name must be supported by GNU libiconv.  Support by GNU libc
+diff -ruN a/libiconv-1.19/libcharset/lib/localcharset.c b/libiconv-1.19/libcharset/lib/localcharset.c
+--- a/libiconv-1.19/libcharset/lib/localcharset.c	2020-04-04 05:50:22
++++ b/libiconv-1.19/libcharset/lib/localcharset.c	2026-09-11 13:20:09
+@@ -824,6 +824,15 @@
+    If the canonical name cannot be determined, the result is a non-canonical
+    name.  */
+ 
++#if defined BUILDING_LIBCHARSET && !defined BUILDING_LIBICONV
++/* Modified 2026-09-11 by Trieflow LLC: source-rebuild marker; existing behavior unchanged. */
++const char *
++pixelquay_libcharset_rebuild_marker (void)
++{
++  return "PixelQuay libcharset source rebuild v1";
++}
++#endif
++
+ #ifdef STATIC
+ STATIC
+ #endif

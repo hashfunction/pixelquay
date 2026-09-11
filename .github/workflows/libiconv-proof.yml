@@ -1,0 +1,45 @@
+name: PixelQuay retained libiconv DLL proof
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  libiconv-windows-x64:
+    runs-on: windows-2025
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - name: Install current CLANG64 proof environment
+        uses: msys2/setup-msys2@66cd2cce69caa17b53920067426061ca1de3a884
+        with:
+          msystem: CLANG64
+          path-type: strict
+          update: true
+          install: >-
+            base-devel
+            git
+            mingw-w64-clang-x86_64-clang
+            mingw-w64-clang-x86_64-autotools
+            mingw-w64-clang-x86_64-doxygen
+            mingw-w64-clang-x86_64-gettext-tools
+            mingw-w64-clang-x86_64-gperf
+            mingw-w64-clang-x86_64-libiconv
+            mingw-w64-clang-x86_64-python
+      - name: Validate source and receipt rejection cases
+        shell: msys2 {0}
+        run: /clang64/bin/python.exe -m unittest discover -s installer/windows/rebuild/libiconv/tests -v
+      - name: Build both source variants and exercise both DLLs
+        shell: msys2 {0}
+        run: |
+          mkdir -p build-evidence
+          bash installer/windows/rebuild/libiconv/prove-windows.sh "$RUNNER_TEMP/pixelquay-libiconv-proof" "$GITHUB_WORKSPACE/build-evidence/libiconv"
+      - name: Preserve proof metadata only
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: PixelQuay-libiconv-proof
+          path: |
+            build-evidence/libiconv/*.json
+            build-evidence/libiconv/*.txt
+          if-no-files-found: error
+          retention-days: 14

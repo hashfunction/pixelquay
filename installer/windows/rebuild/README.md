@@ -159,3 +159,8 @@ MSIX signing/install and broker-observed changed-DLL loading remain separate
 gates. The other runtime sources, generated/embedded code provenance, retained
 LGPL source delivery and broader license choices still require their own
 evidence. This increment changes none of those statuses.
+
+The companion [`libiconv/README.md`](libiconv/README.md) applies the same
+library-only boundary to the remaining `libcharset-1.dll` and `libiconv-2.dll`
+from the single libiconv split package. Its independent receipt keeps full app
+rebuild, MSIX creation and installed changed-module observation false.
