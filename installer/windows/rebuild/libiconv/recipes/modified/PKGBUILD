@@ -28,7 +28,7 @@ sha256sums=('88dd96a8c0464eca144fc791ae60cd31cd8ee78321e67397e25fc095c4a19aa6'
             '89d5c0f666e50a0186cfb142ba7b77e8fe1ac4d65bdfd9ae14ae8d2f0045a87c'
             '6b6e2393840f4dc6067587165777b1a07978f4c05247d7c1010a45ad251bbeeb'
             '56e7ec406bf42eb66b1d972f20d229f7a76ba00c38c7b4403bf348875704baae'
-            '7e86f920a13765f0b38ad82058ba1dc7a17fa5eadb42c92d97d21435381febd1')
+            'cb7c294824d4ecf5d1f1f05f7b5bf723faf0b44f10c06d11da09bcc2fa6b64d0')
 validpgpkeys=('E0FFBD975397F77A32AB76ECB6301D9E1BBEAC08') # Bruno Haible (Free Software Development) <bruno@clisp.org>
 
 apply_patch_with_msg() {

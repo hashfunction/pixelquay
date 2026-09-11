@@ -50,7 +50,8 @@ class LibiconvProofTests(unittest.TestCase):
             self.assertEqual(source.digest((output / "upstream/libiconv-1.19/COPYING.LIB").read_bytes())["sha256"], source.LICENSE_HASHES["COPYING.LIB"])
             self.assertFalse(record["executedRecipe"])
             license_before = (output / "upstream/libiconv-1.19/COPYING.LIB").read_bytes()
-            subprocess.run(["patch", "-p1", "-i", str(HERE / "001-local-markers.patch")], cwd=output / "upstream", check=True, capture_output=True)
+            # Match PKGBUILD prepare(): it enters libiconv-1.19 before -p1.
+            subprocess.run(["patch", "-p1", "-i", str(HERE / "001-local-markers.patch")], cwd=output / "upstream/libiconv-1.19", check=True, capture_output=True)
             changed = ["include/iconv.h.in", "lib/iconv.c", "libcharset/include/localcharset.h.in", "libcharset/lib/localcharset.c"]
             for name in changed:
                 self.assertIn("Modified 2026-09-11 by Trieflow LLC", (output / "upstream/libiconv-1.19" / name).read_text())

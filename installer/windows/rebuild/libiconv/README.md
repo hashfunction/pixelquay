@@ -22,6 +22,13 @@ in `NativeSignatureVerification.json`; the workflow therefore uses makepkg's
 JSON/text evidence only. DLLs, packages, EXEs, signing material and source archives
 are excluded from the artifact.
 
+Windows run `34645193416` proved the original recipe through its native tests but
+the modified recipe stopped in `prepare()`: the local patch named paths relative
+to the source archive's parent while the recipe runs `patch -p1` from inside
+`libiconv-1.19`. The patch now names paths relative to that production working
+directory, and the source regression applies it from the same directory. A fresh
+Windows run is required before the two-DLL proof can be accepted.
+
 This proof can establish that both libraries can be rebuilt and replaced at their
 normal ABI names. It does not rebuild PixelQuay, create an MSIX, prove the installed
 application loads the modified DLLs, perform the LGPL-to-GPL license conversion,
