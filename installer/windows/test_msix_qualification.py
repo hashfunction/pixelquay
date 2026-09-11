@@ -228,6 +228,33 @@ class PackageVerificationTests(QualificationFixture):
 		result = msix.verify_msix(package, record['payload'])
 		self.assertEqual(len(record['payload']), result['verifiedPayloadFiles'])
 
+	def test_opc_encoded_names_match_exact_decoded_payload_bytes(self):
+		package, record = self.package()
+		# The Windows 10.0.26100.0 SDK encoded libc++.dll this way in run
+		# 34596219976. A literal percent filename must be decoded only once.
+		pairs = [('bin/libc%2B%2B.dll', 'bin/libc++.dll'),
+			('share/R%C3%A9sum%C3%A9%20note.txt', 'share/Résumé note.txt'),
+			('share/literal%2520.txt', 'share/literal%20.txt')]
+		with zipfile.ZipFile(package, 'a') as archive:
+			for encoded, decoded in pairs:
+				data = ('owned bytes for ' + decoded).encode('utf-8')
+				archive.writestr(encoded, data)
+				record['payload'][decoded] = {'bytes': len(data), 'sha256': sha(data)}
+		self.assertEqual(len(record['payload']), msix.verify_msix(package, record['payload'])['verifiedPayloadFiles'])
+
+	def test_opc_decoding_rejects_aliases_traversal_and_malformed_names(self):
+		package, record = self.package()
+		for name in ('bin/%50ixelQuay.exe', 'bin%2FPixelQuay.exe', 'bin%5cPixelQuay.exe',
+			'bin/%2e%2e/escaped.txt', '%2Fabsolute.txt', 'share/bad%GG.txt',
+			'share/bad%.txt', 'share/bad%FF.txt', 'share/bad%00.txt'):
+			with self.subTest(name=name):
+				changed = self.root / 'encoded-invalid.msix'
+				shutil.copyfile(package, changed)
+				with zipfile.ZipFile(changed, 'a') as archive:
+					archive.writestr(name, b'unexpected')
+				with self.assertRaises(ValueError):
+					msix.verify_msix(changed, record['payload'])
+
 	def test_independent_zip_verifier_rejects_tamper_and_manifest_semantics(self):
 		package, record = self.package(('bin/PixelQuay.exe', b'tampered'))
 		with self.assertRaisesRegex(ValueError, 'hash|size'):

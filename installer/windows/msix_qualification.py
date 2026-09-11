@@ -18,6 +18,7 @@ import subprocess
 import sys
 import tempfile
 import unicodedata
+from urllib.parse import unquote
 import xml.etree.ElementTree as ET
 import zipfile
 import zlib
@@ -498,6 +499,15 @@ def stage_release(release, artwork, stage, source_commit):
 		raise
 
 
+def _decode_opc_path(value):
+	# MakeAppx stores OPC URI names in the ZIP, e.g. libc++.dll becomes
+	# libc%2B%2B.dll. Decode once before payload/hash and alias comparison.
+	# Escaped separators cannot change the archive's directory hierarchy.
+	if re.search(r'%(?![0-9A-Fa-f]{2})|%(?:2f|5c)', value, re.I):
+		raise ValueError(f'Malformed or hierarchy-changing OPC path: {value!r}')
+	return _checked_path(unquote(value, encoding='utf-8', errors='strict'))
+
+
 def verify_msix(path, expected):
 	if not isinstance(expected, dict) or 'AppxManifest.xml' not in expected:
 		raise ValueError('Invalid expected package payload')
@@ -512,8 +522,7 @@ def verify_msix(path, expected):
 	manifest_data = None
 	with zipfile.ZipFile(path) as archive:
 		for info in archive.infolist():
-			name = info.filename.rstrip('/') if info.is_dir() else info.filename
-			_checked_path(name)
+			name = _decode_opc_path(info.filename.rstrip('/') if info.is_dir() else info.filename)
 			mode = info.external_attr >> 16
 			if info.flag_bits & 1:
 				raise ValueError(f'Encrypted package entry: {info.filename}')

@@ -45,6 +45,8 @@ The builder requires the absolute `x64\makeappx.exe` path under an explicit Wind
 
 The unsigned package and `package-record.json` are published only into a newly created output directory. All record claims remain false for signing, installation, license clearance, public release, and Store submission.
 
+Windows run `34596219976` completed actual SDK pack/unpack, then exposed an independent-verifier filename mismatch: SDK 10.0.26100.0 stored `bin/libc++.dll` as `bin/libc%2B%2B.dll` inside the ZIP. MSIX uses the [OPC format](https://learn.microsoft.com/en-us/windows/win32/appxpkg/appx-portal). The verifier now decodes URI escapes exactly once before comparing payload names and hashes, rejects encoded separators, malformed escapes, invalid UTF-8 and unsafe decoded paths, and checks aliases after decoding. A literal percent filename remains literal after one decode; plus signs never become spaces. New ZIP fixtures cover the actual library name, Unicode/spaces, literal percent, aliases and invalid paths. The prior code failed the encoded-library fixture; the repaired Python suite passes 35 cases with one Windows-only junction case skipped locally. Actual installed-package qualification still requires the next Windows run.
+
 ## Root-owned workflow hooks
 
 After the existing restore/test/publish/inventory steps produce `release`, use the exact installed SDK selection already recorded by the workflow:
