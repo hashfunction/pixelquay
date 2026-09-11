@@ -37,7 +37,18 @@
     <GtkFile Include="$(MinGWBinFolder)\libgobject-2.0-0.dll" />
     <GtkFile Include="$(MinGWBinFolder)\libgraphene-1.0-0.dll" />
     <GtkFile Include="$(MinGWBinFolder)\libgraphite2.dll" />
-    <GtkFile Include="$(MinGWBinFolder)\libgst*.dll" />
+    <!-- Exact GStreamer PE import closure of the qualified GTK4/native roots. -->
+    <GtkFile Include="$(MinGWBinFolder)\libgstallocators-1.0-0.dll" />
+    <GtkFile Include="$(MinGWBinFolder)\libgstaudio-1.0-0.dll" />
+    <GtkFile Include="$(MinGWBinFolder)\libgstbase-1.0-0.dll" />
+    <GtkFile Include="$(MinGWBinFolder)\libgstd3d12-1.0-0.dll" />
+    <GtkFile Include="$(MinGWBinFolder)\libgstd3dshader-1.0-0.dll" />
+    <GtkFile Include="$(MinGWBinFolder)\libgstgl-1.0-0.dll" />
+    <GtkFile Include="$(MinGWBinFolder)\libgstpbutils-1.0-0.dll" />
+    <GtkFile Include="$(MinGWBinFolder)\libgstplay-1.0-0.dll" />
+    <GtkFile Include="$(MinGWBinFolder)\libgstreamer-1.0-0.dll" />
+    <GtkFile Include="$(MinGWBinFolder)\libgsttag-1.0-0.dll" />
+    <GtkFile Include="$(MinGWBinFolder)\libgstvideo-1.0-0.dll" />
     <GtkFile Include="$(MinGWBinFolder)\libgtk-4-1.dll" />
     <GtkFile Include="$(MinGWBinFolder)\libharfbuzz-0.dll" />
     <GtkFile Include="$(MinGWBinFolder)\libharfbuzz-subset-0.dll" />
