@@ -33,11 +33,11 @@ def build_inventory(mingw, file_list, output):
     for entry in database.iterdir():
         if not (entry/'desc').is_file() or not (entry/'files').is_file(): continue
         meta = fields(entry/'desc')
-        name = meta.get('NAME', [''])[0]
+        name = (meta.get('NAME') or [''])[0]
         files = fields(entry/'files').get('FILES', [])
         packages[name] = {
-            'name': name, 'version': meta.get('VERSION', [''])[0],
-            'licenses': meta.get('LICENSE', []), 'upstream': meta.get('URL', [''])[0],
+            'name': name, 'version': (meta.get('VERSION') or [''])[0],
+            'licenses': meta.get('LICENSE', []), 'upstream': (meta.get('URL') or [''])[0],
             'packageSource': 'MSYS2 CLANG64 installed pacman database',
             'licenseFiles': [f for f in files if '/share/licenses/' in f and not f.endswith('/')]
         }
@@ -60,7 +60,7 @@ def build_inventory(mingw, file_list, output):
         names = sorted({owners[p] for p in provenance})
         for name in names:
             package = packages[name]
-            if not package['version'] or not package['licenses'] or not package['upstream']:
+            if not package['name'] or not package['version'] or not package['licenses'] or not package['upstream']:
                 raise ValueError(f'Missing version/license/source metadata: {name}')
             license_files = [msys/f for f in package['licenseFiles']]
             if not license_files or any(not f.is_file() for f in license_files):

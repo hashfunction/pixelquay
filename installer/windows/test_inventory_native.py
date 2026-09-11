@@ -57,4 +57,26 @@ class NativeInventoryTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, 'license text'):
                 module.build_inventory(root/'clang64',listing,root/'out.json')
 
+    def test_unused_package_with_empty_metadata_does_not_break_inventory(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root=Path(tmp)
+            listing, dll=self.fixture(root)
+            other=root/'var/lib/pacman/local/unrelated'
+            other.mkdir()
+            (other/'desc').write_text('%NAME%\nunrelated\n\n%VERSION%\n\n%URL%\n\n')
+            (other/'files').write_text('%FILES%\nusr/bin/unrelated.exe\n')
+            output=root/'out.json'
+            module.build_inventory(root/'clang64',listing,output)
+            self.assertEqual(len(json.loads(output.read_text())['files']),1)
+
+    def test_used_package_with_empty_url_fails_closed_with_metadata_error(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root=Path(tmp)
+            listing, dll=self.fixture(root)
+            desc=root/'var/lib/pacman/local/gtk4-1.2-1/desc'
+            desc.write_text(desc.read_text().replace('https://gtk.org',''))
+            with self.assertRaisesRegex(ValueError, 'version/license/source metadata'):
+                module.build_inventory(root/'clang64',listing,root/'out.json')
+            self.assertFalse((root/'out.json').exists())
+
 if __name__ == '__main__': unittest.main()
