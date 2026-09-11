@@ -6,13 +6,14 @@ import io
 import json
 import os
 from pathlib import Path
+import re
 import shutil
 import subprocess
 import sys
 import tarfile
 
 from libdatrie_source import materialize, digest, checked_parents, write_new, write_json, _regular_stream, _checked_path
-from library_receipt import SELECTED_ARCHIVE_HASHES, SELECTED_PACKAGES, COPYING_SHA, pe_inventory, read_upstream_tests, validate_environment, validate_pair
+from library_receipt import SELECTED_ARCHIVE_HASHES, SELECTED_PACKAGES, COPYING_SHA, UPSTREAM_TESTS, pe_inventory, read_upstream_tests, validate_environment, validate_pair
 
 HERE = Path(__file__).resolve().parent
 SOURCE = HERE.parents[2]
@@ -26,6 +27,24 @@ def file_record(path):
     with _regular_stream(path) as stream:
         value = stream.read()
     return digest(value)
+
+
+def verify_post_test_library(library, retained_hash):
+    """Bind the check() receipt to the same pre-package build DLL it hashed."""
+    with _regular_stream(retained_hash) as stream:
+        tested_hash_bytes = stream.read(66)
+    if len(tested_hash_bytes) > 65:
+        raise ValueError('Oversized post-test library hash evidence')
+    try:
+        tested_library_hash = tested_hash_bytes.decode('ascii').strip()
+    except UnicodeDecodeError as error:
+        raise ValueError('Non-ASCII post-test library hash evidence') from error
+    if not re.fullmatch(r'[0-9a-f]{64}', tested_library_hash):
+        raise ValueError('Malformed post-test library hash evidence')
+    record = file_record(library)
+    if tested_library_hash != record['sha256']:
+        raise ValueError('Retained post-test hash differs from the built library')
+    return record
 
 
 def source_state():
@@ -58,9 +77,35 @@ def prepare(work, evidence):
         root.mkdir()
         write_new(root / 'PKGBUILD', (HERE / 'recipes' / variant / 'PKGBUILD').read_bytes())
         write_new(root / 'libdatrie-0.2.14.tar.xz', (work / 'source/recipe/libdatrie-0.2.14.tar.xz').read_bytes())
+        write_new(root / '002-windows-alpha-test-data.patch', (HERE / '002-windows-alpha-test-data.patch').read_bytes())
         if variant == 'modified': write_new(root / '001-local-marker.patch', (HERE / '001-local-marker.patch').read_bytes())
         (root / 'packages').mkdir(); (root / 'probe-work').mkdir(); (root / 'negative-probe-work').mkdir()
     write_json(evidence / 'inputs.json', {'sourceCommit': commit, 'inputs': inputs, 'sourceReceipt': original_source})
+
+
+def preserve_failed_test_logs(build_root, evidence, variant):
+    """Copy exact Automake test diagnostics before a failed runner is discarded."""
+    if variant not in ('original', 'modified'):
+        raise ValueError('Unknown libdatrie proof variant')
+    tests = Path(build_root) / 'tests'
+    names = ['test-suite.log']
+    for name in UPSTREAM_TESTS:
+        names.extend((name + '.log', name + '.trs'))
+    bodies = {}
+    for name in names:
+        with _regular_stream(tests / name) as stream:
+            body = stream.read(2 * 1024 * 1024 + 1)
+        if len(body) > 2 * 1024 * 1024:
+            raise ValueError(f'Oversized failed test diagnostic: {name}')
+        bodies[name] = body
+    outputs = {
+        name: checked_parents(Path(evidence) / f'{variant}-{name}.txt') for name in names
+    }
+    if any(os.path.lexists(path) for path in outputs.values()):
+        raise FileExistsError('Failed test evidence already exists and will not be replaced')
+    for name in names:
+        write_new(outputs[name], bodies[name])
+    return {'variant': variant, 'files': names}
 
 
 def package_versions(text):
@@ -250,9 +295,14 @@ def verify(work, evidence):
             raise ValueError('Actual package does not bind the local build recipe')
         probe = json.loads((evidence / (variant + '-probe.json')).read_text())
         build = root / 'src/build-CLANG64'
+        tested_build_library = verify_post_test_library(
+            build / 'datrie/.libs/libdatrie-1.dll',
+            build / 'library-unchanged-by-tests.sha256',
+        )
         results[variant] = {
             **file_record(dll), **pe_inventory(dll.read_bytes()), 'upstreamTests': read_upstream_tests(build / 'tests'),
             'probe': probe, 'copyingSha256': hashlib.sha256(members['clang64/share/licenses/libdatrie/COPYING']).hexdigest(),
+            'libraryUnchangedByTests': True, 'testedBuildLibrary': tested_build_library,
             'package': {'name': packages[0].name, **file_record(packages[0])},
             'sourceFiles': {p.relative_to(root / 'src/libdatrie-0.2.14').as_posix(): file_record(p) for p in sorted((root / 'src/libdatrie-0.2.14').rglob('*')) if p.is_file()},
         }
@@ -274,11 +324,15 @@ def verify(work, evidence):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('operation', choices=['prepare', 'environment', 'archives', 'verify'])
+    parser.add_argument(
+        'operation',
+        choices=['prepare', 'environment', 'archives', 'preserve-failed-tests', 'verify'],
+    )
     parser.add_argument('--work', type=Path)
     parser.add_argument('--evidence', type=Path)
     parser.add_argument('--msys', type=Path)
     parser.add_argument('--output', type=Path)
+    parser.add_argument('--variant')
     args = parser.parse_args()
     if sys.platform != 'win32': parser.error('Native Windows proof requires Windows; portable source/tests use separate entry points')
     if args.operation == 'prepare': prepare(args.work, args.evidence)
@@ -286,6 +340,8 @@ def main():
     elif args.operation == 'archives':
         before = json.loads((args.evidence / 'environment-before.json').read_text())
         verify_archive_inputs(args.work / 'package-cache', before, args.evidence / 'package-inputs-before.json')
+    elif args.operation == 'preserve-failed-tests':
+        preserve_failed_test_logs(args.work, args.evidence, args.variant)
     else: verify(args.work, args.evidence)
 
 

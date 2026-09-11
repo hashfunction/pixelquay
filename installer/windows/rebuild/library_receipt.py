@@ -122,6 +122,8 @@ def validate_pair(original, modified, expected_exports):
             raise ValueError('Original COPYING was not preserved')
         if record.get('upstreamTests') != {name: 'PASS' for name in UPSTREAM_TESTS}:
             raise ValueError('All ten upstream tests must pass')
+        if record.get('libraryUnchangedByTests') is not True:
+            raise ValueError('Test execution did not preserve the built library')
         probe = record.get('probe', {})
         if probe.get('mode') != mode or probe.get('apiChecks') != 21 or probe.get('libraryPathMatched') is not True or probe.get('markerPresent') is not (mode == 'modified'):
             raise ValueError('Actual library/API probe did not match variant')

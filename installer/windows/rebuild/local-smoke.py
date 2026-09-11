@@ -39,6 +39,7 @@ def smoke(work, evidence):
         root = work / variant; root.mkdir()
         tree, build = root / 'source', root / 'build'
         shutil.copytree(upstream, tree); build.mkdir()
+        run(['patch', '--batch', '--forward', '--fuzz=0', '-p1', '-i', HERE / '002-windows-alpha-test-data.patch'], tree, evidence / (variant+'-portable-test-patch.txt'))
         if variant == 'modified':
             run(['patch', '--batch', '--forward', '--fuzz=0', '-p1', '-i', HERE / '001-local-marker.patch'], tree, evidence / 'patch.txt')
         # Darwin libtool prefixes every raw -export-symbols line with '_'; it
@@ -53,7 +54,13 @@ def smoke(work, evidence):
         make_exports = 'EXPORTS_FLAGS=-export-symbols ' + str(host_exports)
         run(['sh', tree / 'configure', '--disable-doxygen-doc', '--prefix='+str(root / 'install')], build, evidence / (variant+'-configure.txt'))
         run(['make', '-j2', make_exports], build, evidence / (variant+'-build.txt'))
+        built_libraries = {path.resolve() for path in (build / 'datrie/.libs').glob('libdatrie.*.dylib')}
+        if len(built_libraries) != 1: raise ValueError('Expected one built dylib')
+        library = built_libraries.pop()
+        library_before_tests = digest(library.read_bytes())
         run(['make', 'check', make_exports], build, evidence / (variant+'-tests.txt'))
+        if digest(library.read_bytes()) != library_before_tests:
+            raise ValueError('Upstream test execution changed the built library')
         # The real Mach-O target behind its version symlinks is supplied to dlopen.
         libraries = {path.resolve() for path in (build / 'datrie/.libs').glob('libdatrie.*.dylib')}
         if len(libraries) != 1: raise ValueError('Expected one built dylib')
@@ -79,6 +86,7 @@ def smoke(work, evidence):
         results[variant] = {**digest(library.read_bytes()), 'exports': sorted(exports), 'probe': value,
                             'hostExportSymbols': digest(host_exports.read_bytes()),
                             'upstreamTests': read_upstream_tests(build / 'tests'),
+                            'libraryUnchangedByTests': True,
                             'wrongVariantExit': negative.returncode, 'existingOutputExit': existing.returncode}
     if results['original']['sha256'] == results['modified']['sha256']: raise ValueError('Modification did not change library bytes')
     write_json(evidence / 'local-smoke.json', {'schemaVersion': 1, 'host': 'macOS', 'variants': results,

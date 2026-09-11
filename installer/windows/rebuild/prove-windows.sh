@@ -28,7 +28,9 @@ mkdir "$proof_work/package-cache"
 pacman -Sw --noconfirm --cachedir "$proof_work/package-cache" "${proof_packages[@]}" > "$proof_evidence/package-download.txt" 2>&1
 "$proof_python" "$proof_driver" archives --work "$proof_work" --evidence "$proof_evidence"
 for proof_variant in original modified; do
+  set +e
   (
+    set -e
     cd -- "$proof_work/$proof_variant"
     export PKGDEST="$proof_work/$proof_variant/packages"
     # All source inputs already exist locally. Never skip source verification,
@@ -36,6 +38,19 @@ for proof_variant in original modified; do
     makepkg-mingw --verifysource
     makepkg-mingw --cleanbuild --log
   ) > "$proof_evidence/$proof_variant-build.txt" 2>&1
+  proof_build_exit=$?
+  set -e
+  if [[ $proof_build_exit != 0 ]]; then
+    proof_tests="$proof_work/$proof_variant/src/build-CLANG64/tests"
+    if [[ -f "$proof_tests/test-suite.log" ]]; then
+      "$proof_python" "$proof_driver" preserve-failed-tests \
+        --work "$proof_work/$proof_variant/src/build-CLANG64" \
+        --evidence "$proof_evidence" --variant "$proof_variant"
+    fi
+    printf 'Native %s package build failed (exit %s); per-test logs preserved when available.\n' \
+      "$proof_variant" "$proof_build_exit" >> "$proof_evidence/failure.txt"
+    exit "$proof_build_exit"
+  fi
 done
 /clang64/bin/clang.exe -std=c11 -Wall -Wextra -Werror -municode \
   -I"$proof_work/source/upstream/libdatrie-0.2.14" "$proof_here/datrie_probe.c" -o "$proof_work/datrie_probe.exe" \

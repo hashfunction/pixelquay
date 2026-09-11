@@ -47,6 +47,59 @@ class SourceTests(unittest.TestCase):
             self.assertEqual(before['COPYING'], after['COPYING'])
             self.assertIn(hashlib.sha256((ROOT / '001-local-marker.patch').read_bytes()).hexdigest(), (ROOT / 'recipes/modified/PKGBUILD').read_text())
 
+    def test_windows_test_data_patch_uses_32_bit_alpha_literals_only_in_tests(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            output = Path(tmp).resolve() / 'source'
+            source.materialize(ARCHIVE, output)
+            tree = output / 'upstream/libdatrie-0.2.14'
+            before = {
+                path.relative_to(tree).as_posix(): path.read_bytes()
+                for path in tree.rglob('*')
+                if path.is_file()
+            }
+            subprocess.run(
+                [
+                    'patch',
+                    '--batch',
+                    '--forward',
+                    '--fuzz=0',
+                    '-p1',
+                    '-i',
+                    str(ROOT / '002-windows-alpha-test-data.patch'),
+                ],
+                cwd=tree,
+                check=True,
+                capture_output=True,
+            )
+            after = {
+                path.relative_to(tree).as_posix(): path.read_bytes()
+                for path in tree.rglob('*')
+                if path.is_file()
+            }
+            changed = {name for name in before if before[name] != after[name]}
+            self.assertEqual(
+                changed,
+                {
+                    'tests/test_nonalpha.c',
+                    'tests/test_term_state.c',
+                    'tests/test_walk.c',
+                    'tests/utils.c',
+                },
+            )
+            adapted = b''.join(after[name] for name in sorted(changed))
+            self.assertEqual(adapted.count(b'(AlphaChar *)U"'), 49)
+            self.assertNotIn(b'(AlphaChar *)L"', adapted)
+            for name in changed:
+                self.assertIn(b'Test-data portability modification, Trieflow LLC, 2026-09-11', after[name])
+            self.assertEqual(before['COPYING'], after['COPYING'])
+            patch_hash = hashlib.sha256(
+                (ROOT / '002-windows-alpha-test-data.patch').read_bytes()
+            ).hexdigest()
+            for variant in ('original', 'modified'):
+                recipe = (ROOT / 'recipes' / variant / 'PKGBUILD').read_text()
+                self.assertIn('002-windows-alpha-test-data.patch', recipe)
+                self.assertIn(patch_hash, recipe)
+
     def test_actual_source_materialized_with_exact_notices_and_receipt(self):
         with tempfile.TemporaryDirectory() as tmp:
             output = Path(tmp).resolve() / 'source'

@@ -47,8 +47,18 @@ to the C implementation, header, `.def` and version map. It returns a fixed
 diagnostic string without changing existing trie behavior. The original recipe
 keeps package version 0.2.14-1; the modified local recipe uses 0.2.14-1.1. Both
 retain the original configure flags, run the ten upstream tests through a new
-`check()` function, and retain a library linker map. All source checks remain
-enabled; no dependency installation happens inside either build.
+`check()` function, and retain a library linker map. Both also apply
+`002-windows-alpha-test-data.patch` solely to four upstream test sources. The
+upstream suite cast C wide-string literals to its fixed 32-bit `AlphaChar` type;
+Windows uses 16-bit `wchar_t`, so seven data-driven tests failed while the three
+tests without those literals passed. The dated patch uses C11 32-bit string
+literals for the same 49 ASCII keys. It does not modify library source. Each
+recipe hashes the library before and after the tests, fails on a change, and
+retains the matching post-test hash and verifies it against that same build DLL.
+The separately recorded package DLL may differ because makepkg's retained
+configuration enables stripping; package staging, archive membership, PE/API
+behavior and exports are verified independently. All source
+checks remain enabled; no dependency installation happens inside either build.
 
 The external C probe dynamically loads the exact absolute library path and
 checks 21 conditions covering alphabet maps, insertion, retrieval, overwrite,
@@ -112,8 +122,11 @@ Artifacts include source/environment/package receipts, library proof JSON,
 build/config/linker/test logs and probe results. DLLs, executables and binary
 package archives stay private in the runner's work directory and are not
 uploaded. Existing normal app/MSIX qualification remains unchanged. On a native
-failure, logs and the failure-line record remain available; a success receipt
-is created only after all verification succeeds.
+test failure, the aggregate log plus each of the ten `.log` and `.trs` files are
+copied byte-for-byte before the build exits; output collisions fail rather than
+replace earlier evidence. The build log and failure-line record remain available
+for failures before tests. A success receipt is created only after all
+verification succeeds.
 
 ## Repeatable host check and remaining gates
 
@@ -127,8 +140,13 @@ python installer/windows/rebuild/local-smoke.py \
 
 This runs configure/make and all ten upstream tests for each variant, verifies
 their real Mach-O exports, executes the 21 API checks and both negative controls,
-and records `windowsProof: false`. It requires Xcode command-line tools, make,
-patch and zstd. Host results do not stand in for the Windows job.
+and records `windowsProof: false`. It applies the same portable test-data patch
+and verifies test execution leaves each built library unchanged. Separately,
+the pre-repair suite was reproduced on macOS with `CFLAGS=-fshort-wchar`: it had
+the exact Windows result of seven failures and three passes; the dated test-data
+patch changes that counterfactual to ten passes without changing the library
+archive hash. It requires Xcode command-line tools, make, patch and zstd. Host
+results do not stand in for the Windows job.
 
 Every patched source file carries the dated modification notice. Windows DEF
 semicolon comments remain in the modified source. Darwin libtool cannot consume

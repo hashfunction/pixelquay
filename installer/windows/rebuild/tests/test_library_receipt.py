@@ -38,6 +38,7 @@ def example_pe(machine=0x8664):
 def proof_pair():
     original = {'sha256': '1'*64, 'machine': 'x64', 'exports': ['trie_free', 'trie_new'], 'imports': ['kernel32.dll'],
                 'upstreamTests': {name: 'PASS' for name in EXPECTED_TESTS},
+                'libraryUnchangedByTests': True,
                 'probe': {'mode': 'original', 'apiChecks': 21, 'libraryPathMatched': True, 'markerPresent': False},
                 'copyingSha256': 'a9bdde5616ecdd1e980b44f360600ee8783b1f99b8cc83a2beb163a0a390e861'}
     modified = copy.deepcopy(original)
@@ -66,6 +67,7 @@ class ReceiptTests(unittest.TestCase):
             ('imports', ['kernel32.dll', 'unrecorded.dll']),
             ('machine', 'x86'), ('sha256', '1'*64),
             ('upstreamTests', {'test_walk': 'PASS'}),
+            ('libraryUnchangedByTests', False),
             ('probe', {'mode': 'modified', 'apiChecks': 0, 'libraryPathMatched': True, 'markerPresent': True}),
             ('probe', {'mode': 'modified', 'apiChecks': 21, 'libraryPathMatched': False, 'markerPresent': True}),
             ('copyingSha256', '0'*64),

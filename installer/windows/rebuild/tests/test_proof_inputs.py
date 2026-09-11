@@ -26,6 +26,51 @@ def archive_at(path, entries):
 
 
 class ArchiveInputsTests(unittest.TestCase):
+    def test_post_test_hash_binds_build_library_not_stripped_package_copy(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp).resolve()
+            built = root / 'build/libdatrie-1.dll'
+            packaged = root / 'pkg/libdatrie-1.dll'
+            built.parent.mkdir(); packaged.parent.mkdir()
+            built.write_bytes(b'unstripped build library with linker symbols')
+            packaged.write_bytes(b'stripped package library')
+            retained = root / 'library-unchanged-by-tests.sha256'
+            retained.write_text(hashlib.sha256(built.read_bytes()).hexdigest() + '\n')
+
+            record = driver.verify_post_test_library(built, retained)
+
+            self.assertEqual(record, driver.file_record(built))
+            self.assertNotEqual(record, driver.file_record(packaged))
+            retained.write_text(hashlib.sha256(packaged.read_bytes()).hexdigest() + '\n')
+            with self.assertRaisesRegex(ValueError, 'built library'):
+                driver.verify_post_test_library(built, retained)
+
+    def test_failed_upstream_test_logs_are_preserved_individually_without_overwrite(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp).resolve()
+            tests = root / 'build/tests'
+            evidence = root / 'evidence'
+            tests.mkdir(parents=True)
+            evidence.mkdir()
+            expected = ['test-suite.log']
+            for name in driver.UPSTREAM_TESTS:
+                expected.extend((name + '.log', name + '.trs'))
+            for name in expected:
+                (tests / name).write_text('exact ' + name, encoding='utf-8')
+
+            result = driver.preserve_failed_test_logs(
+                root / 'build', evidence, 'original'
+            )
+
+            self.assertEqual(result['files'], expected)
+            for name in expected:
+                self.assertEqual(
+                    (evidence / ('original-' + name + '.txt')).read_text(),
+                    'exact ' + name,
+                )
+            with self.assertRaises(FileExistsError):
+                driver.preserve_failed_test_logs(root / 'build', evidence, 'original')
+
     def test_actual_archive_bytes_bind_regular_and_hardlinked_tool_names(self):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp).resolve(); archive = root / 'tools.pkg.tar.zst'

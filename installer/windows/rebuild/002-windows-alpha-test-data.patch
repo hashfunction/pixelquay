@@ -1,0 +1,131 @@
+--- a/tests/utils.c
++++ b/tests/utils.c
+@@ -26,0 +27,4 @@
++/* Test-data portability modification, Trieflow LLC, 2026-09-11.
++ * AlphaChar is 32-bit; use 32-bit character literals when wchar_t is 16-bit.
++ */
++
+@@ -89,39 +93,39 @@
+-    {(AlphaChar *)L"a",          TRIE_DATA_UNREAD},
+-    {(AlphaChar *)L"abacus",     TRIE_DATA_UNREAD},
+-    {(AlphaChar *)L"abandon",    TRIE_DATA_UNREAD},
+-    {(AlphaChar *)L"accident",   TRIE_DATA_UNREAD},
+-    {(AlphaChar *)L"accredit",   TRIE_DATA_UNREAD},
+-    {(AlphaChar *)L"algorithm",  TRIE_DATA_UNREAD},
+-    {(AlphaChar *)L"ammonia",    TRIE_DATA_UNREAD},
+-    {(AlphaChar *)L"angel",      TRIE_DATA_UNREAD},
+-    {(AlphaChar *)L"angle",      TRIE_DATA_UNREAD},
+-    {(AlphaChar *)L"azure",      TRIE_DATA_UNREAD},
+-    {(AlphaChar *)L"bat",        TRIE_DATA_UNREAD},
+-    {(AlphaChar *)L"bet",        TRIE_DATA_UNREAD},
+-    {(AlphaChar *)L"best",       TRIE_DATA_UNREAD},
+-    {(AlphaChar *)L"home",       TRIE_DATA_UNREAD},
+-    {(AlphaChar *)L"house",      TRIE_DATA_UNREAD},
+-    {(AlphaChar *)L"hut",        TRIE_DATA_UNREAD},
+-    {(AlphaChar *)L"king",       TRIE_DATA_UNREAD},
+-    {(AlphaChar *)L"kite",       TRIE_DATA_UNREAD},
+-    {(AlphaChar *)L"name",       TRIE_DATA_UNREAD},
+-    {(AlphaChar *)L"net",        TRIE_DATA_UNREAD},
+-    {(AlphaChar *)L"network",    TRIE_DATA_UNREAD},
+-    {(AlphaChar *)L"nut",        TRIE_DATA_UNREAD},
+-    {(AlphaChar *)L"nutshell",   TRIE_DATA_UNREAD},
+-    {(AlphaChar *)L"quality",    TRIE_DATA_UNREAD},
+-    {(AlphaChar *)L"quantum",    TRIE_DATA_UNREAD},
+-    {(AlphaChar *)L"quantity",   TRIE_DATA_UNREAD},
+-    {(AlphaChar *)L"quartz",     TRIE_DATA_UNREAD},
+-    {(AlphaChar *)L"quick",      TRIE_DATA_UNREAD},
+-    {(AlphaChar *)L"quiz",       TRIE_DATA_UNREAD},
+-    {(AlphaChar *)L"run",        TRIE_DATA_UNREAD},
+-    {(AlphaChar *)L"tape",       TRIE_DATA_UNREAD},
+-    {(AlphaChar *)L"test",       TRIE_DATA_UNREAD},
+-    {(AlphaChar *)L"what",       TRIE_DATA_UNREAD},
+-    {(AlphaChar *)L"when",       TRIE_DATA_UNREAD},
+-    {(AlphaChar *)L"where",      TRIE_DATA_UNREAD},
+-    {(AlphaChar *)L"which",      TRIE_DATA_UNREAD},
+-    {(AlphaChar *)L"who",        TRIE_DATA_UNREAD},
+-    {(AlphaChar *)L"why",        TRIE_DATA_UNREAD},
+-    {(AlphaChar *)L"zebra",      TRIE_DATA_UNREAD},
++    {(AlphaChar *)U"a",          TRIE_DATA_UNREAD},
++    {(AlphaChar *)U"abacus",     TRIE_DATA_UNREAD},
++    {(AlphaChar *)U"abandon",    TRIE_DATA_UNREAD},
++    {(AlphaChar *)U"accident",   TRIE_DATA_UNREAD},
++    {(AlphaChar *)U"accredit",   TRIE_DATA_UNREAD},
++    {(AlphaChar *)U"algorithm",  TRIE_DATA_UNREAD},
++    {(AlphaChar *)U"ammonia",    TRIE_DATA_UNREAD},
++    {(AlphaChar *)U"angel",      TRIE_DATA_UNREAD},
++    {(AlphaChar *)U"angle",      TRIE_DATA_UNREAD},
++    {(AlphaChar *)U"azure",      TRIE_DATA_UNREAD},
++    {(AlphaChar *)U"bat",        TRIE_DATA_UNREAD},
++    {(AlphaChar *)U"bet",        TRIE_DATA_UNREAD},
++    {(AlphaChar *)U"best",       TRIE_DATA_UNREAD},
++    {(AlphaChar *)U"home",       TRIE_DATA_UNREAD},
++    {(AlphaChar *)U"house",      TRIE_DATA_UNREAD},
++    {(AlphaChar *)U"hut",        TRIE_DATA_UNREAD},
++    {(AlphaChar *)U"king",       TRIE_DATA_UNREAD},
++    {(AlphaChar *)U"kite",       TRIE_DATA_UNREAD},
++    {(AlphaChar *)U"name",       TRIE_DATA_UNREAD},
++    {(AlphaChar *)U"net",        TRIE_DATA_UNREAD},
++    {(AlphaChar *)U"network",    TRIE_DATA_UNREAD},
++    {(AlphaChar *)U"nut",        TRIE_DATA_UNREAD},
++    {(AlphaChar *)U"nutshell",   TRIE_DATA_UNREAD},
++    {(AlphaChar *)U"quality",    TRIE_DATA_UNREAD},
++    {(AlphaChar *)U"quantum",    TRIE_DATA_UNREAD},
++    {(AlphaChar *)U"quantity",   TRIE_DATA_UNREAD},
++    {(AlphaChar *)U"quartz",     TRIE_DATA_UNREAD},
++    {(AlphaChar *)U"quick",      TRIE_DATA_UNREAD},
++    {(AlphaChar *)U"quiz",       TRIE_DATA_UNREAD},
++    {(AlphaChar *)U"run",        TRIE_DATA_UNREAD},
++    {(AlphaChar *)U"tape",       TRIE_DATA_UNREAD},
++    {(AlphaChar *)U"test",       TRIE_DATA_UNREAD},
++    {(AlphaChar *)U"what",       TRIE_DATA_UNREAD},
++    {(AlphaChar *)U"when",       TRIE_DATA_UNREAD},
++    {(AlphaChar *)U"where",      TRIE_DATA_UNREAD},
++    {(AlphaChar *)U"which",      TRIE_DATA_UNREAD},
++    {(AlphaChar *)U"who",        TRIE_DATA_UNREAD},
++    {(AlphaChar *)U"why",        TRIE_DATA_UNREAD},
++    {(AlphaChar *)U"zebra",      TRIE_DATA_UNREAD},
+--- a/tests/test_walk.c
++++ b/tests/test_walk.c
+@@ -26,0 +27,4 @@
++/* Test-data portability modification, Trieflow LLC, 2026-09-11.
++ * AlphaChar is 32-bit; use 32-bit character literals when wchar_t is 16-bit.
++ */
++
+@@ -49,6 +53,6 @@
+-    {(AlphaChar *)L"pool",       TRIE_DATA_UNREAD},
+-    {(AlphaChar *)L"prize",      TRIE_DATA_UNREAD},
+-    {(AlphaChar *)L"preview",    TRIE_DATA_UNREAD},
+-    {(AlphaChar *)L"prepare",    TRIE_DATA_UNREAD},
+-    {(AlphaChar *)L"produce",    TRIE_DATA_UNREAD},
+-    {(AlphaChar *)L"progress",   TRIE_DATA_UNREAD},
++    {(AlphaChar *)U"pool",       TRIE_DATA_UNREAD},
++    {(AlphaChar *)U"prize",      TRIE_DATA_UNREAD},
++    {(AlphaChar *)U"preview",    TRIE_DATA_UNREAD},
++    {(AlphaChar *)U"prepare",    TRIE_DATA_UNREAD},
++    {(AlphaChar *)U"produce",    TRIE_DATA_UNREAD},
++    {(AlphaChar *)U"progress",   TRIE_DATA_UNREAD},
+--- a/tests/test_nonalpha.c
++++ b/tests/test_nonalpha.c
+@@ -26,0 +27,4 @@
++/* Test-data portability modification, Trieflow LLC, 2026-09-11.
++ * AlphaChar is 32-bit; use 32-bit character literals when wchar_t is 16-bit.
++ */
++
+@@ -33,2 +37,2 @@
+-    (AlphaChar *)L"a6acus",
+-    (AlphaChar *)L"a5acus",
++    (AlphaChar *)U"a6acus",
++    (AlphaChar *)U"a5acus",
+--- a/tests/test_term_state.c
++++ b/tests/test_term_state.c
+@@ -26,0 +27,4 @@
++/* Test-data portability modification, Trieflow LLC, 2026-09-11.
++ * AlphaChar is 32-bit; use 32-bit character literals when wchar_t is 16-bit.
++ */
++
+@@ -57 +61 @@
+-    if (!trie_store (test_trie, (AlphaChar *)L"ab", 1)) {
++    if (!trie_store (test_trie, (AlphaChar *)U"ab", 1)) {
+@@ -61 +65 @@
+-    if (!trie_store (test_trie, (AlphaChar *)L"abc", 2)) {
++    if (!trie_store (test_trie, (AlphaChar *)U"abc", 2)) {
