@@ -1,0 +1,44 @@
+--- a/datrie/trie.h
++++ b/datrie/trie.h
+@@ -117,6 +117,9 @@
+  *   GENERAL FUNCTIONS   *
+  *-----------------------*/
+ 
++/* Local modification, Trieflow LLC, 2026-09-11: optional rebuild proof export. */
++const char *pixelquay_rebuild_marker (void);
++
+ Trie *  trie_new (const AlphaMap *alpha_map);
+ 
+ Trie *  trie_new_from_file (const char *path);
+--- a/datrie/trie.c
++++ b/datrie/trie.c
+@@ -1159,3 +1159,11 @@
+ /*
+ vi:ts=4:ai:expandtab
+ */
++
++/* Local modification, Trieflow LLC, 2026-09-11. LGPL-2.1-or-later.
++ * Demonstrates source replacement without changing existing trie behavior. */
++const char *
++pixelquay_rebuild_marker (void)
++{
++    return "PixelQuay libdatrie source rebuild v1";
++}
+--- a/datrie/libdatrie.def
++++ b/datrie/libdatrie.def
+@@ -33,3 +33,5 @@
+ trie_iterator_next
+ trie_iterator_get_key
+ trie_iterator_get_data
++; Local modification, Trieflow LLC, 2026-09-11: optional rebuild proof export.
++pixelquay_rebuild_marker
+--- a/datrie/libdatrie.map
++++ b/datrie/libdatrie.map
+@@ -1,5 +1,7 @@
++/* Local modification, Trieflow LLC, 2026-09-11: optional rebuild proof export. */
+ DATRIE_0.2 {
+ global:
++  pixelquay_rebuild_marker;
+   alpha_map_new;
+   alpha_map_clone;
+   alpha_map_free;

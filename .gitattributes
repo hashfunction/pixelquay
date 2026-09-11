@@ -10,3 +10,7 @@ installer/windows/record-msys2-inputs.sh text eol=lf
 licenses/managed-source-notices/** -text -whitespace
 licenses/native-supplements/** -text -whitespace
 installer/windows/test-fixtures/native-notices/** -text -whitespace
+installer/windows/rebuild/** text eol=lf
+installer/windows/rebuild/inputs/*.src.tar.zst -text
+installer/windows/rebuild/COPYING.LIBDATRIE -text -whitespace
+installer/windows/rebuild/001-local-marker.patch -whitespace

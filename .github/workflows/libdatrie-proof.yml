@@ -1,0 +1,44 @@
+name: PixelQuay retained LGPL library proof
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  libdatrie-windows-x64:
+    runs-on: windows-2025
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - name: Install current CLANG64 proof environment
+        uses: msys2/setup-msys2@66cd2cce69caa17b53920067426061ca1de3a884
+        with:
+          msystem: CLANG64
+          path-type: strict
+          update: true
+          install: >-
+            base-devel
+            git
+            mingw-w64-clang-x86_64-clang
+            mingw-w64-clang-x86_64-autotools
+            mingw-w64-clang-x86_64-doxygen
+            mingw-w64-clang-x86_64-libiconv
+            mingw-w64-clang-x86_64-python
+      - name: Validate source and proof rejection cases
+        shell: msys2 {0}
+        run: |
+          /clang64/bin/python.exe -m unittest discover -s installer/windows/rebuild/tests -p 'test_*.py' -v
+      - name: Build original and modified libraries and verify real API behavior
+        shell: msys2 {0}
+        run: |
+          mkdir -p build-evidence
+          bash installer/windows/rebuild/prove-windows.sh "$RUNNER_TEMP/pixelquay-libdatrie-proof" "$GITHUB_WORKSPACE/build-evidence/libdatrie"
+      - name: Preserve library proof metadata only
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: PixelQuay-libdatrie-proof
+          path: |
+            build-evidence/libdatrie/*.json
+            build-evidence/libdatrie/*.txt
+          if-no-files-found: error
+          retention-days: 14
