@@ -35,13 +35,13 @@ class ArchiveInputsTests(unittest.TestCase):
             built.write_bytes(b'unstripped build library with linker symbols')
             packaged.write_bytes(b'stripped package library')
             retained = root / 'library-unchanged-by-tests.sha256'
-            retained.write_text(hashlib.sha256(built.read_bytes()).hexdigest() + '\n')
+            retained.write_bytes(hashlib.sha256(built.read_bytes()).hexdigest().encode('ascii') + b'\n')
 
             record = driver.verify_post_test_library(built, retained)
 
             self.assertEqual(record, driver.file_record(built))
             self.assertNotEqual(record, driver.file_record(packaged))
-            retained.write_text(hashlib.sha256(packaged.read_bytes()).hexdigest() + '\n')
+            retained.write_bytes(hashlib.sha256(packaged.read_bytes()).hexdigest().encode('ascii') + b'\n')
             with self.assertRaisesRegex(ValueError, 'built library'):
                 driver.verify_post_test_library(built, retained)
 
