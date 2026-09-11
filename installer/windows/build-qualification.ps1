@@ -15,6 +15,7 @@ Invoke-Checked dotnet @('restore','Pinta.sln','--use-lock-file',$mingwArgument)
 Invoke-Checked dotnet @('build','Pinta.sln','-c','Release','--no-restore',$mingwArgument)
 Invoke-Checked dotnet @('test','Pinta.sln','-c','Release','--no-build','--no-restore',$mingwArgument,'--logger','trx','--results-directory','build-evidence/tests')
 Invoke-Checked python @('installer/windows/test_inventory_native.py')
+Invoke-Checked python @('installer/windows/test_managed_notices.py')
 Invoke-Checked dotnet @('publish','Pinta/Pinta.csproj','-p:BuildTranslations=true',$mingwArgument,$pythonArgument,'-c','Release','-r','win-x64','--self-contained','true','-p:PublishDir=../release/bin/')
 Invoke-Checked python @('installer/windows/inventory_managed.py','--assets','Pinta/obj/project.assets.json','--output','release/bin/licenses/managed-packages.json')
 New-Item -ItemType Directory -Force release/share/icons/hicolor | Out-Null

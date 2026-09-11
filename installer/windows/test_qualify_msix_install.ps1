@@ -1,0 +1,78 @@
+# Failure-path tests for the real PixelQuay qualification orchestration.
+# Copyright 2026 Trieflow LLC. MIT licensed.
+$ErrorActionPreference = 'Stop'
+Set-StrictMode -Version Latest
+. (Join-Path $PSScriptRoot 'qualify-msix-install.ps1') -LibraryOnly
+
+function Assert-True([bool]$Condition, [string]$Message) {
+    if (-not $Condition) { throw "ASSERTION FAILED: $Message" }
+}
+
+function New-FakeOperations([string]$PrimaryFailure, [string[]]$CleanupFailures) {
+    $global:PixelQuayQualificationTestCalls = [Collections.Generic.List[string]]::new()
+    $operations = [ordered]@{}
+    foreach ($name in @('Preflight','PrepareSignedCopy','Install','CaptureInstalledStderr','ActivateAndVerify','CloseCleanly','UninstallAndVerify')) {
+        $operationName = $name
+        $operations[$name] = {
+            $global:PixelQuayQualificationTestCalls.Add($operationName)
+            if ($PrimaryFailure -eq $operationName) { throw "primary:$operationName" }
+        }.GetNewClosure()
+    }
+    foreach ($name in @('StopOwnedProcess','RemoveOwnedPackage','RemoveTrustedCertificate','RemovePersonalCertificate','RemoveTemporaryFiles')) {
+        $operationName = $name
+        $operations[$name] = {
+            $global:PixelQuayQualificationTestCalls.Add($operationName)
+            if ($CleanupFailures -contains $operationName) { throw "cleanup:$operationName" }
+        }.GetNewClosure()
+    }
+    return $operations
+}
+
+$result = Invoke-PixelQuayQualificationCore -Operations (New-FakeOperations '' @())
+Assert-True $result.installation_qualification_passed 'success path must pass'
+Assert-True (-not $result.primary_error) 'success path must have no primary error'
+Assert-True ($result.cleanup_errors.Count -eq 0) 'success path must have no cleanup errors'
+Assert-True (($global:PixelQuayQualificationTestCalls -join ',') -eq 'Preflight,PrepareSignedCopy,Install,CaptureInstalledStderr,ActivateAndVerify,CloseCleanly,UninstallAndVerify,StopOwnedProcess,RemoveOwnedPackage,RemoveTrustedCertificate,RemovePersonalCertificate,RemoveTemporaryFiles') 'all qualification and cleanup steps must run in order'
+
+$result = Invoke-PixelQuayQualificationCore -Operations (New-FakeOperations 'ActivateAndVerify' @('RemoveOwnedPackage','RemovePersonalCertificate'))
+Assert-True (-not $result.installation_qualification_passed) 'primary and cleanup failure must fail'
+Assert-True ($result.primary_error -eq 'primary:ActivateAndVerify') 'primary failure must be retained exactly'
+Assert-True ($result.cleanup_errors.Count -eq 2) 'all cleanup failures must be retained'
+Assert-True (($result.cleanup_errors -join '|') -match 'RemoveOwnedPackage.*RemovePersonalCertificate') 'cleanup failures must identify their operations'
+Assert-True (-not ($global:PixelQuayQualificationTestCalls -contains 'CloseCleanly')) 'later primary operations must not run after failure'
+foreach ($cleanup in @('StopOwnedProcess','RemoveOwnedPackage','RemoveTrustedCertificate','RemovePersonalCertificate','RemoveTemporaryFiles')) {
+    Assert-True ($global:PixelQuayQualificationTestCalls -contains $cleanup) "cleanup operation $cleanup must still run"
+}
+
+$result = Invoke-PixelQuayQualificationCore -Operations (New-FakeOperations '' @('RemoveTrustedCertificate'))
+Assert-True (-not $result.installation_qualification_passed) 'cleanup failure alone must fail qualification'
+Assert-True (-not $result.primary_error) 'cleanup-only failure must not manufacture a primary failure'
+Assert-True ($result.cleanup_errors.Count -eq 1) 'cleanup-only failure must be recorded'
+
+$result = Invoke-PixelQuayQualificationCore -Operations (New-FakeOperations 'Preflight' @())
+Assert-True (-not $result.installation_qualification_passed) 'preexisting-install/preflight failure must fail qualification'
+Assert-True (($global:PixelQuayQualificationTestCalls -join ',') -eq 'Preflight,StopOwnedProcess,RemoveOwnedPackage,RemoveTrustedCertificate,RemovePersonalCertificate,RemoveTemporaryFiles') 'preflight failure must skip mutation and still execute safe cleanup adapters'
+
+$packageRoot = Join-Path ([IO.Path]::GetTempPath()) 'package'
+$insidePackage = Test-PathInside -Candidate (Join-Path $packageRoot 'bin/PixelQuay.exe') -Root $packageRoot
+$siblingPackage = Test-PathInside -Candidate (Join-Path ([IO.Path]::GetTempPath()) 'package-other/foreign.dll') -Root $packageRoot
+Assert-True $insidePackage 'exact package descendant must be accepted'
+Assert-True (-not $siblingPackage) 'textual sibling prefix must not count as package path'
+$recordFixture = [pscustomobject]@{ payload = [pscustomobject]@{ 'bin/PixelQuay.exe' = [pscustomobject]@{ bytes=1; sha256=('a' * 64) } } }
+Assert-True ((Get-RecordPayloadEntry $recordFixture 'bin/PixelQuay.exe').bytes -eq 1) 'slash-qualified payload property must resolve exactly'
+$exclusiveDirectory = Join-Path ([IO.Path]::GetTempPath()) ('pixelquay-ps-test-' + [guid]::NewGuid().ToString('N'))
+New-Item -ItemType Directory -Path $exclusiveDirectory | Out-Null
+try {
+    $exclusiveFile = Join-Path $exclusiveDirectory 'evidence.json'
+    Write-NewUtf8Json $exclusiveFile ([ordered]@{ passed=$false })
+    try { Write-NewUtf8Json $exclusiveFile ([ordered]@{ passed=$true }); throw 'expected exclusive write failure' }
+    catch { Assert-True ($_.Exception.Message -notmatch 'expected exclusive') 'evidence writer must refuse replacement' }
+    Assert-True ((Get-Content -LiteralPath $exclusiveFile -Raw | ConvertFrom-Json).passed -eq $false) 'failed replacement must preserve evidence bytes'
+} finally {
+    Remove-Item -LiteralPath $exclusiveDirectory -Recurse -Force
+}
+Add-PixelQuayActivationTypes
+Assert-True ($null -ne ('PixelQuayQualification.NativePackageProbe' -as [type])) 'GetPackageFullName helper types must compile'
+
+Remove-Variable PixelQuayQualificationTestCalls -Scope Global
+Write-Output 'PASS: 4 installation orchestration scenarios plus path/evidence/native-helper checks.'

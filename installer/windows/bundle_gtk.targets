@@ -108,6 +108,10 @@
     <GtkFile Include="$(MinGWBinFolder)\gtk4-update-icon-cache.exe" />
 
     <GtkFile Include="$(MinGWFolder)\lib\gdk-pixbuf-2.0\**" LinkBase="..\lib\gdk-pixbuf-2.0" />
+    <!-- Fontconfig resolves ../etc/fonts relative to its DLL in bin on Windows. -->
+    <GtkFile Include="$(MinGWFolder)\etc\fonts\**" LinkBase="..\etc\fonts" />
+    <GtkFile Include="$(MinGWFolder)\share\fontconfig\**" LinkBase="..\share\fontconfig" />
+    <GtkFile Include="$(MinGWFolder)\share\xml\fontconfig\**" LinkBase="..\share\xml\fontconfig" />
     <GtkFile Include="$(MinGWFolder)\share\glib-2.0\schemas\**" LinkBase="..\share\glib-2.0\schemas" />
     <GtkFile Include="$(MinGWFolder)\share\locale\**" LinkBase="..\share\locale" />
     <GtkFile Include="$(MinGWFolder)\share\icons\Adwaita\**" LinkBase="..\share\icons\Adwaita" />

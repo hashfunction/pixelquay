@@ -1,0 +1,348 @@
+{
+  "schemaVersion": 1,
+  "status": "supplemental_notice_texts_not_full_release_clearance",
+  "sourceWindowsRun": 34578052932,
+  "entries": [
+    {
+      "package": "GirCore.Adw-1/0.7.0",
+      "packageSha256": "edb9eb26734924b8b3e5d18c5f6a400896e632801aa9074ddd919e3d9abf679e",
+      "noticeFile": "gircore.txt",
+      "noticeSha256": "b07f21e85106d135064496fe5a426c2d13abe680e0c4e664d40276f97903be74",
+      "noticeSourceUrl": "https://raw.githubusercontent.com/gircore/gir.core/dce3253f55036755345c70e32e3d8aef55116b3e/license.txt",
+      "attributionStatus": "source_text_retrieved_for_exact_package_notice_review",
+      "packageCopyright": null,
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/gircore/gir.core",
+        "branch": "refs/heads/main",
+        "commit": "dce3253f55036755345c70e32e3d8aef55116b3e"
+      }
+    },
+    {
+      "package": "GirCore.Cairo-1.0/0.7.0",
+      "packageSha256": "c3c521ed1417a61aac5d3ff93ce32032954ed2ed2f36d18bf93bb4e378caa6d7",
+      "noticeFile": "gircore.txt",
+      "noticeSha256": "b07f21e85106d135064496fe5a426c2d13abe680e0c4e664d40276f97903be74",
+      "noticeSourceUrl": "https://raw.githubusercontent.com/gircore/gir.core/dce3253f55036755345c70e32e3d8aef55116b3e/license.txt",
+      "attributionStatus": "source_text_retrieved_for_exact_package_notice_review",
+      "packageCopyright": null,
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/gircore/gir.core",
+        "branch": "refs/heads/main",
+        "commit": "dce3253f55036755345c70e32e3d8aef55116b3e"
+      }
+    },
+    {
+      "package": "GirCore.FreeType2-2.0/0.7.0",
+      "packageSha256": "5077d8043cab962077d9517f489f8ab0bc7c6420550ca0307e170b45aab17efe",
+      "noticeFile": "gircore.txt",
+      "noticeSha256": "b07f21e85106d135064496fe5a426c2d13abe680e0c4e664d40276f97903be74",
+      "noticeSourceUrl": "https://raw.githubusercontent.com/gircore/gir.core/dce3253f55036755345c70e32e3d8aef55116b3e/license.txt",
+      "attributionStatus": "source_text_retrieved_for_exact_package_notice_review",
+      "packageCopyright": null,
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/gircore/gir.core",
+        "branch": "refs/heads/main",
+        "commit": "dce3253f55036755345c70e32e3d8aef55116b3e"
+      }
+    },
+    {
+      "package": "GirCore.Gdk-4.0/0.7.0",
+      "packageSha256": "94f8a92cc47ce80dd0bd81fa3b3c4a1a3dbd567f25a4733f311b692b25205510",
+      "noticeFile": "gircore.txt",
+      "noticeSha256": "b07f21e85106d135064496fe5a426c2d13abe680e0c4e664d40276f97903be74",
+      "noticeSourceUrl": "https://raw.githubusercontent.com/gircore/gir.core/dce3253f55036755345c70e32e3d8aef55116b3e/license.txt",
+      "attributionStatus": "source_text_retrieved_for_exact_package_notice_review",
+      "packageCopyright": null,
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/gircore/gir.core",
+        "branch": "refs/heads/main",
+        "commit": "dce3253f55036755345c70e32e3d8aef55116b3e"
+      }
+    },
+    {
+      "package": "GirCore.GdkPixbuf-2.0/0.7.0",
+      "packageSha256": "752e1999a86b18eff63e88a7ecf96d56de095e95bb98a9cac23d5f40f181a557",
+      "noticeFile": "gircore.txt",
+      "noticeSha256": "b07f21e85106d135064496fe5a426c2d13abe680e0c4e664d40276f97903be74",
+      "noticeSourceUrl": "https://raw.githubusercontent.com/gircore/gir.core/dce3253f55036755345c70e32e3d8aef55116b3e/license.txt",
+      "attributionStatus": "source_text_retrieved_for_exact_package_notice_review",
+      "packageCopyright": null,
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/gircore/gir.core",
+        "branch": "refs/heads/main",
+        "commit": "dce3253f55036755345c70e32e3d8aef55116b3e"
+      }
+    },
+    {
+      "package": "GirCore.Gio-2.0/0.7.0",
+      "packageSha256": "9e4b4159d76b23003ee086e373f20c5a70a2fce2f76cca7b506311014105f6bd",
+      "noticeFile": "gircore.txt",
+      "noticeSha256": "b07f21e85106d135064496fe5a426c2d13abe680e0c4e664d40276f97903be74",
+      "noticeSourceUrl": "https://raw.githubusercontent.com/gircore/gir.core/dce3253f55036755345c70e32e3d8aef55116b3e/license.txt",
+      "attributionStatus": "source_text_retrieved_for_exact_package_notice_review",
+      "packageCopyright": null,
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/gircore/gir.core",
+        "branch": "refs/heads/main",
+        "commit": "dce3253f55036755345c70e32e3d8aef55116b3e"
+      }
+    },
+    {
+      "package": "GirCore.GLib-2.0/0.7.0",
+      "packageSha256": "bb78f09fb7d038d1b83388b8817ea0951d732a7d89348d394227857f51ac6b2b",
+      "noticeFile": "gircore.txt",
+      "noticeSha256": "b07f21e85106d135064496fe5a426c2d13abe680e0c4e664d40276f97903be74",
+      "noticeSourceUrl": "https://raw.githubusercontent.com/gircore/gir.core/dce3253f55036755345c70e32e3d8aef55116b3e/license.txt",
+      "attributionStatus": "source_text_retrieved_for_exact_package_notice_review",
+      "packageCopyright": null,
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/gircore/gir.core",
+        "branch": "refs/heads/main",
+        "commit": "dce3253f55036755345c70e32e3d8aef55116b3e"
+      }
+    },
+    {
+      "package": "GirCore.GObject-2.0/0.7.0",
+      "packageSha256": "6e60878743728c6f18ba6082236cd1f25adbea5843eae17732c03db44d5a5880",
+      "noticeFile": "gircore.txt",
+      "noticeSha256": "b07f21e85106d135064496fe5a426c2d13abe680e0c4e664d40276f97903be74",
+      "noticeSourceUrl": "https://raw.githubusercontent.com/gircore/gir.core/dce3253f55036755345c70e32e3d8aef55116b3e/license.txt",
+      "attributionStatus": "source_text_retrieved_for_exact_package_notice_review",
+      "packageCopyright": null,
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/gircore/gir.core",
+        "branch": "refs/heads/main",
+        "commit": "dce3253f55036755345c70e32e3d8aef55116b3e"
+      }
+    },
+    {
+      "package": "GirCore.GObject-2.0.Integration/0.7.0",
+      "packageSha256": "9032f3e7e744b46c6a9a4355e36c2a8d7de64408813b53c52ed043c23a412825",
+      "noticeFile": "gircore.txt",
+      "noticeSha256": "b07f21e85106d135064496fe5a426c2d13abe680e0c4e664d40276f97903be74",
+      "noticeSourceUrl": "https://raw.githubusercontent.com/gircore/gir.core/dce3253f55036755345c70e32e3d8aef55116b3e/license.txt",
+      "attributionStatus": "source_text_retrieved_for_exact_package_notice_review",
+      "packageCopyright": null,
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/gircore/gir.core",
+        "branch": "refs/heads/main",
+        "commit": "dce3253f55036755345c70e32e3d8aef55116b3e"
+      }
+    },
+    {
+      "package": "GirCore.Graphene-1.0/0.7.0",
+      "packageSha256": "a273e0cbc8c47fc2d12ffc5a1beb7b3857d7120e4bada190aee2d14814742b6f",
+      "noticeFile": "gircore.txt",
+      "noticeSha256": "b07f21e85106d135064496fe5a426c2d13abe680e0c4e664d40276f97903be74",
+      "noticeSourceUrl": "https://raw.githubusercontent.com/gircore/gir.core/dce3253f55036755345c70e32e3d8aef55116b3e/license.txt",
+      "attributionStatus": "source_text_retrieved_for_exact_package_notice_review",
+      "packageCopyright": null,
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/gircore/gir.core",
+        "branch": "refs/heads/main",
+        "commit": "dce3253f55036755345c70e32e3d8aef55116b3e"
+      }
+    },
+    {
+      "package": "GirCore.Gsk-4.0/0.7.0",
+      "packageSha256": "943bc5b751c854d7a43a30a11f0e0991f8c70506acf6ac69e4ab90c4f02972d3",
+      "noticeFile": "gircore.txt",
+      "noticeSha256": "b07f21e85106d135064496fe5a426c2d13abe680e0c4e664d40276f97903be74",
+      "noticeSourceUrl": "https://raw.githubusercontent.com/gircore/gir.core/dce3253f55036755345c70e32e3d8aef55116b3e/license.txt",
+      "attributionStatus": "source_text_retrieved_for_exact_package_notice_review",
+      "packageCopyright": null,
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/gircore/gir.core",
+        "branch": "refs/heads/main",
+        "commit": "dce3253f55036755345c70e32e3d8aef55116b3e"
+      }
+    },
+    {
+      "package": "GirCore.Gtk-4.0/0.7.0",
+      "packageSha256": "3c59289990acfa03d06cd1745981ac908253ee490cca904be738de64befe2f08",
+      "noticeFile": "gircore.txt",
+      "noticeSha256": "b07f21e85106d135064496fe5a426c2d13abe680e0c4e664d40276f97903be74",
+      "noticeSourceUrl": "https://raw.githubusercontent.com/gircore/gir.core/dce3253f55036755345c70e32e3d8aef55116b3e/license.txt",
+      "attributionStatus": "source_text_retrieved_for_exact_package_notice_review",
+      "packageCopyright": null,
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/gircore/gir.core",
+        "branch": "refs/heads/main",
+        "commit": "dce3253f55036755345c70e32e3d8aef55116b3e"
+      }
+    },
+    {
+      "package": "GirCore.HarfBuzz-0.0/0.7.0",
+      "packageSha256": "b5412a76f69dd5baada6e5f090e9b3460d96771c2a500fffebd38614dee83974",
+      "noticeFile": "gircore.txt",
+      "noticeSha256": "b07f21e85106d135064496fe5a426c2d13abe680e0c4e664d40276f97903be74",
+      "noticeSourceUrl": "https://raw.githubusercontent.com/gircore/gir.core/dce3253f55036755345c70e32e3d8aef55116b3e/license.txt",
+      "attributionStatus": "source_text_retrieved_for_exact_package_notice_review",
+      "packageCopyright": null,
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/gircore/gir.core",
+        "branch": "refs/heads/main",
+        "commit": "dce3253f55036755345c70e32e3d8aef55116b3e"
+      }
+    },
+    {
+      "package": "GirCore.Pango-1.0/0.7.0",
+      "packageSha256": "ac01aad4200e97493797604dfdbeabe90d14a6ae861c600cf0fe3679869b80b4",
+      "noticeFile": "gircore.txt",
+      "noticeSha256": "b07f21e85106d135064496fe5a426c2d13abe680e0c4e664d40276f97903be74",
+      "noticeSourceUrl": "https://raw.githubusercontent.com/gircore/gir.core/dce3253f55036755345c70e32e3d8aef55116b3e/license.txt",
+      "attributionStatus": "source_text_retrieved_for_exact_package_notice_review",
+      "packageCopyright": null,
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/gircore/gir.core",
+        "branch": "refs/heads/main",
+        "commit": "dce3253f55036755345c70e32e3d8aef55116b3e"
+      }
+    },
+    {
+      "package": "GirCore.PangoCairo-1.0/0.7.0",
+      "packageSha256": "77745b48316607c528b18b101b3847141099e6170fb48a5d9907329585522dee",
+      "noticeFile": "gircore.txt",
+      "noticeSha256": "b07f21e85106d135064496fe5a426c2d13abe680e0c4e664d40276f97903be74",
+      "noticeSourceUrl": "https://raw.githubusercontent.com/gircore/gir.core/dce3253f55036755345c70e32e3d8aef55116b3e/license.txt",
+      "attributionStatus": "source_text_retrieved_for_exact_package_notice_review",
+      "packageCopyright": null,
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/gircore/gir.core",
+        "branch": "refs/heads/main",
+        "commit": "dce3253f55036755345c70e32e3d8aef55116b3e"
+      }
+    },
+    {
+      "package": "Mono.Addins/1.4.2-alpha.4",
+      "packageSha256": "45993adefe350722869afd304f9ecc7d7efbf9aa3c29c5845ad916a20b9c1d83",
+      "noticeFile": "mono-addins.txt",
+      "noticeSha256": "cbf31e65aff971c56c6b37d92750ce7dcb4d783b403da3c39a3800195fa14135",
+      "noticeSourceUrl": "https://raw.githubusercontent.com/mono/mono-addins/837c3290113fde43d7bc2a9b390d533bb3a5fbed/COPYING",
+      "attributionStatus": "source_text_retrieved_for_exact_package_notice_review",
+      "packageCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+      "repository": {
+        "type": "git",
+        "commit": "837c3290113fde43d7bc2a9b390d533bb3a5fbed"
+      }
+    },
+    {
+      "package": "Mono.Addins.CecilReflector/1.4.2-alpha.4",
+      "packageSha256": "54f5614d62ca24384e4e1baedd9d18bf50e53855e9f87ee896ac18fd8a591364",
+      "noticeFile": "mono-addins.txt",
+      "noticeSha256": "cbf31e65aff971c56c6b37d92750ce7dcb4d783b403da3c39a3800195fa14135",
+      "noticeSourceUrl": "https://raw.githubusercontent.com/mono/mono-addins/837c3290113fde43d7bc2a9b390d533bb3a5fbed/COPYING",
+      "attributionStatus": "source_text_retrieved_for_exact_package_notice_review",
+      "packageCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+      "repository": null
+    },
+    {
+      "package": "Mono.Addins.Setup/1.4.2-alpha.4",
+      "packageSha256": "a0fa484a23f6d0d40b9418e41bd7f21f4a9d803c25eafc5a6b2913c55806f6b6",
+      "noticeFile": "mono-addins.txt",
+      "noticeSha256": "cbf31e65aff971c56c6b37d92750ce7dcb4d783b403da3c39a3800195fa14135",
+      "noticeSourceUrl": "https://raw.githubusercontent.com/mono/mono-addins/837c3290113fde43d7bc2a9b390d533bb3a5fbed/COPYING",
+      "attributionStatus": "source_text_retrieved_for_exact_package_notice_review",
+      "packageCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+      "repository": null
+    },
+    {
+      "package": "Mono.Cecil/0.10.1",
+      "packageSha256": "26510b66e8c5b5d4e4cbcc2de24e6598b6d8fa1c4b4b36c0589374007ab8d7fe",
+      "noticeFile": "mono-cecil.txt",
+      "noticeSha256": "13d58ecbed676511c0c4c4009bff107025e50007ff5e7901dc562700ec62509e",
+      "noticeSourceUrl": "https://raw.githubusercontent.com/jbevain/cecil/5e52c3ab69a3ee1e9102edfea89177cf43a65535/LICENSE.txt",
+      "attributionStatus": "source_text_retrieved_for_exact_package_notice_review",
+      "packageCopyright": null,
+      "repository": null
+    },
+    {
+      "package": "NGettext/0.6.7",
+      "packageSha256": "7e620e0f03d990d26c9e83491be10bd49e66a5bbb1608e01b2b803d41e0dd8d2",
+      "noticeFile": "ngettext.txt",
+      "noticeSha256": "97c318511dacf2bfa2e27a9ee423fa5679a9a670bda4f99679d2d9da7950f175",
+      "noticeSourceUrl": "https://raw.githubusercontent.com/VitaliiTsilnyk/NGettext/0d7d59ce3e1e95f79f9886f6a6fb39a7dfc31913/LICENSE",
+      "attributionStatus": "source_text_retrieved_for_exact_package_notice_review",
+      "packageCopyright": null,
+      "repository": {
+        "type": "git",
+        "url": "git://github.com/VitaliiTsilnyk/NGettext"
+      }
+    },
+    {
+      "package": "ParagonClipper/6.4.2",
+      "packageSha256": "8c24faae482112a32e1b08957a2200b291d6fa4ba20768d197d8ab781c21555d",
+      "noticeFile": "paragonclipper.txt",
+      "noticeSha256": "c9bff75738922193e67fa726fa225535870d2aa1059f91452c411736284ad566",
+      "noticeSourceUrl": "https://www.boost.org/LICENSE_1_0.txt",
+      "attributionStatus": "source_text_retrieved_for_exact_package_notice_review",
+      "packageCopyright": "Copyright \u00a9 2010-2017 Angus Johnson",
+      "repository": {
+        "url": "https://github.com/ParagonTruss/Clipper"
+      }
+    },
+    {
+      "package": "SharpZipLib/1.3.3",
+      "packageSha256": "1d61104ca87d2adc20ff3225d3bf5d0221fea1bd92856140a8b806e9780832be",
+      "noticeFile": "sharpziplib.txt",
+      "noticeSha256": "d7fbbc16f871bf24fa5624c7eaf945054b778985f32676dcacba41fddca61133",
+      "noticeSourceUrl": "https://raw.githubusercontent.com/icsharpcode/SharpZipLib/1b1ab013ce1df02d8f27cf582197759c614d9126/LICENSE.txt",
+      "attributionStatus": "source_text_retrieved_for_exact_package_notice_review",
+      "packageCopyright": "Copyright \u00a9 2000-2021 SharpZipLib Contributors",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/icsharpcode/SharpZipLib",
+        "commit": "1b1ab013ce1df02d8f27cf582197759c614d9126"
+      }
+    },
+    {
+      "package": "System.CommandLine/2.0.1",
+      "packageSha256": "3430623d4b7f65920c05c2c7a45ffa20c5ff5297ec0bf5e71f7a788b8307085c",
+      "noticeFile": "system-commandline.txt",
+      "noticeSha256": "58fd5ebf25d75b5bb5f4cd407a9fef3befd3641e1af90a1d0716618e6430fc19",
+      "noticeSourceUrl": "https://raw.githubusercontent.com/dotnet/dotnet/fad253f51b461736dfd3cd9c15977bb7493becef/src/command-line-api/LICENSE.md",
+      "attributionStatus": "source_text_retrieved_for_exact_package_notice_review",
+      "packageCopyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/dotnet/dotnet",
+        "commit": "fad253f51b461736dfd3cd9c15977bb7493becef"
+      }
+    },
+    {
+      "package": "Tmds.DBus/0.92.0",
+      "packageSha256": "fed653dc249bb2060e6d2c6c4186621f995c2ac42afac40ddb9f2329afea9c03",
+      "noticeFile": "tmds-dbus.txt",
+      "noticeSha256": "aca3b49277abcc7886ccb2f115603a9f5b15fc3f96019a10c00f2974098b210c",
+      "noticeSourceUrl": "https://raw.githubusercontent.com/tmds/Tmds.DBus/282acebca8d4e4e3ba211646ac650911ee94edfd/COPYING",
+      "attributionStatus": "source_text_retrieved_for_exact_package_notice_review",
+      "packageCopyright": "Tom Deseyn;Alp Toker",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/tmds/Tmds.DBus.git",
+        "branch": "refs/heads/release/0.92",
+        "commit": "282acebca8d4e4e3ba211646ac650911ee94edfd"
+      }
+    }
+  ],
+  "notes": [
+    "NuGet package 6.4.2 explicitly links Boost Software License 1.0 and copyright Angus Johnson 2010-2017. Declared GitHub source repository is unavailable (404); do not claim source pin or reproducible source build for this binary.",
+    "Core NuGet embeds exact commit; sibling Setup and CecilReflector same-version packages omit repository commit and point to same project COPYING. Verify source attribution alongside final shipped DLL inventory.",
+    "Source text inclusion is not proof that every package, binary, native dependency and embedded asset has been cleared."
+  ]
+}

@@ -41,6 +41,9 @@ jobs:
       - name: Build, test and publish qualification directory
         shell: pwsh
         run: ./installer/windows/build-qualification.ps1
+      - name: Qualify temporary MSIX installation and broker startup
+        shell: pwsh
+        run: ./installer/windows/qualify-msix.ps1
       - name: Preserve qualification metadata only
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
@@ -53,5 +56,12 @@ jobs:
             build-evidence/nuget-locks/**/packages.lock.json
             release/bin/native-files.json
             release/bin/licenses/managed-packages.json
+            ${{ runner.temp }}/pixelquay-msix-package/package-record.json
+            build-evidence/msix-install/installation-qualification.json
+            build-evidence/msix-install/loaded-modules.json
+            build-evidence/msix-install/accessible-window-tree.json
+            build-evidence/msix-install/qualification-window.png
+            build-evidence/msix-install/installed-native-stdout.txt
+            build-evidence/msix-install/installed-native-stderr.txt
           retention-days: 14
           if-no-files-found: error

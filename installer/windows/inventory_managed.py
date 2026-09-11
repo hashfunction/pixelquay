@@ -6,6 +6,7 @@ import json
 from pathlib import Path
 import shutil
 import xml.etree.ElementTree as ET
+from managed_notices import include_notice
 
 parser=argparse.ArgumentParser(description=__doc__)
 parser.add_argument('--assets',type=Path,required=True)
@@ -32,12 +33,20 @@ for key,info in assets['libraries'].items():
             license_files.append(rel.as_posix())
     repo=metadata.get('repository')
     nupkg=next(package.glob('*.nupkg'))
-    rows.append({'package':key,'authors':value('authors'),'copyright':value('copyright'),
+    row={'package':key,'authors':value('authors'),'copyright':value('copyright'),
         'license':value('license'),'licenseUrl':value('licenseUrl'),'projectUrl':value('projectUrl'),
         'repository':dict(repo.attrib) if repo is not None else None,
         'packageSha256':hashlib.sha256(nupkg.read_bytes()).hexdigest(),
         'includedNoticeFiles':license_files,
-        'noticeReviewRequired':not license_files})
+        'noticeReviewRequired':not license_files}
+    supplement=include_notice(row,Path(__file__).resolve().parents[2]/'licenses/managed-source-notices',args.output.parent)
+    if supplement:
+        row['includedNoticeFiles'].append(supplement['file'])
+        row['supplementalNoticeProvenance']=supplement
+        row['noticeTextPresent']=True
+        # Keep the explicit review flag: the package itself omitted its notice.
+        # A copied source text is evidence, not clearance for all shipped contents.
+    rows.append(row)
 args.output.parent.mkdir(parents=True,exist_ok=True)
 args.output.write_text(json.dumps({'schemaVersion':1,'status':'restored-package-audit-not-release-clearance',
     'scope':'All packages in the supplied assets file, including build-only and RID alternatives; rerun after Windows restore.',
