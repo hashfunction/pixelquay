@@ -1,0 +1,52 @@
+PixelQuay 1.0.0 — Trieflow LLC
+Product: https://pixelquay.trieflow.com
+Privacy: https://pixelquay.trieflow.com/privacy
+Support: https://pixelquay.trieflow.com/support
+
+PixelQuay is derived from Pinta 3.1.2 (commit b3df1e579f6b3dd23193d2f6877deced20d8063b).
+Copyright (c) 2010–2026 Pinta contributors. MIT license: license-mit.txt.
+Paint.NET 3.36-derived code and retained Paint.NET icons are MIT licensed:
+license-pdn.txt and preserved file headers. https://www.getpaint.net/
+Original PixelQuay additions and main application artwork:
+Copyright (c) 2026 Trieflow LLC. MIT licensed. branding/pixelquay.svg is the source.
+No endorsement by Pinta or Paint.NET is implied.
+
+RETAINED ICON ATTRIBUTION
+Silk: Mark James, https://www.famfamfam.com/lab/icons/silk/
+Fugue: Yusuke Kamiyamane, https://p.yusukekamiyamane.com/
+Both: Creative Commons Attribution 3.0, https://creativecommons.org/licenses/by/3.0/
+Pinta contributor icons: project MIT license; see Pinta.Resources/icons/pinta-icons.md.
+Google Material Icons: Google, Apache License 2.0,
+https://github.com/google/material-design-icons
+Microsoft Fluent UI System Icons: Microsoft, MIT,
+https://github.com/microsoft/fluentui-system-icons
+The upstream Pinta application mark is replaced by original PixelQuay artwork.
+
+MANAGED DEPENDENCIES
+Exact restored runtime packages are recorded in licenses/managed-packages.json.
+GirCore bindings: MIT (native library licenses apply separately).
+Mono.Addins family and Mono.Cecil: MIT; https://github.com/mono/mono-addins
+NGettext: MIT; https://github.com/VitaliiTsilnyk/NGettext
+ParagonClipper / Clipper: Boost Software License 1.0; https://www.boost.org/LICENSE_1_0.txt
+System.CommandLine and Microsoft .NET libraries: MIT.
+Tmds.DBus: MIT; patched to 0.92.0 for GHSA-xrw6-gwf8-vvr9.
+The .NET runtime's LICENSE.txt and ThirdPartyNotices.txt must accompany a self-contained release.
+
+NATIVE DEPENDENCIES — WINDOWS RELEASE GATE
+GTK4, GLib/GIO, GdkPixbuf, libadwaita and Pango, among other dependencies,
+include LGPL components. Cairo and other libraries have their own licenses.
+A top-level MIT license does not clear these binaries or their bundled data.
+The Windows publish target inventories every native file declared by bundle_gtk.targets
+against the actual MSYS2 pacman ownership database, records package names/versions/
+licenses/upstream sources and SHA-256, and copies installed package license files.
+Files with missing ownership, version or license metadata stop publication.
+Native inventory and corresponding source/license compliance must be reviewed before
+MSIX signing. This source checkout does not claim a Windows package is cleared.
+See installer/windows/RELEASE.md for evidence and source-delivery requirements.
+
+Managed dependency license texts retrieved from versioned publisher sources are
+in licenses/managed-source-notices, with source URLs and SHA-256 in sources.json.
+ParagonClipper NuGet metadata credits Angus Johnson, Copyright 2010-2017.
+Its unavailable declared repository prevents a verified source-build pin; the
+Boost Software License text and package metadata are retained. This does not
+waive the final Windows runtime inventory review.

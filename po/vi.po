@@ -1,0 +1,3187 @@
+# Vietnamese translation for pinta
+# Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
+# This file is distributed under the same license as the pinta package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: pinta\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-11-01 00:22+0000\n"
+"PO-Revision-Date: 2025-12-31 18:06+0000\n"
+"Last-Translator: Loc Huynh <huynhloc.contact@gmail.com>\n"
+"Language-Team: Vietnamese <https://hosted.weblate.org/projects/pinta/pinta/"
+"vi/>\n"
+"Language: vi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 5.15.1\n"
+"X-Launchpad-Export-Date: 2023-12-18 03:00+0000\n"
+
+#: ../Pinta.Gui.Addins/InstallDialog.cs:268
+msgid " (in user directory)"
+msgstr " (trong thư mục người dùng)"
+
+#: ../Pinta.Core/Classes/SelectionModeHandler.cs:56
+msgid " Selection Mode: "
+msgstr " Chế độ lựa chọn: "
+
+#: ../Pinta.Core/Managers/EffectsManager.cs:78
+#: ../Pinta.Core/Managers/EffectsManager.cs:116
+msgid "..."
+msgstr "…"
+
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:226
+msgid "3 x 3 Region"
+msgstr "Vùng 3 x 3"
+
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:227
+msgid "5 x 5 Region"
+msgstr "Vùng 5 x 5"
+
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:228
+msgid "7 x 7 Region"
+msgstr "Vùng 7 x 7"
+
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:229
+msgid "9 x 9 Region"
+msgstr "Vùng 9 x 9"
+
+#: ../Pinta/MainWindow.cs:405
+msgid "A_dd-ins"
+msgstr "_Phần mở rộng"
+
+#: ../Pinta.Core/Actions/AppActions.cs:42
+msgid "About"
+msgstr "Giới thiệu về"
+
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:64
+msgid "About Pinta"
+msgstr "Giới thiệu về Pinta"
+
+#: ../Pinta.Core/Actions/LayerActions.cs:61
+#: ../Pinta.Core/Actions/LayerActions.cs:431
+#: ../Pinta/Actions/Edit/PasteAction.cs:174
+msgid "Add New Layer"
+msgstr "Thêm lớp mới"
+
+#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:24
+msgid "Add Noise"
+msgstr "Thêm nhiễu"
+
+#: ../Pinta.Core/Actions/AddinActions.cs:40
+msgid "Add-in Manager..."
+msgstr "Trình quản lý bổ trợ..."
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:839
+msgid "Added"
+msgstr "Được thêm vào"
+
+#: ../Pinta/MainWindow.cs:457
+msgid "Adjustments"
+msgstr "Điều chỉnh"
+
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:197
+msgid "After select"
+msgstr "Sau khi chọn"
+
+#: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:72
+#: ../Pinta.Effects/Effects/AlignObjectEffect.cs:12
+msgid "Align Object"
+msgstr "Căn chỉnh đối tượng"
+
+#: ../Pinta.Core/Actions/EditActions.cs:593
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:285
+#: ../Pinta/Actions/File/OpenDocumentAction.cs:102
+msgid "All files"
+msgstr "Mọi loại tệp"
+
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:515
+msgid "Alpha"
+msgstr "Alpha"
+
+#: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:212
+msgid "Alpha Gradient"
+msgstr "Độ dốc Alpha"
+
+#: ../Pinta.Effects/Effects/BulgeEffect.cs:116
+#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:146
+#: ../Pinta.Effects/Effects/PolarInversionEffect.cs:88
+#: ../Pinta.Effects/Effects/SharpenEffect.cs:57
+#: ../Pinta.Effects/Effects/TwistEffect.cs:171
+#: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:136
+msgid "Amount"
+msgstr "Số lượng"
+
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:139
+msgid "Anchor:"
+msgstr "Neo:"
+
+#: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:81
+#: ../Pinta.Effects/Effects/EmbossEffect.cs:120
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:167
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:168
+#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:147
+#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:136
+#: ../Pinta.Effects/Effects/ReliefEffect.cs:77
+#: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:310
+#: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:145
+msgid "Angle"
+msgstr "Góc"
+
+#: ../Pinta.Effects/Effects/TwistEffect.cs:179
+msgid "Antialias"
+msgstr "Khử nhiễu"
+
+#: ../Pinta.Core/Classes/BaseTool.cs:363
+msgid "Antialiasing Off"
+msgstr "Tắt Khử nhiễu"
+
+#: ../Pinta.Core/Classes/BaseTool.cs:362
+msgid "Antialiasing On"
+msgstr "Bật Khử nhiễu"
+
+#: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:262
+msgid "Arrow"
+msgstr "Mũi tên"
+
+#: ../Pinta.Effects/Effects/InkSketchEffect.cs:41
+#: ../Pinta.Effects/Effects/OilPaintingEffect.cs:32
+#: ../Pinta.Effects/Effects/PencilSketchEffect.cs:33
+msgid "Artistic"
+msgstr "Nghệ sĩ"
+
+#. Translators: Image dithering matrix named after Bill Atkinson
+#: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:28
+msgid "Atkinson"
+msgstr "Atkinson"
+
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:257
+msgid "Auto"
+msgstr "Tự động"
+
+#: ../Pinta.Core/Actions/ImageActions.cs:63
+msgid "Auto Crop"
+msgstr "Tự động cắt nhỏ hình"
+
+#: ../Pinta.Effects/Adjustments/AutoLevelEffect.cs:24
+msgid "Auto Level"
+msgstr "Tự định mức"
+
+#: ../Pinta.Gui.Addins/AddinInfoView.cs:227
+#, csharp-format
+msgid "Available in repository: {0}"
+msgstr "Có sẵn trong kho: {0}"
+
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:130
+msgid "Background"
+msgstr "Nền"
+
+#: ../Pinta/Dialogs/NewImageDialog.cs:127
+msgid "Background Color"
+msgstr "Màu nền"
+
+#: ../Pinta/Dialogs/NewImageDialog.cs:307
+msgid "Background:"
+msgstr "Ảnh nền:"
+
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:94
+msgid "Based on the work of Paint.NET:"
+msgstr "Dựa trên chương trình Paint.NET:"
+
+#. Translators: Gradient with the colors of the flag of Italy: red, white, and green
+#: ../Pinta.Effects/Utilities/GradientHelper.cs:23
+msgid "Beautiful Italy"
+msgstr "Nước Ý xinh đẹp"
+
+#: ../Pinta.Core/Actions/ViewActions.cs:86
+msgid "Best Fit"
+msgstr "Vừa nhất"
+
+#: ../Pinta.Core/Enumerations/ResamplingMode.cs:22
+msgid "Bilinear"
+msgstr "Song tuyến tính"
+
+#. Translators: Simple gradient that goes from black to white
+#: ../Pinta.Effects/Adjustments/BlackAndWhiteEffect.cs:29
+#: ../Pinta.Effects/Utilities/GradientHelper.cs:27
+msgid "Black and White"
+msgstr "Đen trắng"
+
+#: ../Pinta/Dialogs/LayerPropertiesDialog.cs:82
+msgid "Blend Mode"
+msgstr "Chế độ trộn lẫn"
+
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:112
+#: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:62
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:493
+msgid "Blue"
+msgstr "Lam"
+
+#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:91
+msgid "Blue "
+msgstr "Xanh "
+
+#: ../Pinta.Effects/Effects/FragmentEffect.cs:33
+#: ../Pinta.Effects/Effects/GaussianBlurEffect.cs:28
+#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:33
+#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:27
+#: ../Pinta.Effects/Effects/UnfocusEffect.cs:27
+#: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:32
+msgid "Blurs"
+msgstr "Làm nhòe"
+
+#: ../Pinta.Tools/Tools/TextTool.cs:177
+msgid "Bold"
+msgstr "Đậm"
+
+#. Translators: Gradient that starts out white, like the core of a raging fire, and then goes through yellow, red, and black (like visible black smoke), and finally transparent, blending with the background
+#: ../Pinta.Effects/Utilities/GradientHelper.cs:31
+msgid "Bonfire"
+msgstr "Lửa trại"
+
+#: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:35
+msgid "Bottom Center"
+msgstr "Trung tâm dưới cùng"
+
+#: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:34
+msgid "Bottom Left"
+msgstr "Dưới cùng bên trái"
+
+#: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:36
+msgid "Bottom Right"
+msgstr "Dưới cùng bên phải"
+
+#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:147
+#: ../Pinta.Effects/Effects/GlowEffect.cs:81
+msgid "Brightness"
+msgstr "Độ sáng"
+
+#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:28
+msgid "Brightness / Contrast"
+msgstr "Độ sáng / Độ tương phản"
+
+#: ../Pinta.Effects/Effects/OilPaintingEffect.cs:147
+msgid "Brush Size"
+msgstr "Cỡ chổi"
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:262
+#: ../Pinta.Tools/Tools/BaseBrushTool.cs:120
+msgid "Brush width"
+msgstr "Bề rộng nét chổi vẽ"
+
+#: ../Pinta.Effects/Effects/BulgeEffect.cs:23
+msgid "Bulge"
+msgstr "Phình to"
+
+#. Translators: Image dithering matrix named after Daniel Burkes
+#: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:24
+msgid "Burkes"
+msgstr "Burke"
+
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:110
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:80
+msgid "By absolute size:"
+msgstr "Theo kích thước tuyệt đối:"
+
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:102
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:72
+msgid "By percentage:"
+msgstr "Theo phần trăm:"
+
+#: ../Pinta.Core/Actions/EditActions.cs:530
+#: ../Pinta.Gui.Addins/InstallDialog.cs:118
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:214
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:96
+msgid "Cancel"
+msgstr "Hủy"
+
+#: ../Pinta/Pads/CanvasPad.cs:41
+msgid "Canvas"
+msgstr "Nền vẽ"
+
+#: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:92
+msgid "Canvas Grid Settings"
+msgstr "Cài đặt lưới canvas"
+
+#: ../Pinta.Core/Actions/ViewActions.cs:124
+msgid "Canvas Grid..."
+msgstr "Lưới vải..."
+
+#: ../Pinta.Effects/Effects/CellsEffect.cs:176
+msgid "Cell Radius"
+msgstr "Bán kính tế bào"
+
+#: ../Pinta.Effects/Effects/PixelateEffect.cs:121
+msgid "Cell Size"
+msgstr "Kích cỡ tế bào"
+
+#: ../Pinta.Effects/Effects/CellsEffect.cs:19
+msgid "Cells"
+msgstr "Ô"
+
+#: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:32
+msgid "Center"
+msgstr "Trung tâm"
+
+#: ../Pinta.Tools/Tools/TextTool.cs:229
+msgid "Center Align"
+msgstr "Căn giữa"
+
+#: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:31
+msgid "Center Left"
+msgstr "Giữa bên trái"
+
+#: ../Pinta.Effects/Effects/DentsEffect.cs:159
+#: ../Pinta.Effects/Effects/PolarInversionEffect.cs:96
+msgid "Center Offset"
+msgstr "Bù trung tâm"
+
+#: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:33
+msgid "Center Right"
+msgstr "Giữa bên phải"
+
+#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:154
+msgid "Centered"
+msgstr "Cân giữa"
+
+#: ../Pinta.Core/Actions/ViewActions.cs:227
+msgid "Centimeters"
+msgstr "Xăng-ti-mét"
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:279
+#: ../Pinta.Tools/Tools/BaseBrushTool.cs:47
+msgid "Change brush width. Shortcut keys: [ ]"
+msgstr "Thay đổi chiều rộng bàn chải. Phím tắt: [ ]"
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:359
+msgid "Changed Shape Type"
+msgstr "Thay kiểu hình dạng"
+
+#. Translators: Gradient that starts out off-white, like cherry blossoms against sunlight, then goes through pink, then light blue (like the sky) and finally transparent, blending with the background
+#: ../Pinta.Effects/Utilities/GradientHelper.cs:35
+msgid "Cherry Blossom"
+msgstr "Hoa anh đào"
+
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:629
+#: ../Pinta.Gui.Widgets/Dialogs/SimpleEffectDialog.cs:286
+msgid "Choose Color"
+msgstr "Chọn màu"
+
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:149
+msgid "Choose Palette Color"
+msgstr "Chọn màu cho bảng màu"
+
+#: ../Pinta.Tools/Brushes/CircleBrush.cs:36
+msgid "Circles"
+msgstr "Vòng tròn"
+
+#. Translators: Arrangement of points along a circular path
+#: ../Pinta.Core/Algorithms/SpatialPartition.cs:170
+msgid "Circular"
+msgstr "Thông tư"
+
+#: ../Pinta.Effects/Classes/EdgeBehavior.cs:7
+msgid "Clamp"
+msgstr "Kẹp"
+
+#: ../Pinta.Tools/Tools/RectangleSelectTool.cs:42
+msgid ""
+"Click and drag to draw a rectangular selection.\n"
+"Hold Shift to constrain to a square."
+msgstr ""
+"Nhấp và kéo để vẽ vùng chọn hình chữ nhật.\n"
+"Giữ phím Shift để giới hạn thành một hình vuông."
+
+#: ../Pinta.Tools/Tools/EllipseSelectTool.cs:41
+msgid ""
+"Click and drag to draw an elliptical selection.\n"
+"Hold Shift to constrain to a circle."
+msgstr ""
+"Nhấp và kéo để vẽ vùng chọn hình elip.\n"
+"Giữ phím Shift để giới hạn thành một vòng tròn."
+
+#: ../Pinta.Tools/Tools/GradientTool.cs:61
+msgid ""
+"Click and drag to draw gradient from primary to secondary color.\n"
+"Right click to reverse.\n"
+"Click on a control point and drag to move it."
+msgstr ""
+"Nhấp và kéo để vẽ gradient từ màu chính sang màu phụ.\n"
+"Nhấp chuột phải để đảo ngược.\n"
+"Bấm vào một điểm điều khiển và kéo để di chuyển nó."
+
+#: ../Pinta.Tools/Tools/PanTool.cs:42
+msgid "Click and drag to navigate image."
+msgstr "Nhấn chuột và kéo để dò hình."
+
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:328
+msgid "Click to reset primary and secondary color."
+msgstr "Kích chuột để đặt lại màu chính và màu phụ."
+
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:317
+msgid "Click to select primary color."
+msgstr "Kích chuột để chọn màu chính."
+
+#: ../Pinta.Tools/Tools/MagicWandTool.cs:49
+msgid "Click to select region of similar color."
+msgstr "Kích chuột để chọn một vùng có màu sắc tương tự."
+
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:320
+msgid "Click to select secondary color."
+msgstr "Kích chuột để chọn màu phụ."
+
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:246
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:323
+msgid "Click to switch between primary and secondary color."
+msgstr "Nhấp để chuyển đổi giữa màu chính và màu phụ."
+
+#: ../Pinta/Dialogs/NewImageDialog.cs:358
+#: ../Pinta/Dialogs/NewImageDialog.cs:415
+#: ../Pinta/Dialogs/NewImageDialog.cs:434
+#: ../Pinta/Dialogs/NewImageDialog.cs:530
+msgid "Clipboard"
+msgstr "Bộ nhớ tạm"
+
+#: ../Pinta.Tools/Tools/CloneStampTool.cs:46
+msgid "Clone Stamp"
+msgstr "Nhân bản nhãn"
+
+#: ../Pinta.Core/Actions/FileActions.cs:81
+#: ../Pinta.Gui.Addins/InstallDialog.cs:327
+msgid "Close"
+msgstr "Đóng"
+
+#: ../Pinta.Core/Actions/WindowActions.cs:51
+msgid "Close All"
+msgstr "Đóng tất cả"
+
+#: ../Pinta.Tools/Editable/EditEngines/RectangleEditEngine.cs:37
+msgid "Closed Curve Shape"
+msgstr "Kiểu đường cong khép kín"
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:334
+msgid "Closed Line/Curve Series"
+msgstr "Loạt Đường thẳng / Đường cong đóng kín"
+
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:26
+msgid "Clouds"
+msgstr "Mây"
+
+#: ../Pinta.Effects/Effects/OilPaintingEffect.cs:151
+msgid "Coarseness"
+msgstr "Độ Thô"
+
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:43
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:23
+msgid "Color"
+msgstr "Màu sắc"
+
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:33
+msgid "Color Burn"
+msgstr "Màu phơi sáng"
+
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:34
+msgid "Color Dodge"
+msgstr "Màu chắn sáng"
+
+#: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:215
+msgid "Color Gradient"
+msgstr "Độ dốc màu"
+
+#: ../Pinta.Tools/Tools/GradientTool.cs:292
+msgid "Color Mode"
+msgstr "Chế độ màu"
+
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:352
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:48
+msgid "Color Picker"
+msgstr "Chọn màu"
+
+#: ../Pinta.Effects/Effects/PencilSketchEffect.cs:89
+msgid "Color Range"
+msgstr "Khoảng màu"
+
+#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:171
+msgid "Color Saturation"
+msgstr "Độ bão hòa màu"
+
+#: ../Pinta.Core/Actions/ViewActions.cs:253
+#: ../Pinta.Effects/Effects/CellsEffect.cs:183
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:148
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:158
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:174
+msgid "Color Scheme"
+msgstr "Phối màu"
+
+#: ../Pinta.Effects/Effects/CellsEffect.cs:192
+msgid "Color Scheme Edge Behavior"
+msgstr "Phối màu hành vi cạnh"
+
+#: ../Pinta.Effects/Effects/CellsEffect.cs:180
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:145
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:155
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:171
+msgid "Color Scheme Source"
+msgstr "Nguồn phối màu"
+
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:191
+msgid "Color Sorting"
+msgstr "Sắp xếp màu"
+
+#: ../Pinta.Effects/Effects/InkSketchEffect.cs:150
+msgid "Coloring"
+msgstr "Tô màu"
+
+#: ../Pinta.Tools/Tools/GradientTool.cs:277
+msgid "Conical Gradient"
+msgstr "Dài màu hình nón"
+
+#: ../Pinta.Core/Actions/HelpActions.cs:46
+msgid "Contents"
+msgstr "Nội dung"
+
+#: ../Pinta.Tools/Tools/FloodTool.cs:131
+msgid "Contiguous"
+msgstr "Kế nhau"
+
+#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:157
+#: ../Pinta.Effects/Effects/GlowEffect.cs:85
+msgid "Contrast"
+msgstr "Độ tương phản"
+
+#: ../Pinta.Core/Actions/EditActions.cs:91
+msgid "Copy"
+msgstr "Sao chép"
+
+#: ../Pinta.Core/Actions/EditActions.cs:98
+msgid "Copy Merged"
+msgstr "Sao chép ghép"
+
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:81
+msgid "Copyright"
+msgstr "Bản quyền"
+
+#. Translators: Gradient with the colors of blue and pink cotton candy
+#: ../Pinta.Effects/Utilities/GradientHelper.cs:39
+msgid "Cotton Candy"
+msgstr "Kẹo bông"
+
+#. Translators: {0} is the name of a layer, and {1} is the path to a .ora file.
+#: ../Pinta.Core/ImageFormats/OraFormat.cs:125
+#, csharp-format
+msgid "Could not import layer \"{0}\" from {1}"
+msgstr "Không thể nhập lớp \"{0}\" từ {1}"
+
+#: ../Pinta.Core/Extensions/OtherExtensions.cs:166
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:412
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:424
+#, csharp-format
+msgid "Could not open file: {0}"
+msgstr "Không mở được tệp: {0}"
+
+#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:175
+msgid "Coverage"
+msgstr "Phạm vi"
+
+#: ../Pinta.Core/Actions/ImageActions.cs:56
+#: ../Pinta.Core/Actions/ImageActions.cs:295
+msgid "Crop to Selection"
+msgstr "Cắt hình về phần lựa chọn"
+
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:162
+msgid "Current Palette"
+msgstr "Bảng màu hiện tại"
+
+#: ../Pinta.Effects/Effects/TileEffect.cs:247
+msgid "Curved"
+msgstr "Cong"
+
+#: ../Pinta.Effects/Adjustments/CurvesEffect.cs:27
+#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:138
+msgid "Curves"
+msgstr "Cong"
+
+#: ../Pinta/Dialogs/NewImageDialog.cs:360
+#: ../Pinta/Dialogs/NewImageDialog.cs:415
+#: ../Pinta/Dialogs/NewImageDialog.cs:436
+#: ../Pinta/Dialogs/NewImageDialog.cs:530
+msgid "Custom"
+msgstr "Tùy chỉnh"
+
+#: ../Pinta.Core/Actions/EditActions.cs:84
+#: ../Pinta.Core/Actions/EditActions.cs:367
+msgid "Cut"
+msgstr "Cắt"
+
+#. Translators: This refers to using a dark variant of the color scheme.
+#: ../Pinta.Core/Actions/ViewActions.cs:250
+msgid "Dark"
+msgstr "Tối"
+
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:38
+msgid "Darken"
+msgstr "Làm tối"
+
+#: ../Pinta.Tools/Dashes/DashPatternBox.cs:59
+msgid "Dash"
+msgstr "Nét"
+
+#. Translators: This refers to using the system's default color scheme.
+#: ../Pinta.Core/Actions/ViewActions.cs:246
+msgid "Default"
+msgstr "Mặc định"
+
+#: ../Pinta.Core/Actions/LayerActions.cs:68
+#: ../Pinta.Core/Actions/LayerActions.cs:410
+msgid "Delete Layer"
+msgstr "Xoá bỏ lớp"
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:677
+msgid "Deleted"
+msgstr "Bị xóa"
+
+#. Translators: This refers to an image distortion that creates small, random warps or distortions in the image, like tiny dents, bumps, or waves
+#: ../Pinta.Effects/Effects/DentsEffect.cs:49
+msgid "Dents"
+msgstr "Vết lõm"
+
+#: ../Pinta.Core/Actions/EditActions.cs:382
+msgid "Deselect"
+msgstr "Bỏ chọn"
+
+#: ../Pinta.Core/Actions/EditActions.cs:162
+msgid "Deselect All"
+msgstr "Bỏ chọn hết"
+
+#: ../Pinta/Dialogs/ErrorDialog.cs:66
+msgid "Details"
+msgstr "Chi tiết"
+
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:36
+msgid "Difference"
+msgstr "Hiệu số"
+
+#: ../Pinta.Effects/Effects/FragmentEffect.cs:128
+#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:150
+msgid "Distance"
+msgstr "Khoảng cách"
+
+#: ../Pinta.Effects/Effects/CellsEffect.cs:153
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:184
+msgid "Distance Metric"
+msgstr "Số liệu khoảng cách"
+
+#: ../Pinta.Effects/Effects/BulgeEffect.cs:27
+#: ../Pinta.Effects/Effects/DentsEffect.cs:52
+#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:27
+#: ../Pinta.Effects/Effects/PixelateEffect.cs:29
+#: ../Pinta.Effects/Effects/PolarInversionEffect.cs:32
+#: ../Pinta.Effects/Effects/TileEffect.cs:34
+#: ../Pinta.Effects/Effects/TwistEffect.cs:33
+msgid "Distort"
+msgstr "Làm biến dạng"
+
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:14
+msgid "Dithering"
+msgstr "Phối màu"
+
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:206
+msgid "Do not switch tool"
+msgstr "Không đổi công cụ"
+
+#: ../Pinta.Gui.Addins/AddinInfoView.cs:221
+#, csharp-format
+msgid "Download size: {0}"
+msgstr "Kích thước tải xuống: {0}"
+
+#: ../Pinta.Core/Actions/LayerActions.cs:75
+#: ../Pinta.Core/Actions/LayerActions.cs:397
+msgid "Duplicate Layer"
+msgstr "Nhân đôi lớp"
+
+#: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:2
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:69
+msgid "Easily create and edit images"
+msgstr "Dễ dàng tạo và chỉnh sửa hình ảnh"
+
+#: ../Pinta.Effects/Effects/DentsEffect.cs:162
+#: ../Pinta.Effects/Effects/PolarInversionEffect.cs:99
+#: ../Pinta.Effects/Effects/TileEffect.cs:237 Polar Inversion dialog
+msgid "Edge Behavior"
+msgstr "Hành vi của gờ"
+
+#: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:26
+msgid "Edge Detect"
+msgstr "Nhận biết gờ"
+
+#: ../Pinta/MainWindow.cs:403
+msgid "Effe_cts"
+msgstr "_Hiệu ứng"
+
+#: ../Pinta/MainWindow.cs:451
+msgid "Effects"
+msgstr "Các hiệu ứng"
+
+#. Translators: Gradient that starts out white, like the the inner part of a spark, and goes through progressively dark shades of blue until it reaches black, and finally transparent, blending with the background
+#: ../Pinta.Effects/Utilities/GradientHelper.cs:43
+msgid "Electric"
+msgstr "Điện"
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:335
+#: ../Pinta.Tools/Editable/EditEngines/EllipseEditEngine.cs:36
+#: ../Pinta.Tools/Tools/EllipseTool.cs:45
+msgid "Ellipse"
+msgstr "Elip"
+
+#: ../Pinta.Tools/Tools/EllipseSelectTool.cs:39
+msgid "Ellipse Select"
+msgstr "Chọn theo hình ê-líp"
+
+#: ../Pinta.Effects/Effects/EmbossEffect.cs:26
+msgid "Emboss"
+msgstr "Chạm nổi"
+
+#: ../Pinta/Main.cs:67
+msgid "Enable additional logging or behavior changes for debugging"
+msgstr "Bật ghi nhật ký bổ sung hoặc thay đổi hành vi để gỡ lỗi"
+
+#: ../Pinta.Core/Actions/EditActions.cs:127
+#: ../Pinta.Core/Actions/EditActions.cs:368
+msgid "Erase Selection"
+msgstr "Xóa vùng chọn"
+
+#: ../Pinta.Tools/Tools/EraserTool.cs:51
+msgid "Eraser"
+msgstr "Tẩy"
+
+#: ../Pinta.Core/ImageFormats/OraFormat.cs:126
+msgid "Error"
+msgstr "Lỗi"
+
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:171
+msgid "Error Diffusion Method"
+msgstr "Phương pháp khuếch tán lỗi"
+
+#: ../Pinta.Core/Classes/SelectionModeHandler.cs:46
+msgid "Exclude (-) (Right Click)"
+msgstr "Ngoại trừ (-) (Chuột phải)"
+
+#. Translators: This refers to expanding the canvas size when pasting a larger image.
+#: ../Pinta/Actions/Edit/PasteAction.cs:227
+msgid "Expand"
+msgstr "Mở rộng"
+
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:277
+msgid "Extension packages"
+msgstr "Gói mở rộng"
+
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:143
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:156
+msgid "Factor"
+msgstr "Hệ số"
+
+#: ../Pinta/Actions/File/NewScreenshotAction.cs:85
+msgid "Failed to access XDG Desktop Portals"
+msgstr "Không thể truy cập Cổng thông tin máy tính để bàn XDG"
+
+#: ../Pinta/MainWindow.cs:324
+msgid "Failed to initialize add-in"
+msgstr "Không thể khởi tạo phần bổ trợ"
+
+#: ../Pinta.Gui.Addins/InstallDialog.cs:199
+msgid "Failed to load extension package"
+msgstr "Không tải được gói tiện ích mở rộng"
+
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:444
+msgid "Failed to open image"
+msgstr "Không mở được hình ảnh"
+
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:254
+msgid "Failed to save image"
+msgstr "Không lưu được hình ảnh"
+
+#: ../Pinta/Actions/File/NewScreenshotAction.cs:84
+#: ../Pinta/Actions/File/NewScreenshotAction.cs:109
+msgid "Failed to take screenshot"
+msgstr "Không chụp được ảnh chụp màn hình"
+
+#: ../Pinta.Effects/Effects/FeatherEffect.cs:175
+msgid "Feather Canvas Edge"
+msgstr "Cạnh vải lông"
+
+#: ../Pinta.Effects/Effects/FeatherEffect.cs:18
+msgid "Feather Object"
+msgstr "Đối tượng lông vũ"
+
+#: ../Pinta.Core/Actions/HelpActions.cs:59
+msgid "File a Bug"
+msgstr "Báo một Lỗi"
+
+#: ../Pinta/Main.cs:62
+msgid "Files to open"
+msgstr "Tập tin để mở"
+
+#: ../Pinta.Tools/Tools/TextTool.cs:267
+msgid "Fill Background"
+msgstr "Tô nền"
+
+#: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:221
+msgid "Fill Object Background"
+msgstr "Tô nền đối tượng"
+
+#: ../Pinta.Core/Actions/EditActions.cs:134
+#: ../Pinta.Core/Actions/EditActions.cs:320
+msgid "Fill Selection"
+msgstr "Đổ màu vùng chọn"
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:308
+#: ../Pinta.Tools/Tools/FreeformShapeTool.cs:219
+msgid "Fill Shape"
+msgstr "Tô đầy hình"
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:298
+#: ../Pinta.Tools/Tools/FreeformShapeTool.cs:212
+msgid "Fill Style"
+msgstr "Cách thức tô đầy"
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:309
+#: ../Pinta.Tools/Tools/FreeformShapeTool.cs:220
+msgid "Fill and Outline Shape"
+msgstr "Tô đầy và vẽ biên ngoài của hình"
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1104
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1390
+#: ../Pinta.Tools/Tools/GradientTool.cs:214
+msgid "Finalized"
+msgstr "Được hoàn thiện"
+
+#: ../Pinta.Core/HistoryItems/FinishPixelsHistoryItem.cs:41
+msgid "Finish Pixels"
+msgstr "Điểm ảnh hoàn thiện"
+
+#: ../Pinta.Core/Actions/ImageActions.cs:117
+#: ../Pinta.Core/Actions/ImageActions.cs:221
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:167
+msgid "Flatten"
+msgstr "Ghép lớp"
+
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:163
+msgid "Flattening the image will merge all layers into a single layer."
+msgstr "Làm phẳng hình ảnh sẽ hợp nhất tất cả các lớp thành một lớp duy nhất."
+
+#: ../Pinta.Core/Actions/ImageActions.cs:84
+#: ../Pinta.Core/Actions/LayerActions.cs:95
+msgid "Flip Horizontal"
+msgstr "Lật ngang"
+
+#: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:51
+msgid "Flip Image Horizontal"
+msgstr "Lật hình theo chiều ngang"
+
+#: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:55
+msgid "Flip Image Vertical"
+msgstr "Lật hình theo chiều dọc"
+
+#: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:76
+msgid "Flip Layer Horizontal"
+msgstr "Lật lớp theo chiều ngang"
+
+#: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:80
+msgid "Flip Layer Vertical"
+msgstr "Lật lớp theo chiều dọc"
+
+#: ../Pinta.Core/Actions/ImageActions.cs:90
+#: ../Pinta.Core/Actions/LayerActions.cs:101
+msgid "Flip Vertical"
+msgstr "Lật dọc"
+
+#: ../Pinta.Tools/Tools/FloodTool.cs:121
+msgid "Flood Mode"
+msgstr "Chế độ Flood"
+
+#. Translators: Image dithering matrix named after Robert W. Floyd and Louis Steinberg
+#: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:40
+msgid "Floyd-Steinberg"
+msgstr "Floyd-Steinberg"
+
+#. Translators: Image dithering matrix named after Robert W. Floyd and Louis Steinberg. Some software may use it and call it Floyd-Steinberg, but it's not the actual Floyd-Steinberg matrix
+#: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:44
+msgid "Floyd-Steinberg Lite"
+msgstr "Floyd-Steinberg Lite"
+
+#: ../Pinta.Tools/Tools/TextTool.cs:145
+msgid "Font"
+msgstr "Phông chữ"
+
+#: ../Pinta.Effects/Effects/FragmentEffect.cs:27
+msgid "Fragment"
+msgstr "Đoạn"
+
+#: ../Pinta.Effects/Effects/FragmentEffect.cs:124
+msgid "Fragments"
+msgstr "Mảnh vỡ"
+
+#: ../Pinta.Tools/Tools/LassoSelectTool.cs:222
+msgid "Freeform"
+msgstr "Dạng tự do"
+
+#: ../Pinta.Tools/Tools/FreeformShapeTool.cs:48
+msgid "Freeform Shape"
+msgstr "Khối có dạng tự do"
+
+#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:23
+msgid "Frosted Glass"
+msgstr "Kính đóng băng"
+
+#: ../Pinta.Core/Actions/ViewActions.cs:164
+msgid "Fullscreen"
+msgstr "Toàn màn hình"
+
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:86
+msgid "Gallery"
+msgstr "Phòng trưng bày"
+
+#: ../Pinta.Effects/Effects/GaussianBlurEffect.cs:24
+msgid "Gaussian Blur"
+msgstr "Làm nhoè Gauss"
+
+#: ../Pinta.Tools/Tools/FloodTool.cs:132
+msgid "Global"
+msgstr "Toàn cục"
+
+#: ../Pinta.Effects/Effects/GlowEffect.cs:26
+msgid "Glow"
+msgstr "Tỏa sáng"
+
+#: ../Pinta.Tools/Tools/GradientTool.cs:59
+#: ../Pinta.Tools/Tools/GradientTool.cs:267
+msgid "Gradient"
+msgstr "Dải màu"
+
+#: ../Pinta.Tools/Tools/GradientTool.cs:118
+msgid "Gradient Created"
+msgstr "Đã tạo dải màu"
+
+#: ../Pinta.Tools/Tools/GradientTool.cs:119
+msgid "Gradient Modified"
+msgstr "Đã sửa đổi độ dốc"
+
+#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:90
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:109
+#: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:61
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:471
+msgid "Green"
+msgstr "Lục"
+
+#: ../Pinta.Tools/Brushes/GridBrush.cs:36
+msgid "Grid"
+msgstr "Lưới"
+
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:41
+msgid "Hard Light"
+msgstr "Ánh sáng cứng"
+
+#: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:70
+#: ../Pinta/Dialogs/NewImageDialog.cs:333
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:79
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:111
+msgid "Height:"
+msgstr "Độ cao:"
+
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:354
+msgid "Hex"
+msgstr "Lục giác"
+
+#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:116
+msgid "Hide Layer"
+msgstr "Ẩn lớp"
+
+#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:58
+msgid "Hint: For best results, first use selection tools to select each eye."
+msgstr ""
+"Gợi ý: Để đạt kết quả tốt nhất, trước hết dùng công cụ chọn để chon từng mắt."
+
+#: ../Pinta/Pads/HistoryPad.cs:50
+msgid "History"
+msgstr "Lịch sử"
+
+#. Translators: Horizontal color sorting with blue (B) as the leading term
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:228
+msgid "Horizontal blue (B)"
+msgstr "Màu xanh ngang (B)"
+
+#. Translators: Horizontal color sorting with green (G) as the leading term
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:231
+msgid "Horizontal green (G)"
+msgstr "Xanh ngang (G)"
+
+#. Translators: Horizontal color sorting with red (R) as the leading term
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:234
+msgid "Horizontal red (R)"
+msgstr "Màu đỏ ngang (R)"
+
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:45
+#: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:61
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:374
+msgid "Hue"
+msgstr "Sắc độ"
+
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:281
+msgid "Hue & Sat"
+msgstr "Huế & Thứ Bảy"
+
+#: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:23
+msgid "Hue / Saturation"
+msgstr "Sắc độ / Độ bão hòa"
+
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:246
+msgid "ICO files can not be larger than 255 x 255 pixels."
+msgstr "Tệp ICO không thể lớn hơn 255 x 255 pixel."
+
+#: ../Pinta/Actions/File/CloseDocumentAction.cs:75
+msgid "If you don't save, all changes will be permanently lost."
+msgstr "Nếu bạn không lưu lại, tất cả những thay đổi sẽ vĩnh viễn mất."
+
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:244 ../Pinta/MainWindow.cs:463
+msgid "Image"
+msgstr "Hình ảnh"
+
+#: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:3
+msgid "Image Editor"
+msgstr "Trình biên soạn ảnh"
+
+#: ../Pinta.Core/Actions/ViewActions.cs:112
+msgid "Image Tabs"
+msgstr "Thẻ Hình ảnh"
+
+#: ../Pinta/Actions/Edit/PasteAction.cs:207
+msgid "Image cannot be pasted"
+msgstr "Không thể dán hình ảnh"
+
+#: ../Pinta.Core/Actions/LayerActions.cs:241
+#: ../Pinta/Actions/File/OpenDocumentAction.cs:111
+msgid "Image files"
+msgstr "Tệp hình ảnh"
+
+#: ../Pinta/Actions/Edit/PasteAction.cs:214
+msgid "Image larger than canvas"
+msgstr "Hình ảnh lớn hơn Canvas"
+
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:245
+msgid "Image too large"
+msgstr "Hình ảnh quá lớn"
+
+#: ../Pinta.Core/Actions/LayerActions.cs:288
+msgid "Import From File"
+msgstr "Nhập từ tệp"
+
+#: ../Pinta.Core/Actions/LayerActions.cs:89
+msgid "Import from File..."
+msgstr "Nhập từ tệp..."
+
+#: ../Pinta.Tools/Tools/LassoSelectTool.cs:57
+msgid ""
+"In Freeform mode, click and drag to draw the outline for a selection area.\n"
+"\n"
+"In Polygon mode, click and drag to add a new point to the selection.\n"
+"Press Enter to finish the selection.\n"
+"Press Backspace to delete the last point."
+msgstr ""
+"Trong chế độ Freeform, nhấp và kéo để vẽ đường viền cho vùng chọn.\n"
+"\n"
+"Trong chế độ Đa giác, nhấp và kéo để thêm điểm mới vào vùng chọn.\n"
+"Nhấn Enter để kết thúc việc lựa chọn.\n"
+"Nhấn Backspace để xóa điểm cuối cùng."
+
+#: ../Pinta.Core/Actions/ViewActions.cs:226
+msgid "Inches"
+msgstr "Inch"
+
+#: ../Pinta.Effects/Effects/InkSketchEffect.cs:146
+msgid "Ink Outline"
+msgstr "Viền mực"
+
+#: ../Pinta.Effects/Effects/InkSketchEffect.cs:35
+msgid "Ink Sketch"
+msgstr "Nét phác mực"
+
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:272
+msgid "Input"
+msgstr "Đầu vào"
+
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:271
+msgid "Input Histogram"
+msgstr "Biểu đồ cột dữ liệu vào"
+
+#: ../Pinta.Gui.Addins/InstallDialog.cs:121
+#: ../Pinta.Gui.Addins/InstallDialog.cs:247
+msgid "Install"
+msgstr "Cài đặt"
+
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:251
+msgid "Install Extension Package"
+msgstr "Cài đặt gói tiện ích mở rộng"
+
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:110
+msgid "Install from file..."
+msgstr "Cài đặt từ tệp..."
+
+#: ../Pinta.Gui.Addins/AddinInfoView.cs:167
+msgid "Install..."
+msgstr "Cài đặt..."
+
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:87
+msgid "Installed"
+msgstr "Đã cài đặt"
+
+#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:167
+#: ../Pinta.Effects/Effects/OutlineEdgeEffect.cs:137
+#: ../Pinta.Effects/Effects/TileEffect.cs:230
+msgid "Intensity"
+msgstr "Cường độ"
+
+#. Translators: {0} is 'Alt', or a platform-specific key such as 'Option' on macOS.
+#: ../Pinta.Core/Classes/SelectionModeHandler.cs:50
+#, csharp-format
+msgid "Intersect ({0} + Left Click)"
+msgstr "Giao nhau ({0} + Nhấp chuột trái)"
+
+#: ../Pinta.Effects/Adjustments/InvertColorsEffect.cs:29
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:183
+msgid "Invert Colors"
+msgstr "Đảo màu"
+
+#: ../Pinta.Core/Actions/EditActions.cs:141
+#: ../Pinta.Core/Actions/EditActions.cs:615
+msgid "Invert Selection"
+msgstr "Đảo vùng chọn"
+
+#: ../Pinta.Tools/Tools/TextTool.cs:189
+msgid "Italic"
+msgstr "Nghiêng"
+
+#: ../Pinta/Dialogs/JpegCompressionDialog.cs:46
+msgid "JPEG Quality"
+msgstr "Chất lượng JPEG"
+
+#. Translators: Image dithering matrix named after J. F. Jarvis, C. N. Judice, and W. H. Ninke
+#: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:36
+msgid "Jarvis-Judice-Ninke"
+msgstr "Jarvis-Judice-Ninke"
+
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:26
+msgid "Julia Fractal"
+msgstr "Fractal kiểu Julia"
+
+#: ../Pinta/Dialogs/NewImageDialog.cs:300
+msgid "Landscape"
+msgstr "Phong cảnh"
+
+#: ../Pinta.Tools/Tools/LassoSelectTool.cs:215
+msgid "Lasso Mode"
+msgstr "Chế độ Lasso"
+
+#: ../Pinta.Tools/Tools/LassoSelectTool.cs:55
+msgid "Lasso Select"
+msgstr "Chọn theo chế độ thòng lọng"
+
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:243
+msgid "Layer"
+msgstr "Lớp"
+
+#: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListViewItemWidget.cs:101
+msgid "Layer Hidden"
+msgstr "Lớp được ẩn"
+
+#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:106
+msgid "Layer Opacity"
+msgstr "Độ chắn sáng của lớp"
+
+#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:121
+#: ../Pinta/Dialogs/LayerPropertiesDialog.cs:136
+msgid "Layer Properties"
+msgstr "Các thuộc tính lớp"
+
+#: ../Pinta.Core/Actions/LayerActions.cs:125
+msgid "Layer Properties..."
+msgstr "Thuộc tính của lớp..."
+
+#: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListViewItemWidget.cs:101
+msgid "Layer Shown"
+msgstr "Lớp được hiện"
+
+#. Translators: {0} is a unique id for new layers, e.g. "Layer 2".
+#: ../Pinta.Core/Classes/DocumentLayers.cs:133
+#, csharp-format
+msgid "Layer {0}"
+msgstr "Lớp {0}"
+
+#: ../Pinta/Pads/LayersPad.cs:49
+msgid "Layers"
+msgstr "Lớp"
+
+#: ../Pinta.Tools/Tools/TextTool.cs:217
+msgid "Left Align"
+msgstr "Căn lề trái"
+
+#: ../Pinta.Tools/Tools/MoveSelectedTool.cs:49
+#, csharp-format
+msgid ""
+"Left click and drag the selection to move selected content.\n"
+"Hold {0} to scale instead of move.\n"
+"Right click and drag the selection to rotate selected content.\n"
+"Hold Shift to rotate in steps.\n"
+"Use arrow keys to move selected content by a single pixel."
+msgstr ""
+"Nhấp chuột trái và kéo vùng chọn để di chuyển nội dung đã chọn.\n"
+"Giữ {0} để chia tỷ lệ thay vì di chuyển.\n"
+"Nhấp chuột phải và kéo vùng chọn để xoay nội dung đã chọn.\n"
+"Giữ phím Shift để xoay theo từng bước.\n"
+"Sử dụng các phím mũi tên để di chuyển nội dung đã chọn theo một pixel."
+
+#: ../Pinta.Tools/Tools/MoveSelectionTool.cs:50
+#, csharp-format
+msgid ""
+"Left click and drag the selection to move selection outline.\n"
+"Hold {0} to scale instead of move.\n"
+"Right click and drag the selection to rotate selection outline.\n"
+"Hold Shift to rotate in steps.\n"
+"Use arrow keys to move selection outline by a single pixel."
+msgstr ""
+"Nhấp chuột trái và kéo vùng chọn để di chuyển đường viền vùng chọn.\n"
+"Giữ {0} để chia tỷ lệ thay vì di chuyển.\n"
+"Nhấp chuột phải và kéo vùng chọn để xoay đường viền vùng chọn.\n"
+"Giữ phím Shift để xoay theo từng bước.\n"
+"Sử dụng các phím mũi tên để di chuyển đường viền lựa chọn theo một pixel."
+
+#. Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
+#: ../Pinta.Tools/Tools/ShapeTool.cs:58
+#, csharp-format
+msgid ""
+"Left click to draw a shape with the primary color.\n"
+"Left click on a shape to add a control point.\n"
+"Left click on a control point and drag to move it.\n"
+"Right click on a control point and drag to change its tension.\n"
+"Hold Shift to snap to angles.\n"
+"Use arrow keys to move the selected control point.\n"
+"Press {0} + left/right arrows to select control points by order.\n"
+"Press Delete to delete the selected control point.\n"
+"Press Space to add a new control point at the mouse position.\n"
+"Hold {0} while pressing Space to create the control point at the exact same "
+"position.\n"
+"Hold {0} while left clicking on a control point to create a new shape at the "
+"exact same position.\n"
+"Press Enter to finalize the shape."
+msgstr ""
+"Nhấp chuột trái để vẽ hình với màu chính.\n"
+"Nhấp chuột trái vào hình dạng để thêm điểm kiểm soát.\n"
+"Nhấp chuột trái vào một điểm kiểm soát và kéo để di chuyển nó.\n"
+"Nhấp chuột phải vào điểm kiểm soát và kéo để thay đổi độ căng của nó.\n"
+"Giữ phím Shift để chụp theo các góc.\n"
+"Sử dụng các phím mũi tên để di chuyển điểm điều khiển đã chọn.\n"
+"Nhấn {0} + mũi tên trái/phải để chọn điểm kiểm soát theo thứ tự.\n"
+"Nhấn Delete để xóa điểm kiểm soát đã chọn.\n"
+"Nhấn Space để thêm điểm điều khiển mới tại vị trí chuột.\n"
+"Giữ {0} trong khi nhấn Space để tạo điểm điều khiển ở cùng vị trí.\n"
+"Giữ {0} trong khi nhấp chuột trái vào điểm điều khiển để tạo hình dạng mới ở "
+"cùng vị trí. \n"
+"Nhấn Enter để hoàn thiện hình dạng."
+
+#: ../Pinta.Tools/Tools/PencilTool.cs:51
+msgid ""
+"Left click to draw freeform one-pixel wide lines with the primary color.\n"
+"Right click to use the secondary color."
+msgstr ""
+"Nhấp chuột trái để vẽ các đường rộng một pixel dạng tự do với màu chính.\n"
+"Nhấp chuột phải để sử dụng màu phụ."
+
+#: ../Pinta.Tools/Tools/FreeformShapeTool.cs:50
+#: ../Pinta.Tools/Tools/PaintBrushTool.cs:57
+msgid ""
+"Left click to draw with primary color, right click to draw with secondary "
+"color."
+msgstr ""
+"Kích chuột trái để vẽ với màu chính, kích chuột phải để vẽ với màu phụ."
+
+#: ../Pinta.Tools/Tools/EraserTool.cs:57
+msgid ""
+"Left click to erase to transparent, right click to erase to secondary color. "
+msgstr "Kích chuột trái để tẩy về trong s, kích chuột phải để tẩy về màu phụ. "
+
+#: ../Pinta.Tools/Tools/PaintBucketTool.cs:46
+msgid ""
+"Left click to fill a region with the primary color, right click to fill with "
+"the secondary color."
+msgstr ""
+"Kích chuột trái để tô một vùng với màu chính, kích chuột phải để tô với màu "
+"phụ."
+
+#: ../Pinta.Tools/Tools/TextTool.cs:95
+msgid ""
+"Left click to place cursor, then type desired text. Text color is primary "
+"color."
+msgstr ""
+"Kích chuột trái để đặt dấu nháy rồi gõ chữ bạn muốn. Màu của chữ là màu "
+"chính."
+
+#: ../Pinta.Tools/Tools/RecolorTool.cs:58
+msgid ""
+"Left click to replace the secondary color with the primary color.\n"
+"Right click to reverse."
+msgstr ""
+"Nhấp chuột trái để thay thế màu phụ bằng màu chính.\n"
+"Nhấp chuột phải để đảo ngược."
+
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:50
+msgid ""
+"Left click to set primary color.\n"
+"Right click to set secondary color."
+msgstr ""
+"Nhấp chuột trái để đặt màu chính.\n"
+"Nhấp chuột phải để đặt màu phụ."
+
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:314
+msgid "Left click to set primary color. Right click to set secondary color."
+msgstr "Kích chuột trái để chọn màu chính, kích chuột phải để chọn màu phụ."
+
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:310
+msgid ""
+"Left click to set primary color. Right click to set secondary color. Middle "
+"click to choose palette color."
+msgstr ""
+"Kích chuột trái để chọn màu chính. Kích chuột phải để chọn màu phụ. Kích "
+"chuột giữa để chọn màu cho bảng màu."
+
+#: ../Pinta.Tools/Tools/ZoomTool.cs:59
+msgid ""
+"Left click to zoom in.\n"
+"Right click to zoom out.\n"
+"Click and drag to zoom in selection."
+msgstr ""
+"Nhấp chuột trái để zoom.\n"
+"Nhấp chuột phải để thu nhỏ.\n"
+"Nhấp và kéo để zoom vùng chọn."
+
+#: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:331
+msgid "Length"
+msgstr "Độ dài"
+
+#: ../Pinta.Effects/Adjustments/LevelsEffect.cs:23
+msgid "Levels"
+msgstr "Mức độ"
+
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:243
+msgid "Levels Adjustment"
+msgstr "Chỉnh mức độ"
+
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:90
+msgid "License"
+msgstr "Giấy phép"
+
+#. Translators: This refers to using a light variant of the color scheme.
+#: ../Pinta.Core/Actions/ViewActions.cs:248
+msgid "Light"
+msgstr "Sáng"
+
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:37
+msgid "Lighten"
+msgstr "Làm sáng"
+
+#: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:129
+msgid "Lighting"
+msgstr "Ánh sáng"
+
+#: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:67
+msgid "Lightness"
+msgstr "Độ nhạt"
+
+#. Translators: Gradient with a citrusy vibe that starts out white, goes through light yellow, several shades of green, and then transparent, blending with the background
+#: ../Pinta.Effects/Utilities/GradientHelper.cs:47
+msgid "Lime Lemon"
+msgstr "Chanh"
+
+#: ../Pinta.Tools/Tools/LineCurveTool.cs:43
+msgid "Line/Curve"
+msgstr "Đường thẳng/cong"
+
+#: ../Pinta.Tools/Tools/GradientTool.cs:275
+msgid "Linear Diamond Gradient"
+msgstr "Dải màu kim cương tuyến tính"
+
+#: ../Pinta.Tools/Tools/GradientTool.cs:273
+msgid "Linear Gradient"
+msgstr "Dải màu tuyến tính"
+
+#: ../Pinta.Tools/Tools/GradientTool.cs:274
+msgid "Linear Reflected Gradient"
+msgstr "Dải màu phản chiếu tuyến tính"
+
+#: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:83
+msgid "Linked"
+msgstr "Kết nối"
+
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:44
+#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:177
+msgid "Luminosity"
+msgstr "Độ tỏa sáng"
+
+#: ../Pinta.Tools/Tools/MagicWandTool.cs:47
+msgid "Magic Wand Select"
+msgstr "Chọn bằng đùa thần"
+
+#: ../Pinta/MainWindow.cs:445
+msgid "Main Menu"
+msgstr "Thực đơn chính"
+
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:99
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:69
+msgid "Maintain aspect ratio"
+msgstr "Duy trì tỷ lệ hình thể"
+
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:26
+msgid "Mandelbrot Fractal"
+msgstr "Fractal kiểu Mandelbrot"
+
+#. Translators: Gradient with bright, high-energy, and otherworldly tones of blue, purple, and yellow, along with a dark red that gives off the appearance of burning
+#: ../Pinta.Effects/Utilities/GradientHelper.cs:51
+msgid "Martian Lava"
+msgstr "Dung nham sao Hỏa"
+
+#: ../Pinta.Tools/Brushes/SplatterBrush.cs:64
+msgid "Maximum Size"
+msgstr "Kích thước tối đa"
+
+#: ../Pinta.Effects/Effects/MedianEffect.cs:23
+msgid "Median"
+msgstr "Trung bình"
+
+#: ../Pinta.Core/Actions/ViewActions.cs:130
+msgid "Menu Bar"
+msgstr "Thanh thực đơn"
+
+#: ../Pinta.Core/Actions/LayerActions.cs:82
+#: ../Pinta.Core/Actions/LayerActions.cs:363
+msgid "Merge Layer Down"
+msgstr "Ghép lớp xuống"
+
+#: ../Pinta.Tools/Brushes/SplatterBrush.cs:56
+msgid "Minimum Size"
+msgstr "Kích thước tối thiểu"
+
+#: ../Pinta.Tools/Tools/GradientTool.cs:286
+msgid "Mode"
+msgstr "Chế độ"
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:921
+msgid "Modified"
+msgstr "Được sửa đổi"
+
+#: ../Pinta.Gui.Addins/AddinInfoView.cs:159
+msgid "More Information..."
+msgstr "Thêm thông tin..."
+
+#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:27
+msgid "Motion Blur"
+msgstr "Làm mở chuyển động"
+
+#: ../Pinta.Core/Actions/LayerActions.cs:119
+#: ../Pinta.Core/Actions/LayerActions.cs:344
+msgid "Move Layer Down"
+msgstr "Chuyển lớp xuống dưới"
+
+#: ../Pinta.Core/Actions/LayerActions.cs:113
+#: ../Pinta.Core/Actions/LayerActions.cs:328
+msgid "Move Layer Up"
+msgstr "Chuyển lớp lên trên"
+
+#: ../Pinta.Tools/Tools/MoveSelectedTool.cs:45
+msgid "Move Selected Pixels"
+msgstr "Di chuyển các điểm ảnh được chọn"
+
+#: ../Pinta.Tools/Tools/MoveSelectionTool.cs:46
+msgid "Move Selection"
+msgstr "Di chuyển vùng chọn"
+
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:32
+msgid "Multiply"
+msgstr "Thừa số"
+
+#: ../Pinta/Dialogs/LayerPropertiesDialog.cs:67
+msgid "Name:"
+msgstr "Tên:"
+
+#: ../Pinta.Core/Enumerations/ResamplingMode.cs:23
+msgid "Nearest Neighbor"
+msgstr "Hàng xóm gần nhất"
+
+#: ../Pinta.Core/Actions/FileActions.cs:63
+msgid "New"
+msgstr "Mới"
+
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:138
+#: ../Pinta/Dialogs/NewImageDialog.cs:237
+msgid "New Image"
+msgstr "Hình mới"
+
+#: ../Pinta.Core/Actions/FileActions.cs:67
+msgid "New Screenshot..."
+msgstr "Tạo ảnh chụp màn hình mới..."
+
+#: ../Pinta/Actions/Edit/ResizePaletteAction.cs:71
+msgid "New palette size:"
+msgstr "Kích thước mới của bảng màu:"
+
+#: ../Pinta.Core/Actions/FileActions.cs:59
+msgid "New..."
+msgstr "Tạo mới..."
+
+#: ../Pinta.Gui.Addins/AddinListView.cs:55
+msgid "No Items Found"
+msgstr "Không tìm thấy mục nào"
+
+#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:28
+#: ../Pinta.Effects/Effects/MedianEffect.cs:27
+#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:32
+msgid "Noise"
+msgstr "Độ nhiễu"
+
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:31
+#: ../Pinta.Tools/Brushes/PlainBrush.cs:41
+#: ../Pinta.Tools/Tools/EraserTool.cs:326 ../Pinta.Tools/Tools/TextTool.cs:264
+msgid "Normal"
+msgstr "Bình thường"
+
+#: ../Pinta.Core/Classes/BaseTool.cs:345
+msgid "Normal Blending"
+msgstr "Pha trộn thông thường"
+
+#: ../Pinta.Core/Actions/ViewActions.cs:99
+msgid "Normal Size"
+msgstr "Cỡ bình thường"
+
+#: ../Pinta.Tools/Tools/TextTool.cs:265
+msgid "Normal and Outline"
+msgstr "Thông thường và Viền"
+
+#: ../Pinta.Effects/Effects/CellsEffect.cs:172
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:187
+msgid "Number of Cells"
+msgstr "Số lượng tế bào"
+
+#: ../Pinta/Main.cs:56
+msgid "Number of threads to use for rendering"
+msgstr "Số lượng chủ đề được sử dụng để hiển thị"
+
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:210
+msgid "OK"
+msgstr "Đồng ý"
+
+#: ../Pinta.Effects/Effects/AlignObjectEffect.cs:14
+#: ../Pinta.Effects/Effects/FeatherEffect.cs:22
+#: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:22
+msgid "Object"
+msgstr "Sự vật"
+
+#: ../Pinta.Effects/Effects/BulgeEffect.cs:120
+#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:139
+#: ../Pinta.Effects/Effects/VignetteEffect.cs:133
+#: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:140
+#: ../Pinta/Dialogs/OffsetSelectionDialog.cs:54
+msgid "Offset"
+msgstr "Chênh lệch"
+
+#: ../Pinta.Core/Actions/EditActions.cs:148
+#: ../Pinta/Actions/Edit/OffsetSelectionAction.cs:78
+#: ../Pinta/Dialogs/OffsetSelectionDialog.cs:44
+msgid "Offset Selection"
+msgstr "Lựa chọn bù đắp"
+
+#: ../Pinta.Effects/Effects/OilPaintingEffect.cs:26
+msgid "Oil Painting"
+msgstr "Tranh sơn dầu"
+
+#: ../Pinta/Dialogs/LayerPropertiesDialog.cs:98
+msgid "Opacity:"
+msgstr "Độ đục:"
+
+#: ../Pinta.Core/Actions/FileActions.cs:77
+msgid "Open"
+msgstr "Mở"
+
+#: ../Pinta.Tools/Editable/EditEngines/LineCurveEditEngine.cs:37
+msgid "Open Curve Shape"
+msgstr "Kiểu đường cong mở"
+
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:335
+msgid "Open Image"
+msgstr "Mở hình ảnh"
+
+#: ../Pinta.Core/Actions/LayerActions.cs:259
+#: ../Pinta/Actions/File/OpenDocumentAction.cs:73
+msgid "Open Image File"
+msgstr "Mở tệp hình ảnh"
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:333
+msgid "Open Line/Curve Series"
+msgstr "Mở loạt Đường thẳng/Đường cong mở"
+
+#: ../Pinta.Core/Actions/EditActions.cs:495
+msgid "Open Palette File"
+msgstr "Mở tệp bảng màu"
+
+#: ../Pinta.Core/Actions/EditActions.cs:169
+#: ../Pinta.Core/Actions/FileActions.cs:73
+msgid "Open..."
+msgstr "Mở..."
+
+#: ../Pinta/Dialogs/NewImageDialog.cs:316
+msgid "Orientation:"
+msgstr "Định hướng:"
+
+#: ../Pinta.Effects/Classes/EdgeBehavior.cs:25
+msgid "Original"
+msgstr "Nguyên bản"
+
+#: ../Pinta.Tools/Tools/TextTool.cs:266
+msgid "Outline"
+msgstr "Viền"
+
+#: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:218
+msgid "Outline Border"
+msgstr "Đường viền phác thảo"
+
+#: ../Pinta.Effects/Effects/OutlineEdgeEffect.cs:23
+msgid "Outline Edge"
+msgstr "Viền phác thảo"
+
+#: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:18
+msgid "Outline Object"
+msgstr "Đối tượng phác thảo"
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:307
+#: ../Pinta.Tools/Tools/FreeformShapeTool.cs:218
+msgid "Outline Shape"
+msgstr "Vẽ biên ngoài của hình"
+
+#: ../Pinta.Tools/Tools/TextTool.cs:280
+msgid "Outline width"
+msgstr "Độ rộng của viền ngoài"
+
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:273
+msgid "Output"
+msgstr "Đầu ra"
+
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:274
+msgid "Output Histogram"
+msgstr "Biểu đồ cột đầu ra"
+
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:35
+msgid "Overlay"
+msgstr "Lớp phủ"
+
+#: ../Pinta.Core/Classes/BaseTool.cs:346
+msgid "Overwrite"
+msgstr "Ghi đè"
+
+#: ../Pinta.Tools/Tools/PaintBucketTool.cs:44
+msgid "Paint Bucket"
+msgstr "Xô sơn"
+
+#: ../Pinta.Tools/Tools/PaintBrushTool.cs:55
+msgid "Paintbrush"
+msgstr "Bút vẽ"
+
+#: ../Pinta.Core/Actions/EditActions.cs:235
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:177
+msgid "Palette"
+msgstr "Bảng màu"
+
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:174
+msgid "Palette Source"
+msgstr "Nguồn bảng màu"
+
+#: ../Pinta.Core/Actions/EditActions.cs:576
+msgid "Palette files"
+msgstr "Tập tin bảng màu"
+
+#: ../Pinta.Tools/Tools/PanTool.cs:40
+#: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:148
+msgid "Pan"
+msgstr "Kéo dãn"
+
+#: ../Pinta.Core/Actions/EditActions.cs:105
+#: ../Pinta.Core/HistoryItems/PasteHistoryItem.cs:38
+#: ../Pinta/Actions/Edit/PasteAction.cs:118
+msgid "Paste"
+msgstr "Dán"
+
+#: ../Pinta.Core/Actions/EditActions.cs:120
+msgid "Paste Into New Image"
+msgstr "Dán vào Hình mới"
+
+#: ../Pinta.Core/Actions/EditActions.cs:112
+#: ../Pinta/Actions/Edit/PasteAction.cs:118
+msgid "Paste Into New Layer"
+msgstr "Dán vào Lớp mới"
+
+#: ../Pinta.Tools/Tools/PencilTool.cs:48
+msgid "Pencil"
+msgstr "Bút chì"
+
+#: ../Pinta.Effects/Effects/PencilSketchEffect.cs:29
+msgid "Pencil Sketch"
+msgstr "Nét phác chì"
+
+#: ../Pinta.Effects/Effects/PencilSketchEffect.cs:85
+msgid "Pencil Tip Size"
+msgstr "Cỡ ngòi bút chì"
+
+#: ../Pinta.Effects/Effects/MedianEffect.cs:63
+msgid "Percentile"
+msgstr "Phần trăm"
+
+#: ../Pinta.Effects/Effects/GlowEffect.cs:30
+#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:27
+#: ../Pinta.Effects/Effects/SharpenEffect.cs:27
+#: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:58
+#: ../Pinta.Effects/Effects/VignetteEffect.cs:52
+msgid "Photo"
+msgstr "Ảnh"
+
+#. Translators: Arrangement of points similar to how sunflower seeds are arranged
+#: ../Pinta.Core/Algorithms/SpatialPartition.cs:174
+msgid "Phyllotaxis"
+msgstr "Phyllotaxis"
+
+#: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:1
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:65 ../Pinta/Main.cs:71
+#: ../Pinta/MainWindow.cs:57
+msgid "Pinta"
+msgstr "Pinta"
+
+#: ../Pinta/AddinSetupService.cs:66
+msgid "Pinta Community Addins - Cross-Platform"
+msgstr "Phần mở rộng của cộng đồng Pinta - Đa nền tảng"
+
+#: ../Pinta/AddinSetupService.cs:62
+msgid "Pinta Community Addins - Platform-Specific"
+msgstr "Phần mở rộng của cộng đồng Pinta - Tùy thuộc nền tảng"
+
+#: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:4
+msgid "Pinta Image Editor"
+msgstr "Trình xử lý ảnh Pinta"
+
+#: ../Pinta.Core/Actions/HelpActions.cs:53
+msgid "Pinta Website"
+msgstr "Trang web của Pinta"
+
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:231
+msgid "Pinta does not support saving images in this file format."
+msgstr "Pinta không hỗ trợ lưu hình ảnh dưới định dạng này."
+
+#: ../xdg/com.github.PintaProject.Pinta.metainfo.xml.in.h:1
+msgid ""
+"Pinta is a image editing, drawing and painting application with a simple yet "
+"powerful interface. Pinta has a wide range of drawing tools, including: "
+"freehand, rectangles, circles and lines. It also has over 35 effects to "
+"apply to your images, and also has the ability to create unlimited layers to "
+"help organize your creativity."
+msgstr ""
+"Pinta là một áp dụng chỉnh sửa, vẽ và tô màu hình ảnh với giao diện đơn giản "
+"nhưng mạnh mẽ. Pinta có rất nhiều công cụ vẽ, bao gồm: vẽ tự do, hình chữ "
+"nhật, hình tròn và đường thẳng. Nó cũng có hơn 35 hiệu ứng để áp dụng cho "
+"hình ảnh của bạn và cũng có khả năng tạo các lớp không giới hạn để giúp bạn "
+"sắp xếp khả năng sáng tạo."
+
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:425
+msgid "Pinta supports the following file formats:"
+msgstr "Pinta hỗ trợ các định dạng tệp sau:"
+
+#: ../Pinta.Core/Extensions/OtherExtensions.cs:167
+msgid "Pinta supports the following palette formats:"
+msgstr "Pinta hỗ trợ các định dạng bảng màu sau:"
+
+#: ../Pinta.Effects/Effects/PixelateEffect.cs:23
+msgid "Pixelate"
+msgstr "Điểm ảnh hóa"
+
+#: ../Pinta.Core/Actions/ViewActions.cs:225
+msgid "Pixels"
+msgstr "Điểm ảnh"
+
+#. Translators: Gradient with different shades of brownish yellow
+#: ../Pinta.Effects/Utilities/GradientHelper.cs:55
+msgid "Piña Colada"
+msgstr "Piña Colada"
+
+#: ../Pinta/Actions/View/MenuBarToggledAction.cs:40
+msgid "Please restart Pinta for the changes to take effect."
+msgstr "Vui lòng khởi động lại Pinta để những thay đổi có hiệu lực."
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:607
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:810
+msgid "Point Added"
+msgstr "Điểm được thêm vào"
+
+#: ../Pinta.Effects/Effects/CellsEffect.cs:156
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:201
+msgid "Point Arrangement"
+msgstr "Sắp xếp điểm"
+
+#: ../Pinta.Effects/Effects/CellsEffect.cs:169
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:214
+msgid "Point Color"
+msgstr "Màu điểm"
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:658
+msgid "Point Deleted"
+msgstr "Điểm được xóa"
+
+#: ../Pinta.Effects/Effects/CellsEffect.cs:165
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:210
+msgid "Point Size"
+msgstr "Kích thước điểm"
+
+#: ../Pinta.Effects/Effects/PolarInversionEffect.cs:26
+msgid "Polar Inversion"
+msgstr "Đảo cực"
+
+#: ../Pinta.Tools/Tools/LassoSelectTool.cs:223
+msgid "Polygon"
+msgstr "Đa giác"
+
+#: ../Pinta/Dialogs/NewImageDialog.cs:296
+msgid "Portrait"
+msgstr "Chân dung"
+
+#: ../Pinta.Effects/Effects/AlignObjectEffect.cs:129
+msgid "Position"
+msgstr "Vị trí"
+
+#: ../Pinta.Effects/Adjustments/PosterizeEffect.cs:25
+#: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:51
+msgid "Posterize"
+msgstr "Làm áp phích"
+
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:138
+msgid "Power"
+msgstr "Nguồn"
+
+#. Translators: This refers to preserving the current canvas size when pasting a larger image.
+#: ../Pinta/Actions/Edit/PasteAction.cs:225
+msgid "Preserve"
+msgstr "Bảo tồn"
+
+#: ../Pinta.Effects/Utilities/GradientHelper.cs:10
+msgid "Preset Gradient"
+msgstr "Độ dốc cài sẵn"
+
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:159
+msgid "Preset Palettes"
+msgstr "Bảng màu cài sẵn"
+
+#: ../Pinta/Dialogs/NewImageDialog.cs:341
+msgid "Preset:"
+msgstr "Chỉnh sẵn:"
+
+#: ../Pinta/Dialogs/NewImageDialog.cs:190
+msgid "Preview"
+msgstr "Xem trước"
+
+#: ../Pinta.Effects/Classes/EdgeBehavior.cs:16
+msgid "Primary"
+msgstr "Chính"
+
+#: ../Pinta.Core/Actions/FileActions.cs:102
+msgid "Print"
+msgstr "In"
+
+#: ../Pinta.Effects/Effects/CellsEffect.cs:195
+#: ../Pinta.Effects/Effects/DentsEffect.cs:155
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:147
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:160
+#: ../Pinta.Effects/Effects/PolarInversionEffect.cs:92
+#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:142
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:217
+msgid "Quality"
+msgstr "Chất lượng"
+
+#: ../Pinta/Dialogs/JpegCompressionDialog.cs:37
+msgid "Quality: "
+msgstr "Chất lượng: "
+
+#: ../Pinta.Core/Actions/AppActions.cs:47
+msgid "Quit"
+msgstr "Thoát"
+
+#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:176
+msgid "RGB"
+msgstr "RGB"
+
+#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:23
+msgid "Radial Blur"
+msgstr "Che mờ xuyên tâm"
+
+#: ../Pinta.Tools/Tools/GradientTool.cs:276
+msgid "Radial Gradient"
+msgstr "Dải màu đối xứng"
+
+#: ../Pinta.Effects/Effects/FeatherEffect.cs:167
+#: ../Pinta.Effects/Effects/GaussianBlurEffect.cs:247
+#: ../Pinta.Effects/Effects/GlowEffect.cs:77
+#: ../Pinta.Effects/Effects/MedianEffect.cs:59
+#: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:204
+#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:84
+#: ../Pinta.Effects/Effects/UnfocusEffect.cs:88
+#: ../Pinta.Tools/Editable/EditEngines/RoundedLineEditEngine.cs:90
+msgid "Radius"
+msgstr "Bán kính"
+
+#. Translators: This refers to how big the radius is as a percentage of the image's dimensions
+#: ../Pinta.Effects/Effects/BulgeEffect.cs:124
+#: ../Pinta.Effects/Effects/TwistEffect.cs:175
+#: ../Pinta.Effects/Effects/VignetteEffect.cs:137
+msgid "Radius Percentage"
+msgstr "Phần trăm bán kính"
+
+#: ../Pinta.Core/Algorithms/SpatialPartition.cs:166
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:224
+#: ../Pinta.Effects/Utilities/GradientHelper.cs:16
+msgid "Random"
+msgstr "Ngẫu nhiên"
+
+#: ../Pinta.Effects/Effects/CellsEffect.cs:186
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:151
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:161
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:177
+msgid "Random Color Scheme Seed"
+msgstr "Hạt giống phối màu ngẫu nhiên"
+
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:198
+msgid "Random Colors"
+msgstr "Màu sắc ngẫu nhiên"
+
+#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:179
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:142
+#: ../Pinta.Effects/Effects/DentsEffect.cs:151
+#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:150
+msgid "Random Noise Seed"
+msgstr "Hạt giống tiếng ồn ngẫu nhiên"
+
+#: ../Pinta.Effects/Effects/CellsEffect.cs:159
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:204
+msgid "Random Point Locations"
+msgstr "Vị trí điểm ngẫu nhiên"
+
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:165
+msgid "Recently Used Colors"
+msgstr "Màu sắc được sử dụng gần đây"
+
+#: ../Pinta.Tools/Tools/RecolorTool.cs:55
+msgid "Recolor"
+msgstr "Tô màu lại"
+
+#: ../Pinta.Tools/Tools/RectangleTool.cs:43
+msgid "Rectangle"
+msgstr "Hình chữ nhật"
+
+#: ../Pinta.Tools/Tools/RectangleSelectTool.cs:39
+msgid "Rectangle Select"
+msgstr "Chọn theo hình chữ nhật"
+
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:106
+#: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:60
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:449
+msgid "Red"
+msgstr "Đỏ"
+
+#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:89
+msgid "Red  "
+msgstr "Đỏ  "
+
+#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:23
+msgid "Red Eye Removal"
+msgstr "Bỏ mắt đỏ"
+
+#: ../Pinta.Core/Actions/EditActions.cs:77
+msgid "Redo"
+msgstr "Làm lại"
+
+#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:26
+msgid "Reduce Noise"
+msgstr "Giảm nhiễu"
+
+#: ../Pinta.Effects/Classes/EdgeBehavior.cs:13
+msgid "Reflect"
+msgstr "Phản chiếu"
+
+#: ../Pinta.Effects/Effects/DentsEffect.cs:139
+msgid "Refraction"
+msgstr "Khúc xạ"
+
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:102
+msgid "Refresh"
+msgstr "Làm mới"
+
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:91
+msgid "Released under the MIT X11 License."
+msgstr "Phát hành theo giấy phép MIT X11."
+
+#: ../Pinta.Effects/Effects/ReliefEffect.cs:40
+msgid "Relief"
+msgstr "Sự cứu tế"
+
+#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:111
+msgid "Rename Layer"
+msgstr "Đổi tên lớp"
+
+#: ../Pinta.Effects/Effects/CellsEffect.cs:25
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:32
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:32
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:32
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:27
+msgid "Render"
+msgstr "Dựng hình"
+
+#: ../Pinta.Core/Managers/LivePreviewManager.cs:109
+msgid "Rendering Effect"
+msgstr "Hiệu ứng dựng hình"
+
+#: ../Pinta.Core/Classes/SelectionModeHandler.cs:43
+msgid "Replace"
+msgstr "Thay thế"
+
+#: ../Pinta/Dialogs/ErrorDialog.cs:71
+msgid "Report Bug..."
+msgstr "Báo cáo lỗi..."
+
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:126
+msgid "Resampling:"
+msgstr "Lấy mẫu lại:"
+
+#: ../Pinta.Gui.Widgets/Dialogs/SimpleEffectDialog.cs:570
+msgid "Reseed"
+msgstr "Gieo hạt lại"
+
+#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:211
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:260
+msgid "Reset"
+msgstr "Đặt lại"
+
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:200
+msgid "Reset Color"
+msgstr "Đặt lại màu"
+
+#: ../Pinta.Core/Actions/EditActions.cs:181
+msgid "Reset to Default"
+msgstr "Đặt lại về mặc định"
+
+#: ../Pinta.Core/Classes/Document.cs:327
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:199
+msgid "Resize Canvas"
+msgstr "Chỉnh cỡ nền vẽ"
+
+#: ../Pinta.Core/Actions/ImageActions.cs:77
+msgid "Resize Canvas..."
+msgstr "Thay đổi kích thức nền vẽ..."
+
+#: ../Pinta.Core/HistoryItems/ResizeHistoryItem.cs:39
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:139
+msgid "Resize Image"
+msgstr "Chỉnh cỡ hình"
+
+#: ../Pinta.Core/Actions/ImageActions.cs:70
+msgid "Resize Image..."
+msgstr "Thay đổi kích thước hình..."
+
+#: ../Pinta/Actions/Edit/ResizePaletteAction.cs:69
+msgid "Resize Palette"
+msgstr "Thay đổi kích thước bảng màu"
+
+#: ../Pinta/Actions/View/MenuBarToggledAction.cs:39
+msgid "Restart Pinta"
+msgstr "Khởi động lại Pinta"
+
+#: ../Pinta.Effects/Effects/CellsEffect.cs:189
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:154
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:164
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:180
+msgid "Reverse Color Scheme"
+msgstr "Phối màu ngược"
+
+#. Translators: In this context, "reverse" is a verb, and the user can choose whether or not they want to reverse the color sorting
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:195
+msgid "Reverse Color Sorting"
+msgstr "Sắp xếp màu đảo ngược"
+
+#: ../Pinta.Tools/Tools/TextTool.cs:241
+msgid "Right Align"
+msgstr "Căn lề phải"
+
+#: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:70
+#: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:136
+msgid "Rotate / Zoom Layer"
+msgstr "Xoay / Thu phóng lớp"
+
+#: ../Pinta.Core/Actions/LayerActions.cs:107
+msgid "Rotate / Zoom Layer..."
+msgstr "Xoay / Thu phóng lớp..."
+
+#: ../Pinta.Core/Actions/ImageActions.cs:110
+#: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:47
+msgid "Rotate 180°"
+msgstr "Xoay 180°"
+
+#: ../Pinta.Core/Actions/ImageActions.cs:96
+#: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:59
+msgid "Rotate 90° Clockwise"
+msgstr "Xoay phải 90°"
+
+#: ../Pinta.Core/Actions/ImageActions.cs:103
+#: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:63
+msgid "Rotate 90° Counter-Clockwise"
+msgstr "Xoay trái 90°"
+
+#: ../Pinta.Effects/Effects/FragmentEffect.cs:132
+#: ../Pinta.Effects/Effects/TileEffect.cs:222
+msgid "Rotation"
+msgstr "Xoay"
+
+#: ../Pinta.Effects/Effects/DentsEffect.cs:143
+msgid "Roughness"
+msgstr "Độ nhám"
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:336
+msgid "Rounded Line Series"
+msgstr "Loạt đường uốn góc"
+
+#: ../Pinta.Tools/Editable/EditEngines/RoundedLineEditEngine.cs:37
+msgid "Rounded Line Shape"
+msgstr "Kiểu đường uốn góc"
+
+#: ../Pinta.Tools/Tools/RoundedRectangleTool.cs:44
+msgid "Rounded Rectangle"
+msgstr "Hình chữ nhật góc tròn"
+
+#: ../Pinta.Core/Actions/ViewActions.cs:230
+msgid "Ruler Units"
+msgstr "Đơn vị thước đo"
+
+#: ../Pinta.Core/Actions/ViewActions.cs:148
+msgid "Rulers"
+msgstr "Thước kẻ"
+
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:198
+msgid "Sampling"
+msgstr "Lấy mẫu"
+
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:405
+msgid "Sat"
+msgstr "Độ bão hoà"
+
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:272
+msgid "Sat & Value"
+msgstr "Độ bão hoà & Giá trị"
+
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:46
+#: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:64
+msgid "Saturation"
+msgstr "Độ bão hoà"
+
+#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:57
+msgid "Saturation Percentage"
+msgstr "Phần trăm độ bão hoà"
+
+#: ../Pinta.Core/Actions/EditActions.cs:529
+#: ../Pinta.Core/Actions/FileActions.cs:88
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:95
+msgid "Save"
+msgstr "Lưu"
+
+#: ../Pinta.Core/Actions/WindowActions.cs:44
+msgid "Save All"
+msgstr "Lưu tất cả"
+
+#: ../Pinta.Core/Actions/EditActions.cs:175
+#: ../Pinta.Core/Actions/FileActions.cs:95
+msgid "Save As..."
+msgstr "Lưu như là..."
+
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:92
+msgid "Save Image File"
+msgstr "Lưu tệp hình ảnh"
+
+#: ../Pinta.Core/Actions/EditActions.cs:526
+msgid "Save Palette File"
+msgstr "Lưu tệp bảng màu"
+
+#: ../Pinta/Actions/File/CloseDocumentAction.cs:72
+#, csharp-format
+msgid "Save changes to image \"{0}\" before closing?"
+msgstr "Lưu các thay đổi vào hình ảnh \"{0}\" trước khi đóng?"
+
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:134
+#: ../Pinta.Effects/Effects/DentsEffect.cs:135
+msgid "Scale"
+msgstr "Tỉ lệ"
+
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:39
+msgid "Screen"
+msgstr "Màn hình"
+
+#: ../Pinta.Effects/Classes/EdgeBehavior.cs:19
+msgid "Secondary"
+msgstr "Phụ"
+
+#: ../Pinta.Core/Actions/EditActions.cs:155
+#: ../Pinta.Core/Actions/EditActions.cs:336
+msgid "Select All"
+msgstr "Chọn tất cả"
+
+#: ../Pinta.Effects/Utilities/GradientHelper.cs:13
+msgid "Selected Colors"
+msgstr "Màu đã chọn"
+
+#: ../Pinta.Effects/Adjustments/SepiaEffect.cs:35
+msgid "Sepia"
+msgstr "Màu nâu đỏ"
+
+#: ../Pinta.Core/Actions/EditActions.cs:187
+msgid "Set Number of Colors"
+msgstr "Đặt số lượng màu"
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:324
+msgid "Shape Type"
+msgstr "Kiểu hình dạng"
+
+#: ../Pinta.Effects/Effects/TileEffect.cs:244
+msgid "Sharp Edges"
+msgstr "Các cạnh sắc nét"
+
+#: ../Pinta.Effects/Effects/SharpenEffect.cs:23
+msgid "Sharpen"
+msgstr "Làm sắc nét"
+
+#: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:111
+#: ../Pinta.Core/Extensions/ToolBoxButton.cs:51
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:247
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:324
+msgid "Shortcut key"
+msgstr "Phím tắt"
+
+#: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:112
+msgid "Shortcut keys"
+msgstr "Phím tắt"
+
+#: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:49
+msgid "Show Axonometric Grid"
+msgstr "Hiển thị lưới trục đo"
+
+#: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:30
+msgid "Show Grid"
+msgstr "Hiển thị lưới"
+
+#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:116
+msgid "Show Layer"
+msgstr "Hiện lớp"
+
+#: ../Pinta.Effects/Effects/CellsEffect.cs:162
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:207
+msgid "Show Points"
+msgstr "Hiển thị điểm"
+
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:267
+msgid "Show Value"
+msgstr "Hiển thị giá trị"
+
+#: ../Pinta.Core/Actions/ViewActions.cs:242
+msgid "Show/Hide"
+msgstr "Hiển thị/Ẩn"
+
+#. Translators: Image dithering matrix named after Frankie Sierra
+#: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:12
+msgid "Sierra"
+msgstr "Sierra"
+
+#. Translators: Image dithering matrix named after Frankie Sierra
+#: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:20
+msgid "Sierra Lite"
+msgstr "Sierra Lite"
+
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:225
+msgid "Single Pixel"
+msgstr "Một điểm ảnh"
+
+#: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:289
+msgid "Size"
+msgstr "Kích thước"
+
+#: ../Pinta.Tools/Tools/EraserTool.cs:326
+msgid "Smooth"
+msgstr "Trơn tru"
+
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:42
+msgid "Soft Light"
+msgstr "Ánh sáng dịu"
+
+#: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:54
+msgid "Soften Portrait"
+msgstr "Làm mềm chân dung"
+
+#: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:125
+msgid "Softness"
+msgstr "Độ mềm"
+
+#: ../Pinta.Tools/Brushes/SplatterBrush.cs:37
+msgid "Splatter"
+msgstr "Vẩy mực"
+
+#: ../Pinta.Tools/Brushes/SquaresBrush.cs:35
+msgid "Squares"
+msgstr "Hình vuông"
+
+#: ../Pinta.Core/Actions/ViewActions.cs:136
+msgid "Status Bar"
+msgstr "Thanh trạng thái"
+
+#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:88
+#: ../Pinta.Effects/Effects/VignetteEffect.cs:142
+msgid "Strength"
+msgstr "Độ mạnh"
+
+#. Translators: Image dithering matrix named after Peter Stucki
+#: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:32
+msgid "Stucki"
+msgstr "Bị mắc kẹt"
+
+#: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:32
+#: ../Pinta.Effects/Effects/EmbossEffect.cs:32
+#: ../Pinta.Effects/Effects/OutlineEdgeEffect.cs:27
+#: ../Pinta.Effects/Effects/ReliefEffect.cs:33
+msgid "Stylize"
+msgstr "Cách điệu"
+
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:208
+msgid "Switch to Pencil tool"
+msgstr "Chuyển về công cụ bút chì"
+
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:207
+msgid "Switch to previous tool"
+msgstr "Chuyển về công cụ trước đó"
+
+#: ../Pinta.Tools/Tools/TextTool.cs:80
+msgid "Text"
+msgstr "Văn bản"
+
+#: ../Pinta.Tools/Tools/TextTool.cs:83
+msgid "Text - Finalize"
+msgstr "Nhập chữ - Hoàn thành"
+
+#: ../Pinta.Tools/Tools/TextTool.cs:255
+msgid "Text Style"
+msgstr "Kiểu chữ"
+
+#. Translators: {0} is the name of an add-in.
+#: ../Pinta/MainWindow.cs:321
+#, csharp-format
+msgid "The '{0}' add-in may not be compatible with this version of Pinta"
+msgstr ""
+"Tiện ích bổ sung '{0}' có thể không tương thích với phiên bản Pinta này"
+
+#: ../Pinta/Actions/Edit/PasteAction.cs:208
+msgid "The clipboard does not contain an image."
+msgstr "Bộ nhớ tạm không chứa hình ảnh."
+
+#: ../Pinta.Gui.Addins/InstallDialog.cs:200
+msgid "The file may be an invalid or corrupt extension package"
+msgstr "Tệp có thể là gói mở rộng không hợp lệ hoặc bị hỏng"
+
+#: ../Pinta.Gui.Addins/InstallDialog.cs:79
+msgid "The following dependencies could not be resolved:"
+msgstr "Không thể giải quyết những gói phụ thuộc sau:"
+
+#: ../Pinta.Gui.Addins/InstallDialog.cs:72
+msgid "The following packages need to be uninstalled:"
+msgstr "Những gói ứng dụng sau cần được gỡ bỏ:"
+
+#: ../Pinta.Gui.Addins/InstallDialog.cs:66
+msgid "The following packages will be installed:"
+msgstr "Những gói ứng dụng sau sẽ được cài đặt:"
+
+#: ../Pinta.Gui.Addins/InstallDialog.cs:229
+msgid "The following packages will be uninstalled:"
+msgstr "Những gói sau sẽ bị gỡ bỏ:"
+
+#: ../Pinta/Actions/Edit/PasteAction.cs:215
+msgid ""
+"The image being pasted is larger than the canvas. What would you like to do "
+"to the canvas size?"
+msgstr ""
+"Hình ảnh được dán lớn hơn canvas. Bạn muốn làm gì với kích thước canvas?"
+
+#: ../Pinta.Gui.Addins/InstallDialog.cs:352
+msgid "The installation failed!"
+msgstr "Cài đặt lỗi!"
+
+#: ../Pinta.Gui.Addins/InstallDialog.cs:353
+msgid "The installation has completed with warnings."
+msgstr "Quá trình cài đặt hoàn thành với cảnh báo."
+
+#: ../Pinta.Gui.Addins/InstallDialog.cs:52
+msgid ""
+"The selected extension packages can't be installed because there are "
+"dependency conflicts."
+msgstr ""
+"Không thể cài đặt các gói tiện ích mở rộng đã chọn vì có xung đột phụ thuộc."
+
+#: ../Pinta.Gui.Addins/InstallDialog.cs:359
+msgid "The uninstallation failed!"
+msgstr "Quá trình gỡ bỏ lỗi!"
+
+#: ../Pinta.Gui.Addins/InstallDialog.cs:360
+msgid "The uninstallation has completed with warnings."
+msgstr "Quá trình gỡi bỏ hoàn thành với cảnh báo."
+
+#: ../Pinta.Gui.Addins/InstallDialog.cs:241
+msgid ""
+"There are other extension packages that depend on the previous ones which "
+"will also be uninstalled:"
+msgstr ""
+"Có các gói tiện ích mở rộng khác phụ thuộc vào các gói trước đó cũng sẽ được "
+"gỡ cài đặt:"
+
+#: ../Pinta.Effects/Effects/OutlineEdgeEffect.cs:133
+msgid "Thickness"
+msgstr "Độ dày"
+
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:162
+msgid "This format does not support layers. Flatten image?"
+msgstr "Định dạng này không hỗ trợ các lớp. Làm phẳng hình ảnh?"
+
+#: ../Pinta.Effects/Effects/TileEffect.cs:28
+msgid "Tile Reflection"
+msgstr "Ngói phản chiếu"
+
+#: ../Pinta.Effects/Effects/TileEffect.cs:226
+msgid "Tile Size"
+msgstr "Kích cỡ Ngói"
+
+#: ../Pinta.Effects/Effects/TileEffect.cs:234
+msgid "Tile Type"
+msgstr "Loại gạch"
+
+#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:95
+msgid "Tip: Right-click to remove control points."
+msgstr "Mẹo: Kích chuột phải để loại bỏ điểm mốc."
+
+#: ../Pinta.Effects/Effects/FeatherEffect.cs:171
+#: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:208
+#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:53
+#: ../Pinta.Tools/Tools/FloodTool.cs:122
+#: ../Pinta.Tools/Tools/RecolorTool.cs:196
+msgid "Tolerance"
+msgstr "Sai số"
+
+#: ../Pinta.Core/Managers/ToolManager.cs:374
+msgid "Tool"
+msgstr "Công cụ"
+
+#: ../Pinta.Core/Actions/ViewActions.cs:142
+msgid "Tool Box"
+msgstr "Hộp công cụ"
+
+#: ../Pinta.Core/Actions/ViewActions.cs:118
+msgid "Tool Windows"
+msgstr "Cửa sổ Công cụ"
+
+#: ../Pinta.Core/Actions/ViewActions.cs:106
+msgid "Toolbar"
+msgstr "Thanh công cụ"
+
+#: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:29
+msgid "Top Center"
+msgstr "Trung tâm hàng đầu"
+
+#: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:28
+msgid "Top Left"
+msgstr "Trên cùng bên trái"
+
+#: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:30
+msgid "Top Right"
+msgstr "Trên cùng bên phải"
+
+#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:105
+msgid "Transfer Map"
+msgstr "Bản đồ chuyển nhượng"
+
+#: ../Pinta.Core/Actions/HelpActions.cs:65
+msgid "Translate This Application"
+msgstr "Dịch ứng dụng này"
+
+#: ../Pinta.Tools/Tools/GradientTool.cs:293
+msgid "Transparency Mode"
+msgstr "Chế độ minh bạch"
+
+#: ../Pinta.Effects/Classes/EdgeBehavior.cs:22
+#: ../Pinta/Dialogs/NewImageDialog.cs:137
+msgid "Transparent"
+msgstr "Trong suốt"
+
+#: ../Pinta.Effects/Effects/DentsEffect.cs:147
+msgid "Turbulence"
+msgstr "Nhiễu loạn"
+
+#: ../Pinta.Effects/Effects/TwistEffect.cs:27
+msgid "Twist"
+msgstr "Xoắn"
+
+#. Translators: Image dithering matrix named after Frankie Sierra
+#: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:16
+msgid "Two-Row Sierra"
+msgstr "Sierra hai hàng"
+
+#: ../Pinta.Tools/Tools/EraserTool.cs:322
+#: ../Pinta.Tools/Tools/PaintBrushTool.cs:173
+msgid "Type"
+msgstr "Loại"
+
+#: ../Pinta.Tools/Tools/TextTool.cs:201
+msgid "Underline"
+msgstr "Gạch dưới"
+
+#: ../Pinta.Core/Actions/EditActions.cs:70
+msgid "Undo"
+msgstr "Hoàn tác"
+
+#: ../Pinta.Effects/Effects/UnfocusEffect.cs:23
+msgid "Unfocus"
+msgstr "Bỏ tiêu điểm"
+
+#: ../Pinta.Gui.Addins/InstallDialog.cs:216
+#: ../Pinta.Gui.Addins/InstallDialog.cs:217
+msgid "Uninstall"
+msgstr "Gỡ cài đặt"
+
+#: ../Pinta.Gui.Addins/AddinInfoView.cs:185
+msgid "Uninstall..."
+msgstr "Gỡ cài đặt..."
+
+#. Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
+#: ../Pinta.Core/Classes/SelectionModeHandler.cs:45
+#, csharp-format
+msgid "Union (+) ({0} + Left Click)"
+msgstr "Liên (+) ({0} + Click chuột trái)"
+
+#: ../Pinta.Core/Classes/Document.cs:102
+#, csharp-format
+msgid "Unsaved Image {0}"
+msgstr "Chưa lưu hình ảnh {0}"
+
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:330
+msgid "Unsupported file format"
+msgstr "Đinh dạng tệp không được hỗ trợ"
+
+#: ../Pinta.Core/Actions/EditActions.cs:518
+msgid "Unsupported palette format"
+msgstr "Định dạng bảng màu không được hỗ trợ"
+
+#: ../Pinta.Gui.Addins/AddinInfoView.cs:176
+msgid "Update..."
+msgstr "Cập nhật..."
+
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:88
+msgid "Updates"
+msgstr "Cập nhật"
+
+#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:143
+msgid ""
+"Use low quality for previews, small images, and small angles.  Use high "
+"quality for final quality, large images, and large angles."
+msgstr ""
+"Sử dụng chất lượng thấp cho bản xem thử, hình nhỏ, và góc nhỏ. Sử dụng chất "
+"lượng cao cho hình lớn, hoàn chỉnh và góc lớn."
+
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:98
+msgid "Using some icons from:"
+msgstr "Dùng một số hình biểu tượng từ:"
+
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:427
+msgid "Value"
+msgstr "Giá trị"
+
+#: ../Pinta.Gui.Addins/AddinInfoView.cs:214
+#, csharp-format
+msgid "Version: {0}"
+msgstr "Phiên bản: {0}"
+
+#. Translators: Vertical color sorting with blue (B) as the leading term
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:238
+msgid "Vertical blue (B)"
+msgstr "Dọc màu xanh (B)"
+
+#. Translators: Vertical color sorting with green (G) as the leading term
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:241
+msgid "Vertical green (G)"
+msgstr "Dọc màu xanh lá cây (G)"
+
+#. Translators: Vertical color sorting with red (R) as the leading term
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:244
+msgid "Vertical red (R)"
+msgstr "Dọc đỏ (R)"
+
+#: ../Pinta/MainWindow.cs:469
+msgid "View"
+msgstr "Xem"
+
+#. Translators: The vignette effect darkens the outer edges of an image, which fade into an unchanged circular area in the center (or at some other point chosen by the user), similar to what is seen during the closing scene in old cartoons
+#: ../Pinta.Effects/Effects/VignetteEffect.cs:49
+msgid "Vignette"
+msgstr "Họa tiết"
+
+#: ../Pinta/Dialogs/LayerPropertiesDialog.cs:78
+msgid "Visible"
+msgstr "Hiện"
+
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:21
+msgid "Voronoi Diagram"
+msgstr "Sơ đồ Voronoi"
+
+#: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:133
+msgid "Warmth"
+msgstr "Độ ấm"
+
+#: ../Pinta/Dialogs/NewImageDialog.cs:118
+msgid "White"
+msgstr "Trắng"
+
+#: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:66
+#: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:76
+#: ../Pinta/Dialogs/NewImageDialog.cs:325
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:71
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:108
+msgid "Width:"
+msgstr "Bề rộng:"
+
+#: ../Pinta.Core/Actions/ViewActions.cs:207
+#: ../Pinta.Core/Actions/ViewActions.cs:395
+#: ../Pinta.Core/Classes/DocumentWorkspace.cs:365
+#: ../Pinta.Core/Classes/DocumentWorkspace.cs:374
+msgid "Window"
+msgstr "Cửa sổ"
+
+#: ../Pinta.Effects/Classes/EdgeBehavior.cs:10
+msgid "Wrap"
+msgstr "Gói"
+
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:40
+msgid "Xor"
+msgstr "Xor"
+
+#. Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
+#: ../Pinta.Core/Classes/SelectionModeHandler.cs:48
+#, csharp-format
+msgid "Xor ({0} + Right Click)"
+msgstr "Xor ({0} + Nhấp chuột phải)"
+
+#. Translators: {0} is the name of a file that the user does not have permission to open.
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:447
+#, csharp-format
+msgid "You do not have access to '{0}'."
+msgstr "Bạn không có quyền truy cập vào '{0}'."
+
+#. Translators: {0} is the name of a file that the user does not have write permission for.
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:257
+#, csharp-format
+msgid ""
+"You do not have access to modify '{0}'. The file or folder may be read-only."
+msgstr ""
+"Bạn không có quyền truy cập để sửa đổi '{0}'. Tệp hoặc thư mục có thể ở chế "
+"độ chỉ đọc."
+
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:151
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:164
+#: ../Pinta.Tools/Tools/ZoomTool.cs:56
+#: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:151
+msgid "Zoom"
+msgstr "Thu phóng"
+
+#: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:26
+msgid "Zoom Blur"
+msgstr "Zoom mờ"
+
+#: ../Pinta.Core/Actions/ViewActions.cs:72
+msgid "Zoom In"
+msgstr "Phóng to"
+
+#: ../Pinta.Core/Actions/ViewActions.cs:79
+msgid "Zoom Out"
+msgstr "Thu nhỏ"
+
+#: ../Pinta.Core/Actions/ViewActions.cs:93
+msgid "Zoom to Selection"
+msgstr "Zoom vào phần lựa chọn"
+
+#: ../Pinta/MainWindow.cs:402
+msgid "_Adjustments"
+msgstr "_Chỉnh sửa"
+
+#: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:204
+#: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:206
+#: ../Pinta/Actions/Edit/PasteAction.cs:223
+#: ../Pinta/Actions/File/CloseDocumentAction.cs:83
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:166
+#: ../Pinta/Dialogs/ProgressDialog.cs:68
+msgid "_Cancel"
+msgstr "_Hủy bỏ"
+
+#: ../Pinta/Actions/File/CloseDocumentAction.cs:84
+msgid "_Discard"
+msgstr "_Loại bỏ"
+
+#: ../Pinta/MainWindow.cs:395
+msgid "_Edit"
+msgstr "_Sửa"
+
+#: ../Pinta/MainWindow.cs:394
+msgid "_File"
+msgstr "_Tài liệu"
+
+#: ../Pinta/MainWindow.cs:407
+msgid "_Help"
+msgstr "_Trợ giúp"
+
+#: ../Pinta/MainWindow.cs:398
+msgid "_Image"
+msgstr "Ả_nh"
+
+#: ../Pinta/MainWindow.cs:400
+msgid "_Layers"
+msgstr "_Lớp"
+
+#: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:203
+#: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:207
+#: ../Pinta.Gui.Addins/InstallDialog.cs:204 ../Pinta/Dialogs/ErrorDialog.cs:44
+#: ../Pinta/Dialogs/ErrorDialog.cs:73
+msgid "_OK"
+msgstr "_OK"
+
+#: ../Pinta/Actions/File/CloseDocumentAction.cs:85
+msgid "_Save"
+msgstr "_Cứu"
+
+#: ../Pinta/MainWindow.cs:397
+msgid "_View"
+msgstr "_Xem"
+
+#: ../Pinta/MainWindow.cs:406
+msgid "_Window"
+msgstr "Cử_a sổ"
+
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:82
+msgid "by Pinta contributors"
+msgstr "bởi nhóm đóng góp cho Pinta"
+
+#: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:5
+msgid "draw;drawing;paint;painting;graphics;raster;2d;"
+msgstr "draw;drawing;paint;painting;graphics;raster;2d;"
+
+#: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:68
+#: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:72
+#: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:78
+#: ../Pinta/Dialogs/NewImageDialog.cs:277
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:94
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:97
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:121
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:124
+msgid "pixels"
+msgstr "điểm ảnh"
+
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:73
+msgid "translator-credits"
+msgstr ""
+"Jonathan Pobst <https://launchpad.net/~jpobst>\n"
+"Nguyen Quang Chien <https://launchpad.net/~nguyenquangchien>\n"
+"Tu Nguyen <https://launchpad.net/~minhtuvn>\n"
+"Vietnam Linux L10n <https://github.com/linux-l10n-vi>\n"
+"Loc Huynh <https://github.com/hthienloc>"
+
+#. Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
+#: ../Pinta.Tools/Tools/CloneStampTool.cs:49
+#, csharp-format
+msgid "{0} + left click to set origin, left click to paint."
+msgstr "{0} + nhấp chuột trái để đặt điểm gốc, nhấp chuột trái để vẽ."
+
+#. Translators: this is the auto-generated name for a duplicated layer.
+#. {0} is the name of the source layer. Example: "Layer 3 copy".
+#: ../Pinta.Core/Classes/DocumentLayers.cs:207
+#, csharp-format
+msgid "{0} copy"
+msgstr "{0} sao chép"
+
+#: ../Pinta.Core/ImageFormats/FormatDescriptor.cs:122
+#, csharp-format
+msgid "{0} image ({1})"
+msgstr "{0} hình ảnh ({1})"
+
+#. Translators: {0} is the palette format (e.g. "GIMP") and {1} is a list of file extensions.
+#: ../Pinta.Core/PaletteFormats/PaletteDescriptor.cs:63
+#, csharp-format
+msgid "{0} palette ({1})"
+msgstr "{0} bảng màu ({1})"
+
+#. Translators: This specifies the format of the zoom percentage choices
+#. in the toolbar.
+#: ../Pinta.Core/Actions/ViewActions.cs:376
+#, csharp-format
+msgid "{0}%"
+msgstr "{0}%"
+
+#~ msgid "Click and drag to draw the outline for a selection area."
+#~ msgstr "Nhấp chuột và kéo để vẽ đường biên ngoài cho vùng được chọn."
+
+#~ msgid "Random Noise"
+#~ msgstr "Độ nhiễu ngẫu nhiên"
+
+#~ msgid "Choose Primary Color"
+#~ msgstr "Chọn màu chính"
+
+#~ msgid "Choose Secondary Color"
+#~ msgstr "Chọn màu phụ"
+
+#~ msgid "Pixel Grid"
+#~ msgstr "Lưới điểm ảnh"
+
+#~ msgid "Don't change canvas size"
+#~ msgstr "Không thay đổi kích thước nền vẽ"
+
+#~ msgid "Expand canvas"
+#~ msgstr "Mở rộng nền vẽ"
+
+#~ msgid ""
+#~ "The image being pasted is larger than the canvas size. What would you "
+#~ "like to do?"
+#~ msgstr "Ảnh được chèn vào lớn hơn kích thước của nền vẽ. Bạn muốn làm gì?"
+
+#~ msgid "Translated by:"
+#~ msgstr "Dịch bởi:"
+
+#~ msgid "Version Info"
+#~ msgstr "Thông tin về phiên bản"
+
+#~ msgid "Title"
+#~ msgstr "Tựa đề"
+
+#~ msgid "Version"
+#~ msgstr "Phiên bản"
+
+#~ msgid "Path"
+#~ msgstr "Đường dẫn"
+
+#~ msgid ""
+#~ "Left click to zoom in. Right click to zoom out. Click and drag to zoom in "
+#~ "selection."
+#~ msgstr ""
+#~ "Nhấp chuột trái để phóng to, chuột phải để thu nhỏ. Nhấp chuột và kéo để "
+#~ "phóng to phần được chọn."
+
+#~ msgid "Add-in Manager"
+#~ msgstr "Quản lí phần mở rộng"
+
+#~ msgid "Ctrl-left click to set origin, left click to paint."
+#~ msgstr "Ctrl-Chuột trái để đặt gốc, kích chuột trái để vẽ."
+
+#~ msgid ""
+#~ "Click and drag to draw an elliptical selection. Hold Shift to constrain "
+#~ "to a circle."
+#~ msgstr ""
+#~ "Kích chuột vào kéo để lựa chọn theo hình ê-líp. Giữ Shift để tạo thành "
+#~ "hình tròn."
+
+#~ msgid ""
+#~ "Left click to draw a shape with the primary color.\n"
+#~ "Left click on a shape to add a control point.\n"
+#~ "Left click on a control point and drag to move it.\n"
+#~ "Right click on a control point and drag to change its tension.\n"
+#~ "Hold Shift to snap to angles.\n"
+#~ "Use arrow keys to move the selected control point.\n"
+#~ "Press Ctrl + left/right arrows to select control points by order.\n"
+#~ "Press Delete to delete the selected control point.\n"
+#~ "Press Space to add a new control point at the mouse position.\n"
+#~ "Hold Ctrl while pressing Space to create the control point at the exact "
+#~ "same position.\n"
+#~ "Hold Ctrl while left clicking on a control point to create a new shape at "
+#~ "the exact same position.\n"
+#~ "Hold Ctrl while clicking outside of the image bounds to create a new "
+#~ "shape starting at the edge.\n"
+#~ "Press Enter to finalize the shape."
+#~ msgstr ""
+#~ "Kích chuột trái để vẽ một khối với màu chính.\n"
+#~ "Kích chuột trái lên một khối để thêm điểm mốc.\n"
+#~ "Kích chuột trái lên một điểm mốc và kéo để di chuyển nó.\n"
+#~ "Kích chuột phải lên một điểm mốc và kéo để thay đổi độ giãn của nó.\n"
+#~ "Giữ Shift để cố định vào một góc.\n"
+#~ "Dùng phím mũi tên để di chuyển điểm mốc đã chọn.\n"
+#~ "Nhấn Ctrl + mũi tên trái/phải để chọn điểm mốc theo thứ tự.\n"
+#~ "Nhấn Delete để xóa điểm mốc đã chọn.\n"
+#~ "Nhấn phím Cách để thêm một điểm mốc mới tại vị trí của trỏ chuột.\n"
+#~ "Giữ Ctrl khi nhấn phím Cách để tại điểm mốc ở chính vị trí đó.\n"
+#~ "Giữ Ctrl khi nhấn chuột trái lên một điểm mốc để tạo một khối mới ở chính "
+#~ "vị trí đó.\n"
+#~ "Giữ Ctrl khi nhấn chuột bên ngoài hình để tạo một khối mới bắt đầu từ "
+#~ "gờ.\n"
+#~ "Nhấn Enter để kết thúc việc tạo khối."
+
+#~ msgid ""
+#~ "Click and drag to draw gradient from primary to secondary color.  Right "
+#~ "click to reverse."
+#~ msgstr ""
+#~ "Kích chuột và kéo để vẽ một dải màu từ màu chính đến màu phụ. Kích chuột "
+#~ "phải để đảo thứ tự lại."
+
+#~ msgid ""
+#~ "Click and drag to draw a rectangular selection. Hold Shift to constrain "
+#~ "to a square."
+#~ msgstr ""
+#~ "Kích chuột vào kéo để chọn theo hình chữ nhật. Giữ Shift để tạo thành "
+#~ "hình vuông."
+
+#~ msgid ""
+#~ "Left click to replace the secondary color with the primary color. Right "
+#~ "click to reverse."
+#~ msgstr ""
+#~ "Kích chuột trái để thay màu phụ bằng màu chính. Kích chuột phải để làm "
+#~ "ngược lại."
+
+#~ msgid ""
+#~ "Left click to draw freeform one-pixel wide lines with the primary color. "
+#~ "Right click to use the secondary color."
+#~ msgstr ""
+#~ "Kích chuột trái để vẽ một đường tự do rộng 1 pixel với màu chính. Kích "
+#~ "chuột phải để dùng màu phụ."
+
+#~ msgid "No tool selected."
+#~ msgstr "Chưa chọn công cụ nào."
+
+#~ msgid "Union (+) (Ctrl + Left Click)"
+#~ msgstr "Tổng hợp (+) (Ctrl + Chuột trái)"
+
+#~ msgid "Xor (Ctrl + Right Click)"
+#~ msgstr "Xor (Ctrl + Chuột phải)"
+
+#~ msgid "Seed"
+#~ msgstr "Hạt"
+
+#~ msgid "Take Screenshot"
+#~ msgstr "Chụp ảnh màn hình"
+
+#~ msgid "Delay before taking a screenshot (seconds):"
+#~ msgstr "Thời gian chờ trước khi chụp màn hình (giây):"
+
+#, csharp-format
+#~ msgid "A file named \"{0}\" already exists. Do you want to replace it?"
+#~ msgstr "Tệp \"{0}\" đã tồn tại sẵn. Bạn có muốn thay thể nó?"
+
+#, csharp-format
+#~ msgid ""
+#~ "The file already exists in \"{1}\". Replacing it will overwrite its "
+#~ "contents."
+#~ msgstr ""
+#~ "Tệp đã tồn tại ở \"{1}\". Thay thế tệp này sẽ ghi đè lên nội dung của nó."
+
+#~ msgid "Contributors to this release:"
+#~ msgstr "Đóng góp cho bản phát hành này:"
+
+#~ msgid "Previous contributors:"
+#~ msgstr "Đóng góp trước đây:"
+
+#~ msgid "Powered by Mono:"
+#~ msgstr "Được trang bị bởi Mono:"
+
+#~ msgid "Report Bug...."
+#~ msgstr "Báo cáo Lỗi..."
+
+#~ msgid "Show this message and exit."
+#~ msgstr "Hiện thông báo này và thoát."
+
+#~ msgid "Display the application version."
+#~ msgstr "Hiển thị phiên bản ứng dụng."
+
+#~ msgid "number of threads to use for rendering"
+#~ msgstr "số tuyến được dùng để dựng hình"
+
+#~ msgid "Usage: pinta [files]"
+#~ msgstr "Sử dụng: pinta [files]"
+
+#~ msgid "Options: "
+#~ msgstr "Tùy chọn: "
+
+#~ msgid "OptionName"
+#~ msgstr "OptionName"
+
+#~ msgid ""
+#~ "Multiple selection:\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Đa lựa chọn:\n"
+#~ "\n"
+
+#~ msgid "Enable"
+#~ msgstr "Bật"
+
+#~ msgid "Disable"
+#~ msgstr "Tắt"
+
+#~ msgid "No selection"
+#~ msgstr "Không có lựa chọn"
+
+#~ msgid "Available in repository:"
+#~ msgstr "Có sẵn trong kho ứng dụng:"
+
+#~ msgid "Update available"
+#~ msgstr "Có sẵn bản cập nhật"
+
+#~ msgid "This add-in can't be loaded due to missing dependencies"
+#~ msgstr "Không thể tải phần mở rộng này do thiếu gói phụ thuộc."
+
+#, csharp-format
+#~ msgid "Required: {0} v{1}, found v{2}"
+#~ msgstr "Yêu cầu: {0} v{1}, tìm thấy v{2}"
+
+#, csharp-format
+#~ msgid "Missing: {0} v{1}"
+#~ msgstr "Thiếu: {0} v{1}"
+
+#~ msgid "Installed version"
+#~ msgstr "Phiên bản được cài đặt"
+
+#~ msgid "Repository version"
+#~ msgstr "Phiên bản kho ứng dụng"
+
+#~ msgid "Download size"
+#~ msgstr "Kích thước tải về"
+
+#~ msgid "The following depedencies required by this add-in are not available:"
+#~ msgstr "Những gói phụ thuộc sau hiện không sẵn có:"
+
+#~ msgid "Installation cancelled"
+#~ msgstr "Cài đặt bị hủy bỏ"
+
+#~ msgid "Some of the required add-ins were not found"
+#~ msgstr "Không tìm thấy một số phần mở rộng cần thiết"
+
+#~ msgid "Installation failed"
+#~ msgstr "Cài đặt hỏng"
+
+#~ msgid "All repositories"
+#~ msgstr "Tất cả kho ứng dụng"
+
+#~ msgid "Manage Repositories..."
+#~ msgstr "Quản lý kho ứng dụng..."
+
+#, csharp-format
+#~ msgid "{0} update available"
+#~ msgid_plural "{0} updates available"
+#~ msgstr[0] "có bản cập nhật"
+
+#~ msgid "Updating repository"
+#~ msgstr "Cập nhật kho ứng dụng"
+
+#~ msgid "Install Add-in Package"
+#~ msgstr "Cài đặt Gói mở rộng"
+
+#~ msgid "Add-in packages"
+#~ msgstr "Gói mở rộng"
+
+#~ msgid "No add-ins found"
+#~ msgstr "Không tìm thấy phần mở rộng nào"
+
+#~ msgid "Add-in"
+#~ msgstr "Phần mở rộng"
+
+#~ msgid "Other"
+#~ msgstr "Khác"
+
+#~ msgid ""
+#~ "There are other add-ins that depend on the previous ones which will also "
+#~ "be uninstalled:"
+#~ msgstr "Phần mở rộng khác phụ thuộc vào những phần cũ cũng sẽ bị gỡ bỏ:"
+
+#~ msgid ""
+#~ "The selected add-ins can't be installed because there are dependency "
+#~ "conflicts."
+#~ msgstr ""
+#~ "Không thể cài đặt phần mở rộng đã chọn do xung đột các gói phụ thuộc."
+
+#~ msgid "Are you sure you want to cancel the installation?"
+#~ msgstr "Bạn chắc chắn muốn hủy bỏ quá trình cài đặt?"
+
+#~ msgid "Installing Add-ins"
+#~ msgstr "Đang cài phần mở rộng"
+
+#~ msgid "Uninstalling Add-ins"
+#~ msgstr "Gỡ bỏ phần mở rộng"
+
+#~ msgid "Registering repository"
+#~ msgstr "Đăng ký kho ứng dụng"
+
+#~ msgid "More information"
+#~ msgstr "Thông tin thêm"
+
+#~ msgid "Update"
+#~ msgstr "Cập nhật"
+
+#~ msgid "_Uninstall..."
+#~ msgstr "Gỡ bỏ..."
+
+#~ msgid "Additional extensions are required to perform this operation."
+#~ msgstr "Cần thêm những phần mở rộng khác để thực hiện hoạt động này."
+
+#~ msgid "The following add-ins will be installed:"
+#~ msgstr "Những phần mở rộng sau sẽ được cài đặt:"
+
+#~ msgid "No updates found"
+#~ msgstr "Không tìm thấy bản cập nhật"
+
+#~ msgid "Update All"
+#~ msgstr "Cập nhất tất cả"
+
+#~ msgid "Repository:"
+#~ msgstr "Kho ứng dụng:"
+
+#~ msgid "Add-in Repository Management"
+#~ msgstr "Quản lý kho ứng dụng cho phần mở rộng"
+
+#~ msgid "Add New Repository"
+#~ msgstr "Thêm kho ứng dụng"
+
+#~ msgid "Select the location of the repository you want to register:"
+#~ msgstr "Chọn địa điểm của kho ứng dụng bạn muốn đăng ký"
+
+#~ msgid "Register an on-line repository"
+#~ msgstr "Đăng ký một kho ứng dụng trực tuyến"
+
+#~ msgid "Url:"
+#~ msgstr "Url:"
+
+#~ msgid "Register a local repository"
+#~ msgstr "Đăng ký một kho ứng dụng trên máy"
+
+#~ msgid "Path:"
+#~ msgstr "Đường dẫn:"
+
+#~ msgid "Browse..."
+#~ msgstr "Duyệt..."
+
+#~ msgid "Progress"
+#~ msgstr "Tiến trình"
+
+#, csharp-format
+#~ msgid "(provided by {0})"
+#~ msgstr "(provided by {0})"
+
+#, csharp-format
+#~ msgid "Exception occurred: {0}"
+#~ msgstr "Xảy ra lỗi đặc biệt: {0}"

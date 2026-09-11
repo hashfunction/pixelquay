@@ -1,0 +1,10 @@
+* text=auto
+
+# Files required to have LF endings on checkout.
+*_lf.ppm text eol=lf
+
+# Preserve third-party license text formatting as supplied by package publishers.
+licenses/managed/** -whitespace
+
+installer/windows/record-msys2-inputs.sh text eol=lf
+licenses/managed-source-notices/** -whitespace

@@ -1,0 +1,2842 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-11-01 00:22+0000\n"
+"PO-Revision-Date: 2025-06-17 12:30+0000\n"
+"Last-Translator: தமிழ்நேரம் <anishprabu.t@gmail.com>\n"
+"Language-Team: Tamil <https://hosted.weblate.org/projects/pinta/pinta/ta/>\n"
+"Language: ta\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.12.1\n"
+
+#: ../Pinta.Gui.Addins/InstallDialog.cs:268
+msgid " (in user directory)"
+msgstr " (பயனர் கோப்பகத்தில்)"
+
+#: ../Pinta.Core/Classes/SelectionModeHandler.cs:56
+msgid " Selection Mode: "
+msgstr " தேர்வு முறை: "
+
+#: ../Pinta.Core/Managers/EffectsManager.cs:78
+#: ../Pinta.Core/Managers/EffectsManager.cs:116
+msgid "..."
+msgstr "..."
+
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:226
+msgid "3 x 3 Region"
+msgstr "3 ஃச் 3 பகுதி"
+
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:227
+msgid "5 x 5 Region"
+msgstr "5 ஃச் 5 பகுதி"
+
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:228
+msgid "7 x 7 Region"
+msgstr "7 ஃச் 7 பகுதி"
+
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:229
+msgid "9 x 9 Region"
+msgstr "9 ஃச் 9 Region"
+
+#: ../Pinta/MainWindow.cs:405
+msgid "A_dd-ins"
+msgstr "A_dd-ins"
+
+#: ../Pinta.Core/Actions/AppActions.cs:42
+msgid "About"
+msgstr "பற்றி"
+
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:64
+msgid "About Pinta"
+msgstr "பிண்டா பற்றி"
+
+#: ../Pinta.Core/Actions/LayerActions.cs:61
+#: ../Pinta.Core/Actions/LayerActions.cs:431
+#: ../Pinta/Actions/Edit/PasteAction.cs:174
+msgid "Add New Layer"
+msgstr "புதிய அடுக்கைச் சேர்க்கவும்"
+
+#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:24
+msgid "Add Noise"
+msgstr "ஒலி சேர்க்கவும்"
+
+#: ../Pinta.Core/Actions/AddinActions.cs:40
+msgid "Add-in Manager..."
+msgstr "சேர்க்கை மேலாளர் ..."
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:839
+msgid "Added"
+msgstr "சேர்க்கப்பட்டது"
+
+#: ../Pinta/MainWindow.cs:457
+msgid "Adjustments"
+msgstr "சரிசெய்தல்"
+
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:197
+msgid "After select"
+msgstr "தேர்ந்தெடுத்த பிறகு"
+
+#: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:72
+#: ../Pinta.Effects/Effects/AlignObjectEffect.cs:12
+msgid "Align Object"
+msgstr "பொருளை சீரமைக்கவும்"
+
+#: ../Pinta.Core/Actions/EditActions.cs:593
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:285
+#: ../Pinta/Actions/File/OpenDocumentAction.cs:102
+msgid "All files"
+msgstr "அனைத்து கோப்புகள்"
+
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:515
+msgid "Alpha"
+msgstr "அகர"
+
+#: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:212
+msgid "Alpha Gradient"
+msgstr "ஆல்பா சாய்வு"
+
+#: ../Pinta.Effects/Effects/BulgeEffect.cs:116
+#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:146
+#: ../Pinta.Effects/Effects/PolarInversionEffect.cs:88
+#: ../Pinta.Effects/Effects/SharpenEffect.cs:57
+#: ../Pinta.Effects/Effects/TwistEffect.cs:171
+#: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:136
+msgid "Amount"
+msgstr "தொகை"
+
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:139
+msgid "Anchor:"
+msgstr "நங்கூரம்:"
+
+#: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:81
+#: ../Pinta.Effects/Effects/EmbossEffect.cs:120
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:167
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:168
+#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:147
+#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:136
+#: ../Pinta.Effects/Effects/ReliefEffect.cs:77
+#: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:310
+#: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:145
+msgid "Angle"
+msgstr "கோணம்"
+
+#: ../Pinta.Effects/Effects/TwistEffect.cs:179
+msgid "Antialias"
+msgstr "ஆன்டிஆசா"
+
+#: ../Pinta.Core/Classes/BaseTool.cs:363
+msgid "Antialiasing Off"
+msgstr "ஆன்டிலிசிங் ஆஃப்"
+
+#: ../Pinta.Core/Classes/BaseTool.cs:362
+msgid "Antialiasing On"
+msgstr "ஆன்டிலிசிங் ஆன்"
+
+#: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:262
+msgid "Arrow"
+msgstr "அம்பு"
+
+#: ../Pinta.Effects/Effects/InkSketchEffect.cs:41
+#: ../Pinta.Effects/Effects/OilPaintingEffect.cs:32
+#: ../Pinta.Effects/Effects/PencilSketchEffect.cs:33
+msgid "Artistic"
+msgstr "கலை"
+
+#. Translators: Image dithering matrix named after Bill Atkinson
+#: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:28
+msgid "Atkinson"
+msgstr "அட்கின்சன்"
+
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:257
+msgid "Auto"
+msgstr "தானி"
+
+#: ../Pinta.Core/Actions/ImageActions.cs:63
+msgid "Auto Crop"
+msgstr "வாகன பயிர்"
+
+#: ../Pinta.Effects/Adjustments/AutoLevelEffect.cs:24
+msgid "Auto Level"
+msgstr "வாகன நிலை"
+
+#: ../Pinta.Gui.Addins/AddinInfoView.cs:227
+#, csharp-format
+msgid "Available in repository: {0}"
+msgstr "களஞ்சியத்தில் கிடைக்கிறது: {0}"
+
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:130
+msgid "Background"
+msgstr "பின்னணி"
+
+#: ../Pinta/Dialogs/NewImageDialog.cs:127
+msgid "Background Color"
+msgstr "பின்னணி நிறம்"
+
+#: ../Pinta/Dialogs/NewImageDialog.cs:307
+msgid "Background:"
+msgstr "பின்னணி:"
+
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:94
+msgid "Based on the work of Paint.NET:"
+msgstr "பெயிண்ட்.நெட் வேலையின் அடிப்படையில்:"
+
+#. Translators: Gradient with the colors of the flag of Italy: red, white, and green
+#: ../Pinta.Effects/Utilities/GradientHelper.cs:23
+msgid "Beautiful Italy"
+msgstr "அழகான இத்தாலி"
+
+#: ../Pinta.Core/Actions/ViewActions.cs:86
+msgid "Best Fit"
+msgstr "சிறந்த பொருத்தம்"
+
+#: ../Pinta.Core/Enumerations/ResamplingMode.cs:22
+msgid "Bilinear"
+msgstr "பிலினியர்"
+
+#. Translators: Simple gradient that goes from black to white
+#: ../Pinta.Effects/Adjustments/BlackAndWhiteEffect.cs:29
+#: ../Pinta.Effects/Utilities/GradientHelper.cs:27
+msgid "Black and White"
+msgstr "கருப்பு மற்றும் வெள்ளை"
+
+#: ../Pinta/Dialogs/LayerPropertiesDialog.cs:82
+msgid "Blend Mode"
+msgstr "கலப்பு பயன்முறை"
+
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:112
+#: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:62
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:493
+msgid "Blue"
+msgstr "நீலம்"
+
+#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:91
+msgid "Blue "
+msgstr "நீலம் "
+
+#: ../Pinta.Effects/Effects/FragmentEffect.cs:33
+#: ../Pinta.Effects/Effects/GaussianBlurEffect.cs:28
+#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:33
+#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:27
+#: ../Pinta.Effects/Effects/UnfocusEffect.cs:27
+#: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:32
+msgid "Blurs"
+msgstr "மங்கல்கள்"
+
+#: ../Pinta.Tools/Tools/TextTool.cs:177
+msgid "Bold"
+msgstr "தடிமான"
+
+#. Translators: Gradient that starts out white, like the core of a raging fire, and then goes through yellow, red, and black (like visible black smoke), and finally transparent, blending with the background
+#: ../Pinta.Effects/Utilities/GradientHelper.cs:31
+msgid "Bonfire"
+msgstr "நெருப்பு"
+
+#: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:35
+msgid "Bottom Center"
+msgstr "கீழே நடுவண்"
+
+#: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:34
+msgid "Bottom Left"
+msgstr "கீழே இடது"
+
+#: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:36
+msgid "Bottom Right"
+msgstr "கீழே வலது"
+
+#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:147
+#: ../Pinta.Effects/Effects/GlowEffect.cs:81
+msgid "Brightness"
+msgstr "ஒளிஅளவு"
+
+#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:28
+msgid "Brightness / Contrast"
+msgstr "ஒளி / மாறுபாடு"
+
+#: ../Pinta.Effects/Effects/OilPaintingEffect.cs:147
+msgid "Brush Size"
+msgstr "தூரிகை அளவு"
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:262
+#: ../Pinta.Tools/Tools/BaseBrushTool.cs:120
+msgid "Brush width"
+msgstr "தூரிகை அகலம்"
+
+#: ../Pinta.Effects/Effects/BulgeEffect.cs:23
+msgid "Bulge"
+msgstr "வீக்கம்"
+
+#. Translators: Image dithering matrix named after Daniel Burkes
+#: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:24
+msgid "Burkes"
+msgstr "பர்கேச்"
+
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:110
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:80
+msgid "By absolute size:"
+msgstr "முழுமையான அளவு மூலம்:"
+
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:102
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:72
+msgid "By percentage:"
+msgstr "விழுக்காடு மூலம்:"
+
+#: ../Pinta.Core/Actions/EditActions.cs:530
+#: ../Pinta.Gui.Addins/InstallDialog.cs:118
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:214
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:96
+msgid "Cancel"
+msgstr "ரத்துசெய்"
+
+#: ../Pinta/Pads/CanvasPad.cs:41
+msgid "Canvas"
+msgstr "கேன்வாச்"
+
+#: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:92
+msgid "Canvas Grid Settings"
+msgstr "கேன்வாச் கட்டம் அமைப்புகள்"
+
+#: ../Pinta.Core/Actions/ViewActions.cs:124
+msgid "Canvas Grid..."
+msgstr "கேன்வாச் கட்டம் ..."
+
+#: ../Pinta.Effects/Effects/CellsEffect.cs:176
+msgid "Cell Radius"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/PixelateEffect.cs:121
+msgid "Cell Size"
+msgstr "செல் அளவு"
+
+#: ../Pinta.Effects/Effects/CellsEffect.cs:19
+msgid "Cells"
+msgstr ""
+
+#: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:32
+msgid "Center"
+msgstr "நடுவண்"
+
+#: ../Pinta.Tools/Tools/TextTool.cs:229
+msgid "Center Align"
+msgstr "நடுவண் சீரமை"
+
+#: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:31
+msgid "Center Left"
+msgstr "நடுவண் இடது"
+
+#: ../Pinta.Effects/Effects/DentsEffect.cs:159
+#: ../Pinta.Effects/Effects/PolarInversionEffect.cs:96
+msgid "Center Offset"
+msgstr "சென்டர் ஆஃப்செட்"
+
+#: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:33
+msgid "Center Right"
+msgstr "நடுவண் சரியானது"
+
+#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:154
+msgid "Centered"
+msgstr "மையப்படுத்தப்பட்ட"
+
+#: ../Pinta.Core/Actions/ViewActions.cs:227
+msgid "Centimeters"
+msgstr "சென்டிமீட்டர்"
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:279
+#: ../Pinta.Tools/Tools/BaseBrushTool.cs:47
+msgid "Change brush width. Shortcut keys: [ ]"
+msgstr "தூரிகை அகலத்தை மாற்றவும். குறுக்குவழி விசைகள்: []"
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:359
+msgid "Changed Shape Type"
+msgstr "மாற்றப்பட்ட வடிவ வகை"
+
+#. Translators: Gradient that starts out off-white, like cherry blossoms against sunlight, then goes through pink, then light blue (like the sky) and finally transparent, blending with the background
+#: ../Pinta.Effects/Utilities/GradientHelper.cs:35
+msgid "Cherry Blossom"
+msgstr "செர்ரி மலரும்"
+
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:629
+#: ../Pinta.Gui.Widgets/Dialogs/SimpleEffectDialog.cs:286
+msgid "Choose Color"
+msgstr "வண்ணத்தைத் தேர்வுசெய்க"
+
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:149
+msgid "Choose Palette Color"
+msgstr "தட்டு நிறத்தைத் தேர்வுசெய்க"
+
+#: ../Pinta.Tools/Brushes/CircleBrush.cs:36
+msgid "Circles"
+msgstr "வட்டங்கள்"
+
+#. Translators: Arrangement of points along a circular path
+#: ../Pinta.Core/Algorithms/SpatialPartition.cs:170
+msgid "Circular"
+msgstr ""
+
+#: ../Pinta.Effects/Classes/EdgeBehavior.cs:7
+msgid "Clamp"
+msgstr "கொத்து"
+
+#: ../Pinta.Tools/Tools/RectangleSelectTool.cs:42
+msgid ""
+"Click and drag to draw a rectangular selection.\n"
+"Hold Shift to constrain to a square."
+msgstr ""
+"செவ்வக தேர்வை வரைய சொடுக்கு செய்து இழுக்கவும்.\n"
+" ஒரு சதுரத்திற்கு கட்டுப்படுத்த சிப்டை வைத்திருங்கள்."
+
+#: ../Pinta.Tools/Tools/EllipseSelectTool.cs:41
+msgid ""
+"Click and drag to draw an elliptical selection.\n"
+"Hold Shift to constrain to a circle."
+msgstr ""
+"நீள்வட்ட தேர்வை வரைய சொடுக்கு செய்து இழுக்கவும்.\n"
+" ஒரு வட்டத்திற்கு கட்டுப்படுத்த மாற்றத்தை வைத்திருங்கள்."
+
+#: ../Pinta.Tools/Tools/GradientTool.cs:61
+msgid ""
+"Click and drag to draw gradient from primary to secondary color.\n"
+"Right click to reverse.\n"
+"Click on a control point and drag to move it."
+msgstr ""
+
+#: ../Pinta.Tools/Tools/PanTool.cs:42
+msgid "Click and drag to navigate image."
+msgstr "படத்திற்கு செல்ல சொடுக்கு செய்து இழுக்கவும்."
+
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:328
+msgid "Click to reset primary and secondary color."
+msgstr "முதன்மை மற்றும் இரண்டாம் நிலை வண்ணத்தை மீட்டமைக்க சொடுக்கு செய்க."
+
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:317
+msgid "Click to select primary color."
+msgstr "முதன்மை வண்ணத்தைத் தேர்ந்தெடுக்க சொடுக்கு செய்க."
+
+#: ../Pinta.Tools/Tools/MagicWandTool.cs:49
+msgid "Click to select region of similar color."
+msgstr "ஒத்த வண்ணத்தின் பகுதியைத் தேர்ந்தெடுக்க சொடுக்கு செய்க."
+
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:320
+msgid "Click to select secondary color."
+msgstr "இரண்டாம் நிலை வண்ணத்தைத் தேர்ந்தெடுக்க சொடுக்கு செய்க."
+
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:246
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:323
+msgid "Click to switch between primary and secondary color."
+msgstr "முதன்மை மற்றும் இரண்டாம் நிலை வண்ணத்திற்கு இடையில் மாற சொடுக்கு செய்க."
+
+#: ../Pinta/Dialogs/NewImageDialog.cs:358
+#: ../Pinta/Dialogs/NewImageDialog.cs:415
+#: ../Pinta/Dialogs/NewImageDialog.cs:434
+#: ../Pinta/Dialogs/NewImageDialog.cs:530
+msgid "Clipboard"
+msgstr "இடைநிலைப் பலகை"
+
+#: ../Pinta.Tools/Tools/CloneStampTool.cs:46
+msgid "Clone Stamp"
+msgstr "நகலி முத்திரை"
+
+#: ../Pinta.Core/Actions/FileActions.cs:81
+#: ../Pinta.Gui.Addins/InstallDialog.cs:327
+msgid "Close"
+msgstr "மூடு"
+
+#: ../Pinta.Core/Actions/WindowActions.cs:51
+msgid "Close All"
+msgstr "அனைத்தையும் மூடு"
+
+#: ../Pinta.Tools/Editable/EditEngines/RectangleEditEngine.cs:37
+msgid "Closed Curve Shape"
+msgstr "மூடிய வளைவு வடிவம்"
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:334
+msgid "Closed Line/Curve Series"
+msgstr "மூடிய வரி/வளைவு தொடர்"
+
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:26
+msgid "Clouds"
+msgstr "மேகங்கள்"
+
+#: ../Pinta.Effects/Effects/OilPaintingEffect.cs:151
+msgid "Coarseness"
+msgstr "கரடுமுரடான தன்மை"
+
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:43
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:23
+msgid "Color"
+msgstr "நிறம்"
+
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:33
+msgid "Color Burn"
+msgstr "வண்ண எரியும்"
+
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:34
+msgid "Color Dodge"
+msgstr "வண்ண டாட்ச்"
+
+#: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:215
+msgid "Color Gradient"
+msgstr "வண்ண சாய்வு"
+
+#: ../Pinta.Tools/Tools/GradientTool.cs:292
+msgid "Color Mode"
+msgstr "வண்ண பயன்முறை"
+
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:352
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:48
+msgid "Color Picker"
+msgstr "வண்ண தேர்வாளர்"
+
+#: ../Pinta.Effects/Effects/PencilSketchEffect.cs:89
+msgid "Color Range"
+msgstr "வண்ண வரம்பு"
+
+#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:171
+msgid "Color Saturation"
+msgstr "வண்ண செறிவு"
+
+#: ../Pinta.Core/Actions/ViewActions.cs:253
+#: ../Pinta.Effects/Effects/CellsEffect.cs:183
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:148
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:158
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:174
+msgid "Color Scheme"
+msgstr "வண்ணத் திட்டம்"
+
+#: ../Pinta.Effects/Effects/CellsEffect.cs:192
+msgid "Color Scheme Edge Behavior"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/CellsEffect.cs:180
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:145
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:155
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:171
+msgid "Color Scheme Source"
+msgstr "வண்ண திட்ட சான்று"
+
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:191
+msgid "Color Sorting"
+msgstr "வண்ண வரிசையாக்கம்"
+
+#: ../Pinta.Effects/Effects/InkSketchEffect.cs:150
+msgid "Coloring"
+msgstr "வண்ணம்"
+
+#: ../Pinta.Tools/Tools/GradientTool.cs:277
+msgid "Conical Gradient"
+msgstr "கூம்பு சாய்வு"
+
+#: ../Pinta.Core/Actions/HelpActions.cs:46
+msgid "Contents"
+msgstr "உள்ளடக்கங்கள்"
+
+#: ../Pinta.Tools/Tools/FloodTool.cs:131
+msgid "Contiguous"
+msgstr "தொடர்ச்சியான"
+
+#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:157
+#: ../Pinta.Effects/Effects/GlowEffect.cs:85
+msgid "Contrast"
+msgstr "மாறுபாடு"
+
+#: ../Pinta.Core/Actions/EditActions.cs:91
+msgid "Copy"
+msgstr "நகலெடு"
+
+#: ../Pinta.Core/Actions/EditActions.cs:98
+msgid "Copy Merged"
+msgstr "நகல் ஒன்றிணைந்தது"
+
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:81
+msgid "Copyright"
+msgstr "பதிப்புரிமை"
+
+#. Translators: Gradient with the colors of blue and pink cotton candy
+#: ../Pinta.Effects/Utilities/GradientHelper.cs:39
+msgid "Cotton Candy"
+msgstr "பருத்தி மிட்டாய்"
+
+#. Translators: {0} is the name of a layer, and {1} is the path to a .ora file.
+#: ../Pinta.Core/ImageFormats/OraFormat.cs:125
+#, csharp-format
+msgid "Could not import layer \"{0}\" from {1}"
+msgstr "{1} இலிருந்து \"{0}\" அடுக்கை இறக்குமதி செய்ய முடியவில்லை"
+
+#: ../Pinta.Core/Extensions/OtherExtensions.cs:166
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:412
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:424
+#, csharp-format
+msgid "Could not open file: {0}"
+msgstr "கோப்பைத் திறக்க முடியவில்லை: {0}"
+
+#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:175
+msgid "Coverage"
+msgstr "பாதுகாப்பு"
+
+#: ../Pinta.Core/Actions/ImageActions.cs:56
+#: ../Pinta.Core/Actions/ImageActions.cs:295
+msgid "Crop to Selection"
+msgstr "தேர்வுக்கு பயிர்"
+
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:162
+msgid "Current Palette"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/TileEffect.cs:247
+msgid "Curved"
+msgstr "வளைந்த"
+
+#: ../Pinta.Effects/Adjustments/CurvesEffect.cs:27
+#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:138
+msgid "Curves"
+msgstr "வளைவுகள்"
+
+#: ../Pinta/Dialogs/NewImageDialog.cs:360
+#: ../Pinta/Dialogs/NewImageDialog.cs:415
+#: ../Pinta/Dialogs/NewImageDialog.cs:436
+#: ../Pinta/Dialogs/NewImageDialog.cs:530
+msgid "Custom"
+msgstr "தனிப்பயன்"
+
+#: ../Pinta.Core/Actions/EditActions.cs:84
+#: ../Pinta.Core/Actions/EditActions.cs:367
+msgid "Cut"
+msgstr "வெட்டு"
+
+#. Translators: This refers to using a dark variant of the color scheme.
+#: ../Pinta.Core/Actions/ViewActions.cs:250
+msgid "Dark"
+msgstr "இருண்ட"
+
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:38
+msgid "Darken"
+msgstr "தட்டவும்"
+
+#: ../Pinta.Tools/Dashes/DashPatternBox.cs:59
+msgid "Dash"
+msgstr "கோடு"
+
+#. Translators: This refers to using the system's default color scheme.
+#: ../Pinta.Core/Actions/ViewActions.cs:246
+msgid "Default"
+msgstr "இயல்புநிலை"
+
+#: ../Pinta.Core/Actions/LayerActions.cs:68
+#: ../Pinta.Core/Actions/LayerActions.cs:410
+msgid "Delete Layer"
+msgstr "அடுக்கை நீக்கு"
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:677
+msgid "Deleted"
+msgstr "நீக்கப்பட்டது"
+
+#. Translators: This refers to an image distortion that creates small, random warps or distortions in the image, like tiny dents, bumps, or waves
+#: ../Pinta.Effects/Effects/DentsEffect.cs:49
+msgid "Dents"
+msgstr "பற்கள்"
+
+#: ../Pinta.Core/Actions/EditActions.cs:382
+msgid "Deselect"
+msgstr "தேர்வுநீக்கு"
+
+#: ../Pinta.Core/Actions/EditActions.cs:162
+msgid "Deselect All"
+msgstr "அனைத்தையும் தேர்வு செய்யுங்கள்"
+
+#: ../Pinta/Dialogs/ErrorDialog.cs:66
+msgid "Details"
+msgstr "விவரங்கள்"
+
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:36
+msgid "Difference"
+msgstr "வேறுபாடு"
+
+#: ../Pinta.Effects/Effects/FragmentEffect.cs:128
+#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:150
+msgid "Distance"
+msgstr "தூரம்"
+
+#: ../Pinta.Effects/Effects/CellsEffect.cs:153
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:184
+msgid "Distance Metric"
+msgstr "தூர மெட்ரிக்"
+
+#: ../Pinta.Effects/Effects/BulgeEffect.cs:27
+#: ../Pinta.Effects/Effects/DentsEffect.cs:52
+#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:27
+#: ../Pinta.Effects/Effects/PixelateEffect.cs:29
+#: ../Pinta.Effects/Effects/PolarInversionEffect.cs:32
+#: ../Pinta.Effects/Effects/TileEffect.cs:34
+#: ../Pinta.Effects/Effects/TwistEffect.cs:33
+msgid "Distort"
+msgstr "அழி"
+
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:14
+msgid "Dithering"
+msgstr "Ditering"
+
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:206
+msgid "Do not switch tool"
+msgstr "கருவியை மாற்ற வேண்டாம்"
+
+#: ../Pinta.Gui.Addins/AddinInfoView.cs:221
+#, csharp-format
+msgid "Download size: {0}"
+msgstr "பதிவிறக்க அளவு: {0}"
+
+#: ../Pinta.Core/Actions/LayerActions.cs:75
+#: ../Pinta.Core/Actions/LayerActions.cs:397
+msgid "Duplicate Layer"
+msgstr "நகல் அடுக்கு"
+
+#: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:2
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:69
+msgid "Easily create and edit images"
+msgstr "படங்களை எளிதாக உருவாக்கி திருத்தவும்"
+
+#: ../Pinta.Effects/Effects/DentsEffect.cs:162
+#: ../Pinta.Effects/Effects/PolarInversionEffect.cs:99
+#: ../Pinta.Effects/Effects/TileEffect.cs:237 Polar Inversion dialog
+msgid "Edge Behavior"
+msgstr "விளிம்பு நடத்தை"
+
+#: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:26
+msgid "Edge Detect"
+msgstr "விளிம்பு கண்டறிதல்"
+
+#: ../Pinta/MainWindow.cs:403
+msgid "Effe_cts"
+msgstr "விளைவுகள்"
+
+#: ../Pinta/MainWindow.cs:451
+msgid "Effects"
+msgstr "விளைவுகள்"
+
+#. Translators: Gradient that starts out white, like the the inner part of a spark, and goes through progressively dark shades of blue until it reaches black, and finally transparent, blending with the background
+#: ../Pinta.Effects/Utilities/GradientHelper.cs:43
+msgid "Electric"
+msgstr "மின்சாரம்"
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:335
+#: ../Pinta.Tools/Editable/EditEngines/EllipseEditEngine.cs:36
+#: ../Pinta.Tools/Tools/EllipseTool.cs:45
+msgid "Ellipse"
+msgstr "நீள்வட்டம்"
+
+#: ../Pinta.Tools/Tools/EllipseSelectTool.cs:39
+msgid "Ellipse Select"
+msgstr "நீள்வட்டம் தேர்ந்தெடுக்கவும்"
+
+#: ../Pinta.Effects/Effects/EmbossEffect.cs:26
+msgid "Emboss"
+msgstr "புடைப்பு"
+
+#: ../Pinta/Main.cs:67
+msgid "Enable additional logging or behavior changes for debugging"
+msgstr "பிழைத்திருத்தத்திற்கான கூடுதல் பதிவு அல்லது நடத்தை மாற்றங்களை இயக்கவும்"
+
+#: ../Pinta.Core/Actions/EditActions.cs:127
+#: ../Pinta.Core/Actions/EditActions.cs:368
+msgid "Erase Selection"
+msgstr "தேர்வை அழிக்கவும்"
+
+#: ../Pinta.Tools/Tools/EraserTool.cs:51
+msgid "Eraser"
+msgstr "அழிப்பான்"
+
+#: ../Pinta.Core/ImageFormats/OraFormat.cs:126
+msgid "Error"
+msgstr "பிழை"
+
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:171
+msgid "Error Diffusion Method"
+msgstr "பிழை பரவல் முறை"
+
+#: ../Pinta.Core/Classes/SelectionModeHandler.cs:46
+msgid "Exclude (-) (Right Click)"
+msgstr "விலக்கு (-) (வலது கிளிக்)"
+
+#. Translators: This refers to expanding the canvas size when pasting a larger image.
+#: ../Pinta/Actions/Edit/PasteAction.cs:227
+msgid "Expand"
+msgstr "விரிவாக்கு"
+
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:277
+msgid "Extension packages"
+msgstr "விரிவாக்க தொகுப்புகள்"
+
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:143
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:156
+msgid "Factor"
+msgstr "காரணி"
+
+#: ../Pinta/Actions/File/NewScreenshotAction.cs:85
+msgid "Failed to access XDG Desktop Portals"
+msgstr "எக்ச்டிசி டெச்க்டாப் போர்ட்டல்களை அணுகுவதில் தோல்வி"
+
+#: ../Pinta/MainWindow.cs:324
+msgid "Failed to initialize add-in"
+msgstr "கூடுதல் தொடங்குவதில் தோல்வி"
+
+#: ../Pinta.Gui.Addins/InstallDialog.cs:199
+msgid "Failed to load extension package"
+msgstr "நீட்டிப்பு தொகுப்பை ஏற்றுவதில் தோல்வி"
+
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:444
+msgid "Failed to open image"
+msgstr "படத்தைத் திறக்கத் தவறிவிட்டது"
+
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:254
+msgid "Failed to save image"
+msgstr "படத்தை சேமிப்பதில் தோல்வி"
+
+#: ../Pinta/Actions/File/NewScreenshotAction.cs:84
+#: ../Pinta/Actions/File/NewScreenshotAction.cs:109
+msgid "Failed to take screenshot"
+msgstr "திரைக்காட்சி எடுக்கத் தவறிவிட்டது"
+
+#: ../Pinta.Effects/Effects/FeatherEffect.cs:175
+msgid "Feather Canvas Edge"
+msgstr "இறகு கேன்வாச் எட்ச்"
+
+#: ../Pinta.Effects/Effects/FeatherEffect.cs:18
+msgid "Feather Object"
+msgstr "இறகு பொருள்"
+
+#: ../Pinta.Core/Actions/HelpActions.cs:59
+msgid "File a Bug"
+msgstr "ஒரு பிழையை தாக்கல் செய்யுங்கள்"
+
+#: ../Pinta/Main.cs:62
+msgid "Files to open"
+msgstr "திறக்க கோப்புகள்"
+
+#: ../Pinta.Tools/Tools/TextTool.cs:267
+msgid "Fill Background"
+msgstr "பின்னணியை நிரப்பவும்"
+
+#: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:221
+msgid "Fill Object Background"
+msgstr "பொருள் பின்னணியை நிரப்பவும்"
+
+#: ../Pinta.Core/Actions/EditActions.cs:134
+#: ../Pinta.Core/Actions/EditActions.cs:320
+msgid "Fill Selection"
+msgstr "தேர்வை நிரப்பவும்"
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:308
+#: ../Pinta.Tools/Tools/FreeformShapeTool.cs:219
+msgid "Fill Shape"
+msgstr "வடிவத்தை நிரப்பவும்"
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:298
+#: ../Pinta.Tools/Tools/FreeformShapeTool.cs:212
+msgid "Fill Style"
+msgstr "பாணி நிரப்பு"
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:309
+#: ../Pinta.Tools/Tools/FreeformShapeTool.cs:220
+msgid "Fill and Outline Shape"
+msgstr "நிரப்புதல் மற்றும் கோடிட்டு வடிவ"
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1104
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1390
+#: ../Pinta.Tools/Tools/GradientTool.cs:214
+msgid "Finalized"
+msgstr "இறுதி செய்யப்பட்டது"
+
+#: ../Pinta.Core/HistoryItems/FinishPixelsHistoryItem.cs:41
+msgid "Finish Pixels"
+msgstr "பிக்சல்களை முடிக்கவும்"
+
+#: ../Pinta.Core/Actions/ImageActions.cs:117
+#: ../Pinta.Core/Actions/ImageActions.cs:221
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:167
+msgid "Flatten"
+msgstr "தட்டையானது"
+
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:163
+msgid "Flattening the image will merge all layers into a single layer."
+msgstr "படத்தைத் தட்டச்சு செய்வது அனைத்து அடுக்குகளையும் ஒரே அடுக்கில் ஒன்றிணைக்கும்."
+
+#: ../Pinta.Core/Actions/ImageActions.cs:84
+#: ../Pinta.Core/Actions/LayerActions.cs:95
+msgid "Flip Horizontal"
+msgstr "கிடைமட்டமாக புரட்டவும்"
+
+#: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:51
+msgid "Flip Image Horizontal"
+msgstr "படத்தை கிடைமட்டமாக புரட்டவும்"
+
+#: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:55
+msgid "Flip Image Vertical"
+msgstr "படத்தை செங்குத்தாக புரட்டவும்"
+
+#: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:76
+msgid "Flip Layer Horizontal"
+msgstr "ஃபிளிப் லேயர் கிடைமட்டமாக"
+
+#: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:80
+msgid "Flip Layer Vertical"
+msgstr "அடுக்கு செங்குத்து"
+
+#: ../Pinta.Core/Actions/ImageActions.cs:90
+#: ../Pinta.Core/Actions/LayerActions.cs:101
+msgid "Flip Vertical"
+msgstr "செங்குத்து புரட்டவும்"
+
+#: ../Pinta.Tools/Tools/FloodTool.cs:121
+msgid "Flood Mode"
+msgstr "வெள்ள முறை"
+
+#. Translators: Image dithering matrix named after Robert W. Floyd and Louis Steinberg
+#: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:40
+msgid "Floyd-Steinberg"
+msgstr "ஃபிலாய்ட்-ச்டீன்பெர்க்"
+
+#. Translators: Image dithering matrix named after Robert W. Floyd and Louis Steinberg. Some software may use it and call it Floyd-Steinberg, but it's not the actual Floyd-Steinberg matrix
+#: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:44
+msgid "Floyd-Steinberg Lite"
+msgstr "ஃபிலாய்ட்-ச்டீன்பெர்க் லைட்"
+
+#: ../Pinta.Tools/Tools/TextTool.cs:145
+msgid "Font"
+msgstr "எழுத்துரு"
+
+#: ../Pinta.Effects/Effects/FragmentEffect.cs:27
+msgid "Fragment"
+msgstr "துண்டு"
+
+#: ../Pinta.Effects/Effects/FragmentEffect.cs:124
+msgid "Fragments"
+msgstr "துண்டுகள்"
+
+#: ../Pinta.Tools/Tools/LassoSelectTool.cs:222
+msgid "Freeform"
+msgstr ""
+
+#: ../Pinta.Tools/Tools/FreeformShapeTool.cs:48
+msgid "Freeform Shape"
+msgstr "ஃப்ரீஃபார்ம் வடிவம்"
+
+#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:23
+msgid "Frosted Glass"
+msgstr "உறைந்த கண்ணாடி"
+
+#: ../Pinta.Core/Actions/ViewActions.cs:164
+msgid "Fullscreen"
+msgstr "முழு திரை"
+
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:86
+msgid "Gallery"
+msgstr "கேலரி"
+
+#: ../Pinta.Effects/Effects/GaussianBlurEffect.cs:24
+msgid "Gaussian Blur"
+msgstr "காசியன் மங்கலானது"
+
+#: ../Pinta.Tools/Tools/FloodTool.cs:132
+msgid "Global"
+msgstr "உலகளாவிய"
+
+#: ../Pinta.Effects/Effects/GlowEffect.cs:26
+msgid "Glow"
+msgstr "பளபளப்பு"
+
+#: ../Pinta.Tools/Tools/GradientTool.cs:59
+#: ../Pinta.Tools/Tools/GradientTool.cs:267
+msgid "Gradient"
+msgstr "சரிவு"
+
+#: ../Pinta.Tools/Tools/GradientTool.cs:118
+msgid "Gradient Created"
+msgstr ""
+
+#: ../Pinta.Tools/Tools/GradientTool.cs:119
+msgid "Gradient Modified"
+msgstr ""
+
+#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:90
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:109
+#: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:61
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:471
+msgid "Green"
+msgstr "பச்சை"
+
+#: ../Pinta.Tools/Brushes/GridBrush.cs:36
+msgid "Grid"
+msgstr "வலைவாய்"
+
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:41
+msgid "Hard Light"
+msgstr "கடினமான ஒளி"
+
+#: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:70
+#: ../Pinta/Dialogs/NewImageDialog.cs:333
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:79
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:111
+msgid "Height:"
+msgstr "உயரம்:"
+
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:354
+msgid "Hex"
+msgstr "ஃச்"
+
+#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:116
+msgid "Hide Layer"
+msgstr "அடுக்கு மறைக்க"
+
+#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:58
+msgid "Hint: For best results, first use selection tools to select each eye."
+msgstr ""
+"குறிப்பு: சிறந்த முடிவுகளுக்கு, ஒவ்வொரு கண்ணையும் தேர்ந்தெடுக்க முதலில் தேர்வு "
+"கருவிகளைப் பயன்படுத்தவும்."
+
+#: ../Pinta/Pads/HistoryPad.cs:50
+msgid "History"
+msgstr "வரலாறு"
+
+#. Translators: Horizontal color sorting with blue (B) as the leading term
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:228
+msgid "Horizontal blue (B)"
+msgstr "கிடைமட்ட நீலம் (பி)"
+
+#. Translators: Horizontal color sorting with green (G) as the leading term
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:231
+msgid "Horizontal green (G)"
+msgstr "கிடைமட்ட பச்சை (சி)"
+
+#. Translators: Horizontal color sorting with red (R) as the leading term
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:234
+msgid "Horizontal red (R)"
+msgstr "கிடைமட்ட சிவப்பு ("
+
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:45
+#: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:61
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:374
+msgid "Hue"
+msgstr "வண்ணச்சாயல்"
+
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:281
+msgid "Hue & Sat"
+msgstr "சாயல் மற்றும் காரி"
+
+#: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:23
+msgid "Hue / Saturation"
+msgstr "சாயல் / செறிவு"
+
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:246
+msgid "ICO files can not be larger than 255 x 255 pixels."
+msgstr "ஐ.சி.ஓ கோப்புகள் 255 ஃச் 255 பிக்சல்களை விட பெரியதாக இருக்காது."
+
+#: ../Pinta/Actions/File/CloseDocumentAction.cs:75
+msgid "If you don't save, all changes will be permanently lost."
+msgstr "நீங்கள் சேமிக்கவில்லை என்றால், எல்லா மாற்றங்களும் நிரந்தரமாக இழக்கப்படும்."
+
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:244 ../Pinta/MainWindow.cs:463
+msgid "Image"
+msgstr "படம்"
+
+#: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:3
+msgid "Image Editor"
+msgstr "பட ஆசிரியர்"
+
+#: ../Pinta.Core/Actions/ViewActions.cs:112
+msgid "Image Tabs"
+msgstr "பட தாவல்கள்"
+
+#: ../Pinta/Actions/Edit/PasteAction.cs:207
+msgid "Image cannot be pasted"
+msgstr "படத்தை ஒட்ட முடியாது"
+
+#: ../Pinta.Core/Actions/LayerActions.cs:241
+#: ../Pinta/Actions/File/OpenDocumentAction.cs:111
+msgid "Image files"
+msgstr "படக் கோப்புகள்"
+
+#: ../Pinta/Actions/Edit/PasteAction.cs:214
+msgid "Image larger than canvas"
+msgstr "கேன்வாசை விட பெரிய படம்"
+
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:245
+msgid "Image too large"
+msgstr "படம் மிகப் பெரியது"
+
+#: ../Pinta.Core/Actions/LayerActions.cs:288
+msgid "Import From File"
+msgstr "கோப்பிலிருந்து இறக்குமதி"
+
+#: ../Pinta.Core/Actions/LayerActions.cs:89
+msgid "Import from File..."
+msgstr "கோப்பிலிருந்து இறக்குமதி ..."
+
+#: ../Pinta.Tools/Tools/LassoSelectTool.cs:57
+msgid ""
+"In Freeform mode, click and drag to draw the outline for a selection area.\n"
+"\n"
+"In Polygon mode, click and drag to add a new point to the selection.\n"
+"Press Enter to finish the selection.\n"
+"Press Backspace to delete the last point."
+msgstr ""
+
+#: ../Pinta.Core/Actions/ViewActions.cs:226
+msgid "Inches"
+msgstr "அங்குலங்கள்"
+
+#: ../Pinta.Effects/Effects/InkSketchEffect.cs:146
+msgid "Ink Outline"
+msgstr "மை அவுட்லைன்"
+
+#: ../Pinta.Effects/Effects/InkSketchEffect.cs:35
+msgid "Ink Sketch"
+msgstr "மை ச்கெட்ச்"
+
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:272
+msgid "Input"
+msgstr "உள்ளீடு"
+
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:271
+msgid "Input Histogram"
+msgstr "உள்ளீட்டு இச்டோகிராம்"
+
+#: ../Pinta.Gui.Addins/InstallDialog.cs:121
+#: ../Pinta.Gui.Addins/InstallDialog.cs:247
+msgid "Install"
+msgstr "நிறுவவும்"
+
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:251
+msgid "Install Extension Package"
+msgstr "நீட்டிப்பு தொகுப்பை நிறுவவும்"
+
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:110
+msgid "Install from file..."
+msgstr "கோப்பிலிருந்து நிறுவவும் ..."
+
+#: ../Pinta.Gui.Addins/AddinInfoView.cs:167
+msgid "Install..."
+msgstr "நிறுவு ..."
+
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:87
+msgid "Installed"
+msgstr "நிறுவப்பட்டது"
+
+#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:167
+#: ../Pinta.Effects/Effects/OutlineEdgeEffect.cs:137
+#: ../Pinta.Effects/Effects/TileEffect.cs:230
+msgid "Intensity"
+msgstr "தீவிரம்"
+
+#. Translators: {0} is 'Alt', or a platform-specific key such as 'Option' on macOS.
+#: ../Pinta.Core/Classes/SelectionModeHandler.cs:50
+#, csharp-format
+msgid "Intersect ({0} + Left Click)"
+msgstr "குறுக்குவெட்டு ({0} + இடது கிளிக்)"
+
+#: ../Pinta.Effects/Adjustments/InvertColorsEffect.cs:29
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:183
+msgid "Invert Colors"
+msgstr "வண்ணங்களை தலைகீழ்"
+
+#: ../Pinta.Core/Actions/EditActions.cs:141
+#: ../Pinta.Core/Actions/EditActions.cs:615
+msgid "Invert Selection"
+msgstr "தலைகீழ் தேர்வு"
+
+#: ../Pinta.Tools/Tools/TextTool.cs:189
+msgid "Italic"
+msgstr "சாய்வு"
+
+#: ../Pinta/Dialogs/JpegCompressionDialog.cs:46
+msgid "JPEG Quality"
+msgstr "JPEG தகுதி"
+
+#. Translators: Image dithering matrix named after J. F. Jarvis, C. N. Judice, and W. H. Ninke
+#: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:36
+msgid "Jarvis-Judice-Ninke"
+msgstr "சார்விச்-சூனிச் மடிந்தது"
+
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:26
+msgid "Julia Fractal"
+msgstr "சூலியா ஃப்ராக்டல்"
+
+#: ../Pinta/Dialogs/NewImageDialog.cs:300
+msgid "Landscape"
+msgstr "நிலப்பரப்பு"
+
+#: ../Pinta.Tools/Tools/LassoSelectTool.cs:215
+msgid "Lasso Mode"
+msgstr ""
+
+#: ../Pinta.Tools/Tools/LassoSelectTool.cs:55
+msgid "Lasso Select"
+msgstr "லாசோ தேர்ந்தெடுக்கவும்"
+
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:243
+msgid "Layer"
+msgstr "அடுக்கு"
+
+#: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListViewItemWidget.cs:101
+msgid "Layer Hidden"
+msgstr "அடுக்கு மறைக்கப்பட்டுள்ளது"
+
+#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:106
+msgid "Layer Opacity"
+msgstr "அடுக்கு ஒளிபுகாநிலை"
+
+#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:121
+#: ../Pinta/Dialogs/LayerPropertiesDialog.cs:136
+msgid "Layer Properties"
+msgstr "அடுக்கு பண்புகள்"
+
+#: ../Pinta.Core/Actions/LayerActions.cs:125
+msgid "Layer Properties..."
+msgstr "அடுக்கு பண்புகள் ..."
+
+#: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListViewItemWidget.cs:101
+msgid "Layer Shown"
+msgstr "அடுக்கு காட்டப்பட்டுள்ளது"
+
+#. Translators: {0} is a unique id for new layers, e.g. "Layer 2".
+#: ../Pinta.Core/Classes/DocumentLayers.cs:133
+#, csharp-format
+msgid "Layer {0}"
+msgstr "அடுக்கு {0}"
+
+#: ../Pinta/Pads/LayersPad.cs:49
+msgid "Layers"
+msgstr "அடுக்குகள்"
+
+#: ../Pinta.Tools/Tools/TextTool.cs:217
+msgid "Left Align"
+msgstr "இடது சீரமைப்பு"
+
+#: ../Pinta.Tools/Tools/MoveSelectedTool.cs:49
+#, csharp-format
+msgid ""
+"Left click and drag the selection to move selected content.\n"
+"Hold {0} to scale instead of move.\n"
+"Right click and drag the selection to rotate selected content.\n"
+"Hold Shift to rotate in steps.\n"
+"Use arrow keys to move selected content by a single pixel."
+msgstr ""
+"தேர்ந்தெடுக்கப்பட்ட உள்ளடக்கத்தை நகர்த்த இடது சொடுக்கு செய்து தேர்வை இழுக்கவும்.\n"
+" நகர்த்துவதற்கு பதிலாக அளவிட {0} வைத்திருங்கள்.\n"
+" தேர்ந்தெடுக்கப்பட்ட உள்ளடக்கத்தை சுழற்றுவதற்கு வலது சொடுக்கு செய்து தேர்வை இழுக்கவும்.\n"
+" படிகளில் சுழற்ற மாற்றத்தை வைத்திருங்கள்.\n"
+" தேர்ந்தெடுக்கப்பட்ட உள்ளடக்கத்தை ஒற்றை படப்புள்ளி மூலம் நகர்த்த அம்பு விசைகளைப் பயன்படுத்தவும்."
+
+#: ../Pinta.Tools/Tools/MoveSelectionTool.cs:50
+#, csharp-format
+msgid ""
+"Left click and drag the selection to move selection outline.\n"
+"Hold {0} to scale instead of move.\n"
+"Right click and drag the selection to rotate selection outline.\n"
+"Hold Shift to rotate in steps.\n"
+"Use arrow keys to move selection outline by a single pixel."
+msgstr ""
+"தேர்வு அவுட்லைனை நகர்த்துவதற்கு இடது சொடுக்கு செய்து தேர்வை இழுக்கவும்.\n"
+" நகர்த்துவதற்கு பதிலாக அளவிட {0} வைத்திருங்கள்.\n"
+" தேர்வு அவுட்லைனை சுழற்றுவதற்கு வலது சொடுக்கு செய்து தேர்வை இழுக்கவும்.\n"
+" படிகளில் சுழற்ற மாற்றத்தை வைத்திருங்கள்.\n"
+" ஒற்றை படப்புள்ளி மூலம் தேர்வு அவுட்லைன் நகர்த்த அம்பு விசைகளைப் பயன்படுத்தவும்."
+
+#. Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
+#: ../Pinta.Tools/Tools/ShapeTool.cs:58
+#, csharp-format
+msgid ""
+"Left click to draw a shape with the primary color.\n"
+"Left click on a shape to add a control point.\n"
+"Left click on a control point and drag to move it.\n"
+"Right click on a control point and drag to change its tension.\n"
+"Hold Shift to snap to angles.\n"
+"Use arrow keys to move the selected control point.\n"
+"Press {0} + left/right arrows to select control points by order.\n"
+"Press Delete to delete the selected control point.\n"
+"Press Space to add a new control point at the mouse position.\n"
+"Hold {0} while pressing Space to create the control point at the exact same "
+"position.\n"
+"Hold {0} while left clicking on a control point to create a new shape at the "
+"exact same position.\n"
+"Press Enter to finalize the shape."
+msgstr ""
+"முதன்மை வண்ணத்துடன் ஒரு வடிவத்தை வரைய இடது சொடுக்கு செய்யவும்.\n"
+" கட்டுப்பாட்டு புள்ளியைச் சேர்க்க ஒரு வடிவத்தில் இடது சொடுக்கு செய்க.\n"
+" ஒரு கட்டுப்பாட்டு புள்ளியில் இடது சொடுக்கு செய்து அதை நகர்த்த இழுக்கவும்.\n"
+" கட்டுப்பாட்டு புள்ளியில் வலது சொடுக்கு செய்து அதன் பதற்றத்தை மாற்ற இழுக்கவும்.\n"
+" கோணங்களுக்கு ச்னாப் செய்ய மாற்றத்தை வைத்திருங்கள்.\n"
+" தேர்ந்தெடுக்கப்பட்ட கட்டுப்பாட்டு புள்ளியை நகர்த்த அம்பு விசைகளைப் பயன்படுத்தவும்.\n"
+" ஆர்டர் மூலம் கட்டுப்பாட்டு புள்ளிகளைத் தேர்ந்தெடுக்க {0} + இடது/வலது அம்புகளை "
+"அழுத்தவும்.\n"
+" தேர்ந்தெடுக்கப்பட்ட கட்டுப்பாட்டு புள்ளியை நீக்க நீக்கு என்பதை அழுத்தவும்.\n"
+" சுட்டி நிலையில் ஒரு புதிய கட்டுப்பாட்டு புள்ளியைச் சேர்க்க இடத்தை அழுத்தவும்.\n"
+" அதே நிலையில் கட்டுப்பாட்டு புள்ளியை உருவாக்க இடத்தை அழுத்தும்போது {0} வைத்திருங்கள்.\n"
+" அதே நிலையில் ஒரு புதிய வடிவத்தை உருவாக்க ஒரு கட்டுப்பாட்டு புள்ளியில் இடது சொடுக்கு "
+"செய்யும் போது {0} வைத்திருங்கள்.\n"
+" வடிவத்தை இறுதி செய்ய ENTER ஐ அழுத்தவும்."
+
+#: ../Pinta.Tools/Tools/PencilTool.cs:51
+msgid ""
+"Left click to draw freeform one-pixel wide lines with the primary color.\n"
+"Right click to use the secondary color."
+msgstr ""
+"முதன்மை வண்ணத்துடன் ஃப்ரீஃபார்ம் ஒரு படப்புள்ளி அகலமான கோடுகளை வரைய இடது சொடுக்கு "
+"செய்யவும்.\n"
+" இரண்டாம் நிலை வண்ணத்தைப் பயன்படுத்த வலது சொடுக்கு செய்யவும்."
+
+#: ../Pinta.Tools/Tools/FreeformShapeTool.cs:50
+#: ../Pinta.Tools/Tools/PaintBrushTool.cs:57
+msgid ""
+"Left click to draw with primary color, right click to draw with secondary "
+"color."
+msgstr ""
+"முதன்மை வண்ணத்துடன் வரைய இடது சொடுக்கு செய்யவும், இரண்டாம் நிலை வண்ணத்துடன் வரைய வலது "
+"சொடுக்கு செய்யவும்."
+
+#: ../Pinta.Tools/Tools/EraserTool.cs:57
+msgid ""
+"Left click to erase to transparent, right click to erase to secondary color. "
+msgstr "வெளிப்படையான, வலது சொடுக்கு இரண்டாம் நிறத்தை அழிக்க இடது சொடுக்கு செய்யவும். "
+
+#: ../Pinta.Tools/Tools/PaintBucketTool.cs:46
+msgid ""
+"Left click to fill a region with the primary color, right click to fill with "
+"the secondary color."
+msgstr ""
+"முதன்மை வண்ணத்துடன் ஒரு பகுதியை நிரப்ப இடது சொடுக்கு செய்யவும், இரண்டாம் நிலை வண்ணத்தை "
+"நிரப்ப வலது சொடுக்கு செய்யவும்."
+
+#: ../Pinta.Tools/Tools/TextTool.cs:95
+msgid ""
+"Left click to place cursor, then type desired text. Text color is primary "
+"color."
+msgstr ""
+"கர்சரை வைக்க இடது சொடுக்கு செய்து, விரும்பிய உரையைத் தட்டச்சு செய்க. உரை நிறம் முதன்மை "
+"நிறம்."
+
+#: ../Pinta.Tools/Tools/RecolorTool.cs:58
+msgid ""
+"Left click to replace the secondary color with the primary color.\n"
+"Right click to reverse."
+msgstr ""
+"இரண்டாம் நிலை நிறத்தை முதன்மை வண்ணத்துடன் மாற்ற இடது சொடுக்கு செய்யவும்.\n"
+" தலைகீழாக வலது சொடுக்கு செய்யவும்."
+
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:50
+msgid ""
+"Left click to set primary color.\n"
+"Right click to set secondary color."
+msgstr ""
+"முதன்மை வண்ணத்தை அமைக்க இடது சொடுக்கு செய்யவும்.\n"
+" இரண்டாம் நிலை நிறத்தை அமைக்க வலது சொடுக்கு செய்யவும்."
+
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:314
+msgid "Left click to set primary color. Right click to set secondary color."
+msgstr ""
+"முதன்மை வண்ணத்தை அமைக்க இடது சொடுக்கு செய்யவும். இரண்டாம் நிலை நிறத்தை அமைக்க வலது "
+"சொடுக்கு செய்யவும்."
+
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:310
+msgid ""
+"Left click to set primary color. Right click to set secondary color. Middle "
+"click to choose palette color."
+msgstr ""
+"முதன்மை வண்ணத்தை அமைக்க இடது சொடுக்கு செய்யவும். இரண்டாம் நிலை நிறத்தை அமைக்க வலது "
+"சொடுக்கு செய்யவும். தட்டு வண்ணத்தைத் தேர்வுசெய்ய நடுத்தர சொடுக்கு."
+
+#: ../Pinta.Tools/Tools/ZoomTool.cs:59
+msgid ""
+"Left click to zoom in.\n"
+"Right click to zoom out.\n"
+"Click and drag to zoom in selection."
+msgstr ""
+"பெரிதாக்க இடது சொடுக்கு செய்யவும்.\n"
+" பெரிதாக்க வலது சொடுக்கு செய்யவும்.\n"
+" தேர்வில் பெரிதாக்க சொடுக்கு செய்து இழுக்கவும்."
+
+#: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:331
+msgid "Length"
+msgstr "நீளம்"
+
+#: ../Pinta.Effects/Adjustments/LevelsEffect.cs:23
+msgid "Levels"
+msgstr "நிலைகள்"
+
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:243
+msgid "Levels Adjustment"
+msgstr "நிலைகள் சரிசெய்தல்"
+
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:90
+msgid "License"
+msgstr "உரிமம்"
+
+#. Translators: This refers to using a light variant of the color scheme.
+#: ../Pinta.Core/Actions/ViewActions.cs:248
+msgid "Light"
+msgstr "ஒளி"
+
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:37
+msgid "Lighten"
+msgstr "ஒளிரச் செய்யுங்கள்"
+
+#: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:129
+msgid "Lighting"
+msgstr "லைட்டிங்"
+
+#: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:67
+msgid "Lightness"
+msgstr "லேசான தன்மை"
+
+#. Translators: Gradient with a citrusy vibe that starts out white, goes through light yellow, several shades of green, and then transparent, blending with the background
+#: ../Pinta.Effects/Utilities/GradientHelper.cs:47
+msgid "Lime Lemon"
+msgstr "சுண்ணாம்பு எலுமிச்சை"
+
+#: ../Pinta.Tools/Tools/LineCurveTool.cs:43
+msgid "Line/Curve"
+msgstr "வரி/வளைவு"
+
+#: ../Pinta.Tools/Tools/GradientTool.cs:275
+msgid "Linear Diamond Gradient"
+msgstr "நேரியல் வைர சாய்வு"
+
+#: ../Pinta.Tools/Tools/GradientTool.cs:273
+msgid "Linear Gradient"
+msgstr "நேரியல் சாய்வு"
+
+#: ../Pinta.Tools/Tools/GradientTool.cs:274
+msgid "Linear Reflected Gradient"
+msgstr "நேரியல் பிரதிபலித்த சாய்வு"
+
+#: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:83
+msgid "Linked"
+msgstr "இணைக்கப்பட்ட"
+
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:44
+#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:177
+msgid "Luminosity"
+msgstr "ஒளிர்வு"
+
+#: ../Pinta.Tools/Tools/MagicWandTool.cs:47
+msgid "Magic Wand Select"
+msgstr "மேசிக் வாண்ட் தேர்ந்தெடுக்கவும்"
+
+#: ../Pinta/MainWindow.cs:445
+msgid "Main Menu"
+msgstr "பட்டியல் விளையாடுங்கள்"
+
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:99
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:69
+msgid "Maintain aspect ratio"
+msgstr "விகித விகிதத்தை பராமரிக்கவும்"
+
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:26
+msgid "Mandelbrot Fractal"
+msgstr "மாண்டல்பிரோட் ஃப்ராக்டல்"
+
+#. Translators: Gradient with bright, high-energy, and otherworldly tones of blue, purple, and yellow, along with a dark red that gives off the appearance of burning
+#: ../Pinta.Effects/Utilities/GradientHelper.cs:51
+msgid "Martian Lava"
+msgstr "செவ்வாய் எரிமலை"
+
+#: ../Pinta.Tools/Brushes/SplatterBrush.cs:64
+msgid "Maximum Size"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/MedianEffect.cs:23
+msgid "Median"
+msgstr "இடைநடு"
+
+#: ../Pinta.Core/Actions/ViewActions.cs:130
+msgid "Menu Bar"
+msgstr "பட்டியல் பட்டி"
+
+#: ../Pinta.Core/Actions/LayerActions.cs:82
+#: ../Pinta.Core/Actions/LayerActions.cs:363
+msgid "Merge Layer Down"
+msgstr "அடுக்கை ஒன்றிணைக்கவும்"
+
+#: ../Pinta.Tools/Brushes/SplatterBrush.cs:56
+msgid "Minimum Size"
+msgstr ""
+
+#: ../Pinta.Tools/Tools/GradientTool.cs:286
+msgid "Mode"
+msgstr "பயன்முறை"
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:921
+msgid "Modified"
+msgstr "மாற்றியமைக்கப்பட்ட"
+
+#: ../Pinta.Gui.Addins/AddinInfoView.cs:159
+msgid "More Information..."
+msgstr "மேலும் செய்தி ..."
+
+#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:27
+msgid "Motion Blur"
+msgstr "இயக்க மங்கலானது"
+
+#: ../Pinta.Core/Actions/LayerActions.cs:119
+#: ../Pinta.Core/Actions/LayerActions.cs:344
+msgid "Move Layer Down"
+msgstr "அடுக்கை கீழே நகர்த்தவும்"
+
+#: ../Pinta.Core/Actions/LayerActions.cs:113
+#: ../Pinta.Core/Actions/LayerActions.cs:328
+msgid "Move Layer Up"
+msgstr "அடுக்கை மேலே நகர்த்தவும்"
+
+#: ../Pinta.Tools/Tools/MoveSelectedTool.cs:45
+msgid "Move Selected Pixels"
+msgstr "தேர்ந்தெடுக்கப்பட்ட பிக்சல்களை நகர்த்தவும்"
+
+#: ../Pinta.Tools/Tools/MoveSelectionTool.cs:46
+msgid "Move Selection"
+msgstr "தேர்வை நகர்த்தவும்"
+
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:32
+msgid "Multiply"
+msgstr "பெருக்கவும்"
+
+#: ../Pinta/Dialogs/LayerPropertiesDialog.cs:67
+msgid "Name:"
+msgstr "பெயர்:"
+
+#: ../Pinta.Core/Enumerations/ResamplingMode.cs:23
+msgid "Nearest Neighbor"
+msgstr "அருகிலுள்ள அண்டை"
+
+#: ../Pinta.Core/Actions/FileActions.cs:63
+msgid "New"
+msgstr "புதிய"
+
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:138
+#: ../Pinta/Dialogs/NewImageDialog.cs:237
+msgid "New Image"
+msgstr "புதிய படம்"
+
+#: ../Pinta.Core/Actions/FileActions.cs:67
+msgid "New Screenshot..."
+msgstr "புதிய திரை காட்சி ..."
+
+#: ../Pinta/Actions/Edit/ResizePaletteAction.cs:71
+msgid "New palette size:"
+msgstr "புதிய தட்டு அளவு:"
+
+#: ../Pinta.Core/Actions/FileActions.cs:59
+msgid "New..."
+msgstr "புதியது ..."
+
+#: ../Pinta.Gui.Addins/AddinListView.cs:55
+msgid "No Items Found"
+msgstr "உருப்படிகள் எதுவும் கிடைக்கவில்லை"
+
+#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:28
+#: ../Pinta.Effects/Effects/MedianEffect.cs:27
+#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:32
+msgid "Noise"
+msgstr "இரைச்சல்"
+
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:31
+#: ../Pinta.Tools/Brushes/PlainBrush.cs:41
+#: ../Pinta.Tools/Tools/EraserTool.cs:326 ../Pinta.Tools/Tools/TextTool.cs:264
+msgid "Normal"
+msgstr "சாதாரண"
+
+#: ../Pinta.Core/Classes/BaseTool.cs:345
+msgid "Normal Blending"
+msgstr "சாதாரண கலவை"
+
+#: ../Pinta.Core/Actions/ViewActions.cs:99
+msgid "Normal Size"
+msgstr "சாதாரண அளவு"
+
+#: ../Pinta.Tools/Tools/TextTool.cs:265
+msgid "Normal and Outline"
+msgstr "சாதாரண மற்றும் அவுட்லைன்"
+
+#: ../Pinta.Effects/Effects/CellsEffect.cs:172
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:187
+msgid "Number of Cells"
+msgstr "கலங்களின் எண்ணிக்கை"
+
+#: ../Pinta/Main.cs:56
+msgid "Number of threads to use for rendering"
+msgstr "ரெண்டரிங்கிற்கு பயன்படுத்த நூல்களின் எண்ணிக்கை"
+
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:210
+msgid "OK"
+msgstr "சரி"
+
+#: ../Pinta.Effects/Effects/AlignObjectEffect.cs:14
+#: ../Pinta.Effects/Effects/FeatherEffect.cs:22
+#: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:22
+msgid "Object"
+msgstr "பொருள்"
+
+#: ../Pinta.Effects/Effects/BulgeEffect.cs:120
+#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:139
+#: ../Pinta.Effects/Effects/VignetteEffect.cs:133
+#: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:140
+#: ../Pinta/Dialogs/OffsetSelectionDialog.cs:54
+msgid "Offset"
+msgstr "ஈடுசெய்யும்"
+
+#: ../Pinta.Core/Actions/EditActions.cs:148
+#: ../Pinta/Actions/Edit/OffsetSelectionAction.cs:78
+#: ../Pinta/Dialogs/OffsetSelectionDialog.cs:44
+msgid "Offset Selection"
+msgstr "ஆஃப்செட் தேர்வு"
+
+#: ../Pinta.Effects/Effects/OilPaintingEffect.cs:26
+msgid "Oil Painting"
+msgstr "எண்ணெய் ஓவியம்"
+
+#: ../Pinta/Dialogs/LayerPropertiesDialog.cs:98
+msgid "Opacity:"
+msgstr "ஒளிபுகாநிலை:"
+
+#: ../Pinta.Core/Actions/FileActions.cs:77
+msgid "Open"
+msgstr "திற"
+
+#: ../Pinta.Tools/Editable/EditEngines/LineCurveEditEngine.cs:37
+msgid "Open Curve Shape"
+msgstr "திறந்த வளைவு வடிவம்"
+
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:335
+msgid "Open Image"
+msgstr "திறந்த படத்தை"
+
+#: ../Pinta.Core/Actions/LayerActions.cs:259
+#: ../Pinta/Actions/File/OpenDocumentAction.cs:73
+msgid "Open Image File"
+msgstr "படக் கோப்பைத் திறக்கவும்"
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:333
+msgid "Open Line/Curve Series"
+msgstr "திறந்த வரி/வளைவு தொடர்"
+
+#: ../Pinta.Core/Actions/EditActions.cs:495
+msgid "Open Palette File"
+msgstr "திறந்த தட்டு கோப்பு"
+
+#: ../Pinta.Core/Actions/EditActions.cs:169
+#: ../Pinta.Core/Actions/FileActions.cs:73
+msgid "Open..."
+msgstr "திறந்த ..."
+
+#: ../Pinta/Dialogs/NewImageDialog.cs:316
+msgid "Orientation:"
+msgstr "நோக்குநிலை:"
+
+#: ../Pinta.Effects/Classes/EdgeBehavior.cs:25
+msgid "Original"
+msgstr "அசல்"
+
+#: ../Pinta.Tools/Tools/TextTool.cs:266
+msgid "Outline"
+msgstr "அவுட்லைன்"
+
+#: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:218
+msgid "Outline Border"
+msgstr "அவுட்லைன் எல்லை"
+
+#: ../Pinta.Effects/Effects/OutlineEdgeEffect.cs:23
+msgid "Outline Edge"
+msgstr "அவுட்லைன் எட்ச்"
+
+#: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:18
+msgid "Outline Object"
+msgstr "அவுட்லைன் பொருள்"
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:307
+#: ../Pinta.Tools/Tools/FreeformShapeTool.cs:218
+msgid "Outline Shape"
+msgstr "அவுட்லைன் வடிவம்"
+
+#: ../Pinta.Tools/Tools/TextTool.cs:280
+msgid "Outline width"
+msgstr "அவுட்லைன் அகலம்"
+
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:273
+msgid "Output"
+msgstr "வெளியீடு"
+
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:274
+msgid "Output Histogram"
+msgstr "வெளியீட்டு இச்டோகிராம்"
+
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:35
+msgid "Overlay"
+msgstr "மேலடுக்கு"
+
+#: ../Pinta.Core/Classes/BaseTool.cs:346
+msgid "Overwrite"
+msgstr "மேலெழுதும்"
+
+#: ../Pinta.Tools/Tools/PaintBucketTool.cs:44
+msgid "Paint Bucket"
+msgstr "பெயிண்ட் வாளி"
+
+#: ../Pinta.Tools/Tools/PaintBrushTool.cs:55
+msgid "Paintbrush"
+msgstr "பெயிண்ட் பிரச்"
+
+#: ../Pinta.Core/Actions/EditActions.cs:235
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:177
+msgid "Palette"
+msgstr "தட்டு"
+
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:174
+msgid "Palette Source"
+msgstr ""
+
+#: ../Pinta.Core/Actions/EditActions.cs:576
+msgid "Palette files"
+msgstr "தட்டு கோப்புகள்"
+
+#: ../Pinta.Tools/Tools/PanTool.cs:40
+#: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:148
+msgid "Pan"
+msgstr "பான்"
+
+#: ../Pinta.Core/Actions/EditActions.cs:105
+#: ../Pinta.Core/HistoryItems/PasteHistoryItem.cs:38
+#: ../Pinta/Actions/Edit/PasteAction.cs:118
+msgid "Paste"
+msgstr "ஒட்டு"
+
+#: ../Pinta.Core/Actions/EditActions.cs:120
+msgid "Paste Into New Image"
+msgstr "புதிய படத்தில் ஒட்டவும்"
+
+#: ../Pinta.Core/Actions/EditActions.cs:112
+#: ../Pinta/Actions/Edit/PasteAction.cs:118
+msgid "Paste Into New Layer"
+msgstr "புதிய அடுக்கில் ஒட்டவும்"
+
+#: ../Pinta.Tools/Tools/PencilTool.cs:48
+msgid "Pencil"
+msgstr "எழுதுகோல்"
+
+#: ../Pinta.Effects/Effects/PencilSketchEffect.cs:29
+msgid "Pencil Sketch"
+msgstr "பென்சில் ச்கெட்ச்"
+
+#: ../Pinta.Effects/Effects/PencilSketchEffect.cs:85
+msgid "Pencil Tip Size"
+msgstr "பென்சில் முனை அளவு"
+
+#: ../Pinta.Effects/Effects/MedianEffect.cs:63
+msgid "Percentile"
+msgstr "விழுக்காடு"
+
+#: ../Pinta.Effects/Effects/GlowEffect.cs:30
+#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:27
+#: ../Pinta.Effects/Effects/SharpenEffect.cs:27
+#: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:58
+#: ../Pinta.Effects/Effects/VignetteEffect.cs:52
+msgid "Photo"
+msgstr "புகைப்படம்"
+
+#. Translators: Arrangement of points similar to how sunflower seeds are arranged
+#: ../Pinta.Core/Algorithms/SpatialPartition.cs:174
+msgid "Phyllotaxis"
+msgstr ""
+
+#: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:1
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:65 ../Pinta/Main.cs:71
+#: ../Pinta/MainWindow.cs:57
+msgid "Pinta"
+msgstr "மேற்பரப்பு"
+
+#: ../Pinta/AddinSetupService.cs:66
+msgid "Pinta Community Addins - Cross-Platform"
+msgstr "பிண்டா கம்யூனிட்டி அடின்கள் - குறுக்கு -தளம்"
+
+#: ../Pinta/AddinSetupService.cs:62
+msgid "Pinta Community Addins - Platform-Specific"
+msgstr "பிண்டா கம்யூனிட்டி அடின்கள் - இயங்குதளம் சார்ந்த"
+
+#: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:4
+msgid "Pinta Image Editor"
+msgstr "பிண்டா பட எடிட்டர்"
+
+#: ../Pinta.Core/Actions/HelpActions.cs:53
+msgid "Pinta Website"
+msgstr "வலைத்தளத்தைக் கேளுங்கள்"
+
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:231
+msgid "Pinta does not support saving images in this file format."
+msgstr "இந்த கோப்பு வடிவத்தில் படங்களை சேமிப்பதை பிண்டா ஆதரிக்கவில்லை."
+
+#: ../xdg/com.github.PintaProject.Pinta.metainfo.xml.in.h:1
+msgid ""
+"Pinta is a image editing, drawing and painting application with a simple yet "
+"powerful interface. Pinta has a wide range of drawing tools, including: "
+"freehand, rectangles, circles and lines. It also has over 35 effects to "
+"apply to your images, and also has the ability to create unlimited layers to "
+"help organize your creativity."
+msgstr ""
+"பிண்டா என்பது ஒரு எளிய மற்றும் சக்திவாய்ந்த இடைமுகத்துடன் ஒரு பட திருத்துதல், வரைதல் "
+"மற்றும் ஓவியம் பயன்பாடு ஆகும். பிண்டாவில் பரந்த அளவிலான வரைதல் கருவிகள் உள்ளன, அவற்றுள்: "
+"ஃப்ரீஏண்ட், செவ்வகங்கள், வட்டங்கள் மற்றும் கோடுகள். இது உங்கள் படங்களுக்கு விண்ணப்பிக்க 35 க்கும் "
+"மேற்பட்ட விளைவுகளையும் கொண்டுள்ளது, மேலும் உங்கள் படைப்பாற்றலை ஒழுங்கமைக்க உதவும் வரம்பற்ற "
+"அடுக்குகளை உருவாக்கும் திறனையும் கொண்டுள்ளது."
+
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:425
+msgid "Pinta supports the following file formats:"
+msgstr "பிந்தா பின்வரும் கோப்பு வடிவங்களை ஆதரிக்கிறது:"
+
+#: ../Pinta.Core/Extensions/OtherExtensions.cs:167
+msgid "Pinta supports the following palette formats:"
+msgstr "பிந்தா பின்வரும் தட்டு வடிவங்களை ஆதரிக்கிறது:"
+
+#: ../Pinta.Effects/Effects/PixelateEffect.cs:23
+msgid "Pixelate"
+msgstr "பிக்சலேட்"
+
+#: ../Pinta.Core/Actions/ViewActions.cs:225
+msgid "Pixels"
+msgstr "படப்புள்ளிகள்"
+
+#. Translators: Gradient with different shades of brownish yellow
+#: ../Pinta.Effects/Utilities/GradientHelper.cs:55
+msgid "Piña Colada"
+msgstr "பினா கோலாடா"
+
+#: ../Pinta/Actions/View/MenuBarToggledAction.cs:40
+msgid "Please restart Pinta for the changes to take effect."
+msgstr "மாற்றங்கள் நடைமுறைக்கு வர பிண்டாவை மறுதொடக்கம் செய்யுங்கள்."
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:607
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:810
+msgid "Point Added"
+msgstr "புள்ளி சேர்க்கப்பட்டது"
+
+#: ../Pinta.Effects/Effects/CellsEffect.cs:156
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:201
+msgid "Point Arrangement"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/CellsEffect.cs:169
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:214
+msgid "Point Color"
+msgstr ""
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:658
+msgid "Point Deleted"
+msgstr "புள்ளி நீக்கப்பட்டது"
+
+#: ../Pinta.Effects/Effects/CellsEffect.cs:165
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:210
+msgid "Point Size"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/PolarInversionEffect.cs:26
+msgid "Polar Inversion"
+msgstr "துருவ தலைகீழ்"
+
+#: ../Pinta.Tools/Tools/LassoSelectTool.cs:223
+msgid "Polygon"
+msgstr ""
+
+#: ../Pinta/Dialogs/NewImageDialog.cs:296
+msgid "Portrait"
+msgstr "உருவப்படம்"
+
+#: ../Pinta.Effects/Effects/AlignObjectEffect.cs:129
+msgid "Position"
+msgstr "நிலை"
+
+#: ../Pinta.Effects/Adjustments/PosterizeEffect.cs:25
+#: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:51
+msgid "Posterize"
+msgstr "சுவரொட்டி"
+
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:138
+msgid "Power"
+msgstr "விசை"
+
+#. Translators: This refers to preserving the current canvas size when pasting a larger image.
+#: ../Pinta/Actions/Edit/PasteAction.cs:225
+msgid "Preserve"
+msgstr "பாதுகாக்கவும்"
+
+#: ../Pinta.Effects/Utilities/GradientHelper.cs:10
+msgid "Preset Gradient"
+msgstr "முன்னமைக்கப்பட்ட சாய்வு"
+
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:159
+msgid "Preset Palettes"
+msgstr ""
+
+#: ../Pinta/Dialogs/NewImageDialog.cs:341
+msgid "Preset:"
+msgstr "முன்னமைவு:"
+
+#: ../Pinta/Dialogs/NewImageDialog.cs:190
+msgid "Preview"
+msgstr "முன்னோட்டம்"
+
+#: ../Pinta.Effects/Classes/EdgeBehavior.cs:16
+msgid "Primary"
+msgstr "முதன்மை"
+
+#: ../Pinta.Core/Actions/FileActions.cs:102
+msgid "Print"
+msgstr "அச்சிடுக"
+
+#: ../Pinta.Effects/Effects/CellsEffect.cs:195
+#: ../Pinta.Effects/Effects/DentsEffect.cs:155
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:147
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:160
+#: ../Pinta.Effects/Effects/PolarInversionEffect.cs:92
+#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:142
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:217
+msgid "Quality"
+msgstr "தகுதி"
+
+#: ../Pinta/Dialogs/JpegCompressionDialog.cs:37
+msgid "Quality: "
+msgstr "தரம்: "
+
+#: ../Pinta.Core/Actions/AppActions.cs:47
+msgid "Quit"
+msgstr "வெளியேறு"
+
+#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:176
+msgid "RGB"
+msgstr "ஆர்சிபி"
+
+#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:23
+msgid "Radial Blur"
+msgstr "ரேடியல் மங்கலானது"
+
+#: ../Pinta.Tools/Tools/GradientTool.cs:276
+msgid "Radial Gradient"
+msgstr "ரேடியல் சாய்வு"
+
+#: ../Pinta.Effects/Effects/FeatherEffect.cs:167
+#: ../Pinta.Effects/Effects/GaussianBlurEffect.cs:247
+#: ../Pinta.Effects/Effects/GlowEffect.cs:77
+#: ../Pinta.Effects/Effects/MedianEffect.cs:59
+#: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:204
+#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:84
+#: ../Pinta.Effects/Effects/UnfocusEffect.cs:88
+#: ../Pinta.Tools/Editable/EditEngines/RoundedLineEditEngine.cs:90
+msgid "Radius"
+msgstr "ஆரம்"
+
+#. Translators: This refers to how big the radius is as a percentage of the image's dimensions
+#: ../Pinta.Effects/Effects/BulgeEffect.cs:124
+#: ../Pinta.Effects/Effects/TwistEffect.cs:175
+#: ../Pinta.Effects/Effects/VignetteEffect.cs:137
+msgid "Radius Percentage"
+msgstr "ஆரம் விழுக்காடு"
+
+#: ../Pinta.Core/Algorithms/SpatialPartition.cs:166
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:224
+#: ../Pinta.Effects/Utilities/GradientHelper.cs:16
+msgid "Random"
+msgstr "சீரற்ற"
+
+#: ../Pinta.Effects/Effects/CellsEffect.cs:186
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:151
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:161
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:177
+msgid "Random Color Scheme Seed"
+msgstr "சீரற்ற வண்ணத் திட்ட விதை"
+
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:198
+msgid "Random Colors"
+msgstr "சீரற்ற வண்ணங்கள்"
+
+#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:179
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:142
+#: ../Pinta.Effects/Effects/DentsEffect.cs:151
+#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:150
+msgid "Random Noise Seed"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/CellsEffect.cs:159
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:204
+msgid "Random Point Locations"
+msgstr "சீரற்ற புள்ளி இருப்பிடங்கள்"
+
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:165
+msgid "Recently Used Colors"
+msgstr ""
+
+#: ../Pinta.Tools/Tools/RecolorTool.cs:55
+msgid "Recolor"
+msgstr "மறுசீரமைப்பு"
+
+#: ../Pinta.Tools/Tools/RectangleTool.cs:43
+msgid "Rectangle"
+msgstr "செவ்வகம்"
+
+#: ../Pinta.Tools/Tools/RectangleSelectTool.cs:39
+msgid "Rectangle Select"
+msgstr "செவ்வகம் தேர்ந்தெடுக்கவும்"
+
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:106
+#: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:60
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:449
+msgid "Red"
+msgstr "சிவப்பு"
+
+#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:89
+msgid "Red  "
+msgstr "சிவப்பு  "
+
+#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:23
+msgid "Red Eye Removal"
+msgstr "சிவப்பு கண் அகற்றுதல்"
+
+#: ../Pinta.Core/Actions/EditActions.cs:77
+msgid "Redo"
+msgstr "மீண்டும்செய்"
+
+#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:26
+msgid "Reduce Noise"
+msgstr "சத்தத்தைக் குறைக்கவும்"
+
+#: ../Pinta.Effects/Classes/EdgeBehavior.cs:13
+msgid "Reflect"
+msgstr "பிரதிபலிக்கவும்"
+
+#: ../Pinta.Effects/Effects/DentsEffect.cs:139
+msgid "Refraction"
+msgstr ""
+
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:102
+msgid "Refresh"
+msgstr "புதுப்பிப்பு"
+
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:91
+msgid "Released under the MIT X11 License."
+msgstr "எம்ஐடி ஃச் 11 உரிமத்தின் கீழ் வெளியிடப்பட்டது."
+
+#: ../Pinta.Effects/Effects/ReliefEffect.cs:40
+msgid "Relief"
+msgstr "ஈடு"
+
+#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:111
+msgid "Rename Layer"
+msgstr "அடுக்கை மறுபெயரிடுங்கள்"
+
+#: ../Pinta.Effects/Effects/CellsEffect.cs:25
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:32
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:32
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:32
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:27
+msgid "Render"
+msgstr "வழங்கவும்"
+
+#: ../Pinta.Core/Managers/LivePreviewManager.cs:109
+msgid "Rendering Effect"
+msgstr "வழங்குதல் விளைவு"
+
+#: ../Pinta.Core/Classes/SelectionModeHandler.cs:43
+msgid "Replace"
+msgstr "மாற்றவும்"
+
+#: ../Pinta/Dialogs/ErrorDialog.cs:71
+msgid "Report Bug..."
+msgstr "பிழையைப் புகாரளிக்கவும் ..."
+
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:126
+msgid "Resampling:"
+msgstr "மறுசீரமைத்தல்:"
+
+#: ../Pinta.Gui.Widgets/Dialogs/SimpleEffectDialog.cs:570
+msgid "Reseed"
+msgstr "ஒத்திருக்கிறது"
+
+#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:211
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:260
+msgid "Reset"
+msgstr "மீட்டமை"
+
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:200
+msgid "Reset Color"
+msgstr "வண்ணத்தை மீட்டமை"
+
+#: ../Pinta.Core/Actions/EditActions.cs:181
+msgid "Reset to Default"
+msgstr "இயல்புநிலைக்கு மீட்டமைக்கவும்"
+
+#: ../Pinta.Core/Classes/Document.cs:327
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:199
+msgid "Resize Canvas"
+msgstr "கேன்வாசை மறுஅளவிடுங்கள்"
+
+#: ../Pinta.Core/Actions/ImageActions.cs:77
+msgid "Resize Canvas..."
+msgstr "கேன்வாசை மறுஅளவிடுங்கள் ..."
+
+#: ../Pinta.Core/HistoryItems/ResizeHistoryItem.cs:39
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:139
+msgid "Resize Image"
+msgstr "படத்தை மறுஅளவிடுங்கள்"
+
+#: ../Pinta.Core/Actions/ImageActions.cs:70
+msgid "Resize Image..."
+msgstr "மறுஅளவிடுதல் படம் ..."
+
+#: ../Pinta/Actions/Edit/ResizePaletteAction.cs:69
+msgid "Resize Palette"
+msgstr "மறுஅளவிடுதல் தட்டு"
+
+#: ../Pinta/Actions/View/MenuBarToggledAction.cs:39
+msgid "Restart Pinta"
+msgstr "பிண்டாவை மறுதொடக்கம் செய்"
+
+#: ../Pinta.Effects/Effects/CellsEffect.cs:189
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:154
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:164
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:180
+msgid "Reverse Color Scheme"
+msgstr "தலைகீழ் வண்ணத் திட்டம்"
+
+#. Translators: In this context, "reverse" is a verb, and the user can choose whether or not they want to reverse the color sorting
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:195
+msgid "Reverse Color Sorting"
+msgstr "தலைகீழ் வண்ண வரிசையாக்கம்"
+
+#: ../Pinta.Tools/Tools/TextTool.cs:241
+msgid "Right Align"
+msgstr "சரியான சீரமை"
+
+#: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:70
+#: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:136
+msgid "Rotate / Zoom Layer"
+msgstr "சுழற்றுங்கள் / பெரிதாக்கு அடுக்கு"
+
+#: ../Pinta.Core/Actions/LayerActions.cs:107
+msgid "Rotate / Zoom Layer..."
+msgstr "சுழற்றுங்கள் / பெரிதாக்கு அடுக்கு ..."
+
+#: ../Pinta.Core/Actions/ImageActions.cs:110
+#: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:47
+msgid "Rotate 180°"
+msgstr "180 ° சுழற்றுங்கள்"
+
+#: ../Pinta.Core/Actions/ImageActions.cs:96
+#: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:59
+msgid "Rotate 90° Clockwise"
+msgstr "90 ° கடிகார திசையில் சுழற்றுங்கள்"
+
+#: ../Pinta.Core/Actions/ImageActions.cs:103
+#: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:63
+msgid "Rotate 90° Counter-Clockwise"
+msgstr "90 ° எதிர்-கடிகார திசையில் சுழற்றுங்கள்"
+
+#: ../Pinta.Effects/Effects/FragmentEffect.cs:132
+#: ../Pinta.Effects/Effects/TileEffect.cs:222
+msgid "Rotation"
+msgstr "சுழற்சி"
+
+#: ../Pinta.Effects/Effects/DentsEffect.cs:143
+msgid "Roughness"
+msgstr ""
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:336
+msgid "Rounded Line Series"
+msgstr "வட்டமான வரி தொடர்"
+
+#: ../Pinta.Tools/Editable/EditEngines/RoundedLineEditEngine.cs:37
+msgid "Rounded Line Shape"
+msgstr "வட்டமான வரி வடிவம்"
+
+#: ../Pinta.Tools/Tools/RoundedRectangleTool.cs:44
+msgid "Rounded Rectangle"
+msgstr "வட்டமான செவ்வகம்"
+
+#: ../Pinta.Core/Actions/ViewActions.cs:230
+msgid "Ruler Units"
+msgstr "ஆட்சியாளர் அலகுகள்"
+
+#: ../Pinta.Core/Actions/ViewActions.cs:148
+msgid "Rulers"
+msgstr "ஆட்சியாளர்கள்"
+
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:198
+msgid "Sampling"
+msgstr "மாதிரி எடுத்தல்"
+
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:405
+msgid "Sat"
+msgstr "காரி"
+
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:272
+msgid "Sat & Value"
+msgstr "காரி & மதிப்பு"
+
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:46
+#: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:64
+msgid "Saturation"
+msgstr "தெவிட்டல்"
+
+#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:57
+msgid "Saturation Percentage"
+msgstr "செறிவு விழுக்காடு"
+
+#: ../Pinta.Core/Actions/EditActions.cs:529
+#: ../Pinta.Core/Actions/FileActions.cs:88
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:95
+msgid "Save"
+msgstr "சேமி"
+
+#: ../Pinta.Core/Actions/WindowActions.cs:44
+msgid "Save All"
+msgstr "அனைத்தையும் சேமி"
+
+#: ../Pinta.Core/Actions/EditActions.cs:175
+#: ../Pinta.Core/Actions/FileActions.cs:95
+msgid "Save As..."
+msgstr "சேமி ..."
+
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:92
+msgid "Save Image File"
+msgstr "படக் கோப்பை சேமிக்கவும்"
+
+#: ../Pinta.Core/Actions/EditActions.cs:526
+msgid "Save Palette File"
+msgstr "தட்டு கோப்பை சேமிக்கவும்"
+
+#: ../Pinta/Actions/File/CloseDocumentAction.cs:72
+#, csharp-format
+msgid "Save changes to image \"{0}\" before closing?"
+msgstr "மூடுவதற்கு முன் \"{0}\" படத்தில் மாற்றங்களைச் சேமிக்கவா?"
+
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:134
+#: ../Pinta.Effects/Effects/DentsEffect.cs:135
+msgid "Scale"
+msgstr "அளவு"
+
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:39
+msgid "Screen"
+msgstr "திரை"
+
+#: ../Pinta.Effects/Classes/EdgeBehavior.cs:19
+msgid "Secondary"
+msgstr "இரண்டாம் நிலை"
+
+#: ../Pinta.Core/Actions/EditActions.cs:155
+#: ../Pinta.Core/Actions/EditActions.cs:336
+msgid "Select All"
+msgstr "அனைத்தையும் தெரிவுசெய்"
+
+#: ../Pinta.Effects/Utilities/GradientHelper.cs:13
+msgid "Selected Colors"
+msgstr "தேர்ந்தெடுக்கப்பட்ட வண்ணங்கள்"
+
+#: ../Pinta.Effects/Adjustments/SepiaEffect.cs:35
+msgid "Sepia"
+msgstr "செபியா"
+
+#: ../Pinta.Core/Actions/EditActions.cs:187
+msgid "Set Number of Colors"
+msgstr "வண்ணங்களின் எண்ணிக்கையை அமைக்கவும்"
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:324
+msgid "Shape Type"
+msgstr "வடிவ வகை"
+
+#: ../Pinta.Effects/Effects/TileEffect.cs:244
+msgid "Sharp Edges"
+msgstr "கூர்மையான விளிம்புகள்"
+
+#: ../Pinta.Effects/Effects/SharpenEffect.cs:23
+msgid "Sharpen"
+msgstr "கூர்மைப்படுத்துங்கள்"
+
+#: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:111
+#: ../Pinta.Core/Extensions/ToolBoxButton.cs:51
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:247
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:324
+msgid "Shortcut key"
+msgstr "குறுக்குவழி விசை"
+
+#: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:112
+msgid "Shortcut keys"
+msgstr "குறுக்குவழி விசைகள்"
+
+#: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:49
+msgid "Show Axonometric Grid"
+msgstr ""
+
+#: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:30
+msgid "Show Grid"
+msgstr "கட்டத்தைக் காட்டு"
+
+#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:116
+msgid "Show Layer"
+msgstr "அடுக்கு காட்டு"
+
+#: ../Pinta.Effects/Effects/CellsEffect.cs:162
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:207
+msgid "Show Points"
+msgstr ""
+
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:267
+msgid "Show Value"
+msgstr "மதிப்பைக் காட்டு"
+
+#: ../Pinta.Core/Actions/ViewActions.cs:242
+msgid "Show/Hide"
+msgstr "காட்டு/மறைக்க"
+
+#. Translators: Image dithering matrix named after Frankie Sierra
+#: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:12
+msgid "Sierra"
+msgstr "சியரா"
+
+#. Translators: Image dithering matrix named after Frankie Sierra
+#: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:20
+msgid "Sierra Lite"
+msgstr "சியரா லைட்"
+
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:225
+msgid "Single Pixel"
+msgstr "ஒற்றை படப்புள்ளி"
+
+#: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:289
+msgid "Size"
+msgstr "அளவு"
+
+#: ../Pinta.Tools/Tools/EraserTool.cs:326
+msgid "Smooth"
+msgstr "மென்மையான"
+
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:42
+msgid "Soft Light"
+msgstr "மென்மையான ஒளி"
+
+#: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:54
+msgid "Soften Portrait"
+msgstr "உருவப்படத்தை மென்மையாக்கவும்"
+
+#: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:125
+msgid "Softness"
+msgstr "மென்மையாகும்"
+
+#: ../Pinta.Tools/Brushes/SplatterBrush.cs:37
+msgid "Splatter"
+msgstr "சிதறல்"
+
+#: ../Pinta.Tools/Brushes/SquaresBrush.cs:35
+msgid "Squares"
+msgstr "சதுரங்கள்"
+
+#: ../Pinta.Core/Actions/ViewActions.cs:136
+msgid "Status Bar"
+msgstr "நிலை பட்டி"
+
+#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:88
+#: ../Pinta.Effects/Effects/VignetteEffect.cs:142
+msgid "Strength"
+msgstr "வலிமை"
+
+#. Translators: Image dithering matrix named after Peter Stucki
+#: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:32
+msgid "Stucki"
+msgstr "ச்டக்கோ"
+
+#: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:32
+#: ../Pinta.Effects/Effects/EmbossEffect.cs:32
+#: ../Pinta.Effects/Effects/OutlineEdgeEffect.cs:27
+#: ../Pinta.Effects/Effects/ReliefEffect.cs:33
+msgid "Stylize"
+msgstr "ச்டைலீச்"
+
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:208
+msgid "Switch to Pencil tool"
+msgstr "பென்சில் கருவிக்கு மாறவும்"
+
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:207
+msgid "Switch to previous tool"
+msgstr "முந்தைய கருவிக்கு மாறவும்"
+
+#: ../Pinta.Tools/Tools/TextTool.cs:80
+msgid "Text"
+msgstr "உரை"
+
+#: ../Pinta.Tools/Tools/TextTool.cs:83
+msgid "Text - Finalize"
+msgstr "உரை - இறுதி செய்யுங்கள்"
+
+#: ../Pinta.Tools/Tools/TextTool.cs:255
+msgid "Text Style"
+msgstr "உரை நடை"
+
+#. Translators: {0} is the name of an add-in.
+#: ../Pinta/MainWindow.cs:321
+#, csharp-format
+msgid "The '{0}' add-in may not be compatible with this version of Pinta"
+msgstr "பிண்டாவின் இந்த பதிப்போடு '{0}' சேர்க்கை பொருந்தாது"
+
+#: ../Pinta/Actions/Edit/PasteAction.cs:208
+msgid "The clipboard does not contain an image."
+msgstr "கிளிப்போர்டில் ஒரு படம் இல்லை."
+
+#: ../Pinta.Gui.Addins/InstallDialog.cs:200
+msgid "The file may be an invalid or corrupt extension package"
+msgstr "கோப்பு தவறான அல்லது ஊழல் நீட்டிப்பு தொகுப்பாக இருக்கலாம்"
+
+#: ../Pinta.Gui.Addins/InstallDialog.cs:79
+msgid "The following dependencies could not be resolved:"
+msgstr "பின்வரும் சார்புகளை தீர்க்க முடியவில்லை:"
+
+#: ../Pinta.Gui.Addins/InstallDialog.cs:72
+msgid "The following packages need to be uninstalled:"
+msgstr "பின்வரும் தொகுப்புகளை நிறுவல் நீக்க வேண்டும்:"
+
+#: ../Pinta.Gui.Addins/InstallDialog.cs:66
+msgid "The following packages will be installed:"
+msgstr "பின்வரும் தொகுப்புகள் நிறுவப்படும்:"
+
+#: ../Pinta.Gui.Addins/InstallDialog.cs:229
+msgid "The following packages will be uninstalled:"
+msgstr "பின்வரும் தொகுப்புகள் நிறுவல் நீக்கப்படும்:"
+
+#: ../Pinta/Actions/Edit/PasteAction.cs:215
+msgid ""
+"The image being pasted is larger than the canvas. What would you like to do "
+"to the canvas size?"
+msgstr ""
+"ஒட்டப்படும் படம் கேன்வாசை விட பெரியது. கேன்வாச் அளவிற்கு நீங்கள் என்ன செய்ய விரும்புகிறீர்கள்?"
+
+#: ../Pinta.Gui.Addins/InstallDialog.cs:352
+msgid "The installation failed!"
+msgstr "நிறுவல் தோல்வியடைந்தது!"
+
+#: ../Pinta.Gui.Addins/InstallDialog.cs:353
+msgid "The installation has completed with warnings."
+msgstr "நிறுவல் எச்சரிக்கைகளுடன் முடிக்கப்பட்டுள்ளது."
+
+#: ../Pinta.Gui.Addins/InstallDialog.cs:52
+msgid ""
+"The selected extension packages can't be installed because there are "
+"dependency conflicts."
+msgstr ""
+"தேர்ந்தெடுக்கப்பட்ட நீட்டிப்பு தொகுப்புகளை நிறுவ முடியாது, ஏனெனில் சார்பு மோதல்கள் உள்ளன."
+
+#: ../Pinta.Gui.Addins/InstallDialog.cs:359
+msgid "The uninstallation failed!"
+msgstr "நிறுவல் நீக்குதல் தோல்வியடைந்தது!"
+
+#: ../Pinta.Gui.Addins/InstallDialog.cs:360
+msgid "The uninstallation has completed with warnings."
+msgstr "நிறுவல் நீக்குதல் எச்சரிக்கைகளுடன் நிறைவடைந்துள்ளது."
+
+#: ../Pinta.Gui.Addins/InstallDialog.cs:241
+msgid ""
+"There are other extension packages that depend on the previous ones which "
+"will also be uninstalled:"
+msgstr ""
+"முந்தையவற்றைச் சார்ந்து இருக்கும் பிற நீட்டிப்பு தொகுப்புகள் உள்ளன, அவை நிறுவல் நீக்கப்படும்:"
+
+#: ../Pinta.Effects/Effects/OutlineEdgeEffect.cs:133
+msgid "Thickness"
+msgstr "தடிமன்"
+
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:162
+msgid "This format does not support layers. Flatten image?"
+msgstr "இந்த வடிவம் அடுக்குகளை ஆதரிக்காது. தட்டையான படம்?"
+
+#: ../Pinta.Effects/Effects/TileEffect.cs:28
+msgid "Tile Reflection"
+msgstr "ஓடு பிரதிபலிப்பு"
+
+#: ../Pinta.Effects/Effects/TileEffect.cs:226
+msgid "Tile Size"
+msgstr "ஓடு அளவு"
+
+#: ../Pinta.Effects/Effects/TileEffect.cs:234
+msgid "Tile Type"
+msgstr "ஓடு வகை"
+
+#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:95
+msgid "Tip: Right-click to remove control points."
+msgstr "உதவிக்குறிப்பு: கட்டுப்பாட்டு புள்ளிகளை அகற்ற வலது சொடுக்கு செய்யவும்."
+
+#: ../Pinta.Effects/Effects/FeatherEffect.cs:171
+#: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:208
+#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:53
+#: ../Pinta.Tools/Tools/FloodTool.cs:122
+#: ../Pinta.Tools/Tools/RecolorTool.cs:196
+msgid "Tolerance"
+msgstr "பொறுமை"
+
+#: ../Pinta.Core/Managers/ToolManager.cs:374
+msgid "Tool"
+msgstr "கருவி"
+
+#: ../Pinta.Core/Actions/ViewActions.cs:142
+msgid "Tool Box"
+msgstr "கருவி பெட்டி"
+
+#: ../Pinta.Core/Actions/ViewActions.cs:118
+msgid "Tool Windows"
+msgstr "கருவி சாளரங்கள்"
+
+#: ../Pinta.Core/Actions/ViewActions.cs:106
+msgid "Toolbar"
+msgstr "கருவிப்பட்டி"
+
+#: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:29
+msgid "Top Center"
+msgstr "மேல் நடுவண்"
+
+#: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:28
+msgid "Top Left"
+msgstr "மேல் இடது"
+
+#: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:30
+msgid "Top Right"
+msgstr "மேல் வலது"
+
+#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:105
+msgid "Transfer Map"
+msgstr "இடமாற்ற வரைபடம்"
+
+#: ../Pinta.Core/Actions/HelpActions.cs:65
+msgid "Translate This Application"
+msgstr "இந்த பயன்பாட்டை மொழிபெயர்க்கவும்"
+
+#: ../Pinta.Tools/Tools/GradientTool.cs:293
+msgid "Transparency Mode"
+msgstr "வெளிப்படைத்தன்மை பயன்முறை"
+
+#: ../Pinta.Effects/Classes/EdgeBehavior.cs:22
+#: ../Pinta/Dialogs/NewImageDialog.cs:137
+msgid "Transparent"
+msgstr "வெளிப்படையானது"
+
+#: ../Pinta.Effects/Effects/DentsEffect.cs:147
+msgid "Turbulence"
+msgstr "(காற்றுக்)கொந்தளிப்பு"
+
+#: ../Pinta.Effects/Effects/TwistEffect.cs:27
+msgid "Twist"
+msgstr "திருப்பம்"
+
+#. Translators: Image dithering matrix named after Frankie Sierra
+#: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:16
+msgid "Two-Row Sierra"
+msgstr "இரண்டு-வரிசை சியரா"
+
+#: ../Pinta.Tools/Tools/EraserTool.cs:322
+#: ../Pinta.Tools/Tools/PaintBrushTool.cs:173
+msgid "Type"
+msgstr "வகை"
+
+#: ../Pinta.Tools/Tools/TextTool.cs:201
+msgid "Underline"
+msgstr "அடிக்கோடிட்டு"
+
+#: ../Pinta.Core/Actions/EditActions.cs:70
+msgid "Undo"
+msgstr "செயல்தவிர்"
+
+#: ../Pinta.Effects/Effects/UnfocusEffect.cs:23
+msgid "Unfocus"
+msgstr "ஐச்போகச்"
+
+#: ../Pinta.Gui.Addins/InstallDialog.cs:216
+#: ../Pinta.Gui.Addins/InstallDialog.cs:217
+msgid "Uninstall"
+msgstr "நிறுவல் நீக்க"
+
+#: ../Pinta.Gui.Addins/AddinInfoView.cs:185
+msgid "Uninstall..."
+msgstr "நிறுவல் நீக்க ..."
+
+#. Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
+#: ../Pinta.Core/Classes/SelectionModeHandler.cs:45
+#, csharp-format
+msgid "Union (+) ({0} + Left Click)"
+msgstr "யூனியன் ( +) ({0} + இடது கிளிக்)"
+
+#: ../Pinta.Core/Classes/Document.cs:102
+#, csharp-format
+msgid "Unsaved Image {0}"
+msgstr "சேமிக்கப்படாத படம் {0}"
+
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:330
+msgid "Unsupported file format"
+msgstr "ஆதரிக்கப்படாத கோப்பு வடிவம்"
+
+#: ../Pinta.Core/Actions/EditActions.cs:518
+msgid "Unsupported palette format"
+msgstr "ஆதரிக்கப்படாத தட்டு வடிவம்"
+
+#: ../Pinta.Gui.Addins/AddinInfoView.cs:176
+msgid "Update..."
+msgstr "புதுப்பிப்பு ..."
+
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:88
+msgid "Updates"
+msgstr "புதுப்பிப்புகள்"
+
+#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:143
+msgid ""
+"Use low quality for previews, small images, and small angles.  Use high "
+"quality for final quality, large images, and large angles."
+msgstr ""
+"முன்னோட்டங்கள், சிறிய படங்கள் மற்றும் சிறிய கோணங்களுக்கு குறைந்த தரத்தைப் பயன்படுத்தவும். "
+"இறுதி தகுதி, பெரிய படங்கள் மற்றும் பெரிய கோணங்களுக்கு உயர் தரத்தைப் பயன்படுத்துங்கள்."
+
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:98
+msgid "Using some icons from:"
+msgstr "இதிலிருந்து சில சின்னங்களைப் பயன்படுத்துதல்:"
+
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:427
+msgid "Value"
+msgstr "மதிப்பு"
+
+#: ../Pinta.Gui.Addins/AddinInfoView.cs:214
+#, csharp-format
+msgid "Version: {0}"
+msgstr "பதிப்பு: {0}"
+
+#. Translators: Vertical color sorting with blue (B) as the leading term
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:238
+msgid "Vertical blue (B)"
+msgstr "செங்குத்து நீலம் (பி)"
+
+#. Translators: Vertical color sorting with green (G) as the leading term
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:241
+msgid "Vertical green (G)"
+msgstr "செங்குத்தப்பட்ட பச்சை (சி)"
+
+#. Translators: Vertical color sorting with red (R) as the leading term
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:244
+msgid "Vertical red (R)"
+msgstr "செங்குத்துப் சிவப்பு (ஆர்)"
+
+#: ../Pinta/MainWindow.cs:469
+msgid "View"
+msgstr "நோக்கு"
+
+#. Translators: The vignette effect darkens the outer edges of an image, which fade into an unchanged circular area in the center (or at some other point chosen by the user), similar to what is seen during the closing scene in old cartoons
+#: ../Pinta.Effects/Effects/VignetteEffect.cs:49
+msgid "Vignette"
+msgstr "விக்னெட்"
+
+#: ../Pinta/Dialogs/LayerPropertiesDialog.cs:78
+msgid "Visible"
+msgstr "தெரியும்"
+
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:21
+msgid "Voronoi Diagram"
+msgstr "வோரோனோய் வரைபடம்"
+
+#: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:133
+msgid "Warmth"
+msgstr "அரவணைப்பு"
+
+#: ../Pinta/Dialogs/NewImageDialog.cs:118
+msgid "White"
+msgstr "வெள்ளை"
+
+#: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:66
+#: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:76
+#: ../Pinta/Dialogs/NewImageDialog.cs:325
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:71
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:108
+msgid "Width:"
+msgstr "அகலம்:"
+
+#: ../Pinta.Core/Actions/ViewActions.cs:207
+#: ../Pinta.Core/Actions/ViewActions.cs:395
+#: ../Pinta.Core/Classes/DocumentWorkspace.cs:365
+#: ../Pinta.Core/Classes/DocumentWorkspace.cs:374
+msgid "Window"
+msgstr "சாளரம்"
+
+#: ../Pinta.Effects/Classes/EdgeBehavior.cs:10
+msgid "Wrap"
+msgstr "மடக்கு"
+
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:40
+msgid "Xor"
+msgstr "அல்லதில்"
+
+#. Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
+#: ../Pinta.Core/Classes/SelectionModeHandler.cs:48
+#, csharp-format
+msgid "Xor ({0} + Right Click)"
+msgstr "XOR ({0} + வலது கிளிக்)"
+
+#. Translators: {0} is the name of a file that the user does not have permission to open.
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:447
+#, csharp-format
+msgid "You do not have access to '{0}'."
+msgstr "உங்களுக்கு '{0}' அணுகல் இல்லை."
+
+#. Translators: {0} is the name of a file that the user does not have write permission for.
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:257
+#, csharp-format
+msgid ""
+"You do not have access to modify '{0}'. The file or folder may be read-only."
+msgstr ""
+"'{0}' ஐ மாற்றுவதற்கான அணுகல் உங்களுக்கு இல்லை. கோப்பு அல்லது கோப்புறை படிக்க மட்டுமே "
+"இருக்கலாம்."
+
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:151
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:164
+#: ../Pinta.Tools/Tools/ZoomTool.cs:56
+#: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:151
+msgid "Zoom"
+msgstr "பெரிதாக்கு"
+
+#: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:26
+msgid "Zoom Blur"
+msgstr "சூம் மங்கலானது"
+
+#: ../Pinta.Core/Actions/ViewActions.cs:72
+msgid "Zoom In"
+msgstr "பெரிதாக்கு"
+
+#: ../Pinta.Core/Actions/ViewActions.cs:79
+msgid "Zoom Out"
+msgstr "சிறிதாக்கு"
+
+#: ../Pinta.Core/Actions/ViewActions.cs:93
+msgid "Zoom to Selection"
+msgstr "தேர்வுக்கு பெரிதாக்கு"
+
+#: ../Pinta/MainWindow.cs:402
+msgid "_Adjustments"
+msgstr "_சரிசெய்தல்"
+
+#: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:204
+#: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:206
+#: ../Pinta/Actions/Edit/PasteAction.cs:223
+#: ../Pinta/Actions/File/CloseDocumentAction.cs:83
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:166
+#: ../Pinta/Dialogs/ProgressDialog.cs:68
+msgid "_Cancel"
+msgstr "_CANCEL"
+
+#: ../Pinta/Actions/File/CloseDocumentAction.cs:84
+msgid "_Discard"
+msgstr "_ டிச்கார்ட்"
+
+#: ../Pinta/MainWindow.cs:395
+msgid "_Edit"
+msgstr "தொகு (_E)"
+
+#: ../Pinta/MainWindow.cs:394
+msgid "_File"
+msgstr "கோப்பு (_F)"
+
+#: ../Pinta/MainWindow.cs:407
+msgid "_Help"
+msgstr "உதவி (_H)"
+
+#: ../Pinta/MainWindow.cs:398
+msgid "_Image"
+msgstr "_Image"
+
+#: ../Pinta/MainWindow.cs:400
+msgid "_Layers"
+msgstr "_ லேயர்கள்"
+
+#: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:203
+#: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:207
+#: ../Pinta.Gui.Addins/InstallDialog.cs:204 ../Pinta/Dialogs/ErrorDialog.cs:44
+#: ../Pinta/Dialogs/ErrorDialog.cs:73
+msgid "_OK"
+msgstr "_Ok"
+
+#: ../Pinta/Actions/File/CloseDocumentAction.cs:85
+msgid "_Save"
+msgstr "_சேவ்"
+
+#: ../Pinta/MainWindow.cs:397
+msgid "_View"
+msgstr "காட்சி (_V)"
+
+#: ../Pinta/MainWindow.cs:406
+msgid "_Window"
+msgstr "_ சாளரம்"
+
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:82
+msgid "by Pinta contributors"
+msgstr "வழங்கியவர் பிண்டா பங்களிப்பாளர்கள்"
+
+#: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:5
+msgid "draw;drawing;paint;painting;graphics;raster;2d;"
+msgstr "டிரா; வரைதல்; பெயிண்ட்; ஓவியம்; கிராபிக்ச்; ராச்டர்; 2 டி;"
+
+#: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:68
+#: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:72
+#: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:78
+#: ../Pinta/Dialogs/NewImageDialog.cs:277
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:94
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:97
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:121
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:124
+msgid "pixels"
+msgstr "படப்புள்ளிகள்"
+
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:73
+msgid "translator-credits"
+msgstr "மொழிபெயர்ப்பாளர்-வரவு"
+
+#. Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
+#: ../Pinta.Tools/Tools/CloneStampTool.cs:49
+#, csharp-format
+msgid "{0} + left click to set origin, left click to paint."
+msgstr "{0} + இடது சொடுக்கு தோற்றத்தை அமைக்க, இடது சொடுக்கு செய்ய."
+
+#. Translators: this is the auto-generated name for a duplicated layer.
+#. {0} is the name of the source layer. Example: "Layer 3 copy".
+#: ../Pinta.Core/Classes/DocumentLayers.cs:207
+#, csharp-format
+msgid "{0} copy"
+msgstr "{0} நகல்"
+
+#: ../Pinta.Core/ImageFormats/FormatDescriptor.cs:122
+#, csharp-format
+msgid "{0} image ({1})"
+msgstr "{0} படம் ({1})"
+
+#. Translators: {0} is the palette format (e.g. "GIMP") and {1} is a list of file extensions.
+#: ../Pinta.Core/PaletteFormats/PaletteDescriptor.cs:63
+#, csharp-format
+msgid "{0} palette ({1})"
+msgstr "{0} தட்டு ({1})"
+
+#. Translators: This specifies the format of the zoom percentage choices
+#. in the toolbar.
+#: ../Pinta.Core/Actions/ViewActions.cs:376
+#, csharp-format
+msgid "{0}%"
+msgstr "{0}%"
+
+#~ msgid ""
+#~ "Click and drag to draw gradient from primary to secondary color.\n"
+#~ "Right click to reverse."
+#~ msgstr ""
+#~ "முதன்மை முதல் இரண்டாம் நிலை வண்ணத்திற்கு சாய்வை வரைய சொடுக்கு செய்து இழுக்கவும்.\n"
+#~ " தலைகீழாக வலது சொடுக்கு செய்யவும்."
+
+#~ msgid "Click and drag to draw the outline for a selection area."
+#~ msgstr "தேர்வு பகுதிக்கான அவுட்லைன் வரைய சொடுக்கு செய்து இழுக்கவும்."
+
+#~ msgid "Random Noise"
+#~ msgstr "சீரற்ற ஒலி"

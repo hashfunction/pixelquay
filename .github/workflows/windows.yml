@@ -1,0 +1,53 @@
+name: PixelQuay Windows qualification
+on:
+  workflow_dispatch:
+  push:
+    branches: [codex/pixelquay]
+permissions:
+  contents: read
+jobs:
+  windows-x64:
+    runs-on: windows-2025
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - uses: actions/setup-dotnet@26b0ec14cb23fa6904739307f278c14f94c95bf1
+        with:
+          dotnet-version: '8.0.425'
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1
+        with:
+          python-version: '3.12'
+          architecture: x64
+      - name: Install native qualification inputs
+        uses: msys2/setup-msys2@66cd2cce69caa17b53920067426061ca1de3a884
+        with:
+          msystem: CLANG64
+          path-type: inherit
+          update: true
+          install: >-
+            mingw-w64-clang-x86_64-libadwaita
+            mingw-w64-clang-x86_64-webp-pixbuf-loader
+            gettext
+            diffutils
+      - name: Record exact native environment
+        shell: msys2 {0}
+        run: |
+          mkdir -p build-evidence
+          printf 'PIXELQUAY_MINGW=%s\n' "$(cygpath -w "$MINGW_PREFIX")" >> "$GITHUB_ENV"
+          printf 'PIXELQUAY_MSYS=%s\n' "$(cygpath -w /)" >> "$GITHUB_ENV"
+          pacman -Q > build-evidence/msys2-installed-packages.txt
+          pacman -Qi > build-evidence/msys2-package-metadata.txt
+          bash installer/windows/record-msys2-inputs.sh
+      - name: Build, test and publish qualification directory
+        shell: pwsh
+        run: ./installer/windows/build-qualification.ps1
+      - name: Preserve private qualification evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: PixelQuay-Windows-qualification
+          path: |
+            build-evidence/
+            release/
+          retention-days: 14
+          if-no-files-found: error

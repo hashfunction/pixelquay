@@ -1,0 +1,7 @@
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  Pinta.Resources -> <source>/Pinta.Resources/bin/Release/net8.0/Pinta.Resources.dll
+  Pinta.Core -> <source>/Pinta.Core/bin/Release/net8.0/Pinta.Core.dll
+<source>/tests/Pinta.Core.Tests/Export/PendingTextExportTests.cs(80,11): error CS1061: 'TextEngine' does not contain a definition for 'RenderOptions' and no accessible extension method 'RenderOptions' accepting a first argument of type 'TextEngine' could be found (are you missing a using directive or an assembly reference?) [<source>/tests/Pinta.Core.Tests/Pinta.Core.Tests.csproj]
+<source>/tests/Pinta.Core.Tests/Export/PendingTextExportTests.cs(80,31): error CS0246: The type or namespace name 'TextRenderOptions' could not be found (are you missing a using directive or an assembly reference?) [<source>/tests/Pinta.Core.Tests/Pinta.Core.Tests.csproj]
+<source>/tests/Pinta.Core.Tests/Export/PendingTextExportTests.cs(92,26): error CS1061: 'TextEngine' does not contain a definition for 'RenderOptions' and no accessible extension method 'RenderOptions' accepting a first argument of type 'TextEngine' could be found (are you missing a using directive or an assembly reference?) [<source>/tests/Pinta.Core.Tests/Pinta.Core.Tests.csproj]

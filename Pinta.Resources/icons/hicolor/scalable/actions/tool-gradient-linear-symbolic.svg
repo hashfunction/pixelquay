@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="48"
+   height="48"
+   version="1.1"
+   id="svg4"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs4" />
+  <g
+     id="g528"
+     transform="translate(-0.59454,-7.1309)">
+    <path
+       d="m 21.75,17.55 c -1.474128,0.09108 -2.444498,-1.781251 -1.590626,-2.959373 0.788933,-1.320382 3.039106,-1.005529 3.413283,0.494532 C 23.961945,16.26914 23.012906,17.602492 21.75,17.55 Z"
+       fill="currentColor"
+       id="path1" />
+    <path
+       d="M 13.35,16.8 C 11.394401,16.787543 12.358487,13.627062 13.968751,14.696876 14.94444,15.274366 14.443603,16.810618 13.35,16.8 Z"
+       fill="currentColor"
+       id="path2" />
+    <path
+       d="m 38.15,18.55 c -2.101092,0.0634 -3.704261,-2.564095 -2.486424,-4.351291 0.832718,-1.469967 3.006437,-1.968102 4.288388,-0.778786 1.332732,0.990508 1.478794,3.139527 0.223036,4.255077 -0.527652,0.542266 -1.260678,0.887427 -2.025,0.875 z"
+       fill="currentColor"
+       id="path3" />
+    <path
+       d="m 30,17.55 c -1.474128,0.09108 -2.444498,-1.781251 -1.590626,-2.959373 0.788933,-1.320382 3.039106,-1.005529 3.413283,0.494532 C 32.211945,16.26914 31.262906,17.602492 30,17.55 Z"
+       fill="currentColor"
+       id="path4" />
+    <circle
+       transform="translate(0.59454,7.1309)"
+       cx="6.7206001"
+       cy="8.6136999"
+       r="0.56794"
+       fill="currentColor"
+       id="circle4" />
+  </g>
+  <use
+     id="use530"
+     transform="translate(0,7.5962)"
+     xlink:href="#g528" />
+  <use
+     id="use532"
+     transform="translate(0,7.5962)"
+     xlink:href="#use530" />
+  <use
+     id="use534"
+     transform="translate(0,7.5962)"
+     xlink:href="#use532" />
+  <use
+     transform="translate(0,7.5962)"
+     xlink:href="#use534"
+     id="use4" />
+</svg>

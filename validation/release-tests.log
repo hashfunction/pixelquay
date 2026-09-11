@@ -1,0 +1,27 @@
+  Pinta.Resources -> <source>/Pinta.Resources/bin/Release/net8.0/Pinta.Resources.dll
+  Pinta.Core -> <source>/Pinta.Core/bin/Release/net8.0/Pinta.Core.dll
+  Pinta.Gui.Widgets -> <source>/Pinta.Gui.Widgets/bin/Release/net8.0/Pinta.Gui.Widgets.dll
+  Pinta.Core.Tests -> <source>/tests/Pinta.Core.Tests/bin/Release/net8.0/Pinta.Core.Tests.dll
+Test run for <source>/tests/Pinta.Core.Tests/bin/Release/net8.0/Pinta.Core.Tests.dll (.NETCoreApp,Version=v8.0)
+Microsoft (R) Test Execution Command Line Tool Version 17.9.0 (arm64)
+Copyright (c) Microsoft Corporation.  All rights reserved.
+
+  Pinta.Effects -> <source>/Pinta.Effects/bin/Release/net8.0/Pinta.Effects.dll
+Starting test execution, please wait...
+A total of 1 test files matched the specified pattern.
+  Pinta.Effects.Tests -> <source>/tests/Pinta.Effects.Tests/bin/Release/net8.0/Pinta.Effects.Tests.dll
+Test run for <source>/tests/Pinta.Effects.Tests/bin/Release/net8.0/Pinta.Effects.Tests.dll (.NETCoreApp,Version=v8.0)
+Microsoft (R) Test Execution Command Line Tool Version 17.9.0 (arm64)
+Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Starting test execution, please wait...
+A total of 1 test files matched the specified pattern.
+PixelQuay could not load export recipes: 'b' is an invalid start of a property name. Expected a '"'. Path: $ | LineNumber: 0 | BytePositionInLine: 1.
+PixelQuay could not load export recipes: Unsupported recipe settings version or structure.
+PixelQuay could not load export recipes: Unsupported recipe settings version or structure.
+PixelQuay could not load export recipes: Value cannot be null. (Parameter 'recipe')
+
+Passed!  - Failed:     0, Passed:   768, Skipped:     0, Total:   768, Duration: 642 ms - Pinta.Core.Tests.dll (net8.0)
+  Skipped Voronoi8 [< 1 ms]
+
+Passed!  - Failed:     0, Passed:   117, Skipped:     1, Total:   118, Duration: 10 s - Pinta.Effects.Tests.dll (net8.0)

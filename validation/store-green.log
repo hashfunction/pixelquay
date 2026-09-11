@@ -1,0 +1,17 @@
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  Pinta.Resources -> <source>/Pinta.Resources/bin/Debug/net8.0/Pinta.Resources.dll
+  Pinta.Core -> <source>/Pinta.Core/bin/Debug/net8.0/Pinta.Core.dll
+  Pinta.Core.Tests -> <source>/tests/Pinta.Core.Tests/bin/Debug/net8.0/Pinta.Core.Tests.dll
+Test run for <source>/tests/Pinta.Core.Tests/bin/Debug/net8.0/Pinta.Core.Tests.dll (.NETCoreApp,Version=v8.0)
+Microsoft (R) Test Execution Command Line Tool Version 17.9.0 (arm64)
+Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Starting test execution, please wait...
+A total of 1 test files matched the specified pattern.
+PixelQuay could not load export recipes: 'b' is an invalid start of a property name. Expected a '"'. Path: $ | LineNumber: 0 | BytePositionInLine: 1.
+PixelQuay could not load export recipes: Unsupported recipe settings version or structure.
+PixelQuay could not load export recipes: Unsupported recipe settings version or structure.
+PixelQuay could not load export recipes: Value cannot be null. (Parameter 'recipe')
+
+Passed!  - Failed:     0, Passed:    13, Skipped:     0, Total:    13, Duration: 29 ms - Pinta.Core.Tests.dll (net8.0)

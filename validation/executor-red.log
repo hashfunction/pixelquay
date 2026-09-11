@@ -1,0 +1,8 @@
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  Pinta.Resources -> <source>/Pinta.Resources/bin/Debug/net8.0/Pinta.Resources.dll
+  Pinta.Core -> <source>/Pinta.Core/bin/Debug/net8.0/Pinta.Core.dll
+<source>/tests/Pinta.Core.Tests/Export/ExportRecipeExecutionTests.cs(175,58): error CS0246: The type or namespace name 'IExportRecipeSource' could not be found (are you missing a using directive or an assembly reference?) [<source>/tests/Pinta.Core.Tests/Pinta.Core.Tests.csproj]
+<source>/tests/Pinta.Core.Tests/Export/ExportRecipeExecutionTests.cs(188,39): error CS0246: The type or namespace name 'IOutputPublisher' could not be found (are you missing a using directive or an assembly reference?) [<source>/tests/Pinta.Core.Tests/Pinta.Core.Tests.csproj]
+<source>/tests/Pinta.Core.Tests/Export/ExportRecipeExecutionTests.cs(180,66): error CS0246: The type or namespace name 'IExportRecipeRenderer' could not be found (are you missing a using directive or an assembly reference?) [<source>/tests/Pinta.Core.Tests/Pinta.Core.Tests.csproj]
+<source>/tests/Pinta.Core.Tests/Export/ExportRecipeExecutionTests.cs(182,22): error CS0246: The type or namespace name 'ExportRecipePlan' could not be found (are you missing a using directive or an assembly reference?) [<source>/tests/Pinta.Core.Tests/Pinta.Core.Tests.csproj]

@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <IsPublishable>false</IsPublishable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="BenchmarkDotNet" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Pinta.Core\Pinta.Core.csproj" />
+    <ProjectReference Include="..\..\Pinta.Effects\Pinta.Effects.csproj" />
+    <ProjectReference Include="..\..\Pinta.Gui.Widgets\Pinta.Gui.Widgets.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Assets\2000px-test.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>

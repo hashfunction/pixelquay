@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="../properties/ReferenceGirCoreAdw1.props" />
+  <Import Project="../properties/ReferenceGirCoreGObject20Integration.props" />
+
+  <ItemGroup>
+    <PackageReference Include="Mono.Addins" />
+    <PackageReference Include="Mono.Addins.Setup" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Pinta.Core\Pinta.Core.csproj" />
+  </ItemGroup>
+</Project>

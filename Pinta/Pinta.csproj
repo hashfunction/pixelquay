@@ -1,0 +1,57 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <AssemblyName>PixelQuay</AssemblyName>
+    <ApplicationIcon>PixelQuay.ico</ApplicationIcon>
+    <OutputPath>..\build\bin</OutputPath>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+
+    <!-- Disabled by default as it requires gettext to be installed. -->
+    <BuildTranslations>false</BuildTranslations>
+  </PropertyGroup>
+
+  <Import Project="../properties/ReferenceGirCoreAdw1.props" />
+
+  <ItemGroup>
+    <PackageReference Include="Tmds.DBus" />
+    <PackageReference Include="Mono.Addins" />
+    <PackageReference Include="Mono.Addins.Setup" />
+    <PackageReference Include="Mono.Addins.CecilReflector" />
+    <PackageReference Include="System.CommandLine" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Pinta.Core\Pinta.Core.csproj" />
+    <ProjectReference Include="..\Pinta.Docking\Pinta.Docking.csproj" />
+    <ProjectReference Include="..\Pinta.Gui.Addins\Pinta.Gui.Addins.csproj" />
+    <ProjectReference Include="..\Pinta.Gui.Widgets\Pinta.Gui.Widgets.csproj" />
+    <ProjectReference Include="..\Pinta.Resources\Pinta.Resources.csproj" />
+    <ProjectReference Include="..\Pinta.Tools\Pinta.Tools.csproj" />
+    <ProjectReference Include="..\Pinta.Effects\Pinta.Effects.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="../licenses/**/*" Link="licenses/%(RecursiveDir)%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
+    <Content Include="../license-mit.txt;../license-pdn.txt;../THIRD-PARTY-NOTICES.txt" Link="licenses/%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
+  </ItemGroup>
+
+  <!-- Run msgfmt on our translation (po) files -->
+  <ItemGroup>
+    <Translation Include="../po/*.po" />
+  </ItemGroup>
+
+  <Target Name="CompileTranslations" BeforeTargets="Build" Condition="'$(BuildTranslations)' == 'true'" Inputs="@(Translation)" Outputs="$(OutputPath)/locale/%(Translation.Filename)/LC_MESSAGES/pinta.mo">
+
+    <MakeDir Directories="$(OutputPath)/locale/%(Translation.Filename)/LC_MESSAGES" />
+    <Exec Command="msgfmt &quot;%(Translation.FullPath)&quot; -o &quot;$(OutputPath)/locale/%(Translation.Filename)/LC_MESSAGES/pinta.mo&quot;" />
+  </Target>
+
+  <!-- Include the compiled translation files when publishing. -->
+  <Target Name="PublishTranslations" AfterTargets="Publish" Condition="'$(BuildTranslations)' == 'true'">
+    <Copy SourceFiles="$(OutputPath)/locale/%(Translation.Filename)/LC_MESSAGES/pinta.mo" DestinationFiles="$(PublishDir)/locale/%(Translation.Filename)/LC_MESSAGES/pinta.mo" />
+  </Target>
+
+  <!-- For Windows, copy GTK library dependencies to the build folder. -->
+  <Import Condition="$([MSBuild]::IsOSPlatform('Windows'))" Project="../installer/windows/bundle_gtk.targets" />
+</Project>

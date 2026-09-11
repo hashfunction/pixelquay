@@ -1,0 +1,15 @@
+{
+  "draftId": "9a7c719f-a8ef-4661-a121-3789f158e481",
+  "title": "Export recipe workflow — native GTK reference",
+  "htmlContent": "<!DOCTYPE html><html lang=\"en\"><head><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"><title>PixelQuay export recipes</title><script src=\"https://cdn.tailwindcss.com\"></script></head><body><div class=\"min-h-screen bg-[#e9eeed] flex items-center justify-center p-10 font-sans text-[#142e38]\"><main class=\"w-[660px] bg-[#fbfcfa] rounded-2xl shadow-xl border border-[#d5ddda] p-7\"><div class=\"text-xs tracking-widest font-semibold text-[#31766e] mb-2\">PIXELQUAY · TRIEFLOW</div><h1 class=\"text-2xl font-semibold\">Export with Recipe</h1><p class=\"text-sm text-slate-600 mt-2\">Create a resized, flattened image. Your layered document stays open.</p><section class=\"mt-6 space-y-4\"><div class=\"flex gap-2\"><select aria-label=\"Saved recipe\" class=\"border rounded-lg p-3 grow bg-white\"><option>Web thumbnail</option></select><button class=\"border rounded-lg px-4\">New</button><button class=\"border rounded-lg px-4\">Delete</button></div><div class=\"grid grid-cols-2 gap-4\"><label class=\"col-span-2 text-sm\">Recipe name<input class=\"block w-full border rounded-lg p-2 mt-1 bg-white\" value=\"Web thumbnail\"></label><label class=\"text-sm\">Width · pixels<input class=\"block w-full border rounded-lg p-2 mt-1 bg-white\" value=\"320\"></label><label class=\"text-sm\">Height · pixels<input class=\"block w-full border rounded-lg p-2 mt-1 bg-white\" value=\"180\"></label><label class=\"text-sm\">Format<select class=\"block w-full border rounded-lg p-2 mt-1 bg-white\"><option>PNG</option></select></label><label class=\"text-sm\">Filename suffix<input class=\"block w-full border rounded-lg p-2 mt-1 bg-white\" value=\"-web\"></label></div><div class=\"flex justify-between items-center\"><label class=\"text-sm flex gap-2\"><input type=\"checkbox\">Replace an existing output</label><button class=\"border rounded-lg px-4 py-2 text-sm\">Save recipe</button></div><div class=\"border-t pt-4\"><button class=\"border rounded-lg px-4 py-2 text-sm\">Choose destination folder…</button><p class=\"text-xs text-slate-500 mt-4\">OUTPUT</p><p class=\"font-mono text-sm mt-1 break-all\">C:\\Users\\You\\Pictures\\harbour-web.png</p><p class=\"text-xs text-slate-500 mt-2\">320 × 180 px · PNG · Existing output protected</p></div></section><div class=\"mt-6 flex justify-end gap-3\"><button class=\"border rounded-lg px-5 py-2\">Cancel</button><button class=\"rounded-lg bg-[#247c72] text-white font-semibold px-5 py-2\">Export image</button></div></main></div></body></html>",
+  "artifactType": "page",
+  "currentVersion": 1,
+  "versions": [
+    {
+      "version": 1,
+      "prompt": "Imported via CLI (codex)",
+      "createdAt": "2026-09-11T06:41:08.506Z",
+      "isCurrent": true
+    }
+  ]
+}

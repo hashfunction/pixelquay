@@ -1,0 +1,21 @@
+MSBuild version 17.9.8+b34f75857 for .NET
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  Pinta.AddinUtils -> <source>/installer/addins/bin/Release/net8.0/Pinta.AddinUtils.dll
+  Pinta.Resources -> <source>/Pinta.Resources/bin/Release/net8.0/Pinta.Resources.dll
+  Pinta.Core -> <source>/Pinta.Core/bin/Release/net8.0/Pinta.Core.dll
+  Pinta.Docking -> <source>/Pinta.Docking/bin/Release/net8.0/Pinta.Docking.dll
+  Pinta.Gui.Addins -> <source>/Pinta.Gui.Addins/bin/Release/net8.0/Pinta.Gui.Addins.dll
+  Pinta.Gui.Widgets -> <source>/Pinta.Gui.Widgets/bin/Release/net8.0/Pinta.Gui.Widgets.dll
+  Pinta.Tools -> <source>/Pinta.Tools/bin/Release/net8.0/Pinta.Tools.dll
+  Pinta.Core.Tests -> <source>/tests/Pinta.Core.Tests/bin/Release/net8.0/Pinta.Core.Tests.dll
+  Pinta.Effects -> <source>/Pinta.Effects/bin/Release/net8.0/Pinta.Effects.dll
+  PintaBenchmarks -> <source>/tests/PintaBenchmarks/bin/Release/net8.0/PintaBenchmarks.dll
+  Pinta.Effects.Tests -> <source>/tests/Pinta.Effects.Tests/bin/Release/net8.0/Pinta.Effects.Tests.dll
+  Pinta -> <source>/build/bin/PixelQuay.dll
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:05.08

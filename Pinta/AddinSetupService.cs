@@ -1,0 +1,92 @@
+//
+// AddinSetupService.cs
+//
+// Author:
+//       Lluis Sanchez Gual <lluis@novell.com>
+//
+// Copyright (c) 2011 Novell, Inc (http://www.novell.com)
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+// THE SOFTWARE.
+
+using System.Net;
+using System.Net.Http;
+using Mono.Addins;
+using Mono.Addins.Setup;
+using Pinta.Core;
+
+namespace Pinta;
+
+public sealed class AddinSetupService : SetupService
+{
+	internal AddinSetupService (AddinRegistry r) : base (r)
+	{
+		Mono.Addins.Setup.HttpClientProvider.SetHttpClientFactory (CreateHttpClient);
+	}
+
+	private static HttpClient CreateHttpClient (string uri)
+	{
+		// Work around a bug (#1542) in Mono.Addins.Setup.HttpClientDownloadFileRequest,
+		// which assumes that ContentLength is never null.
+		// Github's server (which hosts the repo) doesn't provide this for gzipped responses.
+		HttpClientHandler handler = new () {
+			AutomaticDecompression = DecompressionMethods.Deflate
+		};
+		return new HttpClient (handler);
+	}
+
+	public bool AreRepositoriesRegistered ()
+	{
+		string url = GetPlatformRepositoryUrl ();
+		return Repositories.ContainsRepository (url);
+	}
+
+	public void RegisterRepositories (bool enable)
+	{
+		// PixelQuay does not register upstream third-party add-in feeds.
+		// Local add-ins remain an explicit advanced user action.
+	}
+
+	private void RegisterRepository (string url, string name, bool enable)
+	{
+		if (Repositories.ContainsRepository (url))
+			return;
+
+		var rep = Repositories.RegisterRepository (null, url, false);
+		rep.Name = name;
+		// Although repositories are enabled by default, we should always call this method to ensure
+		// that the repository name from the previous line ends up being saved to disk.
+		Repositories.SetRepositoryEnabled (url, enable);
+	}
+
+	private static string GetPlatformRepositoryUrl ()
+	{
+		string platform = SystemManager.GetOperatingSystem () switch {
+			OS.Windows => "Windows",
+			OS.Mac => "Mac",
+			_ => "Linux"
+		};
+
+		return "http://pintaproject.github.io/Pinta-Community-Addins/repository/" + platform + "/main.mrep";
+	}
+
+	private static string GetAllRepositoryUrl ()
+	{
+		return "http://pintaproject.github.io/Pinta-Community-Addins/repository/All/main.mrep";
+	}
+}

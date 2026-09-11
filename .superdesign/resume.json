@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "targets": {
+    "export-recipes": {
+      "projectId": "d06fcf7d-29ef-4fd3-bba9-14073320de9c",
+      "activeDraftId": "9a7c719f-a8ef-4661-a121-3789f158e481",
+      "direction": "Native GTK dialog, saved recipe controls and absolute destination preview",
+      "contextFiles": [
+        ".superdesign/init/pages.md",
+        ".superdesign/init/routes.md",
+        ".superdesign/init/components.md",
+        ".superdesign/init/extractable-components.md",
+        ".superdesign/init/layouts.md",
+        ".superdesign/init/theme.md"
+      ],
+      "fingerprints": {
+        ".superdesign/init/pages.md": "6edd188e3d19b14b4629c2ebcb3802e9c0c648a37e9af88d1b75d6abdf496b82",
+        ".superdesign/init/routes.md": "46f091742866042e156e32b7a280734fd884d368532483bc184a20eee285bac7",
+        ".superdesign/init/components.md": "38b690293019ec86f8ee7a24a7c2849c4136b1e55c33559f6f442bf2e0deaf01",
+        ".superdesign/init/extractable-components.md": "7055928ef7401eb3ada40d9bb21aba52266e0718664ab3e8e4ac95decd6c6fa5",
+        ".superdesign/init/layouts.md": "41a5405f7325c4e335d0d384d05ca312ae348d9d6102a9eae8f750e8e3cd49b9",
+        ".superdesign/init/theme.md": "da649ecbf91d53bd83cb18da97a0094b53bc3fd48f105dc67a1da67260dbc8e2"
+      },
+      "method": "direct HTML import after controller-verified generation credit exhaustion; no credits spent",
+      "verification": "get-design fetched; native Windows visual QA pending"
+    }
+  }
+}

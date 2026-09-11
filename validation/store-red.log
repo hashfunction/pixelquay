@@ -1,0 +1,19 @@
+  Determining projects to restore...
+  Restored <source>/Pinta.Resources/Pinta.Resources.csproj (in 1.85 sec).
+  Restored <source>/Pinta.Core/Pinta.Core.csproj (in 1.86 sec).
+  Restored <source>/tests/Pinta.Core.Tests/Pinta.Core.Tests.csproj (in 2.04 sec).
+  Pinta.Resources -> <source>/Pinta.Resources/bin/Debug/net8.0/Pinta.Resources.dll
+  Pinta.Core -> <source>/Pinta.Core/bin/Debug/net8.0/Pinta.Core.dll
+<source>/tests/Pinta.Core.Tests/Export/ExportRecipeStoreTests.cs(14,19): error CS0246: The type or namespace name 'ExportRecipeStore' could not be found (are you missing a using directive or an assembly reference?) [<source>/tests/Pinta.Core.Tests/Pinta.Core.Tests.csproj]
+<source>/tests/Pinta.Core.Tests/Export/ExportRecipeStoreTests.cs(15,20): error CS0246: The type or namespace name 'ExportRecipe' could not be found (are you missing a using directive or an assembly reference?) [<source>/tests/Pinta.Core.Tests/Pinta.Core.Tests.csproj]
+<source>/tests/Pinta.Core.Tests/Export/ExportRecipeStoreTests.cs(18,37): error CS0103: The name 'ExportRecipeStore' does not exist in the current context [<source>/tests/Pinta.Core.Tests/Pinta.Core.Tests.csproj]
+<source>/tests/Pinta.Core.Tests/Export/ExportRecipeStoreTests.cs(29,26): error CS0246: The type or namespace name 'ExportRecipeStore' could not be found (are you missing a using directive or an assembly reference?) [<source>/tests/Pinta.Core.Tests/Pinta.Core.Tests.csproj]
+<source>/tests/Pinta.Core.Tests/Export/ExportRecipeStoreTests.cs(37,19): error CS0246: The type or namespace name 'ExportRecipeStore' could not be found (are you missing a using directive or an assembly reference?) [<source>/tests/Pinta.Core.Tests/Pinta.Core.Tests.csproj]
+<source>/tests/Pinta.Core.Tests/Export/ExportRecipeStoreTests.cs(38,20): error CS0246: The type or namespace name 'ExportRecipe' could not be found (are you missing a using directive or an assembly reference?) [<source>/tests/Pinta.Core.Tests/Pinta.Core.Tests.csproj]
+<source>/tests/Pinta.Core.Tests/Export/ExportRecipeStoreTests.cs(52,24): error CS0103: The name 'ExportRecipeStore' does not exist in the current context [<source>/tests/Pinta.Core.Tests/Pinta.Core.Tests.csproj]
+<source>/tests/Pinta.Core.Tests/Export/ExportRecipeStoreTests.cs(53,20): error CS0246: The type or namespace name 'ExportRecipeStore' could not be found (are you missing a using directive or an assembly reference?) [<source>/tests/Pinta.Core.Tests/Pinta.Core.Tests.csproj]
+<source>/tests/Pinta.Core.Tests/Export/ExportRecipeStoreTests.cs(54,37): error CS0103: The name 'ExportRecipeStore' does not exist in the current context [<source>/tests/Pinta.Core.Tests/Pinta.Core.Tests.csproj]
+<source>/tests/Pinta.Core.Tests/Export/ExportRecipeStoreTests.cs(60,30): error CS0103: The name 'ExportRecipeValidator' does not exist in the current context [<source>/tests/Pinta.Core.Tests/Pinta.Core.Tests.csproj]
+<source>/tests/Pinta.Core.Tests/Export/ExportRecipeStoreTests.cs(61,53): error CS0103: The name 'ExportRecipeValidator' does not exist in the current context [<source>/tests/Pinta.Core.Tests/Pinta.Core.Tests.csproj]
+<source>/tests/Pinta.Core.Tests/Export/ExportRecipeStoreTests.cs(62,53): error CS0103: The name 'ExportRecipeValidator' does not exist in the current context [<source>/tests/Pinta.Core.Tests/Pinta.Core.Tests.csproj]
+<source>/tests/Pinta.Core.Tests/Export/ExportRecipeStoreTests.cs(63,53): error CS0103: The name 'ExportRecipeValidator' does not exist in the current context [<source>/tests/Pinta.Core.Tests/Pinta.Core.Tests.csproj]

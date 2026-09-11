@@ -1,0 +1,63 @@
+{
+  "status": "retrieved_for_packaging_review",
+  "sources": [
+    {
+      "component": "gircore",
+      "url": "https://raw.githubusercontent.com/gircore/gir.core/dce3253f55036755345c70e32e3d8aef55116b3e/license.txt",
+      "sha256": "b07f21e85106d135064496fe5a426c2d13abe680e0c4e664d40276f97903be74",
+      "file": "gircore.txt",
+      "bytes": 1065
+    },
+    {
+      "component": "mono-addins",
+      "url": "https://raw.githubusercontent.com/mono/mono-addins/837c3290113fde43d7bc2a9b390d533bb3a5fbed/COPYING",
+      "sha256": "cbf31e65aff971c56c6b37d92750ce7dcb4d783b403da3c39a3800195fa14135",
+      "file": "mono-addins.txt",
+      "bytes": 1127
+    },
+    {
+      "component": "mono-cecil",
+      "url": "https://raw.githubusercontent.com/jbevain/cecil/5e52c3ab69a3ee1e9102edfea89177cf43a65535/LICENSE.txt",
+      "sha256": "13d58ecbed676511c0c4c4009bff107025e50007ff5e7901dc562700ec62509e",
+      "file": "mono-cecil.txt",
+      "bytes": 1098
+    },
+    {
+      "component": "ngettext",
+      "url": "https://raw.githubusercontent.com/VitaliiTsilnyk/NGettext/0d7d59ce3e1e95f79f9886f6a6fb39a7dfc31913/LICENSE",
+      "sha256": "97c318511dacf2bfa2e27a9ee423fa5679a9a670bda4f99679d2d9da7950f175",
+      "file": "ngettext.txt",
+      "bytes": 1099
+    },
+    {
+      "component": "sharpziplib",
+      "url": "https://raw.githubusercontent.com/icsharpcode/SharpZipLib/1b1ab013ce1df02d8f27cf582197759c614d9126/LICENSE.txt",
+      "sha256": "d7fbbc16f871bf24fa5624c7eaf945054b778985f32676dcacba41fddca61133",
+      "file": "sharpziplib.txt",
+      "bytes": 1072
+    },
+    {
+      "component": "system-commandline",
+      "url": "https://raw.githubusercontent.com/dotnet/dotnet/fad253f51b461736dfd3cd9c15977bb7493becef/src/command-line-api/LICENSE.md",
+      "sha256": "58fd5ebf25d75b5bb5f4cd407a9fef3befd3641e1af90a1d0716618e6430fc19",
+      "file": "system-commandline.txt",
+      "bytes": 1115
+    },
+    {
+      "component": "tmds-dbus",
+      "url": "https://raw.githubusercontent.com/tmds/Tmds.DBus/282acebca8d4e4e3ba211646ac650911ee94edfd/COPYING",
+      "sha256": "aca3b49277abcc7886ccb2f115603a9f5b15fc3f96019a10c00f2974098b210c",
+      "file": "tmds-dbus.txt",
+      "bytes": 1151
+    },
+    {
+      "component": "paragonclipper",
+      "url": "https://www.boost.org/LICENSE_1_0.txt",
+      "sha256": "c9bff75738922193e67fa726fa225535870d2aa1059f91452c411736284ad566",
+      "file": "paragonclipper.txt",
+      "bytes": 1338
+    }
+  ],
+  "paragonclipper_note": "NuGet package 6.4.2 explicitly links Boost Software License 1.0 and copyright Angus Johnson 2010-2017. Declared GitHub source repository is unavailable (404); do not claim source pin or reproducible source build for this binary.",
+  "mono_addins_note": "Core NuGet embeds exact commit; sibling Setup and CecilReflector same-version packages omit repository commit and point to same project COPYING. Verify source attribution alongside final shipped DLL inventory."
+}

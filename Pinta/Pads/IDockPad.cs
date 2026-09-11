@@ -1,0 +1,5 @@
+namespace Pinta;
+
+interface IDockPad
+{
+}

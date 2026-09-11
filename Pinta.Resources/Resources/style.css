@@ -1,0 +1,12 @@
+.tool-box-button {
+    -gtk-icon-size: 2rem;
+}
+
+.tool-bar-scale {
+    margin-top: -4px;
+    margin-bottom: -5px;
+}
+
+#canvas {
+    box-shadow: 0px 0px 2px 2px #7F7F7F;
+}

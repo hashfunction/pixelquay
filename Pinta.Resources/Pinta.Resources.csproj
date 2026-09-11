@@ -1,0 +1,68 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <Content Include="icons/hicolor/*/*/*">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Cursor.Paintbrush.png">
+      <LogicalName>Cursor.Paintbrush.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Cursor.ColorPicker.png">
+      <LogicalName>Cursor.ColorPicker.png</LogicalName>
+    </EmbeddedResource>
+	<EmbeddedResource Include="Resources\Cursor.MagicWand.png">
+      <LogicalName>Cursor.MagicWand.png</LogicalName>
+    </EmbeddedResource>
+	<EmbeddedResource Include="Resources\Cursor.Gradient.png">
+      <LogicalName>Cursor.Gradient.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Cursor.Pencil.png">
+      <LogicalName>Cursor.Pencil.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Cursor.Line.png">
+      <LogicalName>Cursor.Line.png</LogicalName>
+    </EmbeddedResource>
+	<EmbeddedResource Include="Resources\Cursor.RectangleSelect.png">
+      <LogicalName>Cursor.RectangleSelect.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Cursor.LassoSelect.png">
+      <LogicalName>Cursor.LassoSelect.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Cursor.EllipseSelect.png">
+      <LogicalName>Cursor.EllipseSelect.png</LogicalName>
+    </EmbeddedResource>
+	<EmbeddedResource Include="Resources\Cursor.Eraser.png">
+      <LogicalName>Cursor.Eraser.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Cursor.Rectangle.png">
+      <LogicalName>Cursor.Rectangle.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Cursor.RoundedRectangle.png">
+      <LogicalName>Cursor.RoundedRectangle.png</LogicalName>
+    </EmbeddedResource>
+	<EmbeddedResource Include="Resources\Cursor.Ellipse.png">
+      <LogicalName>Cursor.Ellipse.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Cursor.FreeformShape.png">
+      <LogicalName>Cursor.FreeformShape.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Cursor.CloneStamp.png">
+      <LogicalName>Cursor.CloneStamp.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Cursor.CloneStampSetSource.png">
+      <LogicalName>Cursor.CloneStampSetSource.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Cursor.Recolor.png">
+      <LogicalName>Cursor.Recolor.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Cursor.PaintBucket.png">
+      <LogicalName>Cursor.PaintBucket.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\style.css" >
+      <LogicalName>style.css</LogicalName>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <Import Project="../properties/ReferenceGirCoreGtk40.props" />
+</Project>

@@ -1,0 +1,1282 @@
+{
+  "schemaVersion": 1,
+  "status": "restored-package-audit-not-release-clearance",
+  "scope": "All packages in the supplied assets file, including build-only and RID alternatives; rerun after Windows restore.",
+  "packages": [
+    {
+      "package": "GirCore.Adw-1/0.7.0",
+      "authors": "Marcel Tiede",
+      "copyright": null,
+      "license": "MIT",
+      "licenseUrl": "https://licenses.nuget.org/MIT",
+      "projectUrl": "https://github.com/gircore/gir.core",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/gircore/gir.core",
+        "branch": "refs/heads/main",
+        "commit": "dce3253f55036755345c70e32e3d8aef55116b3e"
+      },
+      "packageSha256": "edb9eb26734924b8b3e5d18c5f6a400896e632801aa9074ddd919e3d9abf679e",
+      "includedNoticeFiles": [],
+      "noticeReviewRequired": true
+    },
+    {
+      "package": "GirCore.Cairo-1.0/0.7.0",
+      "authors": "Marcel Tiede",
+      "copyright": null,
+      "license": "MIT",
+      "licenseUrl": "https://licenses.nuget.org/MIT",
+      "projectUrl": "https://github.com/gircore/gir.core",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/gircore/gir.core",
+        "branch": "refs/heads/main",
+        "commit": "dce3253f55036755345c70e32e3d8aef55116b3e"
+      },
+      "packageSha256": "c3c521ed1417a61aac5d3ff93ce32032954ed2ed2f36d18bf93bb4e378caa6d7",
+      "includedNoticeFiles": [],
+      "noticeReviewRequired": true
+    },
+    {
+      "package": "GirCore.FreeType2-2.0/0.7.0",
+      "authors": "Marcel Tiede",
+      "copyright": null,
+      "license": "MIT",
+      "licenseUrl": "https://licenses.nuget.org/MIT",
+      "projectUrl": "https://github.com/gircore/gir.core",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/gircore/gir.core",
+        "branch": "refs/heads/main",
+        "commit": "dce3253f55036755345c70e32e3d8aef55116b3e"
+      },
+      "packageSha256": "5077d8043cab962077d9517f489f8ab0bc7c6420550ca0307e170b45aab17efe",
+      "includedNoticeFiles": [],
+      "noticeReviewRequired": true
+    },
+    {
+      "package": "GirCore.Gdk-4.0/0.7.0",
+      "authors": "Marcel Tiede",
+      "copyright": null,
+      "license": "MIT",
+      "licenseUrl": "https://licenses.nuget.org/MIT",
+      "projectUrl": "https://github.com/gircore/gir.core",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/gircore/gir.core",
+        "branch": "refs/heads/main",
+        "commit": "dce3253f55036755345c70e32e3d8aef55116b3e"
+      },
+      "packageSha256": "94f8a92cc47ce80dd0bd81fa3b3c4a1a3dbd567f25a4733f311b692b25205510",
+      "includedNoticeFiles": [],
+      "noticeReviewRequired": true
+    },
+    {
+      "package": "GirCore.GdkPixbuf-2.0/0.7.0",
+      "authors": "Marcel Tiede",
+      "copyright": null,
+      "license": "MIT",
+      "licenseUrl": "https://licenses.nuget.org/MIT",
+      "projectUrl": "https://github.com/gircore/gir.core",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/gircore/gir.core",
+        "branch": "refs/heads/main",
+        "commit": "dce3253f55036755345c70e32e3d8aef55116b3e"
+      },
+      "packageSha256": "752e1999a86b18eff63e88a7ecf96d56de095e95bb98a9cac23d5f40f181a557",
+      "includedNoticeFiles": [],
+      "noticeReviewRequired": true
+    },
+    {
+      "package": "GirCore.Gio-2.0/0.7.0",
+      "authors": "Marcel Tiede",
+      "copyright": null,
+      "license": "MIT",
+      "licenseUrl": "https://licenses.nuget.org/MIT",
+      "projectUrl": "https://github.com/gircore/gir.core",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/gircore/gir.core",
+        "branch": "refs/heads/main",
+        "commit": "dce3253f55036755345c70e32e3d8aef55116b3e"
+      },
+      "packageSha256": "9e4b4159d76b23003ee086e373f20c5a70a2fce2f76cca7b506311014105f6bd",
+      "includedNoticeFiles": [],
+      "noticeReviewRequired": true
+    },
+    {
+      "package": "GirCore.GLib-2.0/0.7.0",
+      "authors": "Marcel Tiede",
+      "copyright": null,
+      "license": "MIT",
+      "licenseUrl": "https://licenses.nuget.org/MIT",
+      "projectUrl": "https://github.com/gircore/gir.core",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/gircore/gir.core",
+        "branch": "refs/heads/main",
+        "commit": "dce3253f55036755345c70e32e3d8aef55116b3e"
+      },
+      "packageSha256": "bb78f09fb7d038d1b83388b8817ea0951d732a7d89348d394227857f51ac6b2b",
+      "includedNoticeFiles": [],
+      "noticeReviewRequired": true
+    },
+    {
+      "package": "GirCore.GObject-2.0/0.7.0",
+      "authors": "Marcel Tiede",
+      "copyright": null,
+      "license": "MIT",
+      "licenseUrl": "https://licenses.nuget.org/MIT",
+      "projectUrl": "https://github.com/gircore/gir.core",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/gircore/gir.core",
+        "branch": "refs/heads/main",
+        "commit": "dce3253f55036755345c70e32e3d8aef55116b3e"
+      },
+      "packageSha256": "6e60878743728c6f18ba6082236cd1f25adbea5843eae17732c03db44d5a5880",
+      "includedNoticeFiles": [],
+      "noticeReviewRequired": true
+    },
+    {
+      "package": "GirCore.GObject-2.0.Integration/0.7.0",
+      "authors": "Marcel Tiede",
+      "copyright": null,
+      "license": "MIT",
+      "licenseUrl": "https://licenses.nuget.org/MIT",
+      "projectUrl": "https://github.com/gircore/gir.core",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/gircore/gir.core",
+        "branch": "refs/heads/main",
+        "commit": "dce3253f55036755345c70e32e3d8aef55116b3e"
+      },
+      "packageSha256": "9032f3e7e744b46c6a9a4355e36c2a8d7de64408813b53c52ed043c23a412825",
+      "includedNoticeFiles": [],
+      "noticeReviewRequired": true
+    },
+    {
+      "package": "GirCore.Graphene-1.0/0.7.0",
+      "authors": "Marcel Tiede",
+      "copyright": null,
+      "license": "MIT",
+      "licenseUrl": "https://licenses.nuget.org/MIT",
+      "projectUrl": "https://github.com/gircore/gir.core",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/gircore/gir.core",
+        "branch": "refs/heads/main",
+        "commit": "dce3253f55036755345c70e32e3d8aef55116b3e"
+      },
+      "packageSha256": "a273e0cbc8c47fc2d12ffc5a1beb7b3857d7120e4bada190aee2d14814742b6f",
+      "includedNoticeFiles": [],
+      "noticeReviewRequired": true
+    },
+    {
+      "package": "GirCore.Gsk-4.0/0.7.0",
+      "authors": "Marcel Tiede",
+      "copyright": null,
+      "license": "MIT",
+      "licenseUrl": "https://licenses.nuget.org/MIT",
+      "projectUrl": "https://github.com/gircore/gir.core",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/gircore/gir.core",
+        "branch": "refs/heads/main",
+        "commit": "dce3253f55036755345c70e32e3d8aef55116b3e"
+      },
+      "packageSha256": "943bc5b751c854d7a43a30a11f0e0991f8c70506acf6ac69e4ab90c4f02972d3",
+      "includedNoticeFiles": [],
+      "noticeReviewRequired": true
+    },
+    {
+      "package": "GirCore.Gtk-4.0/0.7.0",
+      "authors": "Marcel Tiede",
+      "copyright": null,
+      "license": "MIT",
+      "licenseUrl": "https://licenses.nuget.org/MIT",
+      "projectUrl": "https://github.com/gircore/gir.core",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/gircore/gir.core",
+        "branch": "refs/heads/main",
+        "commit": "dce3253f55036755345c70e32e3d8aef55116b3e"
+      },
+      "packageSha256": "3c59289990acfa03d06cd1745981ac908253ee490cca904be738de64befe2f08",
+      "includedNoticeFiles": [],
+      "noticeReviewRequired": true
+    },
+    {
+      "package": "GirCore.HarfBuzz-0.0/0.7.0",
+      "authors": "Marcel Tiede",
+      "copyright": null,
+      "license": "MIT",
+      "licenseUrl": "https://licenses.nuget.org/MIT",
+      "projectUrl": "https://github.com/gircore/gir.core",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/gircore/gir.core",
+        "branch": "refs/heads/main",
+        "commit": "dce3253f55036755345c70e32e3d8aef55116b3e"
+      },
+      "packageSha256": "b5412a76f69dd5baada6e5f090e9b3460d96771c2a500fffebd38614dee83974",
+      "includedNoticeFiles": [],
+      "noticeReviewRequired": true
+    },
+    {
+      "package": "GirCore.Pango-1.0/0.7.0",
+      "authors": "Marcel Tiede",
+      "copyright": null,
+      "license": "MIT",
+      "licenseUrl": "https://licenses.nuget.org/MIT",
+      "projectUrl": "https://github.com/gircore/gir.core",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/gircore/gir.core",
+        "branch": "refs/heads/main",
+        "commit": "dce3253f55036755345c70e32e3d8aef55116b3e"
+      },
+      "packageSha256": "ac01aad4200e97493797604dfdbeabe90d14a6ae861c600cf0fe3679869b80b4",
+      "includedNoticeFiles": [],
+      "noticeReviewRequired": true
+    },
+    {
+      "package": "GirCore.PangoCairo-1.0/0.7.0",
+      "authors": "Marcel Tiede",
+      "copyright": null,
+      "license": "MIT",
+      "licenseUrl": "https://licenses.nuget.org/MIT",
+      "projectUrl": "https://github.com/gircore/gir.core",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/gircore/gir.core",
+        "branch": "refs/heads/main",
+        "commit": "dce3253f55036755345c70e32e3d8aef55116b3e"
+      },
+      "packageSha256": "77745b48316607c528b18b101b3847141099e6170fb48a5d9907329585522dee",
+      "includedNoticeFiles": [],
+      "noticeReviewRequired": true
+    },
+    {
+      "package": "Microsoft.CodeAnalysis.Analyzers/3.3.4",
+      "authors": "Microsoft",
+      "copyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+      "license": "MIT",
+      "licenseUrl": "https://licenses.nuget.org/MIT",
+      "projectUrl": "https://github.com/dotnet/roslyn-analyzers",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/dotnet/roslyn-analyzers",
+        "commit": "22ea6422f85b05ca0793cc3b76375487be407f5d"
+      },
+      "packageSha256": "a83cd37d90520af014bbd833ab693e2cebe1ebf791bc9f7ef9508d724fd9a671",
+      "includedNoticeFiles": [
+        "managed/microsoft.codeanalysis.analyzers/3.3.4/ThirdPartyNotices.txt"
+      ],
+      "noticeReviewRequired": false
+    },
+    {
+      "package": "Microsoft.CodeAnalysis.Common/4.8.0",
+      "authors": "Microsoft",
+      "copyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+      "license": "MIT",
+      "licenseUrl": "https://licenses.nuget.org/MIT",
+      "projectUrl": "https://github.com/dotnet/roslyn",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/dotnet/roslyn",
+        "commit": "e091728607ca0fc9efca55ccfb3e59259c6b5a0a"
+      },
+      "packageSha256": "dc81229d54d9abafda6a331503c5d344edcb4c812dd0fba11b22131892edab3e",
+      "includedNoticeFiles": [
+        "managed/microsoft.codeanalysis.common/4.8.0/ThirdPartyNotices.rtf"
+      ],
+      "noticeReviewRequired": false
+    },
+    {
+      "package": "Microsoft.CodeAnalysis.CSharp/4.8.0",
+      "authors": "Microsoft",
+      "copyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+      "license": "MIT",
+      "licenseUrl": "https://licenses.nuget.org/MIT",
+      "projectUrl": "https://github.com/dotnet/roslyn",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/dotnet/roslyn",
+        "commit": "e091728607ca0fc9efca55ccfb3e59259c6b5a0a"
+      },
+      "packageSha256": "3263a75c9bddfdecece543dcab218b9db673e66f9579da517c1fa415979eaa45",
+      "includedNoticeFiles": [
+        "managed/microsoft.codeanalysis.csharp/4.8.0/ThirdPartyNotices.rtf"
+      ],
+      "noticeReviewRequired": false
+    },
+    {
+      "package": "Microsoft.NETCore.Platforms/1.1.1",
+      "authors": "Microsoft",
+      "copyright": "\u00a9 Microsoft Corporation.  All rights reserved.",
+      "license": null,
+      "licenseUrl": "http://go.microsoft.com/fwlink/?LinkId=329770",
+      "projectUrl": "https://dot.net/",
+      "repository": null,
+      "packageSha256": "f212e250abf2fd88ab096945c3375e8c3d836f70da5e11f14fb192671ff39c98",
+      "includedNoticeFiles": [
+        "managed/microsoft.netcore.platforms/1.1.1/dotnet_library_license.txt",
+        "managed/microsoft.netcore.platforms/1.1.1/ThirdPartyNotices.txt"
+      ],
+      "noticeReviewRequired": false
+    },
+    {
+      "package": "Microsoft.NETCore.Targets/1.1.0",
+      "authors": "Microsoft",
+      "copyright": "\u00a9 Microsoft Corporation.  All rights reserved.",
+      "license": null,
+      "licenseUrl": "http://go.microsoft.com/fwlink/?LinkId=329770",
+      "projectUrl": "https://dot.net/",
+      "repository": null,
+      "packageSha256": "d00a90da0312f22365624ac3f81c6d220edc5cc9ebf71647b4a02e3786e37da4",
+      "includedNoticeFiles": [
+        "managed/microsoft.netcore.targets/1.1.0/dotnet_library_license.txt",
+        "managed/microsoft.netcore.targets/1.1.0/ThirdPartyNotices.txt"
+      ],
+      "noticeReviewRequired": false
+    },
+    {
+      "package": "Mono.Addins/1.4.2-alpha.4",
+      "authors": "Microsoft",
+      "copyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+      "license": null,
+      "licenseUrl": "https://github.com/mono/mono-addins/blob/main/COPYING",
+      "projectUrl": "https://github.com/mono/mono-addins",
+      "repository": {
+        "type": "git",
+        "commit": "837c3290113fde43d7bc2a9b390d533bb3a5fbed"
+      },
+      "packageSha256": "45993adefe350722869afd304f9ecc7d7efbf9aa3c29c5845ad916a20b9c1d83",
+      "includedNoticeFiles": [],
+      "noticeReviewRequired": true
+    },
+    {
+      "package": "Mono.Addins.CecilReflector/1.4.2-alpha.4",
+      "authors": "Microsoft",
+      "copyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+      "license": null,
+      "licenseUrl": "https://github.com/mono/mono-addins/blob/main/COPYING",
+      "projectUrl": "https://github.com/mono/mono-addins",
+      "repository": null,
+      "packageSha256": "54f5614d62ca24384e4e1baedd9d18bf50e53855e9f87ee896ac18fd8a591364",
+      "includedNoticeFiles": [],
+      "noticeReviewRequired": true
+    },
+    {
+      "package": "Mono.Addins.Setup/1.4.2-alpha.4",
+      "authors": "Microsoft",
+      "copyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+      "license": null,
+      "licenseUrl": "https://github.com/mono/mono-addins/blob/main/COPYING",
+      "projectUrl": "https://github.com/mono/mono-addins",
+      "repository": null,
+      "packageSha256": "a0fa484a23f6d0d40b9418e41bd7f21f4a9d803c25eafc5a6b2913c55806f6b6",
+      "includedNoticeFiles": [],
+      "noticeReviewRequired": true
+    },
+    {
+      "package": "Mono.Cecil/0.10.1",
+      "authors": "Jb Evain",
+      "copyright": null,
+      "license": null,
+      "licenseUrl": "http://opensource.org/licenses/mit-license.php",
+      "projectUrl": "http://github.com/jbevain/cecil/",
+      "repository": null,
+      "packageSha256": "26510b66e8c5b5d4e4cbcc2de24e6598b6d8fa1c4b4b36c0589374007ab8d7fe",
+      "includedNoticeFiles": [],
+      "noticeReviewRequired": true
+    },
+    {
+      "package": "NGettext/0.6.7",
+      "authors": "Vitaly Zilnik",
+      "copyright": null,
+      "license": "MIT",
+      "licenseUrl": "https://licenses.nuget.org/MIT",
+      "projectUrl": "https://github.com/VitaliiTsilnyk/NGettext",
+      "repository": {
+        "type": "git",
+        "url": "git://github.com/VitaliiTsilnyk/NGettext"
+      },
+      "packageSha256": "7e620e0f03d990d26c9e83491be10bd49e66a5bbb1608e01b2b803d41e0dd8d2",
+      "includedNoticeFiles": [],
+      "noticeReviewRequired": true
+    },
+    {
+      "package": "ParagonClipper/6.4.2",
+      "authors": "Methuselah96",
+      "copyright": "Copyright \u00a9 2010-2017 Angus Johnson",
+      "license": null,
+      "licenseUrl": "https://www.boost.org/LICENSE_1_0.txt",
+      "projectUrl": "https://sourceforge.net/projects/polyclipping/",
+      "repository": {
+        "url": "https://github.com/ParagonTruss/Clipper"
+      },
+      "packageSha256": "8c24faae482112a32e1b08957a2200b291d6fa4ba20768d197d8ab781c21555d",
+      "includedNoticeFiles": [],
+      "noticeReviewRequired": true
+    },
+    {
+      "package": "runtime.debian.8-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.2",
+      "authors": "Microsoft",
+      "copyright": "\u00a9 Microsoft Corporation.  All rights reserved.",
+      "license": null,
+      "licenseUrl": "http://go.microsoft.com/fwlink/?LinkId=329770",
+      "projectUrl": "https://dot.net/",
+      "repository": null,
+      "packageSha256": "11b9cea8f3ab02023d78d85e5cb47ef959d8e291f332c10ac357453c9fc59767",
+      "includedNoticeFiles": [
+        "managed/runtime.debian.8-x64.runtime.native.system.security.cryptography.openssl/4.3.2/dotnet_library_license.txt",
+        "managed/runtime.debian.8-x64.runtime.native.system.security.cryptography.openssl/4.3.2/ThirdPartyNotices.txt"
+      ],
+      "noticeReviewRequired": false
+    },
+    {
+      "package": "runtime.fedora.23-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.2",
+      "authors": "Microsoft",
+      "copyright": "\u00a9 Microsoft Corporation.  All rights reserved.",
+      "license": null,
+      "licenseUrl": "http://go.microsoft.com/fwlink/?LinkId=329770",
+      "projectUrl": "https://dot.net/",
+      "repository": null,
+      "packageSha256": "995834d9336f25cd41b87534deaddf1f733a70c82429a40f071ada48797f06d8",
+      "includedNoticeFiles": [
+        "managed/runtime.fedora.23-x64.runtime.native.system.security.cryptography.openssl/4.3.2/dotnet_library_license.txt",
+        "managed/runtime.fedora.23-x64.runtime.native.system.security.cryptography.openssl/4.3.2/ThirdPartyNotices.txt"
+      ],
+      "noticeReviewRequired": false
+    },
+    {
+      "package": "runtime.fedora.24-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.2",
+      "authors": "Microsoft",
+      "copyright": "\u00a9 Microsoft Corporation.  All rights reserved.",
+      "license": null,
+      "licenseUrl": "http://go.microsoft.com/fwlink/?LinkId=329770",
+      "projectUrl": "https://dot.net/",
+      "repository": null,
+      "packageSha256": "83d5228a4ae5f8ce348587b424c9461defe5ad1d3e9cdd39605eb8c332e60410",
+      "includedNoticeFiles": [
+        "managed/runtime.fedora.24-x64.runtime.native.system.security.cryptography.openssl/4.3.2/dotnet_library_license.txt",
+        "managed/runtime.fedora.24-x64.runtime.native.system.security.cryptography.openssl/4.3.2/ThirdPartyNotices.txt"
+      ],
+      "noticeReviewRequired": false
+    },
+    {
+      "package": "runtime.native.System/4.3.0",
+      "authors": "Microsoft",
+      "copyright": "\u00a9 Microsoft Corporation.  All rights reserved.",
+      "license": null,
+      "licenseUrl": "http://go.microsoft.com/fwlink/?LinkId=329770",
+      "projectUrl": "https://dot.net/",
+      "repository": null,
+      "packageSha256": "64165aa1d9e3bcb5c04d6a575da90581ccba3fe82386c8455e6825acbe710f96",
+      "includedNoticeFiles": [
+        "managed/runtime.native.system/4.3.0/dotnet_library_license.txt",
+        "managed/runtime.native.system/4.3.0/ThirdPartyNotices.txt"
+      ],
+      "noticeReviewRequired": false
+    },
+    {
+      "package": "runtime.native.System.Net.Http/4.3.0",
+      "authors": "Microsoft",
+      "copyright": "\u00a9 Microsoft Corporation.  All rights reserved.",
+      "license": null,
+      "licenseUrl": "http://go.microsoft.com/fwlink/?LinkId=329770",
+      "projectUrl": "https://dot.net/",
+      "repository": null,
+      "packageSha256": "739e7a3f285e470a588707818d27c8c04c991e701407c8d68a8c8a11ca7fd9d8",
+      "includedNoticeFiles": [
+        "managed/runtime.native.system.net.http/4.3.0/dotnet_library_license.txt",
+        "managed/runtime.native.system.net.http/4.3.0/ThirdPartyNotices.txt"
+      ],
+      "noticeReviewRequired": false
+    },
+    {
+      "package": "runtime.native.System.Security.Cryptography.Apple/4.3.0",
+      "authors": "Microsoft",
+      "copyright": "\u00a9 Microsoft Corporation.  All rights reserved.",
+      "license": null,
+      "licenseUrl": "http://go.microsoft.com/fwlink/?LinkId=329770",
+      "projectUrl": "https://dot.net/",
+      "repository": null,
+      "packageSha256": "d88841bf48baa5370ecabf05148c9f3c469a087526259f036302d4c09fb9c1ac",
+      "includedNoticeFiles": [
+        "managed/runtime.native.system.security.cryptography.apple/4.3.0/dotnet_library_license.txt",
+        "managed/runtime.native.system.security.cryptography.apple/4.3.0/ThirdPartyNotices.txt"
+      ],
+      "noticeReviewRequired": false
+    },
+    {
+      "package": "runtime.native.System.Security.Cryptography.OpenSsl/4.3.2",
+      "authors": "Microsoft",
+      "copyright": "\u00a9 Microsoft Corporation.  All rights reserved.",
+      "license": null,
+      "licenseUrl": "http://go.microsoft.com/fwlink/?LinkId=329770",
+      "projectUrl": "https://dot.net/",
+      "repository": null,
+      "packageSha256": "c6a17a2db6eda73342f67d546b5e8f9d88171d4d0bbdb94444e4df2b8bc8c57f",
+      "includedNoticeFiles": [
+        "managed/runtime.native.system.security.cryptography.openssl/4.3.2/dotnet_library_license.txt",
+        "managed/runtime.native.system.security.cryptography.openssl/4.3.2/ThirdPartyNotices.txt"
+      ],
+      "noticeReviewRequired": false
+    },
+    {
+      "package": "runtime.opensuse.13.2-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.2",
+      "authors": "Microsoft",
+      "copyright": "\u00a9 Microsoft Corporation.  All rights reserved.",
+      "license": null,
+      "licenseUrl": "http://go.microsoft.com/fwlink/?LinkId=329770",
+      "projectUrl": "https://dot.net/",
+      "repository": null,
+      "packageSha256": "68906ee85adc83ac1e6efcd570a36850fd5be3ad8e02a45e1768224d2c81cc24",
+      "includedNoticeFiles": [
+        "managed/runtime.opensuse.13.2-x64.runtime.native.system.security.cryptography.openssl/4.3.2/dotnet_library_license.txt",
+        "managed/runtime.opensuse.13.2-x64.runtime.native.system.security.cryptography.openssl/4.3.2/ThirdPartyNotices.txt"
+      ],
+      "noticeReviewRequired": false
+    },
+    {
+      "package": "runtime.opensuse.42.1-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.2",
+      "authors": "Microsoft",
+      "copyright": "\u00a9 Microsoft Corporation.  All rights reserved.",
+      "license": null,
+      "licenseUrl": "http://go.microsoft.com/fwlink/?LinkId=329770",
+      "projectUrl": "https://dot.net/",
+      "repository": null,
+      "packageSha256": "329b7b28dd8aab9d5060e1157ac123856702193a96724b8f7fc1e5435d74a8b6",
+      "includedNoticeFiles": [
+        "managed/runtime.opensuse.42.1-x64.runtime.native.system.security.cryptography.openssl/4.3.2/dotnet_library_license.txt",
+        "managed/runtime.opensuse.42.1-x64.runtime.native.system.security.cryptography.openssl/4.3.2/ThirdPartyNotices.txt"
+      ],
+      "noticeReviewRequired": false
+    },
+    {
+      "package": "runtime.osx.10.10-x64.runtime.native.System.Security.Cryptography.Apple/4.3.0",
+      "authors": "Microsoft",
+      "copyright": "\u00a9 Microsoft Corporation.  All rights reserved.",
+      "license": null,
+      "licenseUrl": "http://go.microsoft.com/fwlink/?LinkId=329770",
+      "projectUrl": "https://dot.net/",
+      "repository": null,
+      "packageSha256": "b1eae477803b17a79c88f88f26d532272c73740b6ea4471621943d9e9b44cc83",
+      "includedNoticeFiles": [
+        "managed/runtime.osx.10.10-x64.runtime.native.system.security.cryptography.apple/4.3.0/dotnet_library_license.txt",
+        "managed/runtime.osx.10.10-x64.runtime.native.system.security.cryptography.apple/4.3.0/ThirdPartyNotices.txt"
+      ],
+      "noticeReviewRequired": false
+    },
+    {
+      "package": "runtime.osx.10.10-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.2",
+      "authors": "Microsoft",
+      "copyright": "\u00a9 Microsoft Corporation.  All rights reserved.",
+      "license": null,
+      "licenseUrl": "http://go.microsoft.com/fwlink/?LinkId=329770",
+      "projectUrl": "https://dot.net/",
+      "repository": null,
+      "packageSha256": "26f325b667d50b9de6099b4a0c713af46dd14fa21ddbc867b249ed3fd30c3fd5",
+      "includedNoticeFiles": [
+        "managed/runtime.osx.10.10-x64.runtime.native.system.security.cryptography.openssl/4.3.2/dotnet_library_license.txt",
+        "managed/runtime.osx.10.10-x64.runtime.native.system.security.cryptography.openssl/4.3.2/ThirdPartyNotices.txt"
+      ],
+      "noticeReviewRequired": false
+    },
+    {
+      "package": "runtime.rhel.7-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.2",
+      "authors": "Microsoft",
+      "copyright": "\u00a9 Microsoft Corporation.  All rights reserved.",
+      "license": null,
+      "licenseUrl": "http://go.microsoft.com/fwlink/?LinkId=329770",
+      "projectUrl": "https://dot.net/",
+      "repository": null,
+      "packageSha256": "41f17159355134184de039b55d16c27feb28350a72f353ec65e777c7aa29fdb2",
+      "includedNoticeFiles": [
+        "managed/runtime.rhel.7-x64.runtime.native.system.security.cryptography.openssl/4.3.2/dotnet_library_license.txt",
+        "managed/runtime.rhel.7-x64.runtime.native.system.security.cryptography.openssl/4.3.2/ThirdPartyNotices.txt"
+      ],
+      "noticeReviewRequired": false
+    },
+    {
+      "package": "runtime.ubuntu.14.04-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.2",
+      "authors": "Microsoft",
+      "copyright": "\u00a9 Microsoft Corporation.  All rights reserved.",
+      "license": null,
+      "licenseUrl": "http://go.microsoft.com/fwlink/?LinkId=329770",
+      "projectUrl": "https://dot.net/",
+      "repository": null,
+      "packageSha256": "11a24755cf5a0d9e85ee5b4cd89c2522e889bea33aec2291abaf368954a8fa95",
+      "includedNoticeFiles": [
+        "managed/runtime.ubuntu.14.04-x64.runtime.native.system.security.cryptography.openssl/4.3.2/dotnet_library_license.txt",
+        "managed/runtime.ubuntu.14.04-x64.runtime.native.system.security.cryptography.openssl/4.3.2/ThirdPartyNotices.txt"
+      ],
+      "noticeReviewRequired": false
+    },
+    {
+      "package": "runtime.ubuntu.16.04-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.2",
+      "authors": "Microsoft",
+      "copyright": "\u00a9 Microsoft Corporation.  All rights reserved.",
+      "license": null,
+      "licenseUrl": "http://go.microsoft.com/fwlink/?LinkId=329770",
+      "projectUrl": "https://dot.net/",
+      "repository": null,
+      "packageSha256": "3c7474fbaac88c9b309fcf5ea225986350ee53cbbac5124baed8f290032e1660",
+      "includedNoticeFiles": [
+        "managed/runtime.ubuntu.16.04-x64.runtime.native.system.security.cryptography.openssl/4.3.2/dotnet_library_license.txt",
+        "managed/runtime.ubuntu.16.04-x64.runtime.native.system.security.cryptography.openssl/4.3.2/ThirdPartyNotices.txt"
+      ],
+      "noticeReviewRequired": false
+    },
+    {
+      "package": "runtime.ubuntu.16.10-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.2",
+      "authors": "Microsoft",
+      "copyright": "\u00a9 Microsoft Corporation.  All rights reserved.",
+      "license": null,
+      "licenseUrl": "http://go.microsoft.com/fwlink/?LinkId=329770",
+      "projectUrl": "https://dot.net/",
+      "repository": null,
+      "packageSha256": "2c5921eee6bb478ac8e70d8a1a37079465cb79cb27702cba9035cbbb2e2a0ff4",
+      "includedNoticeFiles": [
+        "managed/runtime.ubuntu.16.10-x64.runtime.native.system.security.cryptography.openssl/4.3.2/dotnet_library_license.txt",
+        "managed/runtime.ubuntu.16.10-x64.runtime.native.system.security.cryptography.openssl/4.3.2/ThirdPartyNotices.txt"
+      ],
+      "noticeReviewRequired": false
+    },
+    {
+      "package": "SharpZipLib/1.3.3",
+      "authors": "ICSharpCode",
+      "copyright": "Copyright \u00a9 2000-2021 SharpZipLib Contributors",
+      "license": "MIT",
+      "licenseUrl": "https://licenses.nuget.org/MIT",
+      "projectUrl": "https://github.com/icsharpcode/SharpZipLib",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/icsharpcode/SharpZipLib",
+        "commit": "1b1ab013ce1df02d8f27cf582197759c614d9126"
+      },
+      "packageSha256": "1d61104ca87d2adc20ff3225d3bf5d0221fea1bd92856140a8b806e9780832be",
+      "includedNoticeFiles": [],
+      "noticeReviewRequired": true
+    },
+    {
+      "package": "System.Collections/4.3.0",
+      "authors": "Microsoft",
+      "copyright": "\u00a9 Microsoft Corporation.  All rights reserved.",
+      "license": null,
+      "licenseUrl": "http://go.microsoft.com/fwlink/?LinkId=329770",
+      "projectUrl": "https://dot.net/",
+      "repository": null,
+      "packageSha256": "69f63b554b43eb0ff9998aab71ef2442bbc321f4b61970c834387bdc88f124a7",
+      "includedNoticeFiles": [
+        "managed/system.collections/4.3.0/dotnet_library_license.txt",
+        "managed/system.collections/4.3.0/ThirdPartyNotices.txt"
+      ],
+      "noticeReviewRequired": false
+    },
+    {
+      "package": "System.Collections.Concurrent/4.3.0",
+      "authors": "Microsoft",
+      "copyright": "\u00a9 Microsoft Corporation.  All rights reserved.",
+      "license": null,
+      "licenseUrl": "http://go.microsoft.com/fwlink/?LinkId=329770",
+      "projectUrl": "https://dot.net/",
+      "repository": null,
+      "packageSha256": "28c6390df2670de22c6b5dc3a6abf237c36445e644300167966360955a052172",
+      "includedNoticeFiles": [
+        "managed/system.collections.concurrent/4.3.0/dotnet_library_license.txt",
+        "managed/system.collections.concurrent/4.3.0/ThirdPartyNotices.txt"
+      ],
+      "noticeReviewRequired": false
+    },
+    {
+      "package": "System.Collections.Immutable/7.0.0",
+      "authors": "Microsoft",
+      "copyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+      "license": "MIT",
+      "licenseUrl": "https://licenses.nuget.org/MIT",
+      "projectUrl": "https://dot.net/",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/dotnet/runtime",
+        "commit": "d099f075e45d2aa6007a22b71b45a08758559f80"
+      },
+      "packageSha256": "f5a9f6c1bc6e7b6aabb6e818112f5ac2c85083e29f26a6a386786ce3991021d9",
+      "includedNoticeFiles": [
+        "managed/system.collections.immutable/7.0.0/THIRD-PARTY-NOTICES.TXT",
+        "managed/system.collections.immutable/7.0.0/LICENSE.TXT"
+      ],
+      "noticeReviewRequired": false
+    },
+    {
+      "package": "System.Collections.NonGeneric/4.3.0",
+      "authors": "Microsoft",
+      "copyright": "\u00a9 Microsoft Corporation.  All rights reserved.",
+      "license": null,
+      "licenseUrl": "http://go.microsoft.com/fwlink/?LinkId=329770",
+      "projectUrl": "https://dot.net/",
+      "repository": null,
+      "packageSha256": "f3fc99983e238efabb9baf123e42592c143bf633933b24f9972cd7e12098031f",
+      "includedNoticeFiles": [
+        "managed/system.collections.nongeneric/4.3.0/dotnet_library_license.txt",
+        "managed/system.collections.nongeneric/4.3.0/ThirdPartyNotices.txt"
+      ],
+      "noticeReviewRequired": false
+    },
+    {
+      "package": "System.Collections.Specialized/4.3.0",
+      "authors": "Microsoft",
+      "copyright": "\u00a9 Microsoft Corporation.  All rights reserved.",
+      "license": null,
+      "licenseUrl": "http://go.microsoft.com/fwlink/?LinkId=329770",
+      "projectUrl": "https://dot.net/",
+      "repository": null,
+      "packageSha256": "40d834249371fb35cc436e8c2513f31fb4c776daa3acdb462d481a47549dbce9",
+      "includedNoticeFiles": [
+        "managed/system.collections.specialized/4.3.0/dotnet_library_license.txt",
+        "managed/system.collections.specialized/4.3.0/ThirdPartyNotices.txt"
+      ],
+      "noticeReviewRequired": false
+    },
+    {
+      "package": "System.CommandLine/2.0.1",
+      "authors": "Microsoft",
+      "copyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+      "license": "MIT",
+      "licenseUrl": "https://licenses.nuget.org/MIT",
+      "projectUrl": "https://github.com/dotnet/command-line-api",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/dotnet/dotnet",
+        "commit": "fad253f51b461736dfd3cd9c15977bb7493becef"
+      },
+      "packageSha256": "3430623d4b7f65920c05c2c7a45ffa20c5ff5297ec0bf5e71f7a788b8307085c",
+      "includedNoticeFiles": [],
+      "noticeReviewRequired": true
+    },
+    {
+      "package": "System.Diagnostics.Debug/4.3.0",
+      "authors": "Microsoft",
+      "copyright": "\u00a9 Microsoft Corporation.  All rights reserved.",
+      "license": null,
+      "licenseUrl": "http://go.microsoft.com/fwlink/?LinkId=329770",
+      "projectUrl": "https://dot.net/",
+      "repository": null,
+      "packageSha256": "7e403bf528cf6d27a211cadb6d4b1bef4bbd07bc2a6ec74cf6cd4b9e82a3d203",
+      "includedNoticeFiles": [
+        "managed/system.diagnostics.debug/4.3.0/dotnet_library_license.txt",
+        "managed/system.diagnostics.debug/4.3.0/ThirdPartyNotices.txt"
+      ],
+      "noticeReviewRequired": false
+    },
+    {
+      "package": "System.Diagnostics.DiagnosticSource/4.3.0",
+      "authors": "Microsoft",
+      "copyright": "\u00a9 Microsoft Corporation.  All rights reserved.",
+      "license": null,
+      "licenseUrl": "http://go.microsoft.com/fwlink/?LinkId=329770",
+      "projectUrl": "https://dot.net/",
+      "repository": null,
+      "packageSha256": "3852516f4ca07a9d19df20c12f002033f4e47ece09083b6c361c031fd71dd57c",
+      "includedNoticeFiles": [
+        "managed/system.diagnostics.diagnosticsource/4.3.0/dotnet_library_license.txt",
+        "managed/system.diagnostics.diagnosticsource/4.3.0/ThirdPartyNotices.txt"
+      ],
+      "noticeReviewRequired": false
+    },
+    {
+      "package": "System.Diagnostics.Tracing/4.3.0",
+      "authors": "Microsoft",
+      "copyright": "\u00a9 Microsoft Corporation.  All rights reserved.",
+      "license": null,
+      "licenseUrl": "http://go.microsoft.com/fwlink/?LinkId=329770",
+      "projectUrl": "https://dot.net/",
+      "repository": null,
+      "packageSha256": "8421136691c719584f62f6f80b47e1e33b3ef33bf818fa22c5a8242d98e96bd4",
+      "includedNoticeFiles": [
+        "managed/system.diagnostics.tracing/4.3.0/dotnet_library_license.txt",
+        "managed/system.diagnostics.tracing/4.3.0/ThirdPartyNotices.txt"
+      ],
+      "noticeReviewRequired": false
+    },
+    {
+      "package": "System.Globalization/4.3.0",
+      "authors": "Microsoft",
+      "copyright": "\u00a9 Microsoft Corporation.  All rights reserved.",
+      "license": null,
+      "licenseUrl": "http://go.microsoft.com/fwlink/?LinkId=329770",
+      "projectUrl": "https://dot.net/",
+      "repository": null,
+      "packageSha256": "71a2f4a51985484b1aa1e65e58de414d0b46ac0b5a40fc058bc60e64f646e6b2",
+      "includedNoticeFiles": [
+        "managed/system.globalization/4.3.0/dotnet_library_license.txt",
+        "managed/system.globalization/4.3.0/ThirdPartyNotices.txt"
+      ],
+      "noticeReviewRequired": false
+    },
+    {
+      "package": "System.Globalization.Calendars/4.3.0",
+      "authors": "Microsoft",
+      "copyright": "\u00a9 Microsoft Corporation.  All rights reserved.",
+      "license": null,
+      "licenseUrl": "http://go.microsoft.com/fwlink/?LinkId=329770",
+      "projectUrl": "https://dot.net/",
+      "repository": null,
+      "packageSha256": "b8d383d043951609d2d9f30abcc884b48f5a3b0d34f8f7f2fc7faab9c01094f7",
+      "includedNoticeFiles": [
+        "managed/system.globalization.calendars/4.3.0/dotnet_library_license.txt",
+        "managed/system.globalization.calendars/4.3.0/ThirdPartyNotices.txt"
+      ],
+      "noticeReviewRequired": false
+    },
+    {
+      "package": "System.Globalization.Extensions/4.3.0",
+      "authors": "Microsoft",
+      "copyright": "\u00a9 Microsoft Corporation.  All rights reserved.",
+      "license": null,
+      "licenseUrl": "http://go.microsoft.com/fwlink/?LinkId=329770",
+      "projectUrl": "https://dot.net/",
+      "repository": null,
+      "packageSha256": "9a6256036ed3d06455b853fdfec8fee13ad1e06256af33489363c3adbafb4509",
+      "includedNoticeFiles": [
+        "managed/system.globalization.extensions/4.3.0/dotnet_library_license.txt",
+        "managed/system.globalization.extensions/4.3.0/ThirdPartyNotices.txt"
+      ],
+      "noticeReviewRequired": false
+    },
+    {
+      "package": "System.IO/4.3.0",
+      "authors": "Microsoft",
+      "copyright": "\u00a9 Microsoft Corporation.  All rights reserved.",
+      "license": null,
+      "licenseUrl": "http://go.microsoft.com/fwlink/?LinkId=329770",
+      "projectUrl": "https://dot.net/",
+      "repository": null,
+      "packageSha256": "aeeca74077a414fe703eb0e257284d891217799fc8f4da632b9a54f873c38916",
+      "includedNoticeFiles": [
+        "managed/system.io/4.3.0/dotnet_library_license.txt",
+        "managed/system.io/4.3.0/ThirdPartyNotices.txt"
+      ],
+      "noticeReviewRequired": false
+    },
+    {
+      "package": "System.IO.FileSystem/4.3.0",
+      "authors": "Microsoft",
+      "copyright": "\u00a9 Microsoft Corporation.  All rights reserved.",
+      "license": null,
+      "licenseUrl": "http://go.microsoft.com/fwlink/?LinkId=329770",
+      "projectUrl": "https://dot.net/",
+      "repository": null,
+      "packageSha256": "bcd2189ef95acae563d167d17d82a90eb843a6d961a75a4df026269557764d7c",
+      "includedNoticeFiles": [
+        "managed/system.io.filesystem/4.3.0/dotnet_library_license.txt",
+        "managed/system.io.filesystem/4.3.0/ThirdPartyNotices.txt"
+      ],
+      "noticeReviewRequired": false
+    },
+    {
+      "package": "System.IO.FileSystem.Primitives/4.3.0",
+      "authors": "Microsoft",
+      "copyright": "\u00a9 Microsoft Corporation.  All rights reserved.",
+      "license": null,
+      "licenseUrl": "http://go.microsoft.com/fwlink/?LinkId=329770",
+      "projectUrl": "https://dot.net/",
+      "repository": null,
+      "packageSha256": "2cc9df83c5706afb3d70c9eaf67347f085ad02d49f934fc5cb8b3846df6bd648",
+      "includedNoticeFiles": [
+        "managed/system.io.filesystem.primitives/4.3.0/dotnet_library_license.txt",
+        "managed/system.io.filesystem.primitives/4.3.0/ThirdPartyNotices.txt"
+      ],
+      "noticeReviewRequired": false
+    },
+    {
+      "package": "System.Linq/4.3.0",
+      "authors": "Microsoft",
+      "copyright": "\u00a9 Microsoft Corporation.  All rights reserved.",
+      "license": null,
+      "licenseUrl": "http://go.microsoft.com/fwlink/?LinkId=329770",
+      "projectUrl": "https://dot.net/",
+      "repository": null,
+      "packageSha256": "479ba248bde5e9add7ad74922fa8f3faafcf732550cc4001ca2b9764d4aa0ff0",
+      "includedNoticeFiles": [
+        "managed/system.linq/4.3.0/dotnet_library_license.txt",
+        "managed/system.linq/4.3.0/ThirdPartyNotices.txt"
+      ],
+      "noticeReviewRequired": false
+    },
+    {
+      "package": "System.Net.Http/4.3.4",
+      "authors": "Microsoft",
+      "copyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+      "license": null,
+      "licenseUrl": "http://go.microsoft.com/fwlink/?LinkId=329770",
+      "projectUrl": "https://dot.net/",
+      "repository": null,
+      "packageSha256": "14ca14d0aee794f2f1a038eed0d2f6d568e581af46a67028423b05845618b74d",
+      "includedNoticeFiles": [
+        "managed/system.net.http/4.3.4/dotnet_library_license.txt",
+        "managed/system.net.http/4.3.4/ThirdPartyNotices.txt"
+      ],
+      "noticeReviewRequired": false
+    },
+    {
+      "package": "System.Net.Primitives/4.3.0",
+      "authors": "Microsoft",
+      "copyright": "\u00a9 Microsoft Corporation.  All rights reserved.",
+      "license": null,
+      "licenseUrl": "http://go.microsoft.com/fwlink/?LinkId=329770",
+      "projectUrl": "https://dot.net/",
+      "repository": null,
+      "packageSha256": "318ed9eaf3ad14c6c429a2d6f6739265e023716a700ad74eeff5b59a41990731",
+      "includedNoticeFiles": [
+        "managed/system.net.primitives/4.3.0/dotnet_library_license.txt",
+        "managed/system.net.primitives/4.3.0/ThirdPartyNotices.txt"
+      ],
+      "noticeReviewRequired": false
+    },
+    {
+      "package": "System.Reflection/4.3.0",
+      "authors": "Microsoft",
+      "copyright": "\u00a9 Microsoft Corporation.  All rights reserved.",
+      "license": null,
+      "licenseUrl": "http://go.microsoft.com/fwlink/?LinkId=329770",
+      "projectUrl": "https://dot.net/",
+      "repository": null,
+      "packageSha256": "35049946964bbed3d60e5be6308746c5c56ec949f0f76654468d215ec12c8576",
+      "includedNoticeFiles": [
+        "managed/system.reflection/4.3.0/dotnet_library_license.txt",
+        "managed/system.reflection/4.3.0/ThirdPartyNotices.txt"
+      ],
+      "noticeReviewRequired": false
+    },
+    {
+      "package": "System.Reflection.Emit/4.7.0",
+      "authors": "Microsoft",
+      "copyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+      "license": "MIT",
+      "licenseUrl": "https://licenses.nuget.org/MIT",
+      "projectUrl": "https://github.com/dotnet/corefx",
+      "repository": null,
+      "packageSha256": "170fc24910fec1a8c7d4ca9f292dd0fec22b507ec63782be17e0f1ebc50f3488",
+      "includedNoticeFiles": [
+        "managed/system.reflection.emit/4.7.0/THIRD-PARTY-NOTICES.TXT",
+        "managed/system.reflection.emit/4.7.0/LICENSE.TXT"
+      ],
+      "noticeReviewRequired": false
+    },
+    {
+      "package": "System.Reflection.Metadata/7.0.0",
+      "authors": "Microsoft",
+      "copyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+      "license": "MIT",
+      "licenseUrl": "https://licenses.nuget.org/MIT",
+      "projectUrl": "https://dot.net/",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/dotnet/runtime",
+        "commit": "d099f075e45d2aa6007a22b71b45a08758559f80"
+      },
+      "packageSha256": "1b000a4219213c1613aa645d1bd73db5aaab292283c325203848562cac5634f2",
+      "includedNoticeFiles": [
+        "managed/system.reflection.metadata/7.0.0/THIRD-PARTY-NOTICES.TXT",
+        "managed/system.reflection.metadata/7.0.0/LICENSE.TXT"
+      ],
+      "noticeReviewRequired": false
+    },
+    {
+      "package": "System.Reflection.Primitives/4.3.0",
+      "authors": "Microsoft",
+      "copyright": "\u00a9 Microsoft Corporation.  All rights reserved.",
+      "license": null,
+      "licenseUrl": "http://go.microsoft.com/fwlink/?LinkId=329770",
+      "projectUrl": "https://dot.net/",
+      "repository": null,
+      "packageSha256": "e68830581e2f9504e5de38e4d718e7886da8cdb1488d94cbf6e834bac650b813",
+      "includedNoticeFiles": [
+        "managed/system.reflection.primitives/4.3.0/dotnet_library_license.txt",
+        "managed/system.reflection.primitives/4.3.0/ThirdPartyNotices.txt"
+      ],
+      "noticeReviewRequired": false
+    },
+    {
+      "package": "System.Resources.ResourceManager/4.3.0",
+      "authors": "Microsoft",
+      "copyright": "\u00a9 Microsoft Corporation.  All rights reserved.",
+      "license": null,
+      "licenseUrl": "http://go.microsoft.com/fwlink/?LinkId=329770",
+      "projectUrl": "https://dot.net/",
+      "repository": null,
+      "packageSha256": "89d88e0fddf16dbadbc304a70f898e440f51622fc3fd4e3c79152c9ff5a7586a",
+      "includedNoticeFiles": [
+        "managed/system.resources.resourcemanager/4.3.0/dotnet_library_license.txt",
+        "managed/system.resources.resourcemanager/4.3.0/ThirdPartyNotices.txt"
+      ],
+      "noticeReviewRequired": false
+    },
+    {
+      "package": "System.Runtime/4.3.0",
+      "authors": "Microsoft",
+      "copyright": "\u00a9 Microsoft Corporation.  All rights reserved.",
+      "license": null,
+      "licenseUrl": "http://go.microsoft.com/fwlink/?LinkId=329770",
+      "projectUrl": "https://dot.net/",
+      "repository": null,
+      "packageSha256": "e75f35dd65e9048b2e03a7d4b44e57691423716750dbf966128909b7deeed118",
+      "includedNoticeFiles": [
+        "managed/system.runtime/4.3.0/dotnet_library_license.txt",
+        "managed/system.runtime/4.3.0/ThirdPartyNotices.txt"
+      ],
+      "noticeReviewRequired": false
+    },
+    {
+      "package": "System.Runtime.CompilerServices.Unsafe/6.0.0",
+      "authors": "Microsoft",
+      "copyright": "\u00a9 Microsoft Corporation. All rights reserved.",
+      "license": "MIT",
+      "licenseUrl": "https://licenses.nuget.org/MIT",
+      "projectUrl": "https://dot.net/",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/dotnet/runtime",
+        "commit": "4822e3c3aa77eb82b2fb33c9321f923cf11ddde6"
+      },
+      "packageSha256": "6c41b53e70e9eee298cff3a02ce5acdd15b04125589be0273f0566026720a762",
+      "includedNoticeFiles": [
+        "managed/system.runtime.compilerservices.unsafe/6.0.0/THIRD-PARTY-NOTICES.TXT",
+        "managed/system.runtime.compilerservices.unsafe/6.0.0/LICENSE.TXT"
+      ],
+      "noticeReviewRequired": false
+    },
+    {
+      "package": "System.Runtime.Extensions/4.3.0",
+      "authors": "Microsoft",
+      "copyright": "\u00a9 Microsoft Corporation.  All rights reserved.",
+      "license": null,
+      "licenseUrl": "http://go.microsoft.com/fwlink/?LinkId=329770",
+      "projectUrl": "https://dot.net/",
+      "repository": null,
+      "packageSha256": "c0b0c79a8cebf38bf55b6cd8096631c63d0547424360749545a46e0e6d1b77fa",
+      "includedNoticeFiles": [
+        "managed/system.runtime.extensions/4.3.0/dotnet_library_license.txt",
+        "managed/system.runtime.extensions/4.3.0/ThirdPartyNotices.txt"
+      ],
+      "noticeReviewRequired": false
+    },
+    {
+      "package": "System.Runtime.Handles/4.3.0",
+      "authors": "Microsoft",
+      "copyright": "\u00a9 Microsoft Corporation.  All rights reserved.",
+      "license": null,
+      "licenseUrl": "http://go.microsoft.com/fwlink/?LinkId=329770",
+      "projectUrl": "https://dot.net/",
+      "repository": null,
+      "packageSha256": "289e5a5e81a9079e98ebe89ea4191da71fc07da243022b71e2fae42ea47b826b",
+      "includedNoticeFiles": [
+        "managed/system.runtime.handles/4.3.0/dotnet_library_license.txt",
+        "managed/system.runtime.handles/4.3.0/ThirdPartyNotices.txt"
+      ],
+      "noticeReviewRequired": false
+    },
+    {
+      "package": "System.Runtime.InteropServices/4.3.0",
+      "authors": "Microsoft",
+      "copyright": "\u00a9 Microsoft Corporation.  All rights reserved.",
+      "license": null,
+      "licenseUrl": "http://go.microsoft.com/fwlink/?LinkId=329770",
+      "projectUrl": "https://dot.net/",
+      "repository": null,
+      "packageSha256": "f2c0c7f965097c247eedee277e97ed8fffa5b2d122662c56501b9e476ce61e02",
+      "includedNoticeFiles": [
+        "managed/system.runtime.interopservices/4.3.0/dotnet_library_license.txt",
+        "managed/system.runtime.interopservices/4.3.0/ThirdPartyNotices.txt"
+      ],
+      "noticeReviewRequired": false
+    },
+    {
+      "package": "System.Runtime.Numerics/4.3.0",
+      "authors": "Microsoft",
+      "copyright": "\u00a9 Microsoft Corporation.  All rights reserved.",
+      "license": null,
+      "licenseUrl": "http://go.microsoft.com/fwlink/?LinkId=329770",
+      "projectUrl": "https://dot.net/",
+      "repository": null,
+      "packageSha256": "3f98c70a031b80531888e36fce668a15e3aa7002033eefd4f1b395acd3d82aa7",
+      "includedNoticeFiles": [
+        "managed/system.runtime.numerics/4.3.0/dotnet_library_license.txt",
+        "managed/system.runtime.numerics/4.3.0/ThirdPartyNotices.txt"
+      ],
+      "noticeReviewRequired": false
+    },
+    {
+      "package": "System.Security.Cryptography.Algorithms/4.3.0",
+      "authors": "Microsoft",
+      "copyright": "\u00a9 Microsoft Corporation.  All rights reserved.",
+      "license": null,
+      "licenseUrl": "http://go.microsoft.com/fwlink/?LinkId=329770",
+      "projectUrl": "https://dot.net/",
+      "repository": null,
+      "packageSha256": "b4026f35295ccd8049dc4776e007b6edae79b6afe7e03ddfb9b35077070a580f",
+      "includedNoticeFiles": [
+        "managed/system.security.cryptography.algorithms/4.3.0/dotnet_library_license.txt",
+        "managed/system.security.cryptography.algorithms/4.3.0/ThirdPartyNotices.txt"
+      ],
+      "noticeReviewRequired": false
+    },
+    {
+      "package": "System.Security.Cryptography.Cng/4.3.0",
+      "authors": "Microsoft",
+      "copyright": "\u00a9 Microsoft Corporation.  All rights reserved.",
+      "license": null,
+      "licenseUrl": "http://go.microsoft.com/fwlink/?LinkId=329770",
+      "projectUrl": "https://dot.net/",
+      "repository": null,
+      "packageSha256": "bb5eefcbac0d86aa24f754ab54b9e8d8cd44ccb1d99ba54c71af39c5b54286cc",
+      "includedNoticeFiles": [
+        "managed/system.security.cryptography.cng/4.3.0/dotnet_library_license.txt",
+        "managed/system.security.cryptography.cng/4.3.0/ThirdPartyNotices.txt"
+      ],
+      "noticeReviewRequired": false
+    },
+    {
+      "package": "System.Security.Cryptography.Csp/4.3.0",
+      "authors": "Microsoft",
+      "copyright": "\u00a9 Microsoft Corporation.  All rights reserved.",
+      "license": null,
+      "licenseUrl": "http://go.microsoft.com/fwlink/?LinkId=329770",
+      "projectUrl": "https://dot.net/",
+      "repository": null,
+      "packageSha256": "a1e7dd4d4fd9d8f594f6795ab7cba24431aafcf199a123d182430bd75a66bcf4",
+      "includedNoticeFiles": [
+        "managed/system.security.cryptography.csp/4.3.0/dotnet_library_license.txt",
+        "managed/system.security.cryptography.csp/4.3.0/ThirdPartyNotices.txt"
+      ],
+      "noticeReviewRequired": false
+    },
+    {
+      "package": "System.Security.Cryptography.Encoding/4.3.0",
+      "authors": "Microsoft",
+      "copyright": "\u00a9 Microsoft Corporation.  All rights reserved.",
+      "license": null,
+      "licenseUrl": "http://go.microsoft.com/fwlink/?LinkId=329770",
+      "projectUrl": "https://dot.net/",
+      "repository": null,
+      "packageSha256": "62e81ef3d37a33e35c6e572f5cc7b21d9ea46437f006fdcb3cc0e217c1e126cb",
+      "includedNoticeFiles": [
+        "managed/system.security.cryptography.encoding/4.3.0/dotnet_library_license.txt",
+        "managed/system.security.cryptography.encoding/4.3.0/ThirdPartyNotices.txt"
+      ],
+      "noticeReviewRequired": false
+    },
+    {
+      "package": "System.Security.Cryptography.OpenSsl/4.3.0",
+      "authors": "Microsoft",
+      "copyright": "\u00a9 Microsoft Corporation.  All rights reserved.",
+      "license": null,
+      "licenseUrl": "http://go.microsoft.com/fwlink/?LinkId=329770",
+      "projectUrl": "https://dot.net/",
+      "repository": null,
+      "packageSha256": "0cbf83dac73626b422078a007148204c5c83f30dda2c48c97e877924f7be3b3e",
+      "includedNoticeFiles": [
+        "managed/system.security.cryptography.openssl/4.3.0/dotnet_library_license.txt",
+        "managed/system.security.cryptography.openssl/4.3.0/ThirdPartyNotices.txt"
+      ],
+      "noticeReviewRequired": false
+    },
+    {
+      "package": "System.Security.Cryptography.Primitives/4.3.0",
+      "authors": "Microsoft",
+      "copyright": "\u00a9 Microsoft Corporation.  All rights reserved.",
+      "license": null,
+      "licenseUrl": "http://go.microsoft.com/fwlink/?LinkId=329770",
+      "projectUrl": "https://dot.net/",
+      "repository": null,
+      "packageSha256": "7e7162ec1dd29d58f96be05b8179db8e718dbd6ac2114e87a7fc23b235b3df5f",
+      "includedNoticeFiles": [
+        "managed/system.security.cryptography.primitives/4.3.0/dotnet_library_license.txt",
+        "managed/system.security.cryptography.primitives/4.3.0/ThirdPartyNotices.txt"
+      ],
+      "noticeReviewRequired": false
+    },
+    {
+      "package": "System.Security.Cryptography.X509Certificates/4.3.0",
+      "authors": "Microsoft",
+      "copyright": "\u00a9 Microsoft Corporation.  All rights reserved.",
+      "license": null,
+      "licenseUrl": "http://go.microsoft.com/fwlink/?LinkId=329770",
+      "projectUrl": "https://dot.net/",
+      "repository": null,
+      "packageSha256": "306dd5fe8c03876ef718250fb061ab68dc1a56973276ea65dc4b4f5e3e93546d",
+      "includedNoticeFiles": [
+        "managed/system.security.cryptography.x509certificates/4.3.0/dotnet_library_license.txt",
+        "managed/system.security.cryptography.x509certificates/4.3.0/ThirdPartyNotices.txt"
+      ],
+      "noticeReviewRequired": false
+    },
+    {
+      "package": "System.Text.Encoding/4.3.0",
+      "authors": "Microsoft",
+      "copyright": "\u00a9 Microsoft Corporation.  All rights reserved.",
+      "license": null,
+      "licenseUrl": "http://go.microsoft.com/fwlink/?LinkId=329770",
+      "projectUrl": "https://dot.net/",
+      "repository": null,
+      "packageSha256": "19cb475462d901afebaa404d86c0469ec89674acafe950ee6d8a4692e3a404b8",
+      "includedNoticeFiles": [
+        "managed/system.text.encoding/4.3.0/dotnet_library_license.txt",
+        "managed/system.text.encoding/4.3.0/ThirdPartyNotices.txt"
+      ],
+      "noticeReviewRequired": false
+    },
+    {
+      "package": "System.Threading/4.3.0",
+      "authors": "Microsoft",
+      "copyright": "\u00a9 Microsoft Corporation.  All rights reserved.",
+      "license": null,
+      "licenseUrl": "http://go.microsoft.com/fwlink/?LinkId=329770",
+      "projectUrl": "https://dot.net/",
+      "repository": null,
+      "packageSha256": "643437751e29cd5c266aa060e2169c65a55e9d0ff7c8017fb95ec15d95e38967",
+      "includedNoticeFiles": [
+        "managed/system.threading/4.3.0/dotnet_library_license.txt",
+        "managed/system.threading/4.3.0/ThirdPartyNotices.txt"
+      ],
+      "noticeReviewRequired": false
+    },
+    {
+      "package": "System.Threading.Tasks/4.3.0",
+      "authors": "Microsoft",
+      "copyright": "\u00a9 Microsoft Corporation.  All rights reserved.",
+      "license": null,
+      "licenseUrl": "http://go.microsoft.com/fwlink/?LinkId=329770",
+      "projectUrl": "https://dot.net/",
+      "repository": null,
+      "packageSha256": "679ad77c9d445e9dc6df620a646899ea4a0c8d1bb49fc0b5346af0a5d21e9f8c",
+      "includedNoticeFiles": [
+        "managed/system.threading.tasks/4.3.0/dotnet_library_license.txt",
+        "managed/system.threading.tasks/4.3.0/ThirdPartyNotices.txt"
+      ],
+      "noticeReviewRequired": false
+    },
+    {
+      "package": "Tmds.DBus/0.92.0",
+      "authors": "Tom Deseyn",
+      "copyright": "Tom Deseyn;Alp Toker",
+      "license": "MIT",
+      "licenseUrl": "https://licenses.nuget.org/MIT",
+      "projectUrl": null,
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/tmds/Tmds.DBus.git",
+        "branch": "refs/heads/release/0.92",
+        "commit": "282acebca8d4e4e3ba211646ac650911ee94edfd"
+      },
+      "packageSha256": "fed653dc249bb2060e6d2c6c4186621f995c2ac42afac40ddb9f2329afea9c03",
+      "includedNoticeFiles": [],
+      "noticeReviewRequired": true
+    }
+  ]
+}
