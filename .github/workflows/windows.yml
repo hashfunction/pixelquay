@@ -41,13 +41,17 @@ jobs:
       - name: Build, test and publish qualification directory
         shell: pwsh
         run: ./installer/windows/build-qualification.ps1
-      - name: Preserve private qualification evidence
+      - name: Preserve qualification metadata only
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: PixelQuay-Windows-qualification
           path: |
-            build-evidence/
-            release/
+            build-evidence/*.txt
+            build-evidence/*.json
+            build-evidence/tests/*.trx
+            build-evidence/nuget-locks/**/packages.lock.json
+            release/bin/native-files.json
+            release/bin/licenses/managed-packages.json
           retention-days: 14
           if-no-files-found: error
