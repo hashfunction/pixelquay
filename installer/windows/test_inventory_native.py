@@ -3,6 +3,9 @@ import importlib.util
 import json
 from pathlib import Path
 import tempfile
+import os
+import subprocess
+from unittest.mock import patch
 import unittest
 
 spec = importlib.util.spec_from_file_location('inventory_native', Path(__file__).with_name('inventory_native.py'))
@@ -66,6 +69,74 @@ class NativeInventoryTests(unittest.TestCase):
                 destination = f'licenses/native/{name}/{relative}'
                 self.assertEqual((output.parent/destination).read_bytes(), (root/relative).read_bytes())
                 self.assertIn({'sourcePath': relative, 'path': destination, 'size': size, 'sha256': digest}, records)
+
+    def test_original_notice_bytes_survive_windows_style_git_checkout(self):
+        source = Path(__file__).resolve().parents[2]
+        relatives = (
+            'installer/windows/test-fixtures/native-notices/clang64/share/licenses/gettext-runtime/COPYING',
+            'installer/windows/test-fixtures/native-notices/clang64/share/licenses/gettext-runtime/libasprintf/COPYING')
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp); repo = root/'repo'; repo.mkdir(); checkout = root/'checkout'; checkout.mkdir()
+            (repo/'.gitattributes').write_bytes((source/'.gitattributes').read_bytes())
+            for relative in relatives:
+                path = repo/relative; path.parent.mkdir(parents=True, exist_ok=True)
+                path.write_bytes((source/relative).read_bytes())
+            def git(*args):
+                subprocess.run(['git', '-C', str(repo), *args], check=True, capture_output=True)
+            git('init', '-q')
+            git('-c', 'core.autocrlf=false', 'add', '.')
+            git('-c', 'core.autocrlf=true', 'checkout-index', '--all', '--prefix='+checkout.as_posix()+'/')
+            for relative in relatives:
+                self.assertEqual((checkout/relative).read_bytes(), (source/relative).read_bytes())
+
+    def test_existing_notice_outputs_are_preserved_before_any_write(self):
+        for kind in ('file-link', 'directory-link', 'regular-file', 'hard-link'):
+            with self.subTest(kind=kind), tempfile.TemporaryDirectory() as tmp:
+                root = Path(tmp)
+                listing, _ = self.fixture(root)
+                output = root/'release/native-files.json'
+                destination = output.parent/'licenses/native/gtk4/clang64/share/licenses/gtk4/COPYING'
+                outside = root/'outside'; outside.mkdir()
+                sentinel = outside/'COPYING'; sentinel.write_bytes(b'preserve outside')
+                if kind == 'directory-link':
+                    destination.parent.parent.mkdir(parents=True)
+                    destination.parent.symlink_to(outside, target_is_directory=True)
+                else:
+                    destination.parent.mkdir(parents=True)
+                    if kind == 'file-link': destination.symlink_to(sentinel)
+                    elif kind == 'hard-link': os.link(sentinel, destination)
+                    else: destination.write_bytes(b'preserve existing')
+                with self.assertRaises((ValueError, FileExistsError)):
+                    module.build_inventory(root/'clang64', listing, output)
+                self.assertEqual(sentinel.read_bytes(), b'preserve outside')
+                if kind == 'regular-file': self.assertEqual(destination.read_bytes(), b'preserve existing')
+                self.assertFalse(output.exists())
+
+    def test_existing_inventory_is_preserved_without_copying_notices(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp); listing, _ = self.fixture(root)
+            output = root/'release/native-files.json'; output.parent.mkdir()
+            output.write_bytes(b'previous evidence')
+            with self.assertRaisesRegex(ValueError, 'already exists'):
+                module.build_inventory(root/'clang64', listing, output)
+            self.assertEqual(output.read_bytes(), b'previous evidence')
+            self.assertFalse((output.parent/'licenses').exists())
+
+    def test_late_notice_file_is_not_overwritten(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp); listing, _ = self.fixture(root)
+            output = root/'release/native-files.json'
+            destination = output.parent/'licenses/native/gtk4/clang64/share/licenses/gtk4/COPYING'
+            original_open = Path.open
+            def late_owner(path, mode='r', *args, **kwargs):
+                if path == destination and mode in ('wb', 'xb'):
+                    with original_open(path, 'wb') as stream: stream.write(b'late owner')
+                return original_open(path, mode, *args, **kwargs)
+            with patch.object(Path, 'open', late_owner):
+                with self.assertRaises((ValueError, FileExistsError)):
+                    module.build_inventory(root/'clang64', listing, output)
+            self.assertEqual(destination.read_bytes(), b'late owner')
+            self.assertFalse(output.exists())
 
     def test_missing_package_owner_fails_closed(self):
         with tempfile.TemporaryDirectory() as tmp:

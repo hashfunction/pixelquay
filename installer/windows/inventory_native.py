@@ -10,9 +10,36 @@ import hashlib
 import json
 from pathlib import Path
 import shutil
+import stat
 
 # Use the same Windows-safe path and regular-file primitives as final packaging.
-from msix_qualification import _checked_path, _digest, _register_path, _regular_stream
+from msix_qualification import _checked_path, _digest, _register_path, _regular_stream, _reject_link
+
+
+
+def _output_directory(path):
+    """Create a missing directory, never follow an existing output link."""
+    try:
+        info = _reject_link(path)
+    except FileNotFoundError:
+        path.mkdir()
+        info = _reject_link(path)
+    if not stat.S_ISDIR(info.st_mode):
+        raise ValueError(f'Expected output directory: {path}')
+
+
+def _exclusive_output(root, relative):
+    """The caller supplies the build root; every child component is checked."""
+    _checked_path(relative)
+    _output_directory(root)
+    parts = relative.split('/')
+    parent = root
+    for part in parts[:-1]:
+        parent = parent/part
+        _output_directory(parent)
+    # Exclusive creation also refuses a file/link appearing after the checks.
+    # Never truncate a pre-existing notice, including a hard-link alias.
+    return (parent/parts[-1]).open('xb')
 
 
 def fields(path):
@@ -97,7 +124,12 @@ def build_inventory(mingw, file_list, output, supplements=None):
                      'sha256': hashlib.sha256(path.read_bytes()).hexdigest(),
                      'packages': [packages[name] for name in names], 'provenanceInputs': provenance})
     if not rows: raise ValueError('Empty native inventory is not a release inventory')
-    output.parent.mkdir(parents=True, exist_ok=True)
+    # Build output may be reused accidentally; refuse existing inventory bytes.
+    if output.exists() or output.is_symlink():
+        raise ValueError(f'Native inventory already exists; use a fresh output: {output}')
+    if not output.parent.exists() and not output.parent.is_symlink():
+        output.parent.parent.mkdir(parents=True, exist_ok=True)
+    _output_directory(output.parent)
     notice_paths = {}
     for name in sorted(used):
         _checked_path(name)
@@ -116,11 +148,10 @@ def build_inventory(mingw, file_list, output, supplements=None):
         for original, source, relative in copies:
             _register_path(relative, notice_paths)
             destination = output.parent/relative
-            destination.parent.mkdir(parents=True, exist_ok=True)
             with _regular_stream(source) as stream:
                 record = _digest(stream)
                 stream.seek(0)
-                with destination.open('wb') as target:
+                with _exclusive_output(output.parent, relative) as target:
                     shutil.copyfileobj(stream, target)
             with _regular_stream(destination) as stream:
                 if _digest(stream) != record:
@@ -129,9 +160,8 @@ def build_inventory(mingw, file_list, output, supplements=None):
                                                    'size': record['bytes'], 'sha256': record['sha256']})
     payload = {'schemaVersion': 1, 'verifiedAt': datetime.now(timezone.utc).isoformat(),
                'provider': 'MSYS2', 'status': 'inventoried-requires-release-license-review', 'files': rows}
-    stage=output.with_suffix('.json.tmp')
-    stage.write_text(json.dumps(payload, indent=2)+'\n', encoding='utf-8')
-    stage.replace(output)
+    with _exclusive_output(output.parent, output.name) as stream:
+        stream.write((json.dumps(payload, indent=2)+'\n').encode('utf-8'))
 
 if __name__ == '__main__':
     parser=argparse.ArgumentParser(description=__doc__)

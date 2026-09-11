@@ -153,3 +153,24 @@ license selections, source supplements and Store flags are unchanged. It does
 not establish full license/source closure or retroactively repair prior native
 artifacts. Exact Windows regeneration, SDK/package verification and coordinator
 source-license reconciliation remain required.
+
+
+### Collector output preservation and Windows fixture bytes
+
+The collector refuses an existing native inventory and creates every notice file
+exclusively. Existing destination files, hard links, symbolic links or directory
+reparse points beneath the caller-provided build output root are preserved and
+cause failure before notice bytes are written through them. An accidentally
+reused output requires a fresh build directory; the collector does not remove
+previous notices or silently replace them. Its final JSON is also created
+exclusively, without a fixed temporary filename that could truncate old bytes.
+The build root is a trusted, isolated caller-provided directory; this does not
+claim protection against a hostile process concurrently replacing its ancestors.
+
+Root independently reproduced the destination-link write-before-rejection on
+`df4026ad`, plus directory-link, regular-file, hard-link and late-file collisions.
+The repair preserves all prior bytes. Existing-inventory refusal is also tested.
+The original 495/65-byte gettext notice fixture is marked `-text`: Windows run
+34607319087 otherwise converted it to 508/66 bytes at checkout. An actual Git
+checkout with core.autocrlf=true reproduced the mismatch before the attribute
+and now preserves both exact archive texts. No notice text or dependency changed.

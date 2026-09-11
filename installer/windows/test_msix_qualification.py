@@ -203,6 +203,7 @@ class StageTests(QualificationFixture):
 		listing = msys / 'inputs.txt'
 		listing.write_text(str(binary)+'\n')
 		shutil.rmtree(self.release / 'bin/licenses/native')
+		(self.release / 'bin/native-files.json').unlink()
 		inventory_native.build_inventory(msys / 'clang64', listing, self.release / 'bin/native-files.json')
 		record = self.stage()
 		for relative in sources:

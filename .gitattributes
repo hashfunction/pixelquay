@@ -9,3 +9,4 @@ licenses/managed/** -whitespace
 installer/windows/record-msys2-inputs.sh text eol=lf
 licenses/managed-source-notices/** -text -whitespace
 licenses/native-supplements/** -text -whitespace
+installer/windows/test-fixtures/native-notices/** -text -whitespace
