@@ -1,4 +1,4 @@
-# Private Windows qualification only. No Store identity, signing or release claim.
+# Windows qualification only. No Store identity, signing or release claim.
 $ErrorActionPreference = 'Stop'
 Set-StrictMode -Version Latest
 if (-not $IsWindows -or $env:CI -ne 'true') { throw 'Requires isolated Windows CI.' }
@@ -31,6 +31,8 @@ Get-ChildItem -Recurse -Filter packages.lock.json | ForEach-Object {
   New-Item -ItemType Directory -Force (Split-Path $target -Parent) | Out-Null
   Copy-Item $_.FullName $target
 }
+# The installed MSYS2 development tree must not satisfy missing package DLLs.
+$env:Path = "$env:SystemRoot\System32;$env:SystemRoot"
 $process = Start-Process (Resolve-Path $expected).Path -PassThru
 try {
   $deadline = (Get-Date).AddSeconds(30)
@@ -40,6 +42,12 @@ try {
     if ($process.HasExited) { throw "PixelQuay exited during startup: $($process.ExitCode)" }
   } until ($process.MainWindowHandle -ne 0 -or (Get-Date) -gt $deadline)
   if ($process.MainWindowHandle -eq 0) { throw 'No native main window appeared.' }
+  $packageRoot = (Resolve-Path 'release').Path + [IO.Path]::DirectorySeparatorChar
+  $windowsRoot = $env:SystemRoot + [IO.Path]::DirectorySeparatorChar
+  $modules = @($process.Modules | ForEach-Object { @{ name=$_.ModuleName; path=$_.FileName } })
+  $outside = @($modules | Where-Object { -not $_.path.StartsWith($packageRoot, [StringComparison]::OrdinalIgnoreCase) -and -not $_.path.StartsWith($windowsRoot, [StringComparison]::OrdinalIgnoreCase) })
+  $modules | ConvertTo-Json -Depth 3 | Set-Content build-evidence/loaded-modules.json -Encoding utf8NoBOM
+  if ($outside.Count -gt 0) { throw "Package loaded modules outside its own directory or Windows: $($outside.path -join ', ')" }
   $evidence = @{ generated_at_utc=[DateTime]::UtcNow.ToString('o'); source_commit=$env:GITHUB_SHA; windows_native_startup=$true; workflow_acceptance=$false; msix_built=$false; submitted=$false; executable_sha256=(Get-FileHash $expected -Algorithm SHA256).Hash; window_title=$process.MainWindowTitle; note='Native main window startup only. Interactive exports, DLL closure/source delivery, MSIX installation and Store gates remain pending.' }
   $evidence | ConvertTo-Json -Depth 4 | Set-Content build-evidence/windows-startup.json -Encoding utf8NoBOM
 } finally {

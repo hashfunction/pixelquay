@@ -30,6 +30,223 @@
         }
       ],
       "note": "The split libraries package omits share/licenses. The exact MSYS2 source archive contains this upstream COPYING. PKGBUILD enables clang64; .SRCINFO was generated for UCRT64 from the same architecture-independent source recipe. This notice supplements license text only; it does not certify complete binary corresponding-source delivery."
+    },
+    {
+      "package": "mingw-w64-clang-x86_64-gnutls",
+      "version": "3.8.13-3",
+      "licenses": [
+        "spdx:GPL-3.0-or-later",
+        "spdx:LGPL-2.1-or-later"
+      ],
+      "upstream": "https://www.gnutls.org/",
+      "licenseFile": "gnutls-3.8.13-3/LICENSES.txt",
+      "licenseSha256": "8f94c11eaadaf97ec9361edfd23a8343d618f155c6f42bce4099b7fa2d9aa6bf",
+      "sourceArchive": {
+        "url": "https://mirror.msys2.org/mingw/sources/mingw-w64-gnutls-3.8.13-3.src.tar.zst",
+        "sha256": "7889cd73810d909642c0f122b40cfe0eaec5b0d2985804f145cd90c6a51c0435"
+      },
+      "upstreamArchive": {
+        "file": "gnutls-3.8.13.tar.xz",
+        "sha256": "ffed8ec1bf09c2426d4f14aae377de4753b53e537d685e604e99a8b16ca9c97e"
+      },
+      "licenseMembers": [
+        {
+          "archiveMember": "gnutls-3.8.13/COPYING",
+          "file": "gnutls-3.8.13-3/01-COPYING",
+          "sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986"
+        },
+        {
+          "archiveMember": "gnutls-3.8.13/COPYING.LESSERv2",
+          "file": "gnutls-3.8.13-3/02-COPYING.LESSERv2",
+          "sha256": "20e50fe7aae3e56378ebf0417d9de904f55a0e61e4df315333e632a4d3555d95"
+        },
+        {
+          "archiveMember": "gnutls-3.8.13/doc/examples/tlsproxy/LICENSE",
+          "file": "gnutls-3.8.13-3/03-LICENSE",
+          "sha256": "b42dbe48110754b99f026ad30e69b1069f826fb07e7c616b526bd1090952fb1b"
+        },
+        {
+          "archiveMember": "gnutls-3.8.13/lib/crau/LICENSE",
+          "file": "gnutls-3.8.13-3/04-LICENSE",
+          "sha256": "b3c9aed2f5750f6bf698c74916d675d1734e12455b96bfdf6f90e23ab01595cd"
+        },
+        {
+          "archiveMember": "gnutls-3.8.13/lib/inih/LICENSE.txt",
+          "file": "gnutls-3.8.13-3/05-LICENSE.txt",
+          "sha256": "9ae3b39e83e9158e44b67733baa3bb2d84e80efdcfb14a5820210a42c7abdf7f"
+        }
+      ],
+      "packagingEvidence": [
+        {
+          "file": "gnutls-3.8.13-3/PKGBUILD",
+          "sha256": "0626ac4c78bd79c915b3ea1213b66fa384e3a6eaa392b407eb230a87c9ef83db"
+        },
+        {
+          "file": "gnutls-3.8.13-3/.SRCINFO",
+          "sha256": "686505275858c640c7f32692e54de8825a8dedec8fed8d2ce95a91d67f9ddd9a"
+        }
+      ],
+      "note": "Installed package has no share/licenses text. This source-notice bundle labels and retains all COPYING/LICENSE members from the exact upstream archive; individual original bytes are also retained. Upstream archive hash matches the MSYS2 source metadata. This supplements notices only and does not certify complete binary corresponding-source delivery."
+    },
+    {
+      "package": "mingw-w64-clang-x86_64-gst-plugins-base",
+      "version": "1.28.7-1",
+      "licenses": [
+        "spdx:LGPL-2.1-or-later"
+      ],
+      "upstream": "https://gstreamer.freedesktop.org/",
+      "licenseFile": "gst-plugins-base-1.28.7-1/LICENSES.txt",
+      "licenseSha256": "7f6dee4801aa35ab7bc1f6dee8bca5b4f528ec213c80b5e4637edd3c3ff43ce6",
+      "sourceArchive": {
+        "url": "https://mirror.msys2.org/mingw/sources/mingw-w64-gst-plugins-base-1.28.7-1.src.tar.zst",
+        "sha256": "5cb51805c6aa201b199aaebf5357d77805018a13625ad4588e1877dd42f47b5f"
+      },
+      "upstreamArchive": {
+        "file": "gst-plugins-base-1.28.7.tar.xz",
+        "sha256": "ed6e5410f496d171818763af2265e7977154bc7f9b827e98acf8c5bed21dd5a7"
+      },
+      "licenseMembers": [
+        {
+          "archiveMember": "gst-plugins-base-1.28.7/COPYING",
+          "file": "gst-plugins-base-1.28.7-1/01-COPYING",
+          "sha256": "ad2eec519ebd4b5df86ea84dff24ae3bfa2edea846a703b58902dd221ae375db"
+        }
+      ],
+      "packagingEvidence": [
+        {
+          "file": "gst-plugins-base-1.28.7-1/PKGBUILD",
+          "sha256": "d09d1791db17277134cbd05382bddf2eec4c127ae5df4797297e65ff7eaab998"
+        },
+        {
+          "file": "gst-plugins-base-1.28.7-1/.SRCINFO",
+          "sha256": "0bd46223b08b90281a8252b59a7d3d221f7aaa2f0ea21752db993dc6f47e3fe2"
+        }
+      ],
+      "note": "Installed package has no share/licenses text. This source-notice bundle labels and retains all COPYING/LICENSE members from the exact upstream archive; individual original bytes are also retained. Upstream archive hash matches the MSYS2 source metadata. This supplements notices only and does not certify complete binary corresponding-source delivery."
+    },
+    {
+      "package": "mingw-w64-clang-x86_64-gstreamer",
+      "version": "1.28.7-1",
+      "licenses": [
+        "spdx:LGPL-2.1-or-later"
+      ],
+      "upstream": "https://gstreamer.freedesktop.org/",
+      "licenseFile": "gstreamer-1.28.7-1/LICENSES.txt",
+      "licenseSha256": "c05a9efc9c8555eca7a8e07d0e9db6968f863504a1f8f19ddcce6d6aeac038ea",
+      "sourceArchive": {
+        "url": "https://mirror.msys2.org/mingw/sources/mingw-w64-gstreamer-1.28.7-1.src.tar.zst",
+        "sha256": "309d782e4a39467b18a973a94a2170e88f133166a33dfb94854397f986a3dcda"
+      },
+      "upstreamArchive": {
+        "file": "gstreamer-1.28.7.tar.xz",
+        "sha256": "787329b2c5758e228a71d926a6dcf960bceaacca3cadd63874ba665dfcda013e"
+      },
+      "licenseMembers": [
+        {
+          "archiveMember": "gstreamer-1.28.7/COPYING",
+          "file": "gstreamer-1.28.7-1/01-COPYING",
+          "sha256": "ad2eec519ebd4b5df86ea84dff24ae3bfa2edea846a703b58902dd221ae375db"
+        }
+      ],
+      "packagingEvidence": [
+        {
+          "file": "gstreamer-1.28.7-1/PKGBUILD",
+          "sha256": "c439ccc8b5d447e9f9462d6d9bc78cec8635389802c600937b14e385997d8e5e"
+        },
+        {
+          "file": "gstreamer-1.28.7-1/.SRCINFO",
+          "sha256": "5c126494ba5f53239888c8b04fd2f3b7c4bddf84bb25febeaa778ea8c28b03d0"
+        }
+      ],
+      "note": "Installed package has no share/licenses text. This source-notice bundle labels and retains all COPYING/LICENSE members from the exact upstream archive; individual original bytes are also retained. Upstream archive hash matches the MSYS2 source metadata. This supplements notices only and does not certify complete binary corresponding-source delivery."
+    },
+    {
+      "package": "mingw-w64-clang-x86_64-libidn2",
+      "version": "2.3.8-4",
+      "licenses": [
+        "spdx:GPL-2.0-or-later",
+        "spdx:LGPL-3.0-or-later"
+      ],
+      "upstream": "https://www.gnu.org/software/libidn/#libidn2",
+      "licenseFile": "libidn2-2.3.8-4/LICENSES.txt",
+      "licenseSha256": "7e08b416d6ff3eb460cd5aeb5566c251c7a35d7c6540c120639b7d4a92f03a4a",
+      "sourceArchive": {
+        "url": "https://mirror.msys2.org/mingw/sources/mingw-w64-libidn2-2.3.8-4.src.tar.zst",
+        "sha256": "cd83e8514fbeb6a4499299b88691b9b9ecc3114cca1e2be4f6c54aab6ae9ddd0"
+      },
+      "upstreamArchive": {
+        "file": "libidn2-2.3.8.tar.gz",
+        "sha256": "f557911bf6171621e1f72ff35f5b1825bb35b52ed45325dcdee931e5d3c0787a"
+      },
+      "licenseMembers": [
+        {
+          "archiveMember": "libidn2-2.3.8/COPYING",
+          "file": "libidn2-2.3.8-4/01-COPYING",
+          "sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986"
+        },
+        {
+          "archiveMember": "libidn2-2.3.8/COPYING.LESSERv3",
+          "file": "libidn2-2.3.8-4/02-COPYING.LESSERv3",
+          "sha256": "e3a994d82e644b03a792a930f574002658412f62407f5fee083f2555c5f23118"
+        },
+        {
+          "archiveMember": "libidn2-2.3.8/COPYING.unicode",
+          "file": "libidn2-2.3.8-4/03-COPYING.unicode",
+          "sha256": "01d621eef165cf4d3d3dbb737aa0699178d94c6f18cf87e9dde6db3ca7790f46"
+        },
+        {
+          "archiveMember": "libidn2-2.3.8/COPYINGv2",
+          "file": "libidn2-2.3.8-4/04-COPYINGv2",
+          "sha256": "edaef632cbb643e4e7a221717a6c441a4c1a7c918e6e4d56debc3d8739b233f6"
+        }
+      ],
+      "packagingEvidence": [
+        {
+          "file": "libidn2-2.3.8-4/PKGBUILD",
+          "sha256": "cf6def1817d6a38b49c66fc4cbe36cd56705d9b8952dae13e06d60da703983ff"
+        },
+        {
+          "file": "libidn2-2.3.8-4/.SRCINFO",
+          "sha256": "0d4afd632026e8886746ccac585d8b5562869477c968553fee8444451b3660f4"
+        }
+      ],
+      "note": "Installed package has no share/licenses text. This source-notice bundle labels and retains all COPYING/LICENSE members from the exact upstream archive; individual original bytes are also retained. Upstream archive hash matches the MSYS2 source metadata. This supplements notices only and does not certify complete binary corresponding-source delivery."
+    },
+    {
+      "package": "mingw-w64-clang-x86_64-p11-kit",
+      "version": "0.26.5-1",
+      "licenses": [
+        "spdx:BSD-3-Clause"
+      ],
+      "upstream": "https://p11-glue.freedesktop.org/p11-kit.html",
+      "licenseFile": "p11-kit-0.26.5-1/LICENSES.txt",
+      "licenseSha256": "6e57653cbe9bdf2c1a210786a081bd19273aa4c2eceffbcf1296f84331ea0e18",
+      "sourceArchive": {
+        "url": "https://mirror.msys2.org/mingw/sources/mingw-w64-p11-kit-0.26.5-1.src.tar.zst",
+        "sha256": "1665c40c6237bbb9be868ecfc00ab65f9038047e4c608126de575ae4ecb5ca12"
+      },
+      "upstreamArchive": {
+        "file": "p11-kit-0.26.5.tar.xz",
+        "sha256": "f2cc09111e44bf3fea58f023180b33acea90aa82d042d6fbb623fbc5ba033bb7"
+      },
+      "licenseMembers": [
+        {
+          "archiveMember": "p11-kit-0.26.5/COPYING",
+          "file": "p11-kit-0.26.5-1/01-COPYING",
+          "sha256": "2e1ba993904df807a10c3eda1e5c272338edc35674b679773a8b3ad460731054"
+        }
+      ],
+      "packagingEvidence": [
+        {
+          "file": "p11-kit-0.26.5-1/PKGBUILD",
+          "sha256": "98fa23420fa595ea71cf51fdb3f5cc2bcd77a0b996e36549057fe82b8c1e723f"
+        },
+        {
+          "file": "p11-kit-0.26.5-1/.SRCINFO",
+          "sha256": "bcf482c0161bd7b0cd1f52cbbd30333bb6dcfadc9467e5b4b50f3dd560e91e52"
+        }
+      ],
+      "note": "Installed package has no share/licenses text. This source-notice bundle labels and retains all COPYING/LICENSE members from the exact upstream archive; individual original bytes are also retained. Upstream archive hash matches the MSYS2 source metadata. This supplements notices only and does not certify complete binary corresponding-source delivery."
     }
   ]
 }
