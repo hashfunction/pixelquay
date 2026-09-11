@@ -167,6 +167,25 @@ exclusively, without a fixed temporary filename that could truncate old bytes.
 The build root is a trusted, isolated caller-provided directory; this does not
 claim protection against a hostile process concurrently replacing its ancestors.
 
+### Independent unpack evidence and temporary-directory ownership
+
+Installation preflight now requires the recorded independently unpacked payload
+count to equal the source-bound payload count and SDK container count. The
+unpacked object must contain exactly `verifiedPayloadFiles`, represented as a
+positive integer; absent, zero, mismatched, string, Boolean, floating-point and
+extra-field records fail before package installation. Ten actual preflight
+variants exercise this contract using the production operation with only its
+Windows guard and platform calls substituted locally. The zero-count case first
+reproduced the accepted malformed record, then passed after the repair.
+
+Temporary signing-directory cleanup records ownership only after exclusive
+directory creation succeeds. An actual creation-collision regression first
+reproduced removal of an existing directory; the repair preserves that directory
+and its sentinel bytes. Both fixtures run from the Windows qualification driver.
+The existing evidence-reporting, six orchestration and ten registration ownership
+scenarios also pass locally, as do the 46 Python tests (one Windows junction skip
+on macOS). These local checks do not replace a fresh Windows installation run.
+
 Root independently reproduced the destination-link write-before-rejection on
 `df4026ad`, plus directory-link, regular-file, hard-link and late-file collisions.
 The repair preserves all prior bytes. Existing-inventory refusal is also tested.

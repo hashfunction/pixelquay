@@ -66,6 +66,27 @@ function Test-PathInside([string]$Candidate, [string]$Root) {
         $candidatePath.StartsWith($rootPath + [IO.Path]::DirectorySeparatorChar, [StringComparison]::OrdinalIgnoreCase)
 }
 
+function Assert-PixelQuayUnpackEvidence([object]$Record) {
+    $payloadProperty = $Record.PSObject.Properties['payload']
+    $unpackedProperty = $Record.PSObject.Properties['unpackedVerification']
+    $containerProperty = $Record.PSObject.Properties['containerVerification']
+    if (-not $payloadProperty -or $payloadProperty.Value -isnot [pscustomobject] -or
+        -not $unpackedProperty -or $unpackedProperty.Value -isnot [pscustomobject] -or
+        -not $containerProperty -or $containerProperty.Value -isnot [pscustomobject]) {
+        throw 'Missing structured payload/container/SDK unpack evidence.'
+    }
+    $count = @($payloadProperty.Value.PSObject.Properties).Count
+    $unpacked = $unpackedProperty.Value.PSObject.Properties['verifiedPayloadFiles']
+    $container = $containerProperty.Value.PSObject.Properties['verifiedPayloadFiles']
+    if ($count -le 0 -or @($unpackedProperty.Value.PSObject.Properties).Count -ne 1 -or
+        -not $unpacked -or -not $container -or
+        -not ($unpacked.Value -is [int] -or $unpacked.Value -is [long]) -or
+        -not ($container.Value -is [int] -or $container.Value -is [long]) -or
+        $unpacked.Value -ne $count -or $container.Value -ne $count) {
+        throw 'SDK unpack and container evidence must contain the exact typed payload count.'
+    }
+}
+
 function Get-RecordPayloadEntry([object]$Record, [string]$Relative) {
     $property = $Record.payload.PSObject.Properties[$Relative]
     if (-not $property) { throw "Installed/package module is absent from the verified payload record: $Relative" }
@@ -259,6 +280,7 @@ function Invoke-PixelQuayInstallQualification([string]$PackagePath, [string]$Rec
         foreach ($field in $expectedIdentity.Keys) {
             if ([string]$state.record.identity.$field -cne [string]$expectedIdentity[$field]) { throw "Qualification identity mismatch: $field" }
         }
+        Assert-PixelQuayUnpackEvidence $state.record
         $state.unsignedPackageSha256 = (Get-FileHash -LiteralPath $state.package -Algorithm SHA256).Hash.ToLowerInvariant()
         if ($state.unsignedPackageSha256 -ne ([string]$state.record.containerVerification.package.sha256).ToLowerInvariant()) { throw 'Unsigned package hash differs from verified package record.' }
         $sdkVersion = [regex]::Escape([string]$state.record.makeAppx.sdkVersion)
@@ -277,8 +299,9 @@ function Invoke-PixelQuayInstallQualification([string]$PackagePath, [string]$Rec
 
     $operations.PrepareSignedCopy = {
         $runnerTemp = if ($env:RUNNER_TEMP) { $env:RUNNER_TEMP } else { [IO.Path]::GetTempPath() }
-        $state.temporary = Join-Path $runnerTemp ('.pixelquay-install-' + [guid]::NewGuid().ToString('N'))
-        New-Item -ItemType Directory -Path $state.temporary -ErrorAction Stop | Out-Null
+        $temporaryCandidate = Join-Path $runnerTemp ('.pixelquay-install-' + [guid]::NewGuid().ToString('N'))
+        New-Item -ItemType Directory -Path $temporaryCandidate -ErrorAction Stop | Out-Null
+        $state.temporary = $temporaryCandidate
         $state.signedCopy = Join-Path $state.temporary 'PixelQuay.Qualification.signed.msix'
         [IO.File]::Copy($state.package, $state.signedCopy, $false)
         $state.publicCertificate = Join-Path $state.temporary 'PixelQuay.Qualification.public.cer'
