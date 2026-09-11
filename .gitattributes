@@ -7,4 +7,4 @@
 licenses/managed/** -whitespace
 
 installer/windows/record-msys2-inputs.sh text eol=lf
-licenses/managed-source-notices/** -whitespace
+licenses/managed-source-notices/** -text -whitespace
