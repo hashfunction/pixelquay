@@ -281,7 +281,7 @@ function Invoke-PixelQuayInstallQualification([string]$PackagePath, [string]$Rec
             -CertStoreLocation 'Cert:\CurrentUser\My' -TextExtension @('2.5.29.37={text}1.3.6.1.5.5.7.3.3','2.5.29.19={text}') `
             -Subject $expectedIdentity.publisher -FriendlyName 'PixelQuay ephemeral CI qualification' -NotAfter (Get-Date).AddHours(12)
         Export-Certificate -Cert $state.certificate -FilePath $state.publicCertificate -Force | Out-Null
-        $state.trustedCertificate = Import-Certificate -FilePath $state.publicCertificate -CertStoreLocation 'Cert:\CurrentUser\TrustedPeople'
+        $state.trustedCertificate = Import-Certificate -FilePath $state.publicCertificate -CertStoreLocation 'Cert:\LocalMachine\TrustedPeople'
         foreach ($arguments in @(
             @('sign','/fd','SHA256','/sha1',$state.certificate.Thumbprint,'/s','My',$state.signedCopy),
             @('verify','/pa','/all','/v',$state.signedCopy)
@@ -438,7 +438,7 @@ function Invoke-PixelQuayInstallQualification([string]$PackagePath, [string]$Rec
 
     $operations.RemoveTrustedCertificate = {
         if ($state.trustedCertificate) {
-            $path = 'Cert:\CurrentUser\TrustedPeople\' + $state.certificate.Thumbprint
+            $path = 'Cert:\LocalMachine\TrustedPeople\' + $state.certificate.Thumbprint
             if (Test-Path -LiteralPath $path) { Remove-Item -LiteralPath $path -Force -ErrorAction Stop }
             if (Test-Path -LiteralPath $path) { throw 'Trusted public certificate remains after cleanup.' }
         }
@@ -464,6 +464,19 @@ function Invoke-PixelQuayInstallQualification([string]$PackagePath, [string]$Rec
         # An output collision is intentionally not overwritten and cannot receive evidence.
         throw $result.primary_error
     }
+    $evidenceErrors = [Collections.Generic.List[string]]::new()
+    $unsignedUnchanged = $false
+    if ($state.unsignedPackageSha256 -and $state.package) {
+        try {
+            $unsignedUnchanged = (Get-FileHash -LiteralPath $state.package -Algorithm SHA256 -ErrorAction Stop).Hash.ToLowerInvariant() -eq $state.unsignedPackageSha256
+            if (-not $unsignedUnchanged) { $evidenceErrors.Add('Unsigned package changed after qualification.') }
+        } catch {
+            $evidenceErrors.Add('Unsigned package final verification failed: ' + $_.Exception.Message)
+        }
+    } elseif ($result.installation_qualification_passed) {
+        $evidenceErrors.Add('Successful core qualification did not retain the unsigned package identity.')
+    }
+    $qualificationPassed = $result.installation_qualification_passed -and $unsignedUnchanged -and $evidenceErrors.Count -eq 0
     $evidence = [ordered]@{
         schema_version = 1
         generated_at_utc = [DateTime]::UtcNow.ToString('o')
@@ -478,7 +491,7 @@ function Invoke-PixelQuayInstallQualification([string]$PackagePath, [string]$Rec
         diagnostic_clean_close_verified = $state.diagnosticCleanClose
         unsigned_package_sha256 = $state.unsignedPackageSha256
         signed_copy_sha256 = $state.signedPackageSha256
-        unsigned_package_unchanged = if ($state.unsignedPackageSha256 -and $state.package) { (Get-FileHash -LiteralPath $state.package -Algorithm SHA256).Hash.ToLowerInvariant() -eq $state.unsignedPackageSha256 } else { $false }
+        unsigned_package_unchanged = $unsignedUnchanged
         signtool = $state.signTool
         certificate_private_key_exported = $false
         executable_sha256 = $state.executableSha256
@@ -488,7 +501,7 @@ function Invoke-PixelQuayInstallQualification([string]$PackagePath, [string]$Rec
         window = $state.window
         clean_close_verified = $state.cleanClose
         uninstall_verified = $state.uninstallVerified
-        installation_qualification_passed = $result.installation_qualification_passed
+        installation_qualification_passed = $qualificationPassed
         workflow_acceptance = $false
         export_workflow_tested = $false
         upgrade_tested = $false
@@ -497,10 +510,15 @@ function Invoke-PixelQuayInstallQualification([string]$PackagePath, [string]$Rec
         public_release = $false
         primary_error = $result.primary_error
         cleanup_errors = @($result.cleanup_errors)
+        evidence_errors = @($evidenceErrors)
     }
-    Write-NewUtf8Json (Join-Path $state.output 'installation-qualification.json') $evidence
-    if (-not $result.installation_qualification_passed) {
-        throw "PixelQuay installation qualification failed. Primary: $($result.primary_error); cleanup: $($result.cleanup_errors -join '; ')"
+    try {
+        Write-NewUtf8Json (Join-Path $state.output 'installation-qualification.json') $evidence
+    } catch {
+        throw "Could not preserve qualification JSON: $($_.Exception.Message). Primary: $($result.primary_error); cleanup: $($result.cleanup_errors -join '; '); evidence: $($evidenceErrors -join '; ')"
+    }
+    if (-not $qualificationPassed) {
+        throw "PixelQuay installation qualification failed. Primary: $($result.primary_error); cleanup: $($result.cleanup_errors -join '; '); evidence: $($evidenceErrors -join '; ')"
     }
     Write-Output 'PASS: broker-activated exact package, verified owned modules/window/close, uninstalled, and cleaned certificate state.'
 }

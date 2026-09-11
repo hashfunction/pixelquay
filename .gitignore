@@ -39,3 +39,7 @@ xdg/pinta.appdata.xml
 .vscode
 
 __pycache__/
+
+# Qualification evidence and restore-generated locks are archived separately.
+/build-evidence/
+**/packages.lock.json

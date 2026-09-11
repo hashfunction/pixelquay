@@ -10,6 +10,7 @@ function Invoke-Checked([string]$Program, [string[]]$Arguments) {
 $powerShell = (Get-Process -Id $PID).Path
 Invoke-Checked python @('installer/windows/test_msix_qualification.py')
 Invoke-Checked $powerShell @('-NoLogo','-NoProfile','-File','installer/windows/test_qualify_msix_install.ps1')
+Invoke-Checked $powerShell @('-NoLogo','-NoProfile','-File','installer/windows/test_msix_evidence.ps1')
 $sourceCommit = (git rev-parse HEAD).Trim()
 if ($LASTEXITCODE -ne 0 -or $sourceCommit -cne $env:GITHUB_SHA) { throw 'Source commit differs from this qualification run.' }
 $sdkVersion = '10.0.26100.0'
