@@ -224,6 +224,8 @@ function Invoke-PixelQuayInstallQualification([string]$PackagePath, [string]$Rec
         publicCertificate = $null; certificate = $null; trustedCertificate = $null
         installed = $null; installedByUs = $false; process = $null
         installAttempted = $false; brokerProcessId = 0
+        addCompleted = $false; ownedPackageFullName = $null
+        preflightPackageFullNames = @(); residualPackageFullNames = @()
         unsignedPackageSha256 = $null; signedPackageSha256 = $null; signTool = $null
         aumid = $null; processPackageFullName = $null; modules = @(); window = $null
         executableSha256 = $null; coreclrSha256 = $null; hostfxrSha256 = $null
@@ -269,6 +271,7 @@ function Invoke-PixelQuayInstallQualification([string]$PackagePath, [string]$Rec
             sdk_version = [string]$state.record.makeAppx.sdkVersion
         }
         $existing = @(Get-AppxPackage -Name $expectedIdentity.packageName -ErrorAction Stop)
+        $state.preflightPackageFullNames = @($existing | ForEach-Object { [string]$_.PackageFullName })
         if ($existing.Count -gt 0) { throw 'A matching PixelQuay qualification package is already installed; refusing to replace or remove it.' }
     }.GetNewClosure()
 
@@ -309,13 +312,23 @@ function Invoke-PixelQuayInstallQualification([string]$PackagePath, [string]$Rec
     $operations.Install = {
         $state.installAttempted = $true
         Add-AppxPackage -Path $state.signedCopy -ErrorAction Stop
-        $state.installedByUs = $true
+        $state.addCompleted = $true
         $matches = @(Get-AppxPackage -Name $expectedIdentity.packageName -ErrorAction Stop)
         if ($matches.Count -ne 1) { throw 'Expected exactly one installed qualification package.' }
-        $state.installed = $matches[0]
-        if ([string]$state.installed.Publisher -cne $expectedIdentity.publisher -or [string]$state.installed.Version -cne $expectedIdentity.version -or [string]$state.installed.Architecture -cne 'X64') {
+        $candidate = $matches[0]
+        if ([string]$candidate.Name -cne $expectedIdentity.packageName -or
+            [string]$candidate.Publisher -cne $expectedIdentity.publisher -or
+            [string]$candidate.Version -cne $expectedIdentity.version -or
+            [string]$candidate.Architecture -cne 'X64' -or
+            -not ([string]$candidate.PackageFullName).StartsWith($expectedIdentity.packageName + '_' + $expectedIdentity.version + '_x64_', [StringComparison]::Ordinal) -or
+            -not [string]$candidate.PackageFamilyName) {
             throw 'Installed publisher/version/architecture differs from qualification identity.'
         }
+        # A successful Add is necessary but not sufficient ownership evidence.
+        # Retain one exact observed full name as the only removal capability.
+        $state.installed = $candidate
+        $state.ownedPackageFullName = [string]$candidate.PackageFullName
+        $state.installedByUs = $true
         $state.aumid = [string]$state.installed.PackageFamilyName + '!' + $expectedIdentity.applicationId
         foreach ($relative in @('bin/PixelQuay.exe','bin/coreclr.dll','bin/hostfxr.dll','bin/PixelQuay.runtimeconfig.json')) {
             $expected = Get-RecordPayloadEntry $state.record $relative
@@ -409,7 +422,8 @@ function Invoke-PixelQuayInstallQualification([string]$PackagePath, [string]$Rec
     }.GetNewClosure()
 
     $operations.UninstallAndVerify = {
-        Remove-AppxPackage -Package $state.installed.PackageFullName -ErrorAction Stop
+        if (-not $state.installedByUs -or -not $state.ownedPackageFullName) { throw 'Exact installed package ownership was not established.' }
+        Remove-AppxPackage -Package $state.ownedPackageFullName -ErrorAction Stop
         if (@(Get-AppxPackage -Name $expectedIdentity.packageName -ErrorAction Stop).Count -ne 0) { throw 'Package registration remains after uninstall.' }
         $state.uninstallVerified = $true
     }.GetNewClosure()
@@ -426,14 +440,18 @@ function Invoke-PixelQuayInstallQualification([string]$PackagePath, [string]$Rec
 
     $operations.RemoveOwnedPackage = {
         if ($state.installAttempted) {
-            $remaining = @(Get-AppxPackage -Name $expectedIdentity.packageName -ErrorAction Stop | Where-Object {
-                [string]$_.Publisher -ceq $expectedIdentity.publisher -and [string]$_.Version -ceq $expectedIdentity.version
-            })
-            foreach ($owned in $remaining) { Remove-AppxPackage -Package $owned.PackageFullName -ErrorAction Stop }
-            if (@(Get-AppxPackage -Name $expectedIdentity.packageName -ErrorAction Stop | Where-Object {
-                [string]$_.Publisher -ceq $expectedIdentity.publisher -and [string]$_.Version -ceq $expectedIdentity.version
-            }).Count -gt 0) {
-                throw 'Owned package registration remains after cleanup.'
+            $remaining = @(Get-AppxPackage -Name $expectedIdentity.packageName -ErrorAction Stop)
+            $state.residualPackageFullNames = @($remaining | ForEach-Object { [string]$_.PackageFullName })
+            if ($state.installedByUs -and $state.ownedPackageFullName) {
+                $owned = @($remaining | Where-Object { [string]$_.PackageFullName -ceq $state.ownedPackageFullName })
+                if ($owned.Count -gt 1) { throw 'Ambiguous duplicate registration state; all registrations preserved.' }
+                if ($owned.Count -eq 1) { Remove-AppxPackage -Package $state.ownedPackageFullName -ErrorAction Stop }
+            }
+            $remaining = @(Get-AppxPackage -Name $expectedIdentity.packageName -ErrorAction Stop)
+            $state.residualPackageFullNames = @($remaining | ForEach-Object { [string]$_.PackageFullName })
+            if ($remaining.Count) { throw ('Unowned or unresolved package registrations preserved: ' + ($state.residualPackageFullNames -join ', ')) }
+            if ($state.addCompleted -and -not $state.installedByUs) {
+                throw 'Add-AppxPackage completed but exact registration ownership was not established; package residue cannot be ruled out.'
             }
         }
     }.GetNewClosure()
@@ -487,6 +505,11 @@ function Invoke-PixelQuayInstallQualification([string]$PackagePath, [string]$Rec
         identity = $expectedIdentity
         aumid = $state.aumid
         package_full_name = if ($state.installed) { [string]$state.installed.PackageFullName } else { $null }
+        add_appx_completed = $state.addCompleted
+        registration_ownership_established = $state.installedByUs
+        owned_package_full_name = $state.ownedPackageFullName
+        preflight_package_full_names = @($state.preflightPackageFullNames)
+        residual_package_full_names = @($state.residualPackageFullNames)
         activated_process_package_full_name = $state.processPackageFullName
         diagnostic_process_package_full_name = $state.diagnosticPackageFullName
         diagnostic_stderr = $state.diagnosticStderr
