@@ -28,14 +28,16 @@ function Invoke-PixelQuayQualificationCore([Collections.IDictionary]$Operations)
     $cleanupErrors = [Collections.Generic.List[string]]::new()
     try {
         foreach ($name in @('Preflight','PrepareSignedCopy','Install','CaptureInstalledStderr','ActivateAndVerify','CloseCleanly','UninstallAndVerify')) {
-            & $Operations[$name]
+            # Native tools such as SignTool emit stdout. Keep it in the host
+            # log without turning this function's structured result into an array.
+            & $Operations[$name] | Out-Host
         }
     } catch {
         $primaryError = $_.Exception.Message
     } finally {
         foreach ($name in @('StopOwnedProcess','RemoveOwnedPackage','RemoveTrustedCertificate','RemovePersonalCertificate','RemoveTemporaryFiles')) {
             try {
-                & $Operations[$name]
+                & $Operations[$name] | Out-Host
             } catch {
                 $cleanupErrors.Add("${name}: $($_.Exception.Message)")
             }

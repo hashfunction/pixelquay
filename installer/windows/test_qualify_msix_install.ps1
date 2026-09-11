@@ -8,13 +8,14 @@ function Assert-True([bool]$Condition, [string]$Message) {
     if (-not $Condition) { throw "ASSERTION FAILED: $Message" }
 }
 
-function New-FakeOperations([string]$PrimaryFailure, [string[]]$CleanupFailures) {
+function New-FakeOperations([string]$PrimaryFailure, [string[]]$CleanupFailures, [switch]$Noisy) {
     $global:PixelQuayQualificationTestCalls = [Collections.Generic.List[string]]::new()
     $operations = [ordered]@{}
     foreach ($name in @('Preflight','PrepareSignedCopy','Install','CaptureInstalledStderr','ActivateAndVerify','CloseCleanly','UninstallAndVerify')) {
         $operationName = $name
         $operations[$name] = {
             $global:PixelQuayQualificationTestCalls.Add($operationName)
+            if ($Noisy) { Write-Output "native stdout:$operationName"; Write-Output ([pscustomobject]@{ unrelated_native_output=$true }) }
             if ($PrimaryFailure -eq $operationName) { throw "primary:$operationName" }
         }.GetNewClosure()
     }
@@ -22,6 +23,7 @@ function New-FakeOperations([string]$PrimaryFailure, [string[]]$CleanupFailures)
         $operationName = $name
         $operations[$name] = {
             $global:PixelQuayQualificationTestCalls.Add($operationName)
+            if ($Noisy) { Write-Output "cleanup stdout:$operationName"; Write-Output 7 }
             if ($CleanupFailures -contains $operationName) { throw "cleanup:$operationName" }
         }.GetNewClosure()
     }
@@ -53,6 +55,15 @@ $result = Invoke-PixelQuayQualificationCore -Operations (New-FakeOperations 'Pre
 Assert-True (-not $result.installation_qualification_passed) 'preexisting-install/preflight failure must fail qualification'
 Assert-True (($global:PixelQuayQualificationTestCalls -join ',') -eq 'Preflight,StopOwnedProcess,RemoveOwnedPackage,RemoveTrustedCertificate,RemovePersonalCertificate,RemoveTemporaryFiles') 'preflight failure must skip mutation and still execute safe cleanup adapters'
 
+$result = @(Invoke-PixelQuayQualificationCore -Operations (New-FakeOperations '' @() -Noisy))
+Assert-True ($result.Count -eq 1) 'native stdout must not contaminate the one structured result'
+Assert-True $result[0].installation_qualification_passed 'noisy success must retain its success result'
+$result = @(Invoke-PixelQuayQualificationCore -Operations (New-FakeOperations 'ActivateAndVerify' @('RemovePersonalCertificate') -Noisy))
+Assert-True ($result.Count -eq 1) 'noisy failure must retain only one structured result'
+Assert-True (-not $result[0].installation_qualification_passed) 'noisy failure cannot pass'
+Assert-True ($result[0].primary_error -eq 'primary:ActivateAndVerify') 'native stdout must not erase primary failure'
+Assert-True ($result[0].cleanup_errors.Count -eq 1) 'native stdout must not erase cleanup failure'
+
 $packageRoot = Join-Path ([IO.Path]::GetTempPath()) 'package'
 $insidePackage = Test-PathInside -Candidate (Join-Path $packageRoot 'bin/PixelQuay.exe') -Root $packageRoot
 $siblingPackage = Test-PathInside -Candidate (Join-Path ([IO.Path]::GetTempPath()) 'package-other/foreign.dll') -Root $packageRoot
@@ -75,4 +86,4 @@ Add-PixelQuayActivationTypes
 Assert-True ($null -ne ('PixelQuayQualification.NativePackageProbe' -as [type])) 'GetPackageFullName helper types must compile'
 
 Remove-Variable PixelQuayQualificationTestCalls -Scope Global
-Write-Output 'PASS: 4 installation orchestration scenarios plus path/evidence/native-helper checks.'
+Write-Output 'PASS: 6 installation orchestration scenarios plus path/evidence/native-helper checks.'
