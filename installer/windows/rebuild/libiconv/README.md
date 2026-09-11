@@ -26,8 +26,15 @@ Windows run `34645193416` proved the original recipe through its native tests bu
 the modified recipe stopped in `prepare()`: the local patch named paths relative
 to the source archive's parent while the recipe runs `patch -p1` from inside
 `libiconv-1.19`. The patch now names paths relative to that production working
-directory, and the source regression applies it from the same directory. A fresh
-Windows run is required before the two-DLL proof can be accepted.
+directory, and the source regression applies it from the same directory.
+
+Windows run `34646807172` then completed both original and modified native test
+suites, package builds, exact-path probes, and wrong-marker-mode rejection. Its
+receipt verifier rejected the valid binary-mode `sha256sum` separator emitted by
+MSYS2 because it accepted only the text-mode separator. Both canonical separators
+are now accepted while digest width, exact DLL names, duplicate rejection, and
+post-test rehashing remain strict. A fresh Windows run is required before the
+two-DLL proof can be accepted.
 
 This proof can establish that both libraries can be rebuilt and replaced at their
 normal ABI names. It does not rebuild PixelQuay, create an MSIX, prove the installed

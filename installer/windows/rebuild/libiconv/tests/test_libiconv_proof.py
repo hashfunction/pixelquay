@@ -98,6 +98,20 @@ class LibiconvProofTests(unittest.TestCase):
             b.write_bytes(b"changed")
             with self.assertRaises(ValueError): receipt.verify_post_test_hashes({a.name: a, b.name: b}, hashes)
 
+    def test_post_test_hashes_accept_sha256sum_binary_marker(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            a = root / "libcharset-1.dll"; b = root / "libiconv-2.dll"
+            a.write_bytes(b"a"); b.write_bytes(b"b")
+            hashes = root / "source-tests-before.sha256"
+            hashes.write_bytes(
+                (
+                    f"{receipt.sha256(a)} *libcharset-1.dll\n"
+                    f"{receipt.sha256(b)} *libiconv-2.dll\n"
+                ).encode("ascii")
+            )
+            self.assertEqual(set(receipt.verify_post_test_hashes({a.name: a, b.name: b}, hashes)), {a.name, b.name})
+
     def test_probe_record_requires_exact_typed_variant_and_both_libraries(self):
         value = {"schemaVersion": 1, "mode": "original", "libraryPathMatched": True,
                  "markersPresent": False, "libraries": {"libcharset-1.dll": {"apiChecks": 2}, "libiconv-2.dll": {"apiChecks": 6}}}

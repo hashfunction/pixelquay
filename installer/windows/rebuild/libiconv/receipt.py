@@ -28,7 +28,7 @@ def verify_post_test_hashes(libraries, evidence):
     lines = Path(evidence).read_text(encoding="ascii").splitlines()
     actual = {}
     for line in lines:
-        match = re.fullmatch(r"([0-9a-f]{64})  (libcharset-1\.dll|libiconv-2\.dll)", line)
+        match = re.fullmatch(r"([0-9a-f]{64}) [ *](libcharset-1\.dll|libiconv-2\.dll)", line)
         if not match or match.group(2) in actual: raise ValueError("Malformed/duplicate post-test hash")
         actual[match.group(2)] = match.group(1)
     if set(actual) != set(libraries): raise ValueError("Both post-test DLL hashes required")
