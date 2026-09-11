@@ -23,8 +23,30 @@ def fields(path):
     return result
 
 
-def build_inventory(mingw, file_list, output):
+def source_license(package, manifest):
+    """Use a reviewed source notice only for the exact split package recorded."""
+    if not manifest.is_file():
+        raise ValueError(f"Missing installed package license text: {package['name']}")
+    data = json.loads(manifest.read_text(encoding='utf-8'))
+    matches = [p for p in data['packages'] if p['package'] == package['name']]
+    if len(matches) != 1:
+        raise ValueError(f"Missing installed package license text: {package['name']}")
+    record = matches[0]
+    if data.get('schemaVersion') != 1 or any(record[k] != package[k] for k in ('version', 'licenses', 'upstream')):
+        raise ValueError(f"License supplement metadata mismatch: {package['name']}")
+    relative = Path(record['licenseFile'])
+    path = (manifest.parent/relative).resolve()
+    if relative.is_absolute() or not path.is_relative_to(manifest.parent.resolve()):
+        raise ValueError(f"Invalid license supplement path: {package['name']}")
+    if not path.is_file() or hashlib.sha256(path.read_bytes()).hexdigest() != record['licenseSha256']:
+        raise ValueError(f"License supplement hash mismatch: {package['name']}")
+    package['licenseSupplement'] = record
+    return path
+
+
+def build_inventory(mingw, file_list, output, supplements=None):
     mingw, output = Path(mingw).resolve(), Path(output)
+    supplements = Path(supplements) if supplements is not None else Path(__file__).resolve().parents[2]/'licenses/native-supplements/sources.json'
     msys = mingw.parent
     database = msys/'var/lib/pacman/local'
     if not database.is_dir():
@@ -43,7 +65,7 @@ def build_inventory(mingw, file_list, output):
         }
         for filename in files: owners[filename.rstrip('/')] = name
 
-    rows, used = [], set()
+    rows, used, supplemental_files = [], set(), {}
     paths = sorted(set(Path(p.strip()).resolve() for p in Path(file_list).read_text(encoding='utf-8-sig').splitlines() if p.strip()))
     for path in paths:
         if not path.is_file(): raise ValueError(f'Missing native input: {path}')
@@ -63,8 +85,10 @@ def build_inventory(mingw, file_list, output):
             if not package['name'] or not package['version'] or not package['licenses'] or not package['upstream']:
                 raise ValueError(f'Missing version/license/source metadata: {name}')
             license_files = [msys/f for f in package['licenseFiles']]
-            if not license_files or any(not f.is_file() for f in license_files):
+            if any(not f.is_file() for f in license_files):
                 raise ValueError(f'Missing installed package license text: {name}')
+            if not license_files:
+                supplemental_files[name] = source_license(package, supplements)
         used.update(names)
         rows.append({'path': path.relative_to(mingw).as_posix(), 'size': path.stat().st_size,
                      'sha256': hashlib.sha256(path.read_bytes()).hexdigest(),
@@ -72,6 +96,11 @@ def build_inventory(mingw, file_list, output):
     if not rows: raise ValueError('Empty native inventory is not a release inventory')
     output.parent.mkdir(parents=True, exist_ok=True)
     for name in used:
+        if name in supplemental_files:
+            source = supplemental_files[name]
+            destination = output.parent/'licenses/native'/name/source.name
+            destination.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copyfile(source, destination)
         for rel in packages[name]['licenseFiles']:
             destination=output.parent/'licenses/native'/name/Path(rel).name
             destination.parent.mkdir(parents=True, exist_ok=True)

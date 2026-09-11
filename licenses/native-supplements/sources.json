@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "packages": [
+    {
+      "package": "mingw-w64-clang-x86_64-gst-plugins-bad-libs",
+      "version": "1.28.7-1",
+      "licenses": [
+        "spdx:LGPL-2.1-or-later"
+      ],
+      "upstream": "https://gstreamer.freedesktop.org/",
+      "licenseFile": "gst-plugins-bad-1.28.7/COPYING",
+      "licenseSha256": "dc626520dcd53a22f727af3ee42c770e56c97a64fe3adb063799d8ab032fe551",
+      "sourceArchive": {
+        "url": "https://mirror.msys2.org/mingw/sources/mingw-w64-gst-plugins-bad-1.28.7-1.src.tar.zst",
+        "sha256": "03371e6b989f67c5caa01ebf141798394cc52c8e27d6d7ce04ed31c71a52963f"
+      },
+      "upstreamArchive": {
+        "file": "gst-plugins-bad-1.28.7.tar.xz",
+        "sha256": "dc525383c18b2c265bbe6a43d498656cd918aaa130aa4e3abeabcdaa741c3ffe",
+        "licenseMember": "gst-plugins-bad-1.28.7/COPYING"
+      },
+      "packagingEvidence": [
+        {
+          "file": "gst-plugins-bad-1.28.7/PKGBUILD",
+          "sha256": "b85e9d76319d0580f9e55e0790fe2972531a8275e42fef7bd5d79e51e1faa1bd"
+        },
+        {
+          "file": "gst-plugins-bad-1.28.7/.SRCINFO",
+          "sha256": "e3dfbbecc79efde70d13bcc66003ba6a9f1f1b1cdbc5970f11ca5a3a9a0533d4"
+        }
+      ],
+      "note": "The split libraries package omits share/licenses. The exact MSYS2 source archive contains this upstream COPYING. PKGBUILD enables clang64; .SRCINFO was generated for UCRT64 from the same architecture-independent source recipe. This notice supplements license text only; it does not certify complete binary corresponding-source delivery."
+    }
+  ]
+}
