@@ -14,10 +14,20 @@ import unittest
 import zipfile
 
 import msix_qualification as msix
+import inventory_native
 
 
 def sha(data):
 	return hashlib.sha256(data).hexdigest()
+
+
+def native_package(name, data):
+	source = f'clang64/share/licenses/{name}/COPYING'
+	return {'name': name, 'version': '1.0', 'licenses': ['MIT'],
+		'upstream': 'https://example.invalid/' + name,
+		'licenseFiles': [source],
+		'includedLicenseFiles': [{'sourcePath': source,
+			'path': f'licenses/native/{name}/{source}', 'size': len(data), 'sha256': sha(data)}]}
 
 
 class QualificationFixture(unittest.TestCase):
@@ -36,7 +46,7 @@ class QualificationFixture(unittest.TestCase):
 			'bin/hostfxr.dll': b'host fxr',
 			'bin/native.dll': b'native dependency',
 			'bin/licenses/managed/example.txt': b'example notice',
-			'bin/licenses/native/native-fixture/COPYING': b'native fixture notice',
+			'bin/licenses/native/native-fixture/clang64/share/licenses/native-fixture/COPYING': b'native fixture notice',
 			'share/locale/example.mo': b'locale',
 		}
 		for relative, data in files.items():
@@ -50,8 +60,7 @@ class QualificationFixture(unittest.TestCase):
 			'files': [{
 				'path': 'bin/native.dll', 'size': len(files['bin/native.dll']),
 				'sha256': sha(files['bin/native.dll']),
-				'packages': [{'name': 'native-fixture', 'version': '1.0',
-					'licenses': ['MIT'], 'upstream': 'https://example.invalid/native'}],
+				'packages': [native_package('native-fixture', b'native fixture notice')],
 				'provenanceInputs': ['bin/native.dll'],
 			}],
 		}
@@ -133,9 +142,98 @@ class StageTests(QualificationFixture):
 			self.stage()
 
 	def test_stage_rejects_missing_native_notice(self):
-		(self.release / 'bin/licenses/native/native-fixture/COPYING').unlink()
+		(self.release / 'bin/licenses/native/native-fixture/clang64/share/licenses/native-fixture/COPYING').unlink()
 		with self.assertRaisesRegex(ValueError, '(?i)native.*notice'):
 			self.stage()
+
+	def test_stage_rejects_changed_native_notice_despite_nonempty_directory(self):
+		path = self.release / 'bin/licenses/native/native-fixture/clang64/share/licenses/native-fixture/COPYING'
+		path.write_bytes(b'replacement notice')
+		with self.assertRaisesRegex(ValueError, '(?i)native.*notice'):
+			self.stage()
+
+	def test_stage_requires_complete_unambiguous_native_notice_mapping(self):
+		path = self.release / 'bin/native-files.json'
+		original = path.read_text()
+		for corruption in ('missing-map', 'omitted-source', 'extra-source', 'duplicate-source', 'duplicate-map', 'wrong-source', 'flattened-path', 'wrong-hash', 'wrong-size', 'unsafe-source', 'case-alias'):
+			with self.subTest(corruption=corruption):
+				inventory = json.loads(original)
+				package = inventory['files'][0]['packages'][0]
+				mapping = package['includedLicenseFiles']
+				if corruption == 'missing-map': del package['includedLicenseFiles']
+				elif corruption == 'omitted-source': package['licenseFiles'] = []
+				elif corruption == 'extra-source': package['licenseFiles'].append('clang64/share/licenses/native-fixture/nested/COPYING')
+				elif corruption == 'duplicate-source': package['licenseFiles'].append(package['licenseFiles'][0])
+				elif corruption == 'duplicate-map': mapping.append(dict(mapping[0]))
+				elif corruption == 'wrong-source': mapping[0]['sourcePath'] = 'clang64/share/licenses/other/COPYING'
+				elif corruption == 'flattened-path': mapping[0]['path'] = 'licenses/native/native-fixture/COPYING'
+				elif corruption == 'wrong-hash': mapping[0]['sha256'] = '0' * 64
+				elif corruption == 'wrong-size': mapping[0]['size'] += 1
+				elif corruption == 'unsafe-source': package['licenseFiles'][0] = '../clang64/share/licenses/native-fixture/COPYING'
+				elif corruption == 'case-alias':
+					original_source = 'clang64/share/licenses/native-fixture/copying'
+					package['licenseFiles'].append(original_source)
+					mapping.append({**mapping[0], 'sourcePath': original_source, 'path': 'licenses/native/native-fixture/' + original_source})
+				path.write_text(json.dumps(inventory))
+				with self.assertRaisesRegex(ValueError, '(?i)native.*notice'):
+					msix._validate_native_inventory(self.release, inventory)
+		path.write_text(original)
+
+	def test_stage_rejects_unmapped_native_notice_even_with_valid_required_copy(self):
+		path = self.release / 'bin/licenses/native/native-fixture/extra-COPYING'
+		path.write_bytes(b'unmapped leftover')
+		with self.assertRaisesRegex(ValueError, '(?i)native.*notice'):
+			self.stage()
+
+	def test_generated_nested_notice_inventory_survives_complete_package_stage(self):
+		msys = self.root / 'msys'
+		entry = msys / 'var/lib/pacman/local/gettext-runtime-1.0-1'
+		entry.mkdir(parents=True)
+		name = 'mingw-w64-clang-x86_64-gettext-runtime'
+		(entry / 'desc').write_text('%NAME%\n'+name+'\n\n%VERSION%\n1.0-1\n\n%LICENSE%\nGPL-3.0-or-later\nLGPL-2.1-or-later\n\n%URL%\nhttps://www.gnu.org/software/gettext/\n')
+		sources = ('clang64/share/licenses/gettext-runtime/COPYING', 'clang64/share/licenses/gettext-runtime/libasprintf/COPYING')
+		(entry / 'files').write_text('%FILES%\nclang64/bin/native.dll\n'+'\n'.join(sources)+'\n')
+		binary = msys / 'clang64/bin/native.dll'
+		binary.parent.mkdir(parents=True)
+		binary.write_bytes((self.release / 'bin/native.dll').read_bytes())
+		for relative in sources:
+			path = msys / relative
+			path.parent.mkdir(parents=True, exist_ok=True)
+			path.write_bytes((Path(__file__).parent / 'test-fixtures/native-notices' / relative).read_bytes())
+		listing = msys / 'inputs.txt'
+		listing.write_text(str(binary)+'\n')
+		shutil.rmtree(self.release / 'bin/licenses/native')
+		inventory_native.build_inventory(msys / 'clang64', listing, self.release / 'bin/native-files.json')
+		record = self.stage()
+		for relative in sources:
+			copied = f'bin/licenses/native/{name}/{relative}'
+			self.assertEqual((self.root / 'stage' / copied).read_bytes(), (msys / relative).read_bytes())
+			self.assertEqual(record['payload'][copied], {'bytes': (msys / relative).stat().st_size, 'sha256': sha((msys / relative).read_bytes())})
+		# A still-nonempty directory cannot conceal either absent original notice.
+		(self.release / f'bin/licenses/native/{name}/{sources[0]}').unlink()
+		with self.assertRaisesRegex(ValueError, '(?i)native.*notice'):
+			msix._validate_native_inventory(self.release, json.loads((self.release / 'bin/native-files.json').read_text()))
+
+	def test_native_supplement_mapping_preserves_exact_source_choice_and_hash(self):
+		inventory = json.loads((self.release / 'bin/native-files.json').read_text())
+		package = inventory['files'][0]['packages'][0]
+		old = self.release / 'bin' / package['includedLicenseFiles'][0]['path']
+		data = old.read_bytes()
+		shutil.rmtree(self.release / 'bin/licenses/native')
+		path = self.release / 'bin/licenses/native/native-fixture/COPYING'
+		path.parent.mkdir(parents=True)
+		path.write_bytes(data)
+		package['licenseFiles'] = []
+		package['licenseSupplement'] = {**{key: package[key] for key in ('version', 'licenses', 'upstream')},
+			'package': package['name'], 'licenseFile': 'reviewed-source/COPYING', 'licenseSha256': sha(data)}
+		package['includedLicenseFiles'] = [{'sourcePath': 'reviewed-source/COPYING', 'path': 'licenses/native/native-fixture/COPYING', 'size': len(data), 'sha256': sha(data)}]
+		msix._validate_native_inventory(self.release, inventory)
+		# Coherently changing the copied bytes and its mapping must still fail
+		# against the exact already-reviewed supplemental source digest.
+		path.write_bytes(b'changed supplemental notice')
+		package['includedLicenseFiles'][0].update(size=path.stat().st_size, sha256=sha(path.read_bytes()))
+		with self.assertRaisesRegex(ValueError, '(?i)native.*notice'):
+			msix._validate_native_inventory(self.release, inventory)
 
 	def test_stage_rejects_fontconfig_dll_without_runtime_configuration(self):
 		data = b'fontconfig dll'
@@ -144,12 +242,11 @@ class StageTests(QualificationFixture):
 		inventory = json.loads(inventory_path.read_text())
 		inventory['files'].append({
 			'path': 'bin/libfontconfig-1.dll', 'size': len(data), 'sha256': sha(data),
-			'packages': [{'name': 'fontconfig-fixture', 'version': '1.0',
-				'licenses': ['MIT'], 'upstream': 'https://example.invalid/fontconfig'}],
+			'packages': [native_package('fontconfig-fixture', b'fontconfig fixture notice')],
 			'provenanceInputs': ['bin/libfontconfig-1.dll'],
 		})
 		inventory_path.write_text(json.dumps(inventory))
-		notice = self.release / 'bin/licenses/native/fontconfig-fixture/COPYING'
+		notice = self.release / 'bin/licenses/native/fontconfig-fixture/clang64/share/licenses/fontconfig-fixture/COPYING'
 		notice.parent.mkdir(parents=True)
 		notice.write_bytes(b'fontconfig fixture notice')
 		with self.assertRaisesRegex(ValueError, '(?i)fontconfig.*etc/fonts'):
@@ -164,7 +261,7 @@ class StageTests(QualificationFixture):
 			path.parent.mkdir(parents=True, exist_ok=True)
 			path.write_bytes(data)
 			inventory['files'].append({'path': relative, 'size': len(data), 'sha256': sha(data),
-				'packages': [{'name': 'native-fixture', 'version': '1.0', 'licenses': ['MIT'], 'upstream': 'https://example.invalid/native'}],
+				'packages': [native_package('native-fixture', b'native fixture notice')],
 				'provenanceInputs': [relative]})
 		inventory_path.write_text(json.dumps(inventory))
 		record = self.stage()

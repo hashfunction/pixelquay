@@ -11,6 +11,9 @@ import json
 from pathlib import Path
 import shutil
 
+# Use the same Windows-safe path and regular-file primitives as final packaging.
+from msix_qualification import _checked_path, _digest, _register_path, _regular_stream
+
 
 def fields(path):
     result, key = {}, None
@@ -95,16 +98,35 @@ def build_inventory(mingw, file_list, output, supplements=None):
                      'packages': [packages[name] for name in names], 'provenanceInputs': provenance})
     if not rows: raise ValueError('Empty native inventory is not a release inventory')
     output.parent.mkdir(parents=True, exist_ok=True)
-    for name in used:
+    notice_paths = {}
+    for name in sorted(used):
+        _checked_path(name)
+        if '/' in name:
+            raise ValueError(f'Invalid native package name: {name}')
+        package = packages[name]
+        copies = []
         if name in supplemental_files:
             source = supplemental_files[name]
-            destination = output.parent/'licenses/native'/name/source.name
+            copies.append((package['licenseSupplement']['licenseFile'], source,
+                           f'licenses/native/{name}/{source.name}'))
+        for rel in package['licenseFiles']:
+            _checked_path(rel)
+            copies.append((rel, msys/rel, f'licenses/native/{name}/{rel}'))
+        package['includedLicenseFiles'] = []
+        for original, source, relative in copies:
+            _register_path(relative, notice_paths)
+            destination = output.parent/relative
             destination.parent.mkdir(parents=True, exist_ok=True)
-            shutil.copyfile(source, destination)
-        for rel in packages[name]['licenseFiles']:
-            destination=output.parent/'licenses/native'/name/Path(rel).name
-            destination.parent.mkdir(parents=True, exist_ok=True)
-            shutil.copyfile(msys/rel, destination)
+            with _regular_stream(source) as stream:
+                record = _digest(stream)
+                stream.seek(0)
+                with destination.open('wb') as target:
+                    shutil.copyfileobj(stream, target)
+            with _regular_stream(destination) as stream:
+                if _digest(stream) != record:
+                    raise ValueError(f'Copied native notice hash mismatch: {relative}')
+            package['includedLicenseFiles'].append({'sourcePath': original, 'path': relative,
+                                                   'size': record['bytes'], 'sha256': record['sha256']})
     payload = {'schemaVersion': 1, 'verifiedAt': datetime.now(timezone.utc).isoformat(),
                'provider': 'MSYS2', 'status': 'inventoried-requires-release-license-review', 'files': rows}
     stage=output.with_suffix('.json.tmp')

@@ -30,7 +30,7 @@ release/bin/native-files.json
 release/bin/licenses/managed-packages.json
 ```
 
-Native inventory rows are rebound to their actual `release/bin`, `release/etc`, `release/lib`, or `release/share` bytes and hashes. Each recorded native package must have a notice directory under `release/bin/licenses/native`. Each managed inventory package must point to a notice retained under `release/bin/licenses`. The helper copies the complete tree without flattening it, so locale, icon, font, loader, schema, imported configuration, runtime, and license bytes retain their release paths.
+Native inventory rows are rebound to their actual `release/bin`, `release/etc`, `release/lib`, or `release/share` bytes and hashes. Each recorded native package must include a complete source-to-copy notice mapping under `release/bin/licenses/native`, with exact paths, sizes and SHA-256 values; a nonempty notice directory alone is insufficient. Each managed inventory package must point to a notice retained under `release/bin/licenses`. The helper copies the complete tree without flattening it, so locale, icon, font, loader, schema, imported configuration, runtime, and license bytes retain their release paths.
 
 These checks prove byte retention and provenance-record consistency. The inventory status remains `requires-release-license-review`; corresponding source, LGPL replacement mechanics, fonts/resources, codecs, supplemental notices, and every shipped dependency still require an independent release audit.
 
@@ -113,3 +113,43 @@ Only an actual Windows run can establish package build, semantic SDK validation,
 Installed export/overwrite/cancellation/permission behavior, read-only and Unicode destinations, upgrade, 100/150/200% DPI, high contrast, keyboard/screen-reader acceptance, WACK, source/license closure, Store identity, release signing, submission, and publication remain independent gates.
 
 The installation-flow structure was adapted from ReticleQuay's MIT helper. The retained upstream license is [RETICLEQUAY-MIT.txt](RETICLEQUAY-MIT.txt).
+
+
+## Native notice path repair
+
+The native collector previously flattened installed license paths to basenames.
+That preserved some notices but overwrote distinct notices named `COPYING` within
+the same package. The observed gettext-runtime top-level notice (495 bytes) was
+replaced by its nested libasprintf notice (65 bytes). This is a collision defect,
+not a claim that the prior native package contained no license notices.
+
+Installed notices now retain their full pacman-relative path at
+`licenses/native/<package>/<original-pacman-path>`, relative to `release/bin`.
+Every package record includes `includedLicenseFiles` entries with `sourcePath`,
+`path`, `size` and `sha256`. Original `licenseFiles` remain intact. The collector
+hashes each original open file, copies those bytes and rehashes its destination.
+Existing reviewed source-supplement choices, original metadata, hashes and copied
+destinations are unchanged; their single notice is now mapped explicitly too.
+
+MSIX validation requires consistent package records, exact coverage of all
+original installed license paths (or the existing exact supplement), safe unique
+Windows paths and complete equality between the actual native notice tree and
+its mappings. Missing, changed, flattened, duplicated, unlisted or ambiguous
+copies fail before stage creation. Coherently changing a supplemental copy and
+its mapping still fails against the original supplemental source digest.
+Historical inventories lacking the new required mapping must be regenerated
+from their actual native inputs; they cannot qualify as repaired evidence.
+
+The regression fixture retains the actual two gettext archive notice texts and
+provenance under `test-fixtures/native-notices/`. The initial real-file test
+reproduced the single-file overwrite. Mapping and notice-corruption tests also
+failed against the original implementation. The final suite contains 42 Python
+tests (41 passed, one Windows-only junction skip on macOS), including all 11
+native inventory, six managed notice and 25 MSIX tests. A real collector-to-stage
+fixture proves both original notice paths and bytes reach the package map.
+
+This changes packaging evidence and notice layout only. Product/runtime versions,
+license selections, source supplements and Store flags are unchanged. It does
+not establish full license/source closure or retroactively repair prior native
+artifacts. Exact Windows regeneration, SDK/package verification and coordinator
+source-license reconciliation remain required.

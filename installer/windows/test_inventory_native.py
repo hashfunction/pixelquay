@@ -36,7 +36,36 @@ class NativeInventoryTests(unittest.TestCase):
             self.assertEqual(row['sha256'], hashlib.sha256(dll.read_bytes()).hexdigest())
             self.assertEqual(row['packages'][0]['version'], '1.2-1')
             self.assertEqual(row['packages'][0]['licenses'], ['LGPL-2.1-or-later'])
-            self.assertTrue((output.parent/'licenses/native/gtk4/COPYING').is_file())
+            self.assertTrue((output.parent/'licenses/native/gtk4/clang64/share/licenses/gtk4/COPYING').is_file())
+
+    def test_nested_same_basename_notices_preserve_exact_archive_bytes_and_mapping(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            listing, _ = self.fixture(root)
+            name = 'mingw-w64-clang-x86_64-gettext-runtime'
+            entry = root/'var/lib/pacman/local/gtk4-1.2-1'
+            (entry/'desc').write_text('%NAME%\n'+name+'\n\n%VERSION%\n1.0-1\n\n%LICENSE%\nGPL-3.0-or-later\nLGPL-2.1-or-later\n\n%URL%\nhttps://www.gnu.org/software/gettext/\n')
+            sources = {
+                'clang64/share/licenses/gettext-runtime/COPYING': (495, '7ef2cdfe58e0c0460657b6598b49af29d4e03c1e41cbaf0e1da1eb8ad74b95d0'),
+                'clang64/share/licenses/gettext-runtime/libasprintf/COPYING': (65, '03133addae5b99a6148c538300e6d97074453089be1423b741bd081f18e2b298'),
+            }
+            (entry/'files').write_text('%FILES%\nclang64/bin/libgtk.dll\n'+'\n'.join(sources)+'\n')
+            for relative in sources:
+                original = Path(__file__).parent/'test-fixtures/native-notices'/relative
+                target = root/relative
+                target.parent.mkdir(parents=True, exist_ok=True)
+                target.write_bytes(original.read_bytes())
+            output = root/'release/native-files.json'
+            module.build_inventory(root/'clang64', listing, output)
+            actual_paths = {p.relative_to(output.parent).as_posix() for p in (output.parent/'licenses/native').rglob('*') if p.is_file()}
+            expected_paths = {f'licenses/native/{name}/{relative}' for relative in sources}
+            self.assertEqual(actual_paths, expected_paths)
+            records = json.loads(output.read_text())['files'][0]['packages'][0]['includedLicenseFiles']
+            self.assertEqual(len(records), 2)
+            for relative, (size, digest) in sources.items():
+                destination = f'licenses/native/{name}/{relative}'
+                self.assertEqual((output.parent/destination).read_bytes(), (root/relative).read_bytes())
+                self.assertIn({'sourcePath': relative, 'path': destination, 'size': size, 'sha256': digest}, records)
 
     def test_missing_package_owner_fails_closed(self):
         with tempfile.TemporaryDirectory() as tmp:

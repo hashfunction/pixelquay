@@ -25,7 +25,11 @@ Install MSYS2's `mingw-w64-clang-x86_64-libadwaita` and
 `PythonExecutable` can override the Python command used by MSBuild.
 `bundle_gtk.targets` runs `inventory_native.py` after Windows publish, against
 its exact `GtkFile` input list and the installed pacman metadata. It writes
-`release/bin/native-files.json` and `release/bin/licenses/native/`.
+`release/bin/native-files.json` and `release/bin/licenses/native/`. Installed
+notices retain their full original pacman-relative paths beneath each package
+directory; `includedLicenseFiles` maps every source path to copied path, size and
+SHA-256. Final packaging checks the complete mapping and exact copied tree.
+Existing source-supplement destinations and digest checks remain unchanged.
 Unknown owner/version/license/upstream source or missing installed license text
 is a hard error. Resolve package provenance; do not bypass the inventory gate.
 Generated schemas/loader caches are attributed to their concrete package-owned

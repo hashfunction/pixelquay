@@ -168,7 +168,7 @@ def _validate_native_inventory(release, inventory):
 		or not isinstance(inventory.get('files'), list) or not inventory['files']:
 		raise ValueError('Invalid native inventory')
 	seen = set()
-	package_names = set()
+	package_records = {}
 	for row in inventory['files']:
 		if not isinstance(row, dict) or not isinstance(row.get('path'), str):
 			raise ValueError('Invalid native inventory row')
@@ -195,13 +195,54 @@ def _validate_native_inventory(release, inventory):
 			name = package['name']
 			if '/' in name or _checked_path(name) != name:
 				raise ValueError(f'Invalid native inventory package name: {name!r}')
-			package_names.add(name)
-	for name in package_names:
-		notice_directory = release / 'bin/licenses/native' / name
-		try:
-			inventory_tree(notice_directory)
-		except (OSError, ValueError) as error:
-			raise ValueError(f'Native package notice missing for {name}: {error}') from error
+			if name in package_records and package_records[name] != package:
+				raise ValueError(f'Conflicting native package notice metadata: {name}')
+			package_records[name] = package
+	try:
+		expected_notices = {}
+		seen_notices = {}
+		for name, package in package_records.items():
+			originals = package.get('licenseFiles')
+			if not isinstance(originals, list):
+				raise ValueError(f'Missing original license paths for {name}')
+			expected_sources = {}
+			for original in originals:
+				_checked_path(original)
+				if '/share/licenses/' not in original or original in expected_sources:
+					raise ValueError(f'Invalid or duplicate original license path for {name}')
+				expected_sources[original] = f'licenses/native/{name}/{original}'
+			supplement = package.get('licenseSupplement')
+			if not originals:
+				if not isinstance(supplement, dict) or supplement.get('package') != name \
+					or any(supplement.get(key) != package[key] for key in ('version', 'licenses', 'upstream')):
+					raise ValueError(f'Missing or inconsistent license supplement for {name}')
+				original = _checked_path(supplement.get('licenseFile'))
+				expected_sources[original] = f'licenses/native/{name}/{PurePosixPath(original).name}'
+			elif supplement is not None:
+				raise ValueError(f'Supplement cannot replace installed license files for {name}')
+			included = package.get('includedLicenseFiles')
+			if not isinstance(included, list) or len(included) != len(expected_sources):
+				raise ValueError(f'Incomplete included license mapping for {name}')
+			mapped_sources = set()
+			for notice in included:
+				if not isinstance(notice, dict):
+					raise ValueError(f'Invalid included license mapping for {name}')
+				original = _checked_path(notice.get('sourcePath'))
+				relative = _checked_path(notice.get('path'))
+				if original in mapped_sources or expected_sources.get(original) != relative:
+					raise ValueError(f'Incorrect or duplicate included license mapping for {name}')
+				mapped_sources.add(original)
+				_register_path(relative, seen_notices)
+				if type(notice.get('size')) is not int or notice['size'] <= 0 \
+					or not isinstance(notice.get('sha256'), str) or not re.fullmatch('[0-9a-f]{64}', notice['sha256']):
+					raise ValueError(f'Invalid included license hash/size for {name}')
+				if supplement is not None and notice['sha256'] != supplement.get('licenseSha256'):
+					raise ValueError(f'Included license differs from exact source supplement for {name}')
+				expected_notices[relative.removeprefix('licenses/native/')] = {'bytes': notice['size'], 'sha256': notice['sha256']}
+		if inventory_tree(release / 'bin/licenses/native') != expected_notices:
+			raise ValueError('Copied license files differ from complete source-to-package mapping')
+	except (OSError, ValueError) as error:
+		raise ValueError(f'Native package notice verification failed: {error}') from error
 	return hashlib.sha256(_canonical_json(inventory)).hexdigest()
 
 
