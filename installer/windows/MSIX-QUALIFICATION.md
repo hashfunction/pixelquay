@@ -1,6 +1,6 @@
 # PixelQuay disposable MSIX qualification
 
-This path builds and installs a **CI-only** package from the complete verified Windows `release` directory. It does not assign or approximate a Microsoft Store identity. It does not clear licenses, sign a release package, test the export workflow, or authorize binary publication.
+This path builds and installs a **CI-only** package from the complete verified Windows `release` directory. It does not assign or approximate a Microsoft Store identity. It now requires the ordinary installed image-edit/export/reopen workflow described below. It does not clear licenses, sign a release package, or authorize binary publication. The new consumer path still needs its first Windows execution.
 
 Prior Windows run `34578052932` passed 899 tests, launched the unpackaged `release/bin/PixelQuay.exe` main window, and recorded 233 loaded modules plus 64 distinct native package owners. Its evidence explicitly says `msix_built=false`; it is input history rather than MSIX evidence.
 
@@ -193,3 +193,56 @@ The original 495/65-byte gettext notice fixture is marked `-text`: Windows run
 34607319087 otherwise converted it to 508/66 bytes at checkout. An actual Git
 checkout with core.autocrlf=true reproduced the mismatch before the attribute
 and now preserves both exact archive texts. No notice text or dependency changed.
+
+
+## Installed consumer workflow candidate
+
+The earlier unpackaged build/startup phase first owns and cleans its own fresh
+profile using the same marker and inventory checks. It retains its native process
+handle and requires the original five-second normal-close deadline, with a
+bounded owned-process stop only for failed cleanup. Its lifecycle is recorded in
+`build-evidence/unpackaged-profile-cleanup.json`. The installed qualification then
+owns a newly created fixture directory and an absent
+`%APPDATA%/PixelQuay` profile before either installed process starts. Exclusive
+markers identify both trees. The first normal diagnostic shutdown establishes the
+application-created settings/addin baseline; an existing user profile is refused.
+
+The broker-activated consumer opens an opaque asymmetric 96×64 PNG with Ctrl+O,
+rotates it clockwise with Ctrl+H, and uses ordinary Save As to create `edited.png`.
+An external Python PNG decoder verifies the exact 64×96 pixels. Ctrl+Alt+E opens
+Export with Recipe. The existing field mnemonics enter the named 32×48 PNG recipe
+with suffix `-proof`; ordinary focus traversal activates Save recipe. The driver
+cancels and reopens the dialog, selects a destination through the owned native
+folder picker, and exports using that saved recipe. PNG dimensions, opacity, and
+all pixels outside the three-pixel-wide bilinear quadrant boundaries are checked.
+The input and edited-image hashes must remain unchanged and no staging file may
+remain. The export is then opened, rotated, and saved to `reopened.png`; every pixel
+must equal an independent rotation of the decoded export.
+
+The GTK4 startup evidence has one UIA root. This driver therefore uses the normal
+keyboard shortcuts and source-defined mnemonics/focus order for GTK controls.
+Native file pickers require one exact owned `#32770` dialog and unique visible
+UIA filename/accept controls, with the control ancestry rechecked before action.
+No input is sent to an unproved window. Each action checks retained process handles,
+main/target HWND and PID, native owner chain, title, visibility/enabled state, and
+exact foreground. Stage screenshots repeat those checks before and after capture.
+They are evidence for review; output assertions do not infer success from pixels
+in a screenshot or from a matching title alone.
+
+After the existing normal close request, native waits on retained handles must
+prove both application processes stopped, with a zero exit code for the normal
+consumer. Only then is the actual `settings.xml` parsed and its versioned recipe
+JSON independently compared with the expected name, dimensions, PNG type, suffix,
+quality and overwrite choice. The application writes this setting on exit; the
+harness never supplies or edits recipe settings. Registration uninstall and trust
+cleanup remain required. Cleanup verifies both complete owned trees before
+removing either, rejects links/reparse points and changed/unexpected files or
+directories, and rechecks bytes immediately before deletion.
+
+New local checks are `test_consumer_workflow.py` and `test_consumer_input.ps1`,
+called by the existing qualification runner. Native input/GTK picker execution
+remains pending on Windows. Failure keeps the qualification false and preserves
+bounded owned-window observations and primary/cleanup errors. The only new
+artifact patterns are `consumer-*.json` and `consumer-*.png` under the existing
+MSIX evidence directory; no binary package, image fixture, or profile payload is
+added to artifacts.

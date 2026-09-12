@@ -61,6 +61,8 @@ jobs:
             build-evidence/msix-install/loaded-modules.json
             build-evidence/msix-install/accessible-window-tree.json
             build-evidence/msix-install/qualification-window.png
+            build-evidence/msix-install/consumer-*.json
+            build-evidence/msix-install/consumer-*.png
             build-evidence/msix-install/installed-native-stdout.txt
             build-evidence/msix-install/installed-native-stderr.txt
           retention-days: 14

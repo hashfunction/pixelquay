@@ -5,12 +5,16 @@ $source=Join-Path $PSScriptRoot 'qualify-msix-install.ps1'
 $previousCi=$env:CI
 $adapted=Join-Path ([IO.Path]::GetTempPath()) ('pixelquay-preflight-adapter-'+[guid]::NewGuid().ToString('N')+'.ps1')
 $text=[IO.File]::ReadAllText($source).Replace('[Environment]::OSVersion.Platform -ne [PlatformID]::Win32NT -or $env:CI -ne ''true''','$env:CI -ne ''true''')
+. (Join-Path $PSScriptRoot 'consumer_ui.ps1')
+$text=$text.Replace(". (Join-Path `$PSScriptRoot 'consumer_ui.ps1')",'')
 [IO.File]::WriteAllText($adapted,$text)
 try {
   . $adapted -LibraryOnly
   function global:Get-AppxPackage { [CmdletBinding()]param([string]$Name) return @() }
   function Invoke-PixelQuayQualificationCore([Collections.IDictionary]$Operations) {
     & $Operations.Preflight | Out-Null
+    $state=$Operations.Preflight.Module.SessionState.PSVariable.GetValue('state')
+    $state.consumerReceipt=@{fixture=$true}; $state.consumerRemoved=$true; $state.cleanClose=$true
     [pscustomobject]@{installation_qualification_passed=$true;primary_error=$null;cleanup_errors=@()}
   }
   $env:CI='true'

@@ -17,6 +17,7 @@ foreach ($scenario in @('missing','changed','changed-after-success','success','w
             if ($scenario -in @('changed','changed-after-success')) { [IO.File]::WriteAllText($captured.package, 'changed bytes') }
             if ($scenario -eq 'write-failure') { [IO.File]::WriteAllText((Join-Path $probeRoot 'installation-qualification.json'), 'preserve existing evidence') }
             if ($scenario -in @('success','changed-after-success')) {
+                $captured.consumerReceipt=@{fixture=$true}; $captured.consumerRemoved=$true; $captured.cleanClose=$true
                 return [pscustomobject]@{ installation_qualification_passed=$true; primary_error=$null; cleanup_errors=@() }
             }
             return [pscustomobject]@{ installation_qualification_passed=$false; primary_error='original activation failure'; cleanup_errors=@('original uninstall failure') }

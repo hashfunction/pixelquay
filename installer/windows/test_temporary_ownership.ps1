@@ -23,6 +23,7 @@ function Invoke-PixelQuayQualificationCore([Collections.IDictionary]$Operations)
     [IO.File]::WriteAllText($state.package,'original unsigned fixture')
     $state.unsignedPackageSha256=(Get-FileHash $state.package -Algorithm SHA256).Hash.ToLowerInvariant()
     $Operations.Preflight={}
+    $Operations.PrepareConsumerFixture={}
     # The collision occurs before certificate creation. Run the real owned cleanup.
     return & $script:ActualCore $Operations
 }

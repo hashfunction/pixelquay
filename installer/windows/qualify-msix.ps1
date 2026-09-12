@@ -9,6 +9,9 @@ function Invoke-Checked([string]$Program, [string[]]$Arguments) {
 }
 $powerShell = (Get-Process -Id $PID).Path
 Invoke-Checked python @('installer/windows/test_msix_qualification.py')
+Invoke-Checked python @('installer/windows/test_consumer_workflow.py')
+Invoke-Checked $powerShell @('-NoLogo','-NoProfile','-File','installer/windows/test_consumer_input.ps1')
+Invoke-Checked $powerShell @('-NoLogo','-NoProfile','-File','installer/windows/test_unpacked_profile_lifecycle.ps1')
 Invoke-Checked $powerShell @('-NoLogo','-NoProfile','-File','installer/windows/test_qualify_msix_install.ps1')
 Invoke-Checked $powerShell @('-NoLogo','-NoProfile','-File','installer/windows/test_registration_ownership.ps1')
 Invoke-Checked $powerShell @('-NoLogo','-NoProfile','-File','installer/windows/test_msix_evidence.ps1')

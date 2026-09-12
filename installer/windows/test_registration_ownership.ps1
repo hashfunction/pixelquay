@@ -62,8 +62,9 @@ function Invoke-PixelQuayQualificationCore([Collections.IDictionary]$Operations)
         }
     }
     $state.record = [pscustomobject]@{ sourceCommit = ('a' * 40); payload = [pscustomobject]$payload }
+    $state.consumerReceipt=@{fixture=$true}; $state.consumerRemoved=$true; $state.cleanClose=$true
     $Operations.Preflight = { if (@(Get-AppxPackage -Name 'Trieflow.PixelQuay.Qualification').Count) { throw 'Fixture must start empty' } }
-    foreach ($name in @('PrepareSignedCopy','CaptureInstalledStderr','ActivateAndVerify','CloseCleanly','StopOwnedProcess','RemoveTrustedCertificate','RemovePersonalCertificate','RemoveTemporaryFiles')) {
+    foreach ($name in @('PrepareConsumerFixture','PrepareSignedCopy','CaptureInstalledStderr','ActivateAndVerify','ConsumerWorkflow','CloseCleanly','StopOwnedProcess','RemoveConsumerFixture','RemoveTrustedCertificate','RemovePersonalCertificate','RemoveTemporaryFiles')) {
         $Operations[$name] = {}
     }
     if ($fixture.scenario -in @('normal-owned','normal-with-foreign')) {

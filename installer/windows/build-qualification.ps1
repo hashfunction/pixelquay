@@ -8,6 +8,16 @@ function Invoke-Checked([string]$Program, [string[]]$Arguments) {
   & $Program @Arguments
   if ($LASTEXITCODE -ne 0) { throw "$Program failed with $LASTEXITCODE" }
 }
+. (Join-Path $PSScriptRoot 'consumer_ui.ps1')
+Add-Type -Path (Join-Path $PSScriptRoot 'consumer_native.cs')
+$pixelPython=(Get-Command python).Source
+$pixelStartupState=Join-Path (Get-Location) 'build-evidence/unpackaged-consumer-owner.json'
+[IO.Directory]::CreateDirectory((Split-Path $pixelStartupState -Parent)) | Out-Null
+$pixelStartupRoot=Join-Path $env:RUNNER_TEMP ('pixelquay-startup-'+[guid]::NewGuid().ToString('N'))
+$pixelStartupProfile=Join-Path ([Environment]::GetFolderPath('ApplicationData')) 'PixelQuay'
+$pixelStartupOwnership=Invoke-PixelQuayFiles create $pixelStartupState @('--root',$pixelStartupRoot,'--profile',$pixelStartupProfile) -Python $pixelPython
+$process=$null; $pixelProcessHandle=$null; $pixelProcessOwned=$false; $pixelStartupStopped=$true; $pixelNormalClose=$false; $pixelProfileRemoved=$false; $pixelBuildError=$null
+try {
 $mingwArgument = '-p:MinGWFolder=' + $env:PIXELQUAY_MINGW
 $pythonArgument = '-p:PythonExecutable=' + (Get-Command python).Source
 Invoke-Checked dotnet @('--info')
@@ -34,8 +44,12 @@ Get-ChildItem -Recurse -Filter packages.lock.json | ForEach-Object {
 }
 # The installed MSYS2 development tree must not satisfy missing package DLLs.
 $env:Path = "$env:SystemRoot\System32;$env:SystemRoot"
+$pixelStartupStopped=$false
 $process = Start-Process (Resolve-Path $expected).Path -PassThru
-try {
+$pixelProcessHandle=$process.SafeHandle
+if ($pixelProcessHandle.IsInvalid -or $pixelProcessHandle.IsClosed -or
+    [IO.Path]::GetFullPath($process.Path) -ine (Resolve-Path $expected).Path) { throw 'Unpackaged startup process ownership was not established' }
+$pixelProcessOwned=$true
   $deadline = (Get-Date).AddSeconds(30)
   do {
     Start-Sleep -Milliseconds 500
@@ -51,6 +65,42 @@ try {
   if ($outside.Count -gt 0) { throw "Package loaded modules outside its own directory or Windows: $($outside.path -join ', ')" }
   $evidence = @{ generated_at_utc=[DateTime]::UtcNow.ToString('o'); source_commit=$env:GITHUB_SHA; windows_native_startup=$true; workflow_acceptance=$false; msix_built=$false; submitted=$false; executable_sha256=(Get-FileHash $expected -Algorithm SHA256).Hash; window_title=$process.MainWindowTitle; note='Native main window startup only. Interactive exports, DLL closure/source delivery, MSIX installation and Store gates remain pending.' }
   $evidence | ConvertTo-Json -Depth 4 | Set-Content build-evidence/windows-startup.json -Encoding utf8NoBOM
+} catch {
+  $pixelBuildError=$_.Exception.Message
+  throw
 } finally {
-  if (-not $process.HasExited) { $process.CloseMainWindow() | Out-Null; if (-not $process.WaitForExit(5000)) { $process.Kill() } }
+  $pixelCleanupErrors=[Collections.Generic.List[string]]::new()
+  try {
+    if ($process) {
+      if (-not $pixelProcessOwned) { throw 'Unproved unpackaged process/profile preserved' }
+      $exit=[PixelQuayQualification.ConsumerNative]::ExitCode($process,0)
+      if ($null -eq $exit) {
+        $closeAccepted=$process.CloseMainWindow()
+        $exit=[PixelQuayQualification.ConsumerNative]::ExitCode($process,5000)
+        $pixelNormalClose=$closeAccepted -and $null -ne $exit -and $exit -eq 0
+        if (-not $pixelNormalClose) { $pixelCleanupErrors.Add('Unpackaged startup did not close normally with zero') }
+      } else { $pixelCleanupErrors.Add('Unpackaged startup exited before normal close') }
+      if ($null -eq $exit) {
+        $process.Kill()
+        $exit=[PixelQuayQualification.ConsumerNative]::ExitCode($process,10000)
+      }
+      if ($null -eq $exit) { throw 'Unpackaged process shutdown is unproven' }
+      $pixelStartupStopped=$true
+    }
+  } catch { $pixelCleanupErrors.Add($_.Exception.Message) }
+  if ($pixelStartupStopped) {
+    try {
+      Invoke-PixelQuayFiles baseline $pixelStartupState @('--stopped') -Python $pixelPython | Out-Null
+      $cleanup=Invoke-PixelQuayFiles cleanup $pixelStartupState @('--stopped') -Python $pixelPython
+      $pixelProfileRemoved=$cleanup.removed -eq $true
+    } catch { $pixelCleanupErrors.Add($_.Exception.Message) }
+    finally { if ($process) { $process.Dispose() } }
+  }
+  $pixelLifecycle=@{schema='pixelquay-unpackaged-profile-v1';retained_process_owned=$pixelProcessOwned;process_stopped=$pixelStartupStopped;normal_close_verified=$pixelNormalClose;owned_profile_and_fixture_removed=$pixelProfileRemoved;primary_error=$pixelBuildError;cleanup_errors=@($pixelCleanupErrors)}
+  try {
+    $metadata=[Text.Encoding]::UTF8.GetBytes(($pixelLifecycle | ConvertTo-Json -Depth 6))
+    $file=[IO.File]::Open((Join-Path (Get-Location) 'build-evidence/unpackaged-profile-cleanup.json'),[IO.FileMode]::CreateNew,[IO.FileAccess]::Write,[IO.FileShare]::None)
+    try {$file.Write($metadata,0,$metadata.Length)}finally{$file.Dispose()}
+  } catch {$pixelCleanupErrors.Add('Cleanup evidence: '+$_.Exception.Message)}
+  if ($pixelCleanupErrors.Count) { throw "Unpackaged startup cleanup failed: $($pixelCleanupErrors -join '; '). Primary: $pixelBuildError" }
 }
