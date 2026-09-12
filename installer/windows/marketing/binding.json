@@ -1,5 +1,19 @@
 {
   "schema_version": 1,
   "product": "TintFable",
-  "qualified": null
+  "qualified": {
+    "source_commit": "194094371299bc3afda2dd08af483997abd96149",
+    "workflow_run_id": "34691151615",
+    "workflow_run_attempt": "1",
+    "package": {
+      "bytes": 104350689,
+      "sha256": "f4296d6cd1e38cb58b6196c450bf46cfb6e093dc8849ae669969c26190f20074"
+    },
+    "readiness_receipt": {
+      "bytes": 53710,
+      "sha256": "1cff010c85d27e45f21217b1a2d34226c8a3cba3c1d03b69f5dbf22e782ed280"
+    },
+    "store_artifact_id": 10297154356,
+    "metadata_artifact_id": 10297635046
+  }
 }
