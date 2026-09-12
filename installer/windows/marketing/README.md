@@ -119,3 +119,14 @@ A fresh native capture and visual review are required before publishing images.
 
 Win32 references: https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-showwindowasync
 and https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-iszoomed.
+
+The maximized capture run 34692686058 stopped before publishing any screenshots:
+the real Save picker retained only `C:\TintF` after one queued full-path Unicode
+input batch (274 read-only observations, same focused HWND). Its autocomplete
+list was visible in the retained native failure image. The capture driver now
+streams each distinct filename UTF-16 character once through the original native
+owner/focus-checked input method and its existing 100 ms dispatch interval. There
+is no retry, clipboard mutation or synthetic file write. The original full-path
+readback remains mandatory before submitting the picker, and all output pixel
+checks remain mandatory. This changes capture-only input timing; it does not
+change the product or its original installed qualification evidence.

@@ -1,4 +1,18 @@
 # Copyright 2026 Trieflow LLC. MIT. Normal native UI only; large authored user content.
+function Invoke-TintPacedFileNameText([string]$Text,[scriptblock]$Send) {
+    if($Text.Length -lt 1 -or $Text.Length -gt 4096 -or $Text.Contains([char]0)){throw 'Unbounded capture filename text'}
+    foreach($character in $Text.ToCharArray()){& $Send ([string]$character)}
+}
+# Capture-only input pacing: every distinct UTF-16 character goes through the
+# original native owner/focus gate once, including its 100 ms dispatch interval.
+# Keep the qualified source and its full-path readback/acceptance untouched.
+function Send-PixelQuayFileNameText($Ui,$Scope,[long]$Focus,[string]$Text) {
+    Invoke-TintPacedFileNameText $Text {
+        param($character)
+        Assert-PixelQuayScope $Ui $Scope
+        [PixelQuayQualification.ConsumerNative]::FileNameTextInput($Ui.process,$Ui.main,$Scope.process,$Scope.hwnd,$Scope.title,$Focus,$character)
+    }
+}
 function Invoke-TintCaptureFiles([string]$Operation,[string]$StatePath,[string[]]$Extra=@()) {
     $result=& python (Join-Path $PSScriptRoot 'capture_files.py') $Operation --state $StatePath @Extra
     if($LASTEXITCODE -ne 0){throw "Independent capture file check failed: $Operation"}
