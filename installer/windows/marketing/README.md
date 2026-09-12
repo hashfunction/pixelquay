@@ -20,8 +20,9 @@ The three intended files are native maximized-editor captures of the actual moni
 
 `Ctrl+B` is the original product's **Best Fit** command in
 `Pinta.Core/Actions/ViewActions.cs`. It makes the large canvas visible without
-changing document pixels. Every input uses the original qualified native
-PID/retained-handle/window/foreground/picker-focus guards. Screenshots use native
+changing document pixels. Every input preserves the original qualified native
+PID/retained-handle/window/foreground/picker-focus guards. Filename text uses
+the capture-only control operation described below. Screenshots use native
 CopyFromScreen into PNG without resizing, cropping after capture, overlays,
 retouching or generated application UI. Each image has a receipt with actual
 before/after main and modal rectangles, maximized state, full work-area capture
@@ -99,6 +100,7 @@ python3 -m unittest discover -s installer/windows/marketing -p 'test_*.py' -v
 TMPDIR=/private/tmp ../../filequay/source/.tools/powershell-7.6.6/pwsh -NoProfile -File installer/windows/marketing/test_capture_helpers.ps1
 TMPDIR=/private/tmp ../../filequay/source/.tools/powershell-7.6.6/pwsh -NoProfile -File installer/windows/marketing/test_capture_operations.ps1
 TMPDIR=/private/tmp ../../filequay/source/.tools/powershell-7.6.6/pwsh -NoProfile -File installer/windows/marketing/test_capture_ui.ps1
+TMPDIR=/private/tmp ../../filequay/source/.tools/powershell-7.6.6/pwsh -NoProfile -File installer/windows/marketing/test_capture_filename.ps1
 ```
 
 Ten Python cases passed: real ZIP/package and original native-record replay,
@@ -120,19 +122,42 @@ A fresh native capture and visual review are required before publishing images.
 Win32 references: https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-showwindowasync
 and https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-iszoomed.
 
-The maximized capture run 34692686058 stopped before publishing any screenshots:
-the real Save picker retained only `C:\TintF` after one queued full-path Unicode
-input batch (274 read-only observations, same focused HWND). Its autocomplete
-list was visible in the retained native failure image. The capture driver now
-streams each distinct filename UTF-16 character once through the original native
-owner/focus-checked input method and its existing 100 ms dispatch interval. There
-is no retry, clipboard mutation or synthetic file write. The original full-path
-readback remains mandatory before submitting the picker, and all output pixel
-checks remain mandatory. This changes capture-only input timing; it does not
-change the product or its original installed qualification evidence.
+## Native filename control operation
 
-Run 34692993051 retained the entire Save filename except its first `C`; the
-original full-path check refused it. The next capture adds a one-second pause
-after the existing filename selection, then records the real initial text
-through the original exact-focus native reader before sending any characters.
-This is bounded capture pacing; it does not retry or rewrite a failed path.
+The first maximized capture, run 34692686058, retained only `C:\TintF` after
+one full-path Unicode input batch. Run 34692993051 used separate character sends
+and retained the entire Save path except its first `C`. Run 34693355675 failed
+before text entry because the immediate post-Alt+N focus was the owned filename
+ComboBoxEx32 container, not its Edit. The original exact filename checks refused
+all three. Those failures do not prove a particular Windows autocomplete bug.
+
+The current screenshot driver replaces queued character injection for filename
+text with one normal Win32 `WM_SETTEXT` on the actual focused filename **Edit**.
+Immediately before and after this call it runs the qualified native filename
+observer, which proves the retained dialog/process, writable Edit class,
+filename-ID ancestry and exact focus HWND. It sends no broadcast, uses
+`SendMessageTimeoutW` with `SMTO_BLOCK|SMTO_ABORTIFHUNG|SMTO_ERRORONEXIT` and a
+1,000 ms timeout, and requires both successful dispatch and the Edit's TRUE
+result. There is no input retry. The driver then independently reads all text
+with the original bounded `WM_GETTEXT` and requires exact path equality before
+returning. The unchanged original picker helper repeats its complete readback
+before actual Enter/Choose. A receipt records the precise dialog, focus HWND,
+expected/actual path, delivery method and timeout. No file is written by this
+capture driver: ordinary app Open, Save, Export, and reopen operations still
+produce the independently checked output bytes.
+
+Capture key chords now retain a one-second settling interval after the original
+native guarded send, allowing normal mnemonic focus transitions before the
+strict observer. This interval does not authorize focus or suppress a refusal.
+The original helper source, qualified package, prior consumer evidence, output
+pixel/recipe oracles and lifecycle checks remain unchanged.
+
+Portable tests reproduce the prior absence of a single native write/readback,
+then check one exact write, ownership refusals before/after, failed send, partial
+readback, no replay, one-shot chord settling, Unicode/length/NUL bounds and native
+HWND/broadcast rejection. The actual C# implementation compiles in those tests;
+its Win32 call and the complete new screenshot run remain pending Windows.
+
+Win32 references:
+https://learn.microsoft.com/en-us/windows/win32/winmsg/wm-settext
+https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-sendmessagetimeoutw
