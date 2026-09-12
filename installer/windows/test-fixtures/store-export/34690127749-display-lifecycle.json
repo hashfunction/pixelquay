@@ -1,0 +1,302 @@
+{
+  "workflow_run_id": "34690127749",
+  "mode": "qualification",
+  "source_commit": "fe08ba6bb7d46049e7547b507483195a3cf6a2a3",
+  "original_files": {
+    "consumer-workflow.json": "a6fe577403a064548bebe80bb67e5b78d34bb104d76d163b5ef36acfd79a2847",
+    "installation-qualification.json": "ae43906396d51f4385e7205beabfef7490f42e5570408f56f31150e11023e6e1"
+  },
+  "workflow_native_display": {
+    "purpose": "actual native display only",
+    "device": "\\\\.\\DISPLAY1",
+    "before": {
+      "width": 1024,
+      "height": 768,
+      "bits": 32,
+      "frequency": 64,
+      "orientation": 0,
+      "flags": 0
+    },
+    "supported_modes": [
+      {
+        "width": 640,
+        "height": 480,
+        "bits": 32,
+        "frequency": 64,
+        "orientation": 0,
+        "flags": 0
+      },
+      {
+        "width": 800,
+        "height": 600,
+        "bits": 32,
+        "frequency": 64,
+        "orientation": 0,
+        "flags": 0
+      },
+      {
+        "width": 1024,
+        "height": 768,
+        "bits": 32,
+        "frequency": 64,
+        "orientation": 0,
+        "flags": 0
+      },
+      {
+        "width": 1152,
+        "height": 864,
+        "bits": 32,
+        "frequency": 64,
+        "orientation": 0,
+        "flags": 0
+      },
+      {
+        "width": 1280,
+        "height": 720,
+        "bits": 32,
+        "frequency": 64,
+        "orientation": 0,
+        "flags": 0
+      },
+      {
+        "width": 1280,
+        "height": 800,
+        "bits": 32,
+        "frequency": 64,
+        "orientation": 0,
+        "flags": 0
+      },
+      {
+        "width": 1280,
+        "height": 1024,
+        "bits": 32,
+        "frequency": 64,
+        "orientation": 0,
+        "flags": 0
+      },
+      {
+        "width": 1366,
+        "height": 768,
+        "bits": 32,
+        "frequency": 64,
+        "orientation": 0,
+        "flags": 0
+      },
+      {
+        "width": 1440,
+        "height": 900,
+        "bits": 32,
+        "frequency": 64,
+        "orientation": 0,
+        "flags": 0
+      },
+      {
+        "width": 1600,
+        "height": 900,
+        "bits": 32,
+        "frequency": 64,
+        "orientation": 0,
+        "flags": 0
+      },
+      {
+        "width": 1600,
+        "height": 1200,
+        "bits": 32,
+        "frequency": 64,
+        "orientation": 0,
+        "flags": 0
+      },
+      {
+        "width": 1680,
+        "height": 1050,
+        "bits": 32,
+        "frequency": 64,
+        "orientation": 0,
+        "flags": 0
+      },
+      {
+        "width": 1920,
+        "height": 1080,
+        "bits": 32,
+        "frequency": 64,
+        "orientation": 0,
+        "flags": 0
+      }
+    ],
+    "selected": {
+      "width": 1920,
+      "height": 1080,
+      "bits": 32,
+      "frequency": 64,
+      "orientation": 0,
+      "flags": 0
+    },
+    "test_result": 0,
+    "apply_result": 0,
+    "after": {
+      "width": 1920,
+      "height": 1080,
+      "bits": 32,
+      "frequency": 64,
+      "orientation": 0,
+      "flags": 0
+    },
+    "registry_updated": false,
+    "unsafe_modes_enabled": false,
+    "dpi_changed": false,
+    "renderer_emulation_used": false,
+    "restore_result": null,
+    "restored": null,
+    "restore_verified": false
+  },
+  "installation_native_display": {
+    "purpose": "actual native display only",
+    "device": "\\\\.\\DISPLAY1",
+    "before": {
+      "width": 1024,
+      "height": 768,
+      "bits": 32,
+      "frequency": 64,
+      "orientation": 0,
+      "flags": 0
+    },
+    "supported_modes": [
+      {
+        "width": 640,
+        "height": 480,
+        "bits": 32,
+        "frequency": 64,
+        "orientation": 0,
+        "flags": 0
+      },
+      {
+        "width": 800,
+        "height": 600,
+        "bits": 32,
+        "frequency": 64,
+        "orientation": 0,
+        "flags": 0
+      },
+      {
+        "width": 1024,
+        "height": 768,
+        "bits": 32,
+        "frequency": 64,
+        "orientation": 0,
+        "flags": 0
+      },
+      {
+        "width": 1152,
+        "height": 864,
+        "bits": 32,
+        "frequency": 64,
+        "orientation": 0,
+        "flags": 0
+      },
+      {
+        "width": 1280,
+        "height": 720,
+        "bits": 32,
+        "frequency": 64,
+        "orientation": 0,
+        "flags": 0
+      },
+      {
+        "width": 1280,
+        "height": 800,
+        "bits": 32,
+        "frequency": 64,
+        "orientation": 0,
+        "flags": 0
+      },
+      {
+        "width": 1280,
+        "height": 1024,
+        "bits": 32,
+        "frequency": 64,
+        "orientation": 0,
+        "flags": 0
+      },
+      {
+        "width": 1366,
+        "height": 768,
+        "bits": 32,
+        "frequency": 64,
+        "orientation": 0,
+        "flags": 0
+      },
+      {
+        "width": 1440,
+        "height": 900,
+        "bits": 32,
+        "frequency": 64,
+        "orientation": 0,
+        "flags": 0
+      },
+      {
+        "width": 1600,
+        "height": 900,
+        "bits": 32,
+        "frequency": 64,
+        "orientation": 0,
+        "flags": 0
+      },
+      {
+        "width": 1600,
+        "height": 1200,
+        "bits": 32,
+        "frequency": 64,
+        "orientation": 0,
+        "flags": 0
+      },
+      {
+        "width": 1680,
+        "height": 1050,
+        "bits": 32,
+        "frequency": 64,
+        "orientation": 0,
+        "flags": 0
+      },
+      {
+        "width": 1920,
+        "height": 1080,
+        "bits": 32,
+        "frequency": 64,
+        "orientation": 0,
+        "flags": 0
+      }
+    ],
+    "selected": {
+      "width": 1920,
+      "height": 1080,
+      "bits": 32,
+      "frequency": 64,
+      "orientation": 0,
+      "flags": 0
+    },
+    "test_result": 0,
+    "apply_result": 0,
+    "after": {
+      "width": 1920,
+      "height": 1080,
+      "bits": 32,
+      "frequency": 64,
+      "orientation": 0,
+      "flags": 0
+    },
+    "registry_updated": false,
+    "unsafe_modes_enabled": false,
+    "dpi_changed": false,
+    "renderer_emulation_used": false,
+    "restore_result": 0,
+    "restored": {
+      "width": 1024,
+      "height": 768,
+      "bits": 32,
+      "frequency": 64,
+      "orientation": 0,
+      "flags": 0
+    },
+    "restore_verified": true
+  }
+}

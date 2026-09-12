@@ -106,3 +106,56 @@ $operations.Remove('RestoreConsumerDisplay')
 $failed=$false;try{Invoke-PixelQuayQualificationCore -Operations $operations}catch{$failed=$_.Exception.Message -match 'Missing qualification operation: RestoreConsumerDisplay'}
 Assert-True ($failed -and $global:PixelQuayQualificationTestCalls.Count -eq 0) 'missing restoration adapter must refuse before any operation'
 Write-Output 'PASS: 9 installation orchestration scenarios plus path/evidence/native-helper checks.'
+
+# Execute the production UI-finally block: its real CreateNew writer freezes
+# workflow-time evidence before the outer owner restores the original display.
+$tokens=$null;$parseErrors=$null
+$tree=[Management.Automation.Language.Parser]::ParseFile((Join-Path $PSScriptRoot 'consumer_ui.ps1'),[ref]$tokens,[ref]$parseErrors)
+Assert-True ($parseErrors.Count -eq 0) 'consumer source must parse'
+$consumer=$tree.Find({param($node) $node -is [Management.Automation.Language.FunctionDefinitionAst] -and $node.Name -ceq 'Invoke-PixelQuayConsumerWorkflow'},$true)
+$outerTry=@($consumer.Body.EndBlock.Statements | Where-Object {$_ -is [Management.Automation.Language.TryStatementAst]})
+Assert-True ($outerTry.Count -eq 1) 'expected exact production consumer try/finally'
+$text=$outerTry[0].Finally.Extent.Text
+$finalizeConsumer=[scriptblock]::Create($text.Substring(1,$text.Length-2))
+$actualDisplay=Get-Content -LiteralPath (Join-Path $PSScriptRoot 'test-fixtures/store-export/34690127749-display-lifecycle.json') -Raw | ConvertFrom-Json -AsHashtable
+$snapshotDirectory=Join-Path ([IO.Path]::GetTempPath()) ('pixelquay-evidence-test-'+[guid]::NewGuid().ToString('N'))
+New-Item -ItemType Directory -Path $snapshotDirectory | Out-Null
+try {
+    foreach($restoreFails in @($false,$true)) {
+        $Output=Join-Path $snapshotDirectory ([string]$restoreFails)
+        New-Item -ItemType Directory -Path $Output | Out-Null
+        $DisplayState=@{displayEvidence=($actualDisplay.workflow_native_display | ConvertTo-Json -Depth 20 | ConvertFrom-Json -AsHashtable);
+            displayDevice=$actualDisplay.workflow_native_display.device;displayOriginalMode=@{dmPelsWidth=1024;dmPelsHeight=768;dmBitsPerPel=32;dmDisplayFrequency=64;dmDisplayOrientation=0;dmDisplayFlags=0};displayRestoreRequired=$true}
+        $broker=[IO.MemoryStream]::new()
+        $ui=@{record=@{schema='pixelquay-consumer-workflow-v1';observations=@();ui_actions_completed=(-not $restoreFails)};brokers=@{owned=$broker}}
+        if($restoreFails){$ui.record.error='original consumer failure'}
+        & $finalizeConsumer
+        Assert-True (-not $broker.CanRead) 'finalizer must still dispose retained broker adapters'
+        $path=Join-Path $Output 'consumer-workflow.json'
+        $originalBytes=[IO.File]::ReadAllBytes($path)
+        $standalone=Get-Content -LiteralPath $path -Raw | ConvertFrom-Json -AsHashtable
+        Assert-True (($standalone.native_display | ConvertTo-Json -Depth 20 -Compress) -ceq ($actualDisplay.workflow_native_display | ConvertTo-Json -Depth 20 -Compress)) 'workflow snapshot differs from actual observed pre-restore record'
+        function Set-PixelQuayConsumerDisplayMode {param($Device,$Mode,$Flags);if($restoreFails){return -2};return 0}
+        function Get-PixelQuayConsumerDisplayState {param($Device);return @{current=$DisplayState.displayOriginalMode}}
+        $restoreError=$null
+        try {Restore-PixelQuayConsumerDisplay $DisplayState}catch{$restoreError=$_.Exception.Message}
+        Assert-True (($null -ne $restoreError) -eq $restoreFails) 'production restoration result differs'
+        $embedded=@{consumer_workflow=$ui.record;consumer_native_display=$DisplayState.displayEvidence}
+        Write-NewUtf8Json (Join-Path $Output 'installation.json') $embedded
+        $serialized=Get-Content -LiteralPath (Join-Path $Output 'installation.json') -Raw | ConvertFrom-Json -AsHashtable
+        Assert-True (($serialized.consumer_workflow | ConvertTo-Json -Depth 20 -Compress) -ceq ($standalone | ConvertTo-Json -Depth 20 -Compress)) 'Standalone and installed consumer evidence differ after actual restoration mutation'
+        Assert-True ([Convert]::ToBase64String([IO.File]::ReadAllBytes($path)) -ceq [Convert]::ToBase64String($originalBytes)) 'workflow evidence bytes were replaced during restoration'
+        if($restoreFails) {
+            Assert-True ($serialized.consumer_workflow.error -ceq 'original consumer failure' -and -not $serialized.consumer_workflow.ui_actions_completed -and
+                -not $serialized.consumer_native_display.restore_verified -and $serialized.consumer_native_display.restore_result -eq -2) 'snapshot changed primary failure or manufactured restoration success'
+        } else {
+            Assert-True (($serialized.consumer_native_display | ConvertTo-Json -Depth 20 -Compress) -ceq ($actualDisplay.installation_native_display | ConvertTo-Json -Depth 20 -Compress)) 'final independent display evidence differs from actual restored record'
+        }
+        # A nested mode list must also be independent, not just a shallow copy.
+        $DisplayState.displayEvidence.supported_modes[0].width=999
+        Assert-True ($ui.record.native_display.supported_modes[0].width -eq 640) 'workflow snapshot still aliases nested native display state'
+    }
+} finally {
+    Remove-Item -LiteralPath $snapshotDirectory -Recurse -Force
+}
+Write-Output 'PASS: production finalizer preserves exact workflow snapshot through successful and failed display restoration; final restoration evidence and original failure remain independent.'

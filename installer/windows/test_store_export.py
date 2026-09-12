@@ -107,6 +107,36 @@ class ExportTests(fixtures.QualificationFixture):
         self.assertTrue(result['store_upload_ready']); self.assertFalse(result['signed']); self.assertFalse(result['submitted'])
         self.assertEqual(['qualification', 'store'], result['qualified_identity_modes'])
 
+    def test_workflow_display_snapshot_equality_and_final_restore_are_both_required(self):
+        actual = export.load(HERE / 'test-fixtures/store-export/34690127749-display-lifecycle.json')
+        for mode in ('qualification', 'store'):
+            folder = self.evidence / ('msix-store-install' if mode == 'store' else 'msix-install')
+            path = folder / 'installation-qualification.json'
+            baseline = export.load(path)
+            workflow = export.load(folder / 'consumer-workflow.json')
+            workflow['native_display'] = copy.deepcopy(actual['workflow_native_display'])
+            baseline['consumer_workflow'] = workflow
+            baseline['consumer_native_display'] = copy.deepcopy(actual['installation_native_display'])
+            write(folder / 'consumer-workflow.json', workflow)
+            write(path, baseline)
+            # Reproduce each of the three actual alias mutations separately.
+            for field in ('restore_result', 'restored', 'restore_verified'):
+                bad = copy.deepcopy(baseline)
+                bad['consumer_workflow']['native_display'][field] = actual['installation_native_display'][field]
+                write(path, bad)
+                with self.subTest(mode=mode, field=field), self.assertRaisesRegex(ValueError, 'Standalone and installed consumer evidence differ'):
+                    self.run_export()
+                self.assertFalse((self.evidence / 'store-upload').exists())
+            bad = copy.deepcopy(baseline)
+            bad['consumer_native_display']['restore_verified'] = False
+            write(path, bad)
+            with self.subTest(mode=mode, final_restore=False), self.assertRaisesRegex(ValueError, 'Native display was not restored'):
+                self.run_export()
+            self.assertFalse((self.evidence / 'store-upload').exists())
+            write(path, baseline)
+        self.assertEqual(0, self.public_reads)
+        self.assertTrue(self.run_export()['store_upload_ready'])
+
     def test_actual_lifecycle_wrong_identity_stale_context_module_and_cleanup_refusals(self):
         for mode in ('qualification', 'store'):
             folder = self.evidence / ('msix-store-install' if mode == 'store' else 'msix-install')

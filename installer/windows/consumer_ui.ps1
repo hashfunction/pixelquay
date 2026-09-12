@@ -330,7 +330,11 @@ function Invoke-PixelQuayConsumerWorkflow([Diagnostics.Process]$Process,[string]
         } catch { $ui.record.failure_observation_error=$_.Exception.Message }
         throw
     } finally {
-        if ($null -ne $DisplayState) { $ui.record.native_display=$DisplayState.displayEvidence }
+        # Freeze this workflow-time snapshot before outer display restoration.
+        # The final restore result is recorded separately by the installation owner.
+        if ($null -ne $DisplayState) {
+            $ui.record.native_display=$DisplayState.displayEvidence | ConvertTo-Json -Depth 20 | ConvertFrom-Json -AsHashtable
+        }
         foreach ($broker in $ui.brokers.Values) { $broker.Dispose() }
         try { Write-NewUtf8Json (Join-Path $Output 'consumer-workflow.json') $ui.record }
         catch {
