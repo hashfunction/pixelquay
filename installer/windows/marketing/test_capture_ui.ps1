@@ -4,7 +4,7 @@ $ErrorActionPreference='Stop';Set-StrictMode -Version Latest
 $script:events=[Collections.Generic.List[string]]::new();$script:refusal='none';$script:mainTitle='Unsaved Image 1 - TintFable'
 function Event([string]$Value){$script:events.Add($Value);if($Value -ceq $script:refusal){throw 'Original UI/file refusal'}}
 function Get-PixelQuayMain($Ui,$Title){Event ('main:'+ $Title);if($Title -cne $script:mainTitle){throw 'Unknown main title assumption'};return @{title=$Title}}
-function Set-PixelQuayMainPlacement($Ui,$Scope){Event 'placement'}
+function Set-TintMaximizedPlacement($Ui,$Scope){Event 'placement'}
 function Open-PixelQuayImage($Ui,$Current,$Path,$Expected){if($Current -cne $script:mainTitle){throw 'Open from unknown document'};Event ('open:'+ [IO.Path]::GetFileName($Path));$script:mainTitle=$Expected;return @{title=$Expected}}
 function Save-PixelQuayImage($Ui,$Current,$Path,$Expected){if($Current -cne $script:mainTitle){throw 'Save from unknown document'};Event ('save:'+ [IO.Path]::GetFileName($Path));$script:mainTitle=$Expected;return @{title=$Expected}}
 function Send-PixelQuayKeys($Ui,$Scope,$Keys){Event ('keys:'+($Keys -join ','));if(($Keys -join ',') -ceq '17,72'){$script:mainTitle=$script:mainTitle.Replace(' - TintFable','* - TintFable')}}

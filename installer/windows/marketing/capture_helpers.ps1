@@ -8,11 +8,27 @@ namespace TintFableMarketing {
   [StructLayout(LayoutKind.Sequential)]public struct RECT{public int Left,Top,Right,Bottom;}
   [DllImport("user32.dll",SetLastError=true)]static extern bool GetWindowRect(IntPtr hwnd,out RECT rectangle);
   [DllImport("user32.dll")]public static extern bool IsWindowVisible(IntPtr hwnd);
+  [DllImport("user32.dll")]static extern bool IsZoomed(IntPtr hwnd);
+  [DllImport("user32.dll")]static extern bool ShowWindowAsync(IntPtr hwnd,int state);
+  public static bool Maximized(long hwnd){return IsZoomed((IntPtr)hwnd);}
+  public static bool Maximize(long hwnd){return ShowWindowAsync((IntPtr)hwnd,3);}
   public static bool Visible(long hwnd){return IsWindowVisible((IntPtr)hwnd);}
   public static int[] Rect(long hwnd){RECT r;if(!GetWindowRect((IntPtr)hwnd,out r))throw new InvalidOperationException("Native main rectangle unavailable");return new[]{r.Left,r.Top,checked(r.Right-r.Left),checked(r.Bottom-r.Top)};}
  }
 }
 '@
+}
+function Set-TintMaximizedPlacement($Ui,$Scope) {
+    Add-TintCaptureTypes
+    Assert-TintCaptureProcess $Ui.state;Assert-PixelQuayScope $Ui $Scope
+    [PixelQuayQualification.ConsumerNative]::ValidatePlacementTarget($Ui.main,$Scope.hwnd,[Object]::ReferenceEquals($Ui.process,$Scope.process),$Scope.class)
+    if(-not [TintFableMarketing.Frame]::Maximize($Ui.main)){throw 'Native maximize request failed'}
+    Wait-PixelQuayConsumer {
+        $snapshot=Get-TintFrameSnapshot $Ui $Scope
+        if(-not $snapshot.main_maximized){return $false}
+        Assert-TintFrameSnapshot $snapshot $Ui.process.Id $Ui.main $Ui.main $Scope.title $Scope.title
+        return $true
+    } 'actual maximized editor covering its work area' | Out-Null
 }
 function Assert-TintCaptureProcess($State) {
     $process=$State.process
@@ -41,26 +57,27 @@ function Assert-TintFrameSnapshot($Value,[int]$ExpectedPid,[long]$Main,[long]$Ta
     if($Value.process_id -ne $ExpectedPid -or $Value.main_pid -ne $ExpectedPid -or $Value.target_pid -ne $ExpectedPid -or
         $Value.main -ne $Main -or $Value.target -ne $Target -or $Value.foreground -ne $Target -or
         $Value.main_title -cne $MainTitle -or $Value.target_title -cne $TargetTitle -or -not $Value.main_visible -or -not $Value.target_visible -or $Value.dpi -ne 96){throw 'Capture surface ownership/title/foreground differs'}
-    $m=$Value.main_bounds;$t=$Value.target_bounds;$a=$Value.work_area;$d=$Value.desktop
-    foreach($r in @($m,$t,$a,$d)){if($r.Count -ne 4 -or $r[2] -le 0 -or $r[3] -le 0){throw 'Invalid capture rectangle'}}
-    if($m[2] -ne 1472 -or $m[3] -ne 940 -or $d[2] -lt 1920 -or $d[3] -lt 1080){throw 'Actual marketing resolution differs'}
-    if($m[0] -lt $a[0] -or $m[1] -lt $a[1] -or $m[0]+$m[2] -gt $a[0]+$a[2] -or $m[1]+$m[3] -gt $a[1]+$a[3]){throw 'Main frame is clipped by the work area'}
-    if($t[0] -lt $m[0] -or $t[1] -lt $m[1] -or $t[0]+$t[2] -gt $m[0]+$m[2] -or $t[1]+$t[3] -gt $m[1]+$m[3]){throw 'Owned dialog lies outside the captured main frame'}
+    $m=$Value.main_bounds;$t=$Value.target_bounds;$a=$Value.work_area;$d=$Value.desktop;$c=$Value.capture_bounds
+    foreach($r in @($m,$t,$a,$d,$c)){if($r.Count -ne 4 -or $r[2] -le 0 -or $r[3] -le 0){throw 'Invalid capture rectangle'}}
+    if(-not $Value.main_maximized -or $a[2] -lt 1920 -or $a[3] -lt 1000 -or $d[2] -lt 1920 -or $d[3] -lt 1080 -or ($c -join ',') -cne ($a -join ',')){throw 'Actual maximized marketing resolution differs'}
+    if($a[0] -lt $d[0] -or $a[1] -lt $d[1] -or $a[0]+$a[2] -gt $d[0]+$d[2] -or $a[1]+$a[3] -gt $d[1]+$d[3] -or $m[0] -gt $a[0] -or $m[1] -gt $a[1] -or $m[0]+$m[2] -lt $a[0]+$a[2] -or $m[1]+$m[3] -lt $a[1]+$a[3]){throw 'Maximized editor does not cover the visible work area'}
+    if($Target -eq $Main){if(($t -join ',') -cne ($m -join ',')){throw 'Main target rectangle differs'}}
+    elseif($t[0] -lt $a[0] -or $t[1] -lt $a[1] -or $t[0]+$t[2] -gt $a[0]+$a[2] -or $t[1]+$t[3] -gt $a[1]+$a[3]){throw 'Owned dialog lies outside the captured editor'}
 }
 function Get-TintFrameSnapshot($Ui,$Scope) {
     Assert-TintCaptureProcess $Ui.state;Assert-PixelQuayScope $Ui $Scope
     $geometry=[PixelQuayQualification.ConsumerNative]::Geometry($Ui.process,$Ui.main,$Scope.process,$Scope.hwnd,$Scope.title)
-    $null=[PixelQuayQualification.ConsumerNative]::VisibleBounds($geometry)
     return @{process_id=$Ui.process.Id;main_pid=[PixelQuayQualification.ConsumerNative]::Pid($Ui.main);target_pid=[PixelQuayQualification.ConsumerNative]::Pid($Scope.hwnd);
         main=$Ui.main;target=$Scope.hwnd;foreground=[PixelQuayQualification.ConsumerNative]::ForegroundWindow();
         main_title=[PixelQuayQualification.ConsumerNative]::Title($Ui.main);target_title=[PixelQuayQualification.ConsumerNative]::Title($Scope.hwnd);
         main_visible=[TintFableMarketing.Frame]::Visible($Ui.main);target_visible=[TintFableMarketing.Frame]::Visible($Scope.hwnd);
+        main_maximized=[TintFableMarketing.Frame]::Maximized($Ui.main);capture_bounds=$geometry.WorkArea;
         main_bounds=[TintFableMarketing.Frame]::Rect($Ui.main);target_bounds=$geometry.Window;desktop=$geometry.Desktop;work_area=$geometry.WorkArea;dpi=$geometry.Dpi}
 }
 function Invoke-TintFrameCapture($Operations,[int]$ProcessId,[long]$Main,[long]$Target,[string]$MainTitle,[string]$TargetTitle){
     $before=& $Operations.Observe
     Assert-TintFrameSnapshot $before $ProcessId $Main $Target $MainTitle $TargetTitle
-    [byte[]]$bytes=& $Operations.Capture $before.main_bounds
+    [byte[]]$bytes=& $Operations.Capture $before.capture_bounds
     $after=& $Operations.Observe
     Assert-TintFrameSnapshot $after $ProcessId $Main $Target $MainTitle $TargetTitle
     if(($before|ConvertTo-Json -Depth 8 -Compress) -cne ($after|ConvertTo-Json -Depth 8 -Compress)){throw 'Native frame changed during screenshot'}

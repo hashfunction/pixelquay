@@ -7,7 +7,7 @@ function Invoke-TintCaptureFiles([string]$Operation,[string]$StatePath,[string[]
 function Invoke-TintCaptureUi($Ui,[string]$StatePath) {
     $fixture=Get-Content -LiteralPath $StatePath -Raw|ConvertFrom-Json -AsHashtable
     $main=Get-PixelQuayMain $Ui 'Unsaved Image 1 - TintFable'
-    Set-PixelQuayMainPlacement $Ui $main
+    Set-TintMaximizedPlacement $Ui $main
     $main=Open-PixelQuayImage $Ui $main.title (Join-Path $fixture.root 'Cedar Coast - draft.png') 'Cedar Coast - draft.png - TintFable'
     Send-PixelQuayKeys $Ui $main @(17,72)
     $main=Save-PixelQuayImage $Ui 'Cedar Coast - draft.png* - TintFable' (Join-Path $fixture.root 'Cedar Coast.png') 'Cedar Coast.png - TintFable'

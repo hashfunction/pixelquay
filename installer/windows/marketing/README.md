@@ -3,11 +3,11 @@
 This separate workflow captures the existing, unchanged, qualified Store package.
 It does not build the app, replay substitute qualification evidence, submit a
 package, edit screenshots or modify the original consumer qualification helpers.
-The candidate remains **unbound**: `binding.json` contains `qualified: null` and
-refuses execution before package download or installation.
+The exact successful Store package is bound in `binding.json`; see
+`BOUND-PACKAGE.md` for its independently replayed qualification evidence.
 
-The three intended files are full native 1472×940 window captures on an actual
-1920×1080 or larger display at 96 DPI:
+The three intended files are native maximized-editor captures of the actual monitor work area
+(at least 1920×1000 on a 1920×1080 or larger display at 96 DPI):
 
 1. `01-edited-canvas.png`: the real editor showing the saved upright Cedar Coast
    campaign artwork after ordinary Open, Rotate Clockwise and Save As actions.
@@ -24,7 +24,8 @@ changing document pixels. Every input uses the original qualified native
 PID/retained-handle/window/foreground/picker-focus guards. Screenshots use native
 CopyFromScreen into PNG without resizing, cropping after capture, overlays,
 retouching or generated application UI. Each image has a receipt with actual
-before/after main and modal rectangles, foreground, title, PID, source commit,
+before/after main and modal rectangles, maximized state, full work-area capture
+rectangle, foreground, title, PID, source commit,
 package identity, byte count and SHA-256; all three files are rechecked.
 
 ## Original sample content
@@ -107,6 +108,14 @@ actual qualified helper loading and native compilation; four production capture
 registration scenarios; unproved-process cleanup refusal; eleven frame ownership/
 geometry refusals; before/after frame stability; actual three-image hash recheck;
 all eight lifecycle failure boundaries; and real UI sequence with four stops on
-input/file failure. No Windows screenshot has been produced by this candidate.
-The actual native capture and visual acceptance remain pending the final binding
-and a fresh run of `marketing-screenshots.yml`.
+input/file failure. Run 34691905174 completed all original native capture and cleanup checks. Visual
+review found the console visible through GTK’s transparent window shadow, so those
+images are not used for publication. This capture-only revision maximizes the
+owned editor once with ShowWindowAsync, independently observes IsZoomed, and
+requires its native bounds to cover the entire monitor work area. Only that full
+visible work area is captured directly; there is no image postprocessing. The
+original qualified package and all document/pixel/recipe checks remain unchanged.
+A fresh native capture and visual review are required before publishing images.
+
+Win32 references: https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-showwindowasync
+and https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-iszoomed.
