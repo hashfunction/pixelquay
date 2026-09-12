@@ -130,3 +130,9 @@ is no retry, clipboard mutation or synthetic file write. The original full-path
 readback remains mandatory before submitting the picker, and all output pixel
 checks remain mandatory. This changes capture-only input timing; it does not
 change the product or its original installed qualification evidence.
+
+Run 34692993051 retained the entire Save filename except its first `C`; the
+original full-path check refused it. The next capture adds a one-second pause
+after the existing filename selection, then records the real initial text
+through the original exact-focus native reader before sending any characters.
+This is bounded capture pacing; it does not retry or rewrite a failed path.

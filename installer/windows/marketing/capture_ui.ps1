@@ -7,6 +7,15 @@ function Invoke-TintPacedFileNameText([string]$Text,[scriptblock]$Send) {
 # original native owner/focus gate once, including its 100 ms dispatch interval.
 # Keep the qualified source and its full-path readback/acceptance untouched.
 function Send-PixelQuayFileNameText($Ui,$Scope,[long]$Focus,[string]$Text) {
+    # Native Save autocompletion can still be settling after the filename
+    # mnemonic/select-all. A human-paced pause precedes the one-shot stream;
+    # this is not a retry and the original exact full-path readback stays required.
+    Start-Sleep -Milliseconds 1000
+    Assert-PixelQuayScope $Ui $Scope
+    $before=[PixelQuayQualification.ConsumerNative]::FileNameText($Ui.process,$Ui.main,$Scope.process,$Scope.hwnd,$Scope.title,$Focus)
+    if(-not $Ui.record.Contains('capture_filename_initial')){$Ui.record.capture_filename_initial=[Collections.Generic.List[object]]::new()}
+    if($Ui.record.capture_filename_initial.Count -ge 8){throw 'Capture filename observation bound exceeded'}
+    $Ui.record.capture_filename_initial.Add(@{title=$Scope.title;hwnd=$Scope.hwnd;focus=$Focus;value=$before;expected=$Text;initial_pause_ms=1000})
     Invoke-TintPacedFileNameText $Text {
         param($character)
         Assert-PixelQuayScope $Ui $Scope
