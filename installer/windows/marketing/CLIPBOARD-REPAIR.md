@@ -95,3 +95,11 @@ replays its policy here; its real native clipboard publish/read/restore case is
 explicitly skipped outside Windows. Real Windows paste, the entire screenshot
 workflow and visual review remain pending. No new screenshots are accepted by
 these local tests.
+
+## Publication close sequence correction
+
+Actual run 34695478978 passed all prior fixture suites but stopped in the real native clipboard fixture before installing the app. Begin succeeded, then Verify/Restore reported changed owner/sequence/text. That older generic error did not retain which value changed; the new native fixture records before/after publication sequence and preserves both primary and cleanup errors.
+
+The prior lease anchored its sequence before CloseClipboard. Windows synthesizes companion text formats when publishing text; upstream Wine's real-Windows conformance tests explicitly check that closing a clipboard containing text advances its sequence and that a close with no synthesis does not (dlls/user32/tests/clipboard.c, test_messages). Microsoft's clipboard format documentation describes these synthesized formats: https://learn.microsoft.com/en-us/windows/win32/dataxchg/clipboard-formats . This explains a concrete invalid assumption in the prior lease; the exact failed runner value still requires the fresh native trace.
+
+After completing publication, the driver now takes one fresh locked read, requires its exact owned HWND and Unicode text, then anchors the nonzero sequence. It never repeats publication or adopts a changed owner/content. Every subsequent Verify and Restore still requires exact sequence equality. A new production policy replay first failed the old code when Close synthesized formats, then passed the corrected lease. Another case refuses a foreign owner/content introduced at publication close without clearing it. All 19 compiled clipboard policy cases and 15 original production paste cases pass locally. Fresh real Windows clipboard and full capture remain required.

@@ -14,6 +14,7 @@ namespace TintFableMarketing {
   bool finished;
   public long Owner { get; private set; }
   public uint Sequence { get; private set; }
+  public uint BeforeCloseSequence { get; private set; }
   FilenameClipboard(string value,IClipboardApi native) {text=value;api=native;thread=api.CurrentThread();}
   public static FilenameClipboard Begin(string text) {return Begin(text,new NativeClipboard());}
   internal static FilenameClipboard Begin(string text,IClipboardApi api) {
@@ -24,7 +25,15 @@ namespace TintFableMarketing {
      // A NULL owner is NOT proof of an empty clipboard. Count under the lock
      // before any mutation; the isolated capture only accepts an empty baseline.
      if(api.Count()!=0)throw new InvalidOperationException("Initial clipboard is not empty; preserved");
-     api.Empty();api.WriteUnicode(text);lease.Sequence=api.Sequence();lease.Match();
+     api.Empty();api.WriteUnicode(text);lease.Sequence=api.Sequence();lease.Match();lease.BeforeCloseSequence=lease.Sequence;
+    });
+    // Publishing is complete only after CloseClipboard. Windows can synthesize
+    // companion text formats then, advancing the sequence without changing our
+    // owner or eager Unicode data. Establish the lease in one fresh locked read.
+    lease.Locked(delegate {
+     if(api.Owner()!=lease.Owner || api.ReadUnicode()!=text)
+      throw new InvalidOperationException("Clipboard publication owner/text changed; data preserved");
+     lease.Sequence=api.Sequence();lease.Match();
     });
     return lease;
    }catch(Exception first) {
@@ -37,8 +46,9 @@ namespace TintFableMarketing {
    if(api.CurrentThread()!=thread)throw new InvalidOperationException("Clipboard owner thread changed");
   }
   void Match() {
-   if(Sequence==0 || api.Sequence()!=Sequence || api.Owner()!=Owner || api.ReadUnicode()!=text)
-    throw new InvalidOperationException("Clipboard owner, sequence or Unicode text changed; data preserved");
+   uint observed=api.Sequence();long owner=api.Owner();bool sameText=api.ReadUnicode()==text;
+   if(Sequence==0 || observed!=Sequence || owner!=Owner || !sameText)
+    throw new InvalidOperationException("Clipboard changed; data preserved. Expected sequence="+Sequence+", actual="+observed+", expected owner="+Owner+", actual="+owner+", same Unicode="+sameText);
   }
   void Locked(Action operation) {
    api.Open(Owner);Exception failure=null;

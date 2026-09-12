@@ -4,12 +4,12 @@ $fixture=@'
 namespace TintFableMarketing {
  internal sealed class ReplayClipboard : IClipboardApi {
   internal int Formats,Empties,Writes,Destroyed,Opened,Closed; internal uint Stamp=5;
-  internal long Owning; internal string Text=""; internal bool Busy,FailWrite,FailClose; internal uint Thread=17;
+  internal long Owning; internal string Text=""; internal bool Busy,FailWrite,FailClose,SynthesizeOnClose,ForeignOnClose; internal uint Thread=17;
   public uint CurrentThread(){return Thread;}
   public long CreateOwner(){return 444;}
   public void DestroyOwner(long owner){if(owner!=444)throw new System.Exception("Wrong destroyed owner");Destroyed++;}
   public void Open(long owner){if(Busy)throw new System.Exception("Clipboard busy");Opened++;}
-  public void Close(){Closed++;if(FailClose)throw new System.Exception("Clipboard close failed");}
+  public void Close(){Closed++;if(FailClose)throw new System.Exception("Clipboard close failed");if(Closed==1 && SynthesizeOnClose){Stamp++;Formats=4;}if(Closed==1 && ForeignOnClose){Stamp++;Owning=999;Text="foreign";}}
   public int Count(){return Formats;}
   public long Owner(){return Owning;}
   public uint Sequence(){return Stamp;}
@@ -25,6 +25,12 @@ namespace TintFableMarketing {
    Require(lease.Owner==444 && lease.Sequence==7 && api.Opened==api.Closed,"Missing production publication proof");
    lease.Verify();lease.RestoreEmpty();Require(api.Formats==0 && api.Empties==2 && api.Writes==1 && api.Destroyed==1,"Empty baseline not restored exactly once");cases++;
    try{lease.RestoreEmpty();throw new System.Exception("Second restoration accepted");}catch(System.InvalidOperationException){}cases++;
+   api=new ReplayClipboard{SynthesizeOnClose=true};lease=FilenameClipboard.Begin(path,api);
+   Require(lease.Sequence==8,"Publication sequence must be anchored after CloseClipboard synthesizes formats");
+   lease.Verify();lease.RestoreEmpty();Require(api.Empties==2 && api.Destroyed==1,"Post-publication clipboard was not restored");cases++;
+   api=new ReplayClipboard{ForeignOnClose=true};bool foreignRefused=false;
+   try{FilenameClipboard.Begin(path,api);}catch(System.InvalidOperationException){foreignRefused=true;}
+   Require(foreignRefused && api.Text=="foreign" && api.Empties==1 && api.Destroyed==1,"Changed publication owner was adopted or cleared");cases++;
    foreach(string failure in new[]{"nonempty-ownerless","nonempty-foreign","busy","write","close"}) {
     api=new ReplayClipboard();if(failure.StartsWith("nonempty")){api.Formats=2;api.Text="foreign";api.Owning=failure.EndsWith("foreign")?999:0;}
     api.Busy=failure=="busy";api.FailWrite=failure=="write";api.FailClose=failure=="close";bool refused=false;
@@ -61,6 +67,13 @@ if($IsWindows) {
  # Real eager Unicode allocation/transfer, native owner, sequence and cleanup.
  # This fixture deliberately shares production's truly-empty CI baseline gate.
  $lease=[TintFableMarketing.FilenameClipboard]::Begin('C:\TintFable Demo\Cedar Coast – résumé.png')
- try{$lease.Verify()}finally{$lease.RestoreEmpty()}
+ Write-Output ("Native clipboard publication sequence before Close="+$lease.BeforeCloseSequence+", after Close="+$lease.Sequence+", owner="+$lease.Owner)
+ $primary=$null;$cleanup=$null
+ try{$lease.Verify()}catch{$primary=$_}
+ try{$lease.RestoreEmpty()}catch{$cleanup=$_}
+ if($primary){Write-Output ('Primary native clipboard error: '+$primary.Exception.ToString())}
+ if($cleanup){Write-Output ('Cleanup native clipboard error: '+$cleanup.Exception.ToString())}
+ if($primary){throw $primary}
+ if($cleanup){throw $cleanup}
  Write-Output 'PASS actual Windows native eager Unicode clipboard publish/read/empty-baseline restore.'
 }else{Write-Output 'SKIP actual Windows clipboard execution on this non-Windows host.'}
