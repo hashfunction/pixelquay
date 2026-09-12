@@ -155,3 +155,60 @@ foreach($change in @(
  if([PixelQuayQualification.ConsumerNative]::IsObservedModernSaveFileName($e,'Save Image File')){throw 'Mutated Save filename chain accepted'}
 }
 'PASS actual modern Save topology plus15 wrong-title/chain refusals; native rerun still required'
+
+# Run34682286222: Gtk SelectFolder displays an exact direct-child Edit1152
+# under Export destination. This must not authorize other edits or dialog titles.
+function New-ExportFolderEvidence {
+    $e=New-ObservedFileName;$e.HasFileNameId=$false;$e.DialogThread=3056;$e.FocusThread=3056
+    $e.AncestryReachedDialog=$true;$e.AncestryTruncated=$false
+    $e.Ancestors=@([PixelQuayQualification.FileNameAncestorEvidence]@{
+        Window=220;Parent=200;ProcessId=17;ControlId=1152;Descendant=$true;Class='Edit'
+    });return $e
+}
+$folder=New-ExportFolderEvidence
+if(-not [PixelQuayQualification.ConsumerNative]::IsObservedExportFolderName($folder,'Export destination')){throw 'Observed real export folder field rejected'}
+$folder.HasFileNameId=[PixelQuayQualification.ConsumerNative]::IsObservedExportFolderName($folder,'Export destination')
+[PixelQuayQualification.ConsumerNative]::ValidateFileName($folder)
+$folderTopologyCases=1
+foreach($title in @('Save Image File','Open Image File','Foreign dialog')) {
+    if([PixelQuayQualification.ConsumerNative]::IsObservedExportFolderName((New-ExportFolderEvidence),$title)){throw 'Export folder field accepted another dialog'}
+    $folderTopologyCases++
+}
+if([PixelQuayQualification.ConsumerNative]::IsObservedExportFolderName($null,'Export destination')){throw 'Null folder evidence accepted'}
+$folderTopologyCases++
+foreach($change in @(
+    {param($e)$e.Ancestors=$null}, {param($e)$e.Ancestors=@()}, {param($e)$e.Ancestors=@($null)},
+    {param($e)$e.Ancestors=@($e.Ancestors[0],$e.Ancestors[0])},
+    {param($e)$e.AncestryReachedDialog=$false}, {param($e)$e.AncestryTruncated=$true},
+    {param($e)$e.Window=0}, {param($e)$e.Focus=0}, {param($e)$e.DialogPid=0},
+    {param($e)$e.Ancestors[0].Window=0}, {param($e)$e.Ancestors[0].Window=999},
+    {param($e)$e.Focus=200;$e.Ancestors[0].Window=200},
+    {param($e)$e.Ancestors[0].Parent=999}, {param($e)$e.Ancestors[0].ProcessId=99},
+    {param($e)$e.Ancestors[0].Descendant=$false}, {param($e)$e.Ancestors[0].Class='SearchBox'},
+    {param($e)$e.Ancestors[0].ControlId=1148}, {param($e)$e.Ancestors[0].ControlId=1001},
+    {param($e)$e.DialogThread=0;$e.FocusThread=0}, {param($e)$e.FocusThread=3057}
+)) {
+    $e=New-ExportFolderEvidence;& $change $e
+    if([PixelQuayQualification.ConsumerNative]::IsObservedExportFolderName($e,'Export destination')){throw 'Mutated export folder topology accepted'}
+    $folderTopologyCases++
+}
+# The recognized topology cannot suppress any existing focused-input predicate.
+$folderGuardCases=0
+foreach($change in @(@{ExpectedFocus=999},@{Active=999},@{FocusPid=99},@{Exists=$false},@{Visible=$false},@{Enabled=$false},@{Descendant=$false},@{ReadOnly=$true},@{Class='SearchBox'})) {
+    $e=New-ExportFolderEvidence
+    foreach($key in $change.Keys){$e.$key=$change[$key]}
+    $e.HasFileNameId=[PixelQuayQualification.ConsumerNative]::IsObservedExportFolderName($e,'Export destination')
+    $rejected=$false;try{[PixelQuayQualification.ConsumerNative]::ValidateFileName($e)}catch{$rejected=$true}
+    if(-not $rejected){throw 'Recognized folder topology bypassed final filename validation'}
+    $folderGuardCases++
+}
+$script:boundaryEvents.Clear()
+$folderTarget=[Action]{$script:boundaryEvents.Add('target')}
+$folderFocus=[Action]{
+    $script:boundaryEvents.Add('focus');$e=New-ExportFolderEvidence;$e.Focus=999
+    $e.HasFileNameId=[PixelQuayQualification.ConsumerNative]::IsObservedExportFolderName($e,'Export destination')
+    [PixelQuayQualification.ConsumerNative]::ValidateFileName($e)
+}
+$rejected=$false;try{[PixelQuayQualification.ConsumerNative]::DeliverInput($folderTarget,$folderFocus,$deliver,2)}catch{$rejected=$true}
+if(-not $rejected -or ($script:boundaryEvents -join ',') -cne 'target,focus'){throw 'Export folder focus replacement reached native input'}
+"PASS $folderTopologyCases export-folder topology cases, $folderGuardCases unchanged filename refusals, and final focus replacement before send"

@@ -62,6 +62,18 @@ public static class ConsumerNative {
         }
         return true;
     }
+    // Windows run34682286222 and ExportRecipeDialog.ChooseDestination:
+    // SelectFolder exposes this single direct-child folder Edit. The exact
+    // title/topology identifies the field; all later input guards still apply.
+    public static bool IsObservedExportFolderName(FileNameEvidence e,string title) {
+        if(title!="Export destination" || e==null || !e.AncestryReachedDialog || e.AncestryTruncated ||
+            e.Ancestors==null || e.Ancestors.Length!=1 || e.Focus==0 || e.Window==0 || e.DialogPid<=0 ||
+            e.DialogThread==0 || e.FocusThread!=e.DialogThread)return false;
+        var a=e.Ancestors[0];
+        return a!=null && a.Window!=0 && a.Window!=e.Window && a.Window==e.Focus &&
+            a.Parent==e.Window && a.ProcessId==e.DialogPid && a.Descendant &&
+            a.Class=="Edit" && a.ControlId==1152;
+    }
     public static void ValidateFileName(FileNameEvidence e) {
         var failures=new List<string>();
         if(e.Window==0)failures.Add("window");
@@ -189,7 +201,8 @@ public static class ConsumerNative {
             evidence.ObservationStage="style";
             evidence.Style=GetWindowLongPtr(info.Focus,-16).ToInt64();
             evidence.ReadOnly=FileNameReadOnly(evidence.Style);
-            evidence.HasFileNameId=evidence.HasFileNameId || IsObservedModernSaveFileName(evidence,title);
+            evidence.HasFileNameId=evidence.HasFileNameId || IsObservedModernSaveFileName(evidence,title) ||
+                IsObservedExportFolderName(evidence,title);
             evidence.ObservationStage="filename-validation";
             ValidateFileName(evidence);Require(app,main,target,w,title,true);
             // Re-read focus after ownership/style/ancestry queries. Diagnostics
