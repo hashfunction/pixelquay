@@ -43,6 +43,28 @@ QUALIFICATION_IDENTITY = {
 	'maxVersionTested': '10.0.26100.0',
 	'capability': 'runFullTrust',
 }
+STORE_IDENTITY = {**QUALIFICATION_IDENTITY,
+	'packageName': '1659hashfunction.PixelQuay',
+	'publisher': 'CN=B6A2631A-FD32-45CC-AE12-82466975F528',
+}
+
+
+def identity_for_mode(mode):
+	if mode not in ('qualification', 'store'):
+		raise ValueError('Unknown package identity mode')
+	return dict(STORE_IDENTITY if mode == 'store' else QUALIFICATION_IDENTITY)
+
+
+def package_name(mode):
+	identity_for_mode(mode)
+	return 'TintFable_1.0.1.0_x64.msix' if mode == 'store' else 'TintFable.Qualification_1.0.1.0_x64.msix'
+
+
+def file_record(path):
+	with _regular_stream(path) as stream:
+		return _digest(stream)
+
+
 REQUIRED_RELEASE_FILES = (
 	'bin/TintFable.exe',
 	'bin/TintFable.dll',
@@ -270,8 +292,9 @@ def _validate_managed_inventory(release, inventory):
 	return hashlib.sha256(_canonical_json(inventory)).hexdigest()
 
 
-def create_manifest():
-	identity = QUALIFICATION_IDENTITY
+def create_manifest(identity_mode='qualification'):
+	identity = identity_for_mode(identity_mode)
+	description = 'TintFable image editor' if identity_mode == 'store' else 'TintFable qualification package'
 	package = ET.Element(f'{{{APPX_NS}}}Package', {'IgnorableNamespaces': 'uap rescap'})
 	ET.SubElement(package, f'{{{APPX_NS}}}Identity', {
 		'Name': identity['packageName'], 'Publisher': identity['publisher'],
@@ -279,8 +302,8 @@ def create_manifest():
 	})
 	properties = ET.SubElement(package, f'{{{APPX_NS}}}Properties')
 	for name, value in (
-		('DisplayName', 'TintFable'), ('PublisherDisplayName', 'Trieflow LLC'),
-		('Description', 'TintFable qualification package'), ('Logo', r'Assets\StoreLogo.png'),
+		('DisplayName', 'TintFable'), ('PublisherDisplayName', 'hashfunction' if identity_mode == 'store' else 'Trieflow LLC'),
+		('Description', description), ('Logo', r'Assets\StoreLogo.png'),
 	):
 		ET.SubElement(properties, f'{{{APPX_NS}}}{name}').text = value
 	resources = ET.SubElement(package, f'{{{APPX_NS}}}Resources')
@@ -296,7 +319,7 @@ def create_manifest():
 		'EntryPoint': 'Windows.FullTrustApplication',
 	})
 	ET.SubElement(application, f'{{{UAP_NS}}}VisualElements', {
-		'DisplayName': 'TintFable', 'Description': 'TintFable qualification package',
+		'DisplayName': 'TintFable', 'Description': description,
 		'BackgroundColor': '#142e38', 'Square150x150Logo': r'Assets\Square150x150Logo.png',
 		'Square44x44Logo': r'Assets\Square44x44Logo.png',
 	})
@@ -313,7 +336,8 @@ def _one(parent, tag, label):
 	return items[0]
 
 
-def validate_manifest(data):
+def validate_manifest(data, identity_mode='qualification'):
+	description = 'TintFable image editor' if identity_mode == 'store' else 'TintFable qualification package'
 	try:
 		root = ET.fromstring(data)
 	except ET.ParseError as error:
@@ -327,7 +351,7 @@ def validate_manifest(data):
 	if [child.tag for child in root] != expected_children:
 		raise ValueError('Unexpected manifest sections or extensions')
 	identity_node = _one(root, f'{{{APPX_NS}}}Identity', 'identity')
-	identity = QUALIFICATION_IDENTITY
+	identity = identity_for_mode(identity_mode)
 	if identity_node.attrib != {
 		'Name': identity['packageName'], 'Publisher': identity['publisher'],
 		'Version': identity['version'], 'ProcessorArchitecture': identity['architecture'],
@@ -335,8 +359,8 @@ def validate_manifest(data):
 		raise ValueError('Unexpected qualification identity')
 	properties = _one(root, f'{{{APPX_NS}}}Properties', 'properties')
 	expected_properties = {
-		'DisplayName': 'TintFable', 'PublisherDisplayName': 'Trieflow LLC',
-		'Description': 'TintFable qualification package', 'Logo': r'Assets\StoreLogo.png',
+		'DisplayName': 'TintFable', 'PublisherDisplayName': 'hashfunction' if identity_mode == 'store' else 'Trieflow LLC',
+		'Description': description, 'Logo': r'Assets\StoreLogo.png',
 	}
 	if len(properties) != len(expected_properties) \
 		or {child.tag.rsplit('}', 1)[-1]: child.text for child in properties} != expected_properties \
@@ -356,7 +380,7 @@ def validate_manifest(data):
 		raise ValueError('Unexpected manifest executable/application')
 	visual = _one(application, f'{{{UAP_NS}}}VisualElements', 'visual elements')
 	if len(application) != 1 or visual.attrib != {
-		'DisplayName': 'TintFable', 'Description': 'TintFable qualification package',
+		'DisplayName': 'TintFable', 'Description': description,
 		'BackgroundColor': '#142e38', 'Square150x150Logo': r'Assets\Square150x150Logo.png',
 		'Square44x44Logo': r'Assets\Square44x44Logo.png',
 	} or len(visual):
@@ -471,7 +495,8 @@ def _write_new(path, data):
 		os.fsync(output.fileno())
 
 
-def stage_release(release, artwork, stage, source_commit):
+def stage_release(release, artwork, stage, source_commit, identity_mode='qualification'):
+	identity = identity_for_mode(identity_mode)
 	release, artwork, stage = Path(release), Path(artwork), Path(stage)
 	if not re.fullmatch(r'[0-9a-f]{40}', source_commit or ''):
 		raise ValueError('Exact 40-character source commit is required')
@@ -510,8 +535,8 @@ def stage_release(release, artwork, stage, source_commit):
 			relative = f'Assets/{name}'
 			_write_new(stage / relative, data)
 			assets[relative] = {'bytes': len(data), 'sha256': hashlib.sha256(data).hexdigest(), 'pixels': [size, size]}
-		manifest = create_manifest()
-		validate_manifest(manifest)
+		manifest = create_manifest(identity_mode)
+		validate_manifest(manifest, identity_mode)
 		_write_new(stage / 'AppxManifest.xml', manifest)
 		if inventory_tree(release) != input_inventory:
 			raise ValueError('Release input changed while staging')
@@ -522,8 +547,9 @@ def stage_release(release, artwork, stage, source_commit):
 		return {
 			'schemaVersion': 1,
 			'sourceCommit': source_commit,
-			'qualificationIdentityOnly': True,
-			'identity': dict(QUALIFICATION_IDENTITY),
+			'qualificationIdentityOnly': identity_mode == 'qualification',
+			'identityMode': identity_mode,
+			'identity': identity,
 			'releaseInput': input_inventory,
 			'payload': payload,
 			'nativeInventoryCanonicalSha256': native_digest,
@@ -549,7 +575,8 @@ def _decode_opc_path(value):
 	return _checked_path(unquote(value, encoding='utf-8', errors='strict'))
 
 
-def verify_msix(path, expected):
+def verify_msix(path, expected, identity_mode='qualification'):
+	identity_for_mode(identity_mode)
 	if not isinstance(expected, dict) or 'AppxManifest.xml' not in expected:
 		raise ValueError('Invalid expected package payload')
 	allowed_directories = {
@@ -595,20 +622,40 @@ def verify_msix(path, expected):
 		raise ValueError('Package payload is missing expected files')
 	if not {'[Content_Types].xml', 'AppxBlockMap.xml'}.issubset(metadata):
 		raise ValueError('Package metadata is incomplete')
-	validate_manifest(manifest_data)
+	validate_manifest(manifest_data, identity_mode)
 	with _regular_stream(path) as stream:
 		package = _digest(stream)
 	return {'verifiedPayloadFiles': len(actual), 'metadata': sorted(metadata), 'package': package}
 
 
-def verify_unpacked(root, expected):
+def verify_unpacked(root, expected, identity_mode='qualification'):
 	actual = inventory_tree(root)
 	for metadata in PACKAGE_METADATA:
 		actual.pop(metadata, None)
 	if actual != expected:
 		raise ValueError('SDK-unpacked payload differs from staged payload')
-	validate_manifest((Path(root) / 'AppxManifest.xml').read_bytes())
+	validate_manifest((Path(root) / 'AppxManifest.xml').read_bytes(), identity_mode)
 	return {'verifiedPayloadFiles': len(actual)}
+
+
+def verify_record_inputs(package, record_path, release, artwork, commit, identity_mode='qualification'):
+	"""Rederive every input-derived record field, rather than trusting a JSON claim."""
+	record = _load_json(record_path, 'package record')
+	with tempfile.TemporaryDirectory(prefix='tintfable-record-') as temporary:
+		expected = stage_release(release, artwork, Path(temporary) / 'stage', commit, identity_mode)
+	if set(record) != set(expected) | {'makeAppx', 'containerVerification', 'unpackedVerification'} \
+		or any(_canonical_json(record.get(key)) != _canonical_json(value) for key, value in expected.items()):
+		raise ValueError('Package record differs from exact current release/artwork/source/identity')
+	if _canonical_json(record['containerVerification']) != _canonical_json(verify_msix(package, expected['payload'], identity_mode)):
+		raise ValueError('Unsigned archive differs from independently verified container')
+	tool = record['makeAppx']
+	if _tool_record(Path(tool['path']), tool['sdkVersion']) != tool:
+		raise ValueError('Recorded MakeAppx tool differs from the exact current SDK executable')
+	unpacked = record['unpackedVerification']
+	if set(unpacked) != {'verifiedPayloadFiles'} or type(unpacked['verifiedPayloadFiles']) is not int \
+		or unpacked['verifiedPayloadFiles'] != len(expected['payload']):
+		raise ValueError('Independent SDK unpack evidence differs from complete payload')
+	return record
 
 
 def _tool_record(path, sdk_version):
@@ -631,7 +678,8 @@ def _run(command):
 	subprocess.run(command, check=True, shell=False, timeout=900)
 
 
-def build_qualification(release, artwork, source_commit, makeappx, sdk_version, output, runner=_run):
+def build_qualification(release, artwork, source_commit, makeappx, sdk_version, output, runner=_run, identity_mode='qualification'):
+	identity_for_mode(identity_mode)
 	output = Path(output).absolute()
 	if os.path.lexists(output):
 		raise ValueError(f'Output already exists and will not be replaced: {output}')
@@ -640,8 +688,8 @@ def build_qualification(release, artwork, source_commit, makeappx, sdk_version, 
 	try:
 		tool = _tool_record(makeappx, sdk_version)
 		stage = temporary / 'stage'
-		record = stage_release(release, artwork, stage, source_commit)
-		package = temporary / 'TintFable.Qualification_1.0.1.0_x64.msix'
+		record = stage_release(release, artwork, stage, source_commit, identity_mode)
+		package = temporary / package_name(identity_mode)
 		unpacked = temporary / 'unpacked'
 		commands = [
 			[str(makeappx), 'pack', '/d', str(stage), '/p', str(package), '/v', '/h', 'SHA256'],
@@ -653,8 +701,8 @@ def build_qualification(release, artwork, source_commit, makeappx, sdk_version, 
 			runner(command)
 			if inventory_tree(stage) != record['payload']:
 				raise ValueError('Package stage changed during SDK execution')
-		container = verify_msix(package, record['payload'])
-		unpacked_result = verify_unpacked(unpacked, record['payload'])
+		container = verify_msix(package, record['payload'], identity_mode)
+		unpacked_result = verify_unpacked(unpacked, record['payload'], identity_mode)
 		if _tool_record(makeappx, sdk_version) != tool:
 			raise ValueError('MakeAppx changed during qualification build')
 		record.update({
@@ -686,6 +734,7 @@ def main():
 	parser.add_argument('--makeappx', type=Path, required=True)
 	parser.add_argument('--sdk-version', required=True)
 	parser.add_argument('--output', type=Path, required=True)
+	parser.add_argument('--identity-mode', choices=('qualification', 'store'), default='qualification')
 	args = parser.parse_args()
 	if sys.platform != 'win32' or os.environ.get('CI') != 'true':
 		parser.error('Qualification package builds require disposable Windows CI')
@@ -702,7 +751,7 @@ def main():
 		).stdout.strip()
 		if dirty:
 			raise ValueError('Source checkout must be clean so the recorded commit identifies every packaging input')
-		print(build_qualification(args.release, args.artwork, args.source_commit, args.makeappx, args.sdk_version, args.output))
+		print(build_qualification(args.release, args.artwork, args.source_commit, args.makeappx, args.sdk_version, args.output, identity_mode=args.identity_mode))
 	except (OSError, ValueError, subprocess.SubprocessError) as error:
 		parser.exit(1, str(error) + '\n')
 

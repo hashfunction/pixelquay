@@ -8,6 +8,7 @@ param(
     [Parameter()][string]$PackageRecord,
     [Parameter()][string]$SignTool,
     [Parameter()][string]$Output,
+    [Parameter()][ValidateSet("qualification","store")][string]$IdentityMode="qualification",
     [Parameter()][switch]$LibraryOnly
 )
 
@@ -241,7 +242,33 @@ function Write-NewUtf8Json([string]$Path, [object]$Value) {
     }
 }
 
-function Invoke-PixelQuayInstallQualification([string]$PackagePath, [string]$RecordPath, [string]$SignToolPath, [string]$OutputPath) {
+function Get-PixelQuayIdentity([ValidateSet('qualification','store')][string]$Mode='qualification') {
+    $identity = [ordered]@{
+        packageName='Trieflow.PixelQuay.Qualification'; publisher='CN=PixelQuay-CI-Qualification'; version='1.0.1.0'
+        architecture='x64'; applicationId='PixelQuay'; executable='bin\TintFable.exe'
+        deviceFamily='Windows.Desktop'; minVersion='10.0.19041.0'; maxVersionTested='10.0.26100.0'; capability='runFullTrust'
+    }
+    if ($Mode -ceq 'store') {
+        $identity.packageName='1659hashfunction.PixelQuay'
+        $identity.publisher='CN=B6A2631A-FD32-45CC-AE12-82466975F528'
+    }
+    return $identity
+}
+
+function Assert-PixelQuayRecordIdentity($Record,[ValidateSet('qualification','store')][string]$Mode='qualification') {
+    $expected=Get-PixelQuayIdentity $Mode
+    if ($Record.schemaVersion -ne 1 -or $Record.identityMode -cne $Mode -or
+        $Record.qualificationIdentityOnly -ne ($Mode -ceq 'qualification') -or $Record.signed -or
+        $Record.publicRelease -or $Record.licenseClearanceClaimed -or $Record.installationQualificationPassed) {
+        throw 'Package record is not an unsigned record for the selected identity mode.'
+    }
+    if (@($Record.identity.PSObject.Properties).Count -ne $expected.Count) {throw 'Package identity fields differ.'}
+    foreach($field in $expected.Keys) {
+        if ([string]$Record.identity.$field -cne [string]$expected[$field]) {throw "Qualification identity mismatch: $field"}
+    }
+}
+
+function Invoke-PixelQuayInstallQualification([string]$PackagePath, [string]$RecordPath, [string]$SignToolPath, [string]$OutputPath, [ValidateSet("qualification","store")][string]$IdentityMode="qualification") {
     $state = [ordered]@{
         package = $null; record = $null; output = $null; temporary = $null; signedCopy = $null
         publicCertificate = $null; certificate = $null; trustedCertificate = $null
@@ -253,17 +280,13 @@ function Invoke-PixelQuayInstallQualification([string]$PackagePath, [string]$Rec
         aumid = $null; processPackageFullName = $null; modules = @(); window = $null
         executableSha256 = $null; coreclrSha256 = $null; hostfxrSha256 = $null
         diagnosticPackageFullName = $null; diagnosticStderr = $null
-        diagnosticCleanClose = $false; cleanClose = $false; uninstallVerified = $false
+        diagnosticCleanClose = $false; cleanClose = $false; normalExitCode = $null; uninstallVerified = $false
         processHandle = $null; processOwned = $false; allProcessesStopped = $true
         processLifetimes = [Collections.Generic.List[object]]::new()
         consumerStatePath = $null; consumerFixture = $null; consumerUi = $null; consumerReceipt = $null; consumerRemoved = $false
         consumerDisplay = @{displayOriginalMode=$null;displayDevice=$null;displayRestoreRequired=$false;displayEvidence=$null}
     }
-    $expectedIdentity = [ordered]@{
-        packageName='Trieflow.PixelQuay.Qualification'; publisher='CN=PixelQuay-CI-Qualification'; version='1.0.1.0'
-        architecture='x64'; applicationId='PixelQuay'; executable='bin\TintFable.exe'
-        deviceFamily='Windows.Desktop'; minVersion='10.0.19041.0'; maxVersionTested='10.0.26100.0'; capability='runFullTrust'
-    }
+    $expectedIdentity = Get-PixelQuayIdentity $IdentityMode
 
     $operations = [ordered]@{}
     $operations.Preflight = {
@@ -280,12 +303,7 @@ function Invoke-PixelQuayInstallQualification([string]$PackagePath, [string]$Rec
         New-Item -ItemType Directory -Path $outputCandidate -ErrorAction Stop | Out-Null
         $state.output = $outputCandidate
         $state.record = Get-Content -LiteralPath $recordFile -Raw -Encoding utf8 | ConvertFrom-Json
-        if ($state.record.schemaVersion -ne 1 -or -not $state.record.qualificationIdentityOnly -or $state.record.signed -or $state.record.publicRelease -or $state.record.licenseClearanceClaimed -or $state.record.installationQualificationPassed) {
-            throw 'Package record is not an unsigned qualification-only record.'
-        }
-        foreach ($field in $expectedIdentity.Keys) {
-            if ([string]$state.record.identity.$field -cne [string]$expectedIdentity[$field]) { throw "Qualification identity mismatch: $field" }
-        }
+        Assert-PixelQuayRecordIdentity $state.record $IdentityMode
         Assert-PixelQuayUnpackEvidence $state.record
         $state.unsignedPackageSha256 = (Get-FileHash -LiteralPath $state.package -Algorithm SHA256).Hash.ToLowerInvariant()
         if ($state.unsignedPackageSha256 -ne ([string]$state.record.containerVerification.package.sha256).ToLowerInvariant()) { throw 'Unsigned package hash differs from verified package record.' }
@@ -363,6 +381,11 @@ function Invoke-PixelQuayInstallQualification([string]$PackagePath, [string]$Rec
             -not ([string]$candidate.PackageFullName).StartsWith($expectedIdentity.packageName + '_' + $expectedIdentity.version + '_x64_', [StringComparison]::Ordinal) -or
             -not [string]$candidate.PackageFamilyName) {
             throw 'Installed publisher/version/architecture differs from qualification identity.'
+        }
+        if ($IdentityMode -ceq 'store' -and (
+            [string]$candidate.PackageFamilyName -cne '1659hashfunction.PixelQuay_r3hxytd7jt6c4' -or
+            [string]$candidate.PackageFullName -cne '1659hashfunction.PixelQuay_1.0.1.0_x64__r3hxytd7jt6c4')) {
+            throw 'Installed Store family/full name differs from the assigned account identity.'
         }
         # A successful Add is necessary but not sufficient ownership evidence.
         # Retain one exact observed full name as the only removal capability.
@@ -481,7 +504,7 @@ function Invoke-PixelQuayInstallQualification([string]$PackagePath, [string]$Rec
         foreach ($owned in $state.processLifetimes) {
             if ($null -eq [PixelQuayQualification.ConsumerNative]::ExitCode($owned,0)) { throw 'An owned process remains live after close' }
         }
-        $state.cleanClose=$true; $state.allProcessesStopped=$true
+        $state.normalExitCode=$exit; $state.cleanClose=$true; $state.allProcessesStopped=$true
         $state.consumerReceipt=Invoke-PixelQuayFiles finish $state.consumerStatePath @('--stopped')
         Write-NewUtf8Json (Join-Path $state.output 'consumer-verified-files.json') $state.consumerReceipt
     }.GetNewClosure()
@@ -585,11 +608,20 @@ function Invoke-PixelQuayInstallQualification([string]$PackagePath, [string]$Rec
         $evidenceErrors.Add('Successful qualification lacks verified original display restoration')
     }
     $qualificationPassed = $result.installation_qualification_passed -and $unsignedUnchanged -and $evidenceErrors.Count -eq 0
+    $sourceInputs=[ordered]@{}
+    foreach($name in @('qualify-msix-install.ps1','consumer_ui.ps1','consumer_native.cs','consumer_display.ps1','consumer_workflow.py','msix_qualification.py')) {
+        $sourceInputs[$name]=(Get-FileHash -LiteralPath (Join-Path $PSScriptRoot $name) -Algorithm SHA256).Hash.ToLowerInvariant()
+    }
     $evidence = [ordered]@{
         schema_version = 1
         generated_at_utc = [DateTime]::UtcNow.ToString('o')
         source_commit = if ($state.record) { [string]$state.record.sourceCommit } else { $null }
-        qualification_identity_only = $true
+        qualification_identity_only = ($IdentityMode -ceq 'qualification')
+        identity_mode = $IdentityMode
+        workflow_run_id = $env:GITHUB_RUN_ID
+        workflow_run_attempt = $env:GITHUB_RUN_ATTEMPT
+        qualification_source_inputs = $sourceInputs
+        consumer_workflow = $state.consumerUi
         identity = $expectedIdentity
         aumid = $state.aumid
         package_full_name = if ($state.installed) { [string]$state.installed.PackageFullName } else { $null }
@@ -612,6 +644,7 @@ function Invoke-PixelQuayInstallQualification([string]$PackagePath, [string]$Rec
         hostfxr_sha256 = $state.hostfxrSha256
         loaded_module_count = @($state.modules).Count
         window = $state.window
+        normal_process_exit_code = $state.normalExitCode
         clean_close_verified = $state.cleanClose
         uninstall_verified = $state.uninstallVerified
         installation_qualification_passed = $qualificationPassed
@@ -623,7 +656,7 @@ function Invoke-PixelQuayInstallQualification([string]$PackagePath, [string]$Rec
         consumer_native_display = $state.consumerDisplay.displayEvidence
         upgrade_tested = $false
         wack_tested = $false
-        store_identity_used = $false
+        store_identity_used = ($IdentityMode -ceq 'store')
         public_release = $false
         primary_error = $result.primary_error
         cleanup_errors = @($result.cleanup_errors)
@@ -642,7 +675,7 @@ function Invoke-PixelQuayInstallQualification([string]$PackagePath, [string]$Rec
 
 if (-not $LibraryOnly) {
     try {
-        Invoke-PixelQuayInstallQualification -PackagePath $Package -RecordPath $PackageRecord -SignToolPath $SignTool -OutputPath $Output
+        Invoke-PixelQuayInstallQualification -PackagePath $Package -RecordPath $PackageRecord -SignToolPath $SignTool -OutputPath $Output -IdentityMode $IdentityMode
     } catch {
         Write-Error $_
         exit 1

@@ -41,7 +41,7 @@ jobs:
       - name: Build, test and publish qualification directory
         shell: pwsh
         run: ./installer/windows/build-qualification.ps1
-      - name: Qualify temporary MSIX installation and broker startup
+      - name: Qualify both installed identities and verify unsigned Store export
         shell: pwsh
         run: ./installer/windows/qualify-msix.ps1
       - name: Preserve qualification metadata only
@@ -65,5 +65,19 @@ jobs:
             build-evidence/msix-install/consumer-*.png
             build-evidence/msix-install/installed-native-stdout.txt
             build-evidence/msix-install/installed-native-stderr.txt
+            build-evidence/msix-store-install/*.json
+            build-evidence/msix-store-install/*.png
+            build-evidence/msix-store-install/installed-native-stdout.txt
+            build-evidence/msix-store-install/installed-native-stderr.txt
+          retention-days: 14
+          if-no-files-found: error
+      - name: Retain verified unsigned Store upload package
+        if: success()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: TintFable-Store-unsigned
+          path: |
+            build-evidence/store-upload/TintFable_1.0.1.0_x64.msix
+            build-evidence/store-upload/release-ready.json
           retention-days: 14
           if-no-files-found: error

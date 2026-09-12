@@ -1,0 +1,1895 @@
+{
+  "installation-qualification.json": {
+    "schema_version": 1,
+    "generated_at_utc": "2026-09-12T09:13:10.9735757Z",
+    "source_commit": "8556eb5e329d6fd857d13d1bfb561429f756a824",
+    "qualification_identity_only": true,
+    "identity": {
+      "packageName": "Trieflow.PixelQuay.Qualification",
+      "publisher": "CN=PixelQuay-CI-Qualification",
+      "version": "1.0.1.0",
+      "architecture": "x64",
+      "applicationId": "PixelQuay",
+      "executable": "bin\\TintFable.exe",
+      "deviceFamily": "Windows.Desktop",
+      "minVersion": "10.0.19041.0",
+      "maxVersionTested": "10.0.26100.0",
+      "capability": "runFullTrust"
+    },
+    "aumid": "Trieflow.PixelQuay.Qualification_zdhxetmajqhn8!PixelQuay",
+    "package_full_name": "Trieflow.PixelQuay.Qualification_1.0.1.0_x64__zdhxetmajqhn8",
+    "add_appx_completed": true,
+    "registration_ownership_established": true,
+    "owned_package_full_name": "Trieflow.PixelQuay.Qualification_1.0.1.0_x64__zdhxetmajqhn8",
+    "preflight_package_full_names": [],
+    "residual_package_full_names": [],
+    "activated_process_package_full_name": "Trieflow.PixelQuay.Qualification_1.0.1.0_x64__zdhxetmajqhn8",
+    "diagnostic_process_package_full_name": "Trieflow.PixelQuay.Qualification_1.0.1.0_x64__zdhxetmajqhn8",
+    "diagnostic_stderr": {
+      "bytes": 390,
+      "sha256": "f10ac14022e6e26480895e7bbbdf472452714f15ceee078f5dad144d32dd02b9",
+      "fontconfig_error": false,
+      "fatal_error": false
+    },
+    "diagnostic_clean_close_verified": true,
+    "unsigned_package_sha256": "1f609e054283ea23bcb3f6488ca1de6cc5945b7943be1d6b3c9140b3d644395c",
+    "signed_copy_sha256": "77fdbbf2963de35218dc1567119441f65690459e65fb9baf21329e15d4880c7a",
+    "unsigned_package_unchanged": true,
+    "signtool": {
+      "path": "C:\\Program Files (x86)\\Windows Kits\\10\\bin\\10.0.26100.0\\x64\\signtool.exe",
+      "bytes": 543144,
+      "sha256": "e7b517a6a2828af2d1fba3da60ae1e322a95141bfae192622725329630caa2b3",
+      "sdk_version": "10.0.26100.0"
+    },
+    "certificate_private_key_exported": false,
+    "executable_sha256": "1b9f57322240017c2377238b9ecb21eb87e7b465aea63a462ce8b264334cb738",
+    "coreclr_sha256": "bbbcaedb369617695280caaa60cda1aba4fa3c5b557532a89d9f4a9174a5b692",
+    "hostfxr_sha256": "4f5a0500cd2a2439b0d5edbf242950233aec4539ec9a5e7ba9b8a9b0079f63af",
+    "loaded_module_count": 213,
+    "window": {
+      "accessible_elements": 1,
+      "top_level_windows": [
+        {
+          "name": "Unsaved Image 1 - TintFable",
+          "offscreen": false
+        }
+      ],
+      "actionable_controls_verified": false,
+      "actionable_control_count": 0,
+      "screenshot_captured": true,
+      "screenshot_error": null,
+      "startup_limited": true
+    },
+    "clean_close_verified": true,
+    "uninstall_verified": true,
+    "installation_qualification_passed": true,
+    "workflow_acceptance": true,
+    "export_workflow_tested": true,
+    "consumer_fixture_removed": true,
+    "all_owned_processes_stopped": true,
+    "consumer_images_and_recipe": {
+      "recipe": {
+        "Id": "908a5c47a0f945eb8a0359a32fa7a2cb",
+        "Name": "Consumer proof 32x48",
+        "Width": 32,
+        "Height": 48,
+        "Extension": "png",
+        "Quality": null,
+        "Suffix": "-proof",
+        "Overwrite": false
+      },
+      "images": {
+        "edited": {
+          "width": 64,
+          "height": 96,
+          "checked_pixels": 6144,
+          "bytes": 300,
+          "sha256": "c89fc791b04c669e4a6fe4eef223ca43e1950862d4b160d7076e53921a8237ac"
+        },
+        "exported": {
+          "width": 32,
+          "height": 48,
+          "checked_pixels": 1305,
+          "bytes": 143,
+          "sha256": "e228f977894cbce34af547a36af9a83393ce35e3ac17e392100c949d2ac6d2e7"
+        },
+        "reopened": {
+          "width": 48,
+          "height": 32,
+          "checked_pixels": 1536,
+          "bytes": 151,
+          "sha256": "1fd6cdec14ef5b23cacc348ad98270d9eda3a8874bc694c335e19da8b1481799"
+        }
+      },
+      "source_unchanged": true,
+      "profile_files": {
+        ".pixelquay-consumer-owner": {
+          "bytes": 32,
+          "sha256": "283b8fb153e67f8637c639922a6f94a9e90d16aea84350adb27b8a2ef25fd1d3"
+        },
+        "addins/": {
+          "directory": true
+        },
+        "palette.txt": {
+          "bytes": 372,
+          "sha256": "23731403dc5488f6e7b29ef6604d9d604fb0fc83dcf8e50ac20276f6266d0571"
+        },
+        "settings.xml": {
+          "bytes": 2515,
+          "sha256": "90d4e588ec790352ad48f07aab84f77eda2d326122f6df741cc765208094ed81"
+        },
+        "addins/addin-db-004/": {
+          "directory": true
+        },
+        "addins/addin-db-004/addin-data/": {
+          "directory": true
+        },
+        "addins/addin-db-004/addin-dir-data/": {
+          "directory": true
+        },
+        "addins/addin-db-004/fdb-lock": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "addins/addin-db-004/fdb-update-lock": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "addins/addin-db-004/host-index": {
+          "bytes": 284,
+          "sha256": "42e862d41313386949214739692a90c9fa7d187b82ec0b57eed1a6c09e457777"
+        },
+        "addins/addin-db-004/hosts/": {
+          "directory": true
+        },
+        "addins/addin-db-004/addin-data/1/": {
+          "directory": true
+        },
+        "addins/addin-db-004/addin-dir-data/c__program files_windowsapps_trieflow.pixelquay.qualification_1.0.1.0_x64__zdhxetmajqhn8_bin_fa2dc29f.data": {
+          "bytes": 62405,
+          "sha256": "d033f4735e897a53d97fc3d21b4879670c505f9b5254ad58c9f640ded8b013bb"
+        },
+        "addins/addin-db-004/hosts/TintFable.addins": {
+          "bytes": 277,
+          "sha256": "d58f310a7c06cc398e1398f9185bb2742e3f315154bbe50e7abac560a721adf9"
+        },
+        "addins/addin-db-004/addin-data/1/DefaultEffects,1.0.1.maddin": {
+          "bytes": 1603,
+          "sha256": "c6f759c7ca75e0ab20821b570078a5303f387c70a7bc128bb76a8e57598b075d"
+        },
+        "addins/addin-db-004/addin-data/1/DefaultTools,1.0.1.maddin": {
+          "bytes": 1575,
+          "sha256": "24e1ca1fd89ea339cc6a0b0f7cc8c0c93dd340ca0691adb5ab7b3b5bfb422cc7"
+        },
+        "addins/addin-db-004/addin-data/1/Pinta,1.0.1.maddin": {
+          "bytes": 5327,
+          "sha256": "cf59908afca92a02c338847919ae741f4bfbb9dd3909f8be5a81bdc4d4714212"
+        }
+      }
+    },
+    "consumer_native_display": {
+      "purpose": "actual native display only",
+      "device": "\\\\.\\DISPLAY1",
+      "before": {
+        "width": 1024,
+        "height": 768,
+        "bits": 32,
+        "frequency": 64,
+        "orientation": 0,
+        "flags": 0
+      },
+      "supported_modes": [
+        {
+          "width": 640,
+          "height": 480,
+          "bits": 32,
+          "frequency": 64,
+          "orientation": 0,
+          "flags": 0
+        },
+        {
+          "width": 800,
+          "height": 600,
+          "bits": 32,
+          "frequency": 64,
+          "orientation": 0,
+          "flags": 0
+        },
+        {
+          "width": 1024,
+          "height": 768,
+          "bits": 32,
+          "frequency": 64,
+          "orientation": 0,
+          "flags": 0
+        },
+        {
+          "width": 1152,
+          "height": 864,
+          "bits": 32,
+          "frequency": 64,
+          "orientation": 0,
+          "flags": 0
+        },
+        {
+          "width": 1280,
+          "height": 720,
+          "bits": 32,
+          "frequency": 64,
+          "orientation": 0,
+          "flags": 0
+        },
+        {
+          "width": 1280,
+          "height": 800,
+          "bits": 32,
+          "frequency": 64,
+          "orientation": 0,
+          "flags": 0
+        },
+        {
+          "width": 1280,
+          "height": 1024,
+          "bits": 32,
+          "frequency": 64,
+          "orientation": 0,
+          "flags": 0
+        },
+        {
+          "width": 1366,
+          "height": 768,
+          "bits": 32,
+          "frequency": 64,
+          "orientation": 0,
+          "flags": 0
+        },
+        {
+          "width": 1440,
+          "height": 900,
+          "bits": 32,
+          "frequency": 64,
+          "orientation": 0,
+          "flags": 0
+        },
+        {
+          "width": 1600,
+          "height": 900,
+          "bits": 32,
+          "frequency": 64,
+          "orientation": 0,
+          "flags": 0
+        },
+        {
+          "width": 1600,
+          "height": 1200,
+          "bits": 32,
+          "frequency": 64,
+          "orientation": 0,
+          "flags": 0
+        },
+        {
+          "width": 1680,
+          "height": 1050,
+          "bits": 32,
+          "frequency": 64,
+          "orientation": 0,
+          "flags": 0
+        },
+        {
+          "width": 1920,
+          "height": 1080,
+          "bits": 32,
+          "frequency": 64,
+          "orientation": 0,
+          "flags": 0
+        }
+      ],
+      "selected": {
+        "width": 1920,
+        "height": 1080,
+        "bits": 32,
+        "frequency": 64,
+        "orientation": 0,
+        "flags": 0
+      },
+      "test_result": 0,
+      "apply_result": 0,
+      "after": {
+        "width": 1920,
+        "height": 1080,
+        "bits": 32,
+        "frequency": 64,
+        "orientation": 0,
+        "flags": 0
+      },
+      "registry_updated": false,
+      "unsafe_modes_enabled": false,
+      "dpi_changed": false,
+      "renderer_emulation_used": false,
+      "restore_result": 0,
+      "restored": {
+        "width": 1024,
+        "height": 768,
+        "bits": 32,
+        "frequency": 64,
+        "orientation": 0,
+        "flags": 0
+      },
+      "restore_verified": true
+    },
+    "upgrade_tested": false,
+    "wack_tested": false,
+    "store_identity_used": false,
+    "public_release": false,
+    "primary_error": null,
+    "cleanup_errors": [],
+    "evidence_errors": []
+  },
+  "consumer-workflow.json": {
+    "schema": "pixelquay-consumer-workflow-v1",
+    "reopened": {
+      "width": 48,
+      "height": 32,
+      "checked_pixels": 1536,
+      "bytes": 151,
+      "sha256": "1fd6cdec14ef5b23cacc348ad98270d9eda3a8874bc694c335e19da8b1481799"
+    },
+    "exported": {
+      "width": 32,
+      "height": 48,
+      "checked_pixels": 1305,
+      "bytes": 143,
+      "sha256": "e228f977894cbce34af547a36af9a83393ce35e3ac17e392100c949d2ac6d2e7"
+    },
+    "picker_trees": [],
+    "phase": "normal-consumer-ui-actions",
+    "picker_buttons": [
+      {
+        "native": {
+          "Window": 262718,
+          "Filename": 262704,
+          "Button": 197282,
+          "Parent": 262718,
+          "DialogItem": 197282,
+          "NextTab": 197282,
+          "Focus": 262704,
+          "Active": 262718,
+          "Style": 1342373889,
+          "FinalFocus": 262704,
+          "FinalActive": 262718,
+          "DialogPid": 7880,
+          "ButtonPid": 7880,
+          "ControlId": 1,
+          "CandidateCount": 1,
+          "Class": "Button",
+          "Label": "Choose",
+          "ObservationStage": "verified",
+          "DialogThread": 7756,
+          "ButtonThread": 7756,
+          "Exists": true,
+          "Visible": true,
+          "Enabled": true,
+          "Descendant": true,
+          "FinalFocusObserved": true,
+          "Candidates": [
+            {
+              "Window": 197282,
+              "Parent": 262718,
+              "Style": 1342373889,
+              "ProcessId": 7880,
+              "ControlId": 1,
+              "Class": "Button",
+              "Label": "Choose",
+              "Exists": true,
+              "Visible": true,
+              "Enabled": true,
+              "Descendant": true,
+              "Thread": 7756
+            },
+            {
+              "Window": 197270,
+              "Parent": 262718,
+              "Style": 1342373888,
+              "ProcessId": 7880,
+              "ControlId": 2,
+              "Class": "Button",
+              "Label": "Cancel",
+              "Exists": true,
+              "Visible": true,
+              "Enabled": true,
+              "Descendant": true,
+              "Thread": 7756
+            },
+            {
+              "Window": 262844,
+              "Parent": 262718,
+              "Style": 1208156160,
+              "ProcessId": 7880,
+              "ControlId": 1038,
+              "Class": "Button",
+              "Label": "&Help",
+              "Exists": true,
+              "Visible": false,
+              "Enabled": false,
+              "Descendant": true,
+              "Thread": 7756
+            }
+          ]
+        },
+        "observed_utc": "2026-09-12T09:13:06.1697863Z",
+        "stage": "observe-choose-before-tab"
+      },
+      {
+        "native": {
+          "Window": 262718,
+          "Filename": 262704,
+          "Button": 197282,
+          "Parent": 262718,
+          "DialogItem": 197282,
+          "NextTab": 197282,
+          "Focus": 197282,
+          "Active": 262718,
+          "Style": 1342373889,
+          "FinalFocus": 197282,
+          "FinalActive": 262718,
+          "DialogPid": 7880,
+          "ButtonPid": 7880,
+          "ControlId": 1,
+          "CandidateCount": 1,
+          "Class": "Button",
+          "Label": "Choose",
+          "ObservationStage": "verified",
+          "DialogThread": 7756,
+          "ButtonThread": 7756,
+          "Exists": true,
+          "Visible": true,
+          "Enabled": true,
+          "Descendant": true,
+          "FinalFocusObserved": true,
+          "Candidates": [
+            {
+              "Window": 197282,
+              "Parent": 262718,
+              "Style": 1342373889,
+              "ProcessId": 7880,
+              "ControlId": 1,
+              "Class": "Button",
+              "Label": "Choose",
+              "Exists": true,
+              "Visible": true,
+              "Enabled": true,
+              "Descendant": true,
+              "Thread": 7756
+            },
+            {
+              "Window": 197270,
+              "Parent": 262718,
+              "Style": 1342373888,
+              "ProcessId": 7880,
+              "ControlId": 2,
+              "Class": "Button",
+              "Label": "Cancel",
+              "Exists": true,
+              "Visible": true,
+              "Enabled": true,
+              "Descendant": true,
+              "Thread": 7756
+            },
+            {
+              "Window": 262844,
+              "Parent": 262718,
+              "Style": 1208156160,
+              "ProcessId": 7880,
+              "ControlId": 1038,
+              "Class": "Button",
+              "Label": "&Help",
+              "Exists": true,
+              "Visible": false,
+              "Enabled": false,
+              "Descendant": true,
+              "Thread": 7756
+            }
+          ]
+        },
+        "observed_utc": "2026-09-12T09:13:06.2768273Z",
+        "stage": "observe-focused-choose"
+      },
+      {
+        "observed_utc": "2026-09-12T09:13:06.3842775Z",
+        "input": "native Space",
+        "stage": "activate-choose",
+        "button": 197282
+      }
+    ],
+    "edited": {
+      "width": 64,
+      "height": 96,
+      "checked_pixels": 6144,
+      "bytes": 300,
+      "sha256": "c89fc791b04c669e4a6fe4eef223ca43e1950862d4b160d7076e53921a8237ac"
+    },
+    "ui_actions_completed": true,
+    "process_id": 7880,
+    "picker_fields": [
+      {
+        "focus": 131646,
+        "readback": "bounded WM_GETTEXT",
+        "dialog": "Open Image File",
+        "hwnd": 131668,
+        "class": "Edit",
+        "input": "native Alt+N, Ctrl+A, Unicode text, Enter",
+        "filename_control_id_verified": true,
+        "pid": 7880,
+        "native": {
+          "Window": 131668,
+          "Focus": 131646,
+          "ExpectedFocus": 0,
+          "Active": 131668,
+          "DialogPid": 7880,
+          "FocusPid": 7880,
+          "Exists": true,
+          "Visible": true,
+          "Enabled": true,
+          "Descendant": true,
+          "ReadOnly": false,
+          "HasFileNameId": true,
+          "Class": "Edit",
+          "Style": 1409286272,
+          "FinalFocus": 131646,
+          "FinalActive": 131668,
+          "DialogThread": 632,
+          "FocusThread": 632,
+          "AncestryReachedDialog": true,
+          "AncestryTruncated": false,
+          "FinalFocusObserved": true,
+          "ObservationStage": "verified",
+          "FailedPredicates": [],
+          "Ancestors": [
+            {
+              "Window": 131646,
+              "Parent": 131650,
+              "ProcessId": 7880,
+              "ControlId": 1148,
+              "Descendant": true,
+              "Class": "Edit"
+            },
+            {
+              "Window": 131650,
+              "Parent": 131652,
+              "ProcessId": 7880,
+              "ControlId": 1148,
+              "Descendant": true,
+              "Class": "ComboBox"
+            },
+            {
+              "Window": 131652,
+              "Parent": 131668,
+              "ProcessId": 7880,
+              "ControlId": 1148,
+              "Descendant": true,
+              "Class": "ComboBoxEx32"
+            }
+          ]
+        }
+      },
+      {
+        "focus": 131688,
+        "readback": "bounded WM_GETTEXT",
+        "dialog": "Save Image File",
+        "hwnd": 197204,
+        "class": "Edit",
+        "input": "native Alt+N, Ctrl+A, Unicode text, Enter",
+        "filename_control_id_verified": true,
+        "pid": 7880,
+        "native": {
+          "Window": 197204,
+          "Focus": 131688,
+          "ExpectedFocus": 0,
+          "Active": 197204,
+          "DialogPid": 7880,
+          "FocusPid": 7880,
+          "Exists": true,
+          "Visible": true,
+          "Enabled": true,
+          "Descendant": true,
+          "ReadOnly": false,
+          "HasFileNameId": true,
+          "Class": "Edit",
+          "Style": 1342178176,
+          "FinalFocus": 131688,
+          "FinalActive": 197204,
+          "DialogThread": 2552,
+          "FocusThread": 2552,
+          "AncestryReachedDialog": true,
+          "AncestryTruncated": false,
+          "FinalFocusObserved": true,
+          "ObservationStage": "verified",
+          "FailedPredicates": [],
+          "Ancestors": [
+            {
+              "Window": 131688,
+              "Parent": 131776,
+              "ProcessId": 7880,
+              "ControlId": 1001,
+              "Descendant": true,
+              "Class": "Edit"
+            },
+            {
+              "Window": 131776,
+              "Parent": 131774,
+              "ProcessId": 7880,
+              "ControlId": 0,
+              "Descendant": true,
+              "Class": "ComboBox"
+            },
+            {
+              "Window": 131774,
+              "Parent": 131744,
+              "ProcessId": 7880,
+              "ControlId": 0,
+              "Descendant": true,
+              "Class": "FloatNotifySink"
+            },
+            {
+              "Window": 131744,
+              "Parent": 131748,
+              "ProcessId": 7880,
+              "ControlId": 0,
+              "Descendant": true,
+              "Class": "DirectUIHWND"
+            },
+            {
+              "Window": 131748,
+              "Parent": 197204,
+              "ProcessId": 7880,
+              "ControlId": 0,
+              "Descendant": true,
+              "Class": "DUIViewWndClassName"
+            }
+          ]
+        }
+      },
+      {
+        "focus": 262704,
+        "readback": "bounded WM_GETTEXT",
+        "dialog": "Export destination",
+        "hwnd": 262718,
+        "class": "Edit",
+        "input": "native Alt+N, Ctrl+A, Unicode text, Tab, focused Choose Space",
+        "filename_control_id_verified": true,
+        "pid": 7880,
+        "native": {
+          "Window": 262718,
+          "Focus": 262704,
+          "ExpectedFocus": 0,
+          "Active": 262718,
+          "DialogPid": 7880,
+          "FocusPid": 7880,
+          "Exists": true,
+          "Visible": true,
+          "Enabled": true,
+          "Descendant": true,
+          "ReadOnly": false,
+          "HasFileNameId": true,
+          "Class": "Edit",
+          "Style": 1342242944,
+          "FinalFocus": 262704,
+          "FinalActive": 262718,
+          "DialogThread": 7756,
+          "FocusThread": 7756,
+          "AncestryReachedDialog": true,
+          "AncestryTruncated": false,
+          "FinalFocusObserved": true,
+          "ObservationStage": "verified",
+          "FailedPredicates": [],
+          "Ancestors": [
+            {
+              "Window": 262704,
+              "Parent": 262718,
+              "ProcessId": 7880,
+              "ControlId": 1152,
+              "Descendant": true,
+              "Class": "Edit"
+            }
+          ]
+        }
+      },
+      {
+        "focus": 262818,
+        "readback": "bounded WM_GETTEXT",
+        "dialog": "Open Image File",
+        "hwnd": 655702,
+        "class": "Edit",
+        "input": "native Alt+N, Ctrl+A, Unicode text, Enter",
+        "filename_control_id_verified": true,
+        "pid": 7880,
+        "native": {
+          "Window": 655702,
+          "Focus": 262818,
+          "ExpectedFocus": 0,
+          "Active": 655702,
+          "DialogPid": 7880,
+          "FocusPid": 7880,
+          "Exists": true,
+          "Visible": true,
+          "Enabled": true,
+          "Descendant": true,
+          "ReadOnly": false,
+          "HasFileNameId": true,
+          "Class": "Edit",
+          "Style": 1409286272,
+          "FinalFocus": 262818,
+          "FinalActive": 655702,
+          "DialogThread": 7468,
+          "FocusThread": 7468,
+          "AncestryReachedDialog": true,
+          "AncestryTruncated": false,
+          "FinalFocusObserved": true,
+          "ObservationStage": "verified",
+          "FailedPredicates": [],
+          "Ancestors": [
+            {
+              "Window": 262818,
+              "Parent": 393782,
+              "ProcessId": 7880,
+              "ControlId": 1148,
+              "Descendant": true,
+              "Class": "Edit"
+            },
+            {
+              "Window": 393782,
+              "Parent": 262806,
+              "ProcessId": 7880,
+              "ControlId": 1148,
+              "Descendant": true,
+              "Class": "ComboBox"
+            },
+            {
+              "Window": 262806,
+              "Parent": 655702,
+              "ProcessId": 7880,
+              "ControlId": 1148,
+              "Descendant": true,
+              "Class": "ComboBoxEx32"
+            }
+          ]
+        }
+      },
+      {
+        "focus": 524446,
+        "readback": "bounded WM_GETTEXT",
+        "dialog": "Save Image File",
+        "hwnd": 590404,
+        "class": "Edit",
+        "input": "native Alt+N, Ctrl+A, Unicode text, Enter",
+        "filename_control_id_verified": true,
+        "pid": 7880,
+        "native": {
+          "Window": 590404,
+          "Focus": 524446,
+          "ExpectedFocus": 0,
+          "Active": 590404,
+          "DialogPid": 7880,
+          "FocusPid": 7880,
+          "Exists": true,
+          "Visible": true,
+          "Enabled": true,
+          "Descendant": true,
+          "ReadOnly": false,
+          "HasFileNameId": true,
+          "Class": "Edit",
+          "Style": 1342178176,
+          "FinalFocus": 524446,
+          "FinalActive": 590404,
+          "DialogThread": 2760,
+          "FocusThread": 2760,
+          "AncestryReachedDialog": true,
+          "AncestryTruncated": false,
+          "FinalFocusObserved": true,
+          "ObservationStage": "verified",
+          "FailedPredicates": [],
+          "Ancestors": [
+            {
+              "Window": 524446,
+              "Parent": 459348,
+              "ProcessId": 7880,
+              "ControlId": 1001,
+              "Descendant": true,
+              "Class": "Edit"
+            },
+            {
+              "Window": 459348,
+              "Parent": 590424,
+              "ProcessId": 7880,
+              "ControlId": 0,
+              "Descendant": true,
+              "Class": "ComboBox"
+            },
+            {
+              "Window": 590424,
+              "Parent": 328392,
+              "ProcessId": 7880,
+              "ControlId": 0,
+              "Descendant": true,
+              "Class": "FloatNotifySink"
+            },
+            {
+              "Window": 328392,
+              "Parent": 328404,
+              "ProcessId": 7880,
+              "ControlId": 0,
+              "Descendant": true,
+              "Class": "DirectUIHWND"
+            },
+            {
+              "Window": 328404,
+              "Parent": 590404,
+              "ProcessId": 7880,
+              "ControlId": 0,
+              "Descendant": true,
+              "Class": "DUIViewWndClassName"
+            }
+          ]
+        }
+      }
+    ],
+    "native_display": {
+      "purpose": "actual native display only",
+      "device": "\\\\.\\DISPLAY1",
+      "before": {
+        "width": 1024,
+        "height": 768,
+        "bits": 32,
+        "frequency": 64,
+        "orientation": 0,
+        "flags": 0
+      },
+      "supported_modes": [
+        {
+          "width": 640,
+          "height": 480,
+          "bits": 32,
+          "frequency": 64,
+          "orientation": 0,
+          "flags": 0
+        },
+        {
+          "width": 800,
+          "height": 600,
+          "bits": 32,
+          "frequency": 64,
+          "orientation": 0,
+          "flags": 0
+        },
+        {
+          "width": 1024,
+          "height": 768,
+          "bits": 32,
+          "frequency": 64,
+          "orientation": 0,
+          "flags": 0
+        },
+        {
+          "width": 1152,
+          "height": 864,
+          "bits": 32,
+          "frequency": 64,
+          "orientation": 0,
+          "flags": 0
+        },
+        {
+          "width": 1280,
+          "height": 720,
+          "bits": 32,
+          "frequency": 64,
+          "orientation": 0,
+          "flags": 0
+        },
+        {
+          "width": 1280,
+          "height": 800,
+          "bits": 32,
+          "frequency": 64,
+          "orientation": 0,
+          "flags": 0
+        },
+        {
+          "width": 1280,
+          "height": 1024,
+          "bits": 32,
+          "frequency": 64,
+          "orientation": 0,
+          "flags": 0
+        },
+        {
+          "width": 1366,
+          "height": 768,
+          "bits": 32,
+          "frequency": 64,
+          "orientation": 0,
+          "flags": 0
+        },
+        {
+          "width": 1440,
+          "height": 900,
+          "bits": 32,
+          "frequency": 64,
+          "orientation": 0,
+          "flags": 0
+        },
+        {
+          "width": 1600,
+          "height": 900,
+          "bits": 32,
+          "frequency": 64,
+          "orientation": 0,
+          "flags": 0
+        },
+        {
+          "width": 1600,
+          "height": 1200,
+          "bits": 32,
+          "frequency": 64,
+          "orientation": 0,
+          "flags": 0
+        },
+        {
+          "width": 1680,
+          "height": 1050,
+          "bits": 32,
+          "frequency": 64,
+          "orientation": 0,
+          "flags": 0
+        },
+        {
+          "width": 1920,
+          "height": 1080,
+          "bits": 32,
+          "frequency": 64,
+          "orientation": 0,
+          "flags": 0
+        }
+      ],
+      "selected": {
+        "width": 1920,
+        "height": 1080,
+        "bits": 32,
+        "frequency": 64,
+        "orientation": 0,
+        "flags": 0
+      },
+      "test_result": 0,
+      "apply_result": 0,
+      "after": {
+        "width": 1920,
+        "height": 1080,
+        "bits": 32,
+        "frequency": 64,
+        "orientation": 0,
+        "flags": 0
+      },
+      "registry_updated": false,
+      "unsafe_modes_enabled": false,
+      "dpi_changed": false,
+      "renderer_emulation_used": false,
+      "restore_result": null,
+      "restored": null,
+      "restore_verified": false
+    },
+    "geometry": [
+      {
+        "title": "Unsaved Image 1 - TintFable",
+        "desktop": [
+          0,
+          0,
+          1024,
+          768
+        ],
+        "hwnd": 328054,
+        "window": [
+          0,
+          0,
+          1074,
+          770
+        ],
+        "work_area": [
+          0,
+          0,
+          1024,
+          720
+        ],
+        "stage": "before-display-preparation",
+        "pid": 7880,
+        "dpi": 96
+      },
+      {
+        "title": "Unsaved Image 1 - TintFable",
+        "desktop": [
+          0,
+          0,
+          1920,
+          1080
+        ],
+        "hwnd": 328054,
+        "window": [
+          0,
+          0,
+          1920,
+          1080
+        ],
+        "work_area": [
+          0,
+          0,
+          1920,
+          1032
+        ],
+        "stage": "before-placement",
+        "pid": 7880,
+        "dpi": 96
+      },
+      {
+        "title": "Unsaved Image 1 - TintFable",
+        "desktop": [
+          0,
+          0,
+          1920,
+          1080
+        ],
+        "hwnd": 328054,
+        "window": [
+          224,
+          46,
+          1472,
+          940
+        ],
+        "work_area": [
+          0,
+          0,
+          1920,
+          1032
+        ],
+        "stage": "after-placement",
+        "pid": 7880,
+        "dpi": 96
+      },
+      {
+        "title": "Open Image File",
+        "desktop": [
+          0,
+          0,
+          1920,
+          1080
+        ],
+        "hwnd": 131668,
+        "window": [
+          224,
+          46,
+          960,
+          540
+        ],
+        "work_area": [
+          0,
+          0,
+          1920,
+          1032
+        ],
+        "stage": "picker-0",
+        "pid": 7880,
+        "dpi": 96
+      },
+      {
+        "title": "source.png - TintFable",
+        "desktop": [
+          0,
+          0,
+          1920,
+          1080
+        ],
+        "hwnd": 328054,
+        "window": [
+          224,
+          46,
+          1472,
+          940
+        ],
+        "work_area": [
+          0,
+          0,
+          1920,
+          1032
+        ],
+        "stage": "opened",
+        "pid": 7880,
+        "dpi": 96
+      },
+      {
+        "title": "source.png* - TintFable",
+        "desktop": [
+          0,
+          0,
+          1920,
+          1080
+        ],
+        "hwnd": 328054,
+        "window": [
+          224,
+          46,
+          1472,
+          940
+        ],
+        "work_area": [
+          0,
+          0,
+          1920,
+          1032
+        ],
+        "stage": "rotated",
+        "pid": 7880,
+        "dpi": 96
+      },
+      {
+        "title": "Save Image File",
+        "desktop": [
+          0,
+          0,
+          1920,
+          1080
+        ],
+        "hwnd": 197204,
+        "window": [
+          224,
+          46,
+          960,
+          540
+        ],
+        "work_area": [
+          0,
+          0,
+          1920,
+          1032
+        ],
+        "stage": "picker-3",
+        "pid": 7880,
+        "dpi": 96
+      },
+      {
+        "title": "Export with Recipe",
+        "desktop": [
+          0,
+          0,
+          1920,
+          1080
+        ],
+        "hwnd": 197226,
+        "window": [
+          635,
+          196,
+          650,
+          639
+        ],
+        "work_area": [
+          0,
+          0,
+          1920,
+          1032
+        ],
+        "stage": "recipe-saved",
+        "pid": 7880,
+        "dpi": 96
+      },
+      {
+        "title": "Export with Recipe",
+        "desktop": [
+          0,
+          0,
+          1920,
+          1080
+        ],
+        "hwnd": 262762,
+        "window": [
+          635,
+          196,
+          650,
+          639
+        ],
+        "work_area": [
+          0,
+          0,
+          1920,
+          1032
+        ],
+        "stage": "recipe-reloaded",
+        "pid": 7880,
+        "dpi": 96
+      },
+      {
+        "title": "Export destination",
+        "desktop": [
+          0,
+          0,
+          1920,
+          1080
+        ],
+        "hwnd": 262718,
+        "window": [
+          635,
+          196,
+          960,
+          540
+        ],
+        "work_area": [
+          0,
+          0,
+          1920,
+          1032
+        ],
+        "stage": "picker-6",
+        "pid": 7880,
+        "dpi": 96
+      },
+      {
+        "title": "Export with Recipe",
+        "desktop": [
+          0,
+          0,
+          1920,
+          1080
+        ],
+        "hwnd": 262762,
+        "window": [
+          635,
+          196,
+          650,
+          639
+        ],
+        "work_area": [
+          0,
+          0,
+          1920,
+          1032
+        ],
+        "stage": "export-plan",
+        "pid": 7880,
+        "dpi": 96
+      },
+      {
+        "title": "Image exported",
+        "desktop": [
+          0,
+          0,
+          1920,
+          1080
+        ],
+        "hwnd": 328298,
+        "window": [
+          752,
+          391,
+          416,
+          249
+        ],
+        "work_area": [
+          0,
+          0,
+          1920,
+          1032
+        ],
+        "stage": "export-completed",
+        "pid": 7880,
+        "dpi": 96
+      },
+      {
+        "title": "Open Image File",
+        "desktop": [
+          0,
+          0,
+          1920,
+          1080
+        ],
+        "hwnd": 655702,
+        "window": [
+          224,
+          46,
+          960,
+          540
+        ],
+        "work_area": [
+          0,
+          0,
+          1920,
+          1032
+        ],
+        "stage": "picker-9",
+        "pid": 7880,
+        "dpi": 96
+      },
+      {
+        "title": "edited-proof.png - TintFable",
+        "desktop": [
+          0,
+          0,
+          1920,
+          1080
+        ],
+        "hwnd": 328054,
+        "window": [
+          224,
+          46,
+          1472,
+          940
+        ],
+        "work_area": [
+          0,
+          0,
+          1920,
+          1032
+        ],
+        "stage": "reopened",
+        "pid": 7880,
+        "dpi": 96
+      },
+      {
+        "title": "Save Image File",
+        "desktop": [
+          0,
+          0,
+          1920,
+          1080
+        ],
+        "hwnd": 590404,
+        "window": [
+          224,
+          46,
+          960,
+          540
+        ],
+        "work_area": [
+          0,
+          0,
+          1920,
+          1032
+        ],
+        "stage": "picker-11",
+        "pid": 7880,
+        "dpi": 96
+      },
+      {
+        "title": "reopened.png - TintFable",
+        "desktop": [
+          0,
+          0,
+          1920,
+          1080
+        ],
+        "hwnd": 328054,
+        "window": [
+          224,
+          46,
+          1472,
+          940
+        ],
+        "work_area": [
+          0,
+          0,
+          1920,
+          1032
+        ],
+        "stage": "reopened-witness",
+        "pid": 7880,
+        "dpi": 96
+      }
+    ],
+    "observations": [
+      {
+        "bounds": [
+          224,
+          46,
+          960,
+          540,
+          0,
+          0,
+          1920,
+          1080
+        ],
+        "pid": 7880,
+        "hwnd": 131668,
+        "class": "#32770",
+        "screenshot": "consumer-picker-0.png",
+        "sha256": "cbcbde7d6ac2b797e5c259b5ffc6104d4dad7fe06441ce1c7c0c9d7a67f92259",
+        "owner_chain": [
+          131668,
+          328054
+        ],
+        "stage": "picker-0",
+        "title": "Open Image File"
+      },
+      {
+        "bounds": [
+          224,
+          46,
+          1472,
+          940,
+          0,
+          0,
+          1920,
+          1080
+        ],
+        "pid": 7880,
+        "hwnd": 328054,
+        "class": "gdkSurfaceToplevel",
+        "screenshot": "consumer-opened.png",
+        "sha256": "b1cc8ef9403a8c7d4df0d813ca6545c6f486b6d8851024e7d1252c431f5de60c",
+        "owner_chain": [
+          328054
+        ],
+        "stage": "opened",
+        "title": "source.png - TintFable"
+      },
+      {
+        "bounds": [
+          224,
+          46,
+          1472,
+          940,
+          0,
+          0,
+          1920,
+          1080
+        ],
+        "pid": 7880,
+        "hwnd": 328054,
+        "class": "gdkSurfaceToplevel",
+        "screenshot": "consumer-rotated.png",
+        "sha256": "46814c1b161ac1436cf86c2f85d23d651519eefa91d0f6bf477ccca8c4f7300e",
+        "owner_chain": [
+          328054
+        ],
+        "stage": "rotated",
+        "title": "source.png* - TintFable"
+      },
+      {
+        "bounds": [
+          224,
+          46,
+          960,
+          540,
+          0,
+          0,
+          1920,
+          1080
+        ],
+        "pid": 7880,
+        "hwnd": 197204,
+        "class": "#32770",
+        "screenshot": "consumer-picker-3.png",
+        "sha256": "1308fea6d4160f81ceba2c6eb488515405ef71b51f93fa9d51a984924301acfd",
+        "owner_chain": [
+          197204,
+          328054
+        ],
+        "stage": "picker-3",
+        "title": "Save Image File"
+      },
+      {
+        "bounds": [
+          635,
+          196,
+          650,
+          639,
+          0,
+          0,
+          1920,
+          1080
+        ],
+        "pid": 7880,
+        "hwnd": 197226,
+        "class": "gdkSurfaceToplevel",
+        "screenshot": "consumer-recipe-saved.png",
+        "sha256": "44b0c8921e874418653e0cd60e00e14a981552721963a084370d228db416b56b",
+        "owner_chain": [
+          197226,
+          328054
+        ],
+        "stage": "recipe-saved",
+        "title": "Export with Recipe"
+      },
+      {
+        "bounds": [
+          635,
+          196,
+          650,
+          639,
+          0,
+          0,
+          1920,
+          1080
+        ],
+        "pid": 7880,
+        "hwnd": 262762,
+        "class": "gdkSurfaceToplevel",
+        "screenshot": "consumer-recipe-reloaded.png",
+        "sha256": "39180ce83aaaf0b4c1df32b4583084f000cfbaf5eb63a56babf1a4b92b3c915a",
+        "owner_chain": [
+          262762,
+          328054
+        ],
+        "stage": "recipe-reloaded",
+        "title": "Export with Recipe"
+      },
+      {
+        "bounds": [
+          635,
+          196,
+          960,
+          540,
+          0,
+          0,
+          1920,
+          1080
+        ],
+        "pid": 7880,
+        "hwnd": 262718,
+        "class": "#32770",
+        "screenshot": "consumer-picker-6.png",
+        "sha256": "cce054828ff69687a96ac55781a87dd904cf1b2ca71bce0384fc75041c648ea8",
+        "owner_chain": [
+          262718,
+          262762,
+          328054
+        ],
+        "stage": "picker-6",
+        "title": "Export destination"
+      },
+      {
+        "bounds": [
+          635,
+          196,
+          650,
+          639,
+          0,
+          0,
+          1920,
+          1080
+        ],
+        "pid": 7880,
+        "hwnd": 262762,
+        "class": "gdkSurfaceToplevel",
+        "screenshot": "consumer-export-plan.png",
+        "sha256": "974310c46c55f07e93582975271f4ac396c50252ce9380c79c95de526ae657c1",
+        "owner_chain": [
+          262762,
+          328054
+        ],
+        "stage": "export-plan",
+        "title": "Export with Recipe"
+      },
+      {
+        "bounds": [
+          752,
+          391,
+          416,
+          249,
+          0,
+          0,
+          1920,
+          1080
+        ],
+        "pid": 7880,
+        "hwnd": 328298,
+        "class": "gdkSurfaceToplevel",
+        "screenshot": "consumer-export-completed.png",
+        "sha256": "22cf2df7b8971bed06d196dc0f2406abad78671d63bcf022abf30a78f009105f",
+        "owner_chain": [
+          328298,
+          328054
+        ],
+        "stage": "export-completed",
+        "title": "Image exported"
+      },
+      {
+        "bounds": [
+          224,
+          46,
+          960,
+          540,
+          0,
+          0,
+          1920,
+          1080
+        ],
+        "pid": 7880,
+        "hwnd": 655702,
+        "class": "#32770",
+        "screenshot": "consumer-picker-9.png",
+        "sha256": "d3c6e00aed571e636112a889a47ced823ec324e41c9f92bfa6b0fbdd3e999330",
+        "owner_chain": [
+          655702,
+          328054
+        ],
+        "stage": "picker-9",
+        "title": "Open Image File"
+      },
+      {
+        "bounds": [
+          224,
+          46,
+          1472,
+          940,
+          0,
+          0,
+          1920,
+          1080
+        ],
+        "pid": 7880,
+        "hwnd": 328054,
+        "class": "gdkSurfaceToplevel",
+        "screenshot": "consumer-reopened.png",
+        "sha256": "55918c8dc6b55ecddd557bdc85a5642fc4887837d798ad8c18c2533721eb3072",
+        "owner_chain": [
+          328054
+        ],
+        "stage": "reopened",
+        "title": "edited-proof.png - TintFable"
+      },
+      {
+        "bounds": [
+          224,
+          46,
+          960,
+          540,
+          0,
+          0,
+          1920,
+          1080
+        ],
+        "pid": 7880,
+        "hwnd": 590404,
+        "class": "#32770",
+        "screenshot": "consumer-picker-11.png",
+        "sha256": "8e659ee058044b7a97c16be32f1a13a35757fbd5005f9541ae9ca79a8b705dfb",
+        "owner_chain": [
+          590404,
+          328054
+        ],
+        "stage": "picker-11",
+        "title": "Save Image File"
+      },
+      {
+        "bounds": [
+          224,
+          46,
+          1472,
+          940,
+          0,
+          0,
+          1920,
+          1080
+        ],
+        "pid": 7880,
+        "hwnd": 328054,
+        "class": "gdkSurfaceToplevel",
+        "screenshot": "consumer-reopened-witness.png",
+        "sha256": "b419aa19ac80e85ee3363438f510348da08b8cbc92f31539c25a7ba2af470022",
+        "owner_chain": [
+          328054
+        ],
+        "stage": "reopened-witness",
+        "title": "reopened.png - TintFable"
+      }
+    ]
+  },
+  "consumer-verified-files.json": {
+    "recipe": {
+      "Id": "908a5c47a0f945eb8a0359a32fa7a2cb",
+      "Name": "Consumer proof 32x48",
+      "Width": 32,
+      "Height": 48,
+      "Extension": "png",
+      "Quality": null,
+      "Suffix": "-proof",
+      "Overwrite": false
+    },
+    "images": {
+      "edited": {
+        "width": 64,
+        "height": 96,
+        "checked_pixels": 6144,
+        "bytes": 300,
+        "sha256": "c89fc791b04c669e4a6fe4eef223ca43e1950862d4b160d7076e53921a8237ac"
+      },
+      "exported": {
+        "width": 32,
+        "height": 48,
+        "checked_pixels": 1305,
+        "bytes": 143,
+        "sha256": "e228f977894cbce34af547a36af9a83393ce35e3ac17e392100c949d2ac6d2e7"
+      },
+      "reopened": {
+        "width": 48,
+        "height": 32,
+        "checked_pixels": 1536,
+        "bytes": 151,
+        "sha256": "1fd6cdec14ef5b23cacc348ad98270d9eda3a8874bc694c335e19da8b1481799"
+      }
+    },
+    "source_unchanged": true,
+    "profile_files": {
+      ".pixelquay-consumer-owner": {
+        "bytes": 32,
+        "sha256": "283b8fb153e67f8637c639922a6f94a9e90d16aea84350adb27b8a2ef25fd1d3"
+      },
+      "addins/": {
+        "directory": true
+      },
+      "palette.txt": {
+        "bytes": 372,
+        "sha256": "23731403dc5488f6e7b29ef6604d9d604fb0fc83dcf8e50ac20276f6266d0571"
+      },
+      "settings.xml": {
+        "bytes": 2515,
+        "sha256": "90d4e588ec790352ad48f07aab84f77eda2d326122f6df741cc765208094ed81"
+      },
+      "addins/addin-db-004/": {
+        "directory": true
+      },
+      "addins/addin-db-004/addin-data/": {
+        "directory": true
+      },
+      "addins/addin-db-004/addin-dir-data/": {
+        "directory": true
+      },
+      "addins/addin-db-004/fdb-lock": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "addins/addin-db-004/fdb-update-lock": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "addins/addin-db-004/host-index": {
+        "bytes": 284,
+        "sha256": "42e862d41313386949214739692a90c9fa7d187b82ec0b57eed1a6c09e457777"
+      },
+      "addins/addin-db-004/hosts/": {
+        "directory": true
+      },
+      "addins/addin-db-004/addin-data/1/": {
+        "directory": true
+      },
+      "addins/addin-db-004/addin-dir-data/c__program files_windowsapps_trieflow.pixelquay.qualification_1.0.1.0_x64__zdhxetmajqhn8_bin_fa2dc29f.data": {
+        "bytes": 62405,
+        "sha256": "d033f4735e897a53d97fc3d21b4879670c505f9b5254ad58c9f640ded8b013bb"
+      },
+      "addins/addin-db-004/hosts/TintFable.addins": {
+        "bytes": 277,
+        "sha256": "d58f310a7c06cc398e1398f9185bb2742e3f315154bbe50e7abac560a721adf9"
+      },
+      "addins/addin-db-004/addin-data/1/DefaultEffects,1.0.1.maddin": {
+        "bytes": 1603,
+        "sha256": "c6f759c7ca75e0ab20821b570078a5303f387c70a7bc128bb76a8e57598b075d"
+      },
+      "addins/addin-db-004/addin-data/1/DefaultTools,1.0.1.maddin": {
+        "bytes": 1575,
+        "sha256": "24e1ca1fd89ea339cc6a0b0f7cc8c0c93dd340ca0691adb5ab7b3b5bfb422cc7"
+      },
+      "addins/addin-db-004/addin-data/1/Pinta,1.0.1.maddin": {
+        "bytes": 5327,
+        "sha256": "cf59908afca92a02c338847919ae741f4bfbb9dd3909f8be5a81bdc4d4714212"
+      }
+    }
+  },
+  "consumer-fixture-state.json": {
+    "root": "D:\\a\\_temp\\pixelquay-consumer-695873a611a14d948d1e9a89920f9bb8",
+    "profile": "C:\\Users\\runneradmin\\AppData\\Roaming\\PixelQuay",
+    "token": "b848bcd91f79441991e5625cda00346a",
+    "files": {
+      ".pixelquay-consumer-owner": {
+        "bytes": 32,
+        "sha256": "283b8fb153e67f8637c639922a6f94a9e90d16aea84350adb27b8a2ef25fd1d3"
+      },
+      "source.png": {
+        "bytes": 274,
+        "sha256": "45fa4cdbf27f1e2f8873ee971037bd8ab1d727e7a53c8114d1f9811382f249e3"
+      },
+      "edited.png": {
+        "bytes": 300,
+        "sha256": "c89fc791b04c669e4a6fe4eef223ca43e1950862d4b160d7076e53921a8237ac"
+      },
+      "edited-proof.png": {
+        "bytes": 143,
+        "sha256": "e228f977894cbce34af547a36af9a83393ce35e3ac17e392100c949d2ac6d2e7"
+      },
+      "reopened.png": {
+        "bytes": 151,
+        "sha256": "1fd6cdec14ef5b23cacc348ad98270d9eda3a8874bc694c335e19da8b1481799"
+      }
+    },
+    "profile_files": {
+      ".pixelquay-consumer-owner": {
+        "bytes": 32,
+        "sha256": "283b8fb153e67f8637c639922a6f94a9e90d16aea84350adb27b8a2ef25fd1d3"
+      },
+      "addins/": {
+        "directory": true
+      },
+      "palette.txt": {
+        "bytes": 372,
+        "sha256": "23731403dc5488f6e7b29ef6604d9d604fb0fc83dcf8e50ac20276f6266d0571"
+      },
+      "settings.xml": {
+        "bytes": 2515,
+        "sha256": "90d4e588ec790352ad48f07aab84f77eda2d326122f6df741cc765208094ed81"
+      },
+      "addins/addin-db-004/": {
+        "directory": true
+      },
+      "addins/addin-db-004/addin-data/": {
+        "directory": true
+      },
+      "addins/addin-db-004/addin-dir-data/": {
+        "directory": true
+      },
+      "addins/addin-db-004/fdb-lock": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "addins/addin-db-004/fdb-update-lock": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "addins/addin-db-004/host-index": {
+        "bytes": 284,
+        "sha256": "42e862d41313386949214739692a90c9fa7d187b82ec0b57eed1a6c09e457777"
+      },
+      "addins/addin-db-004/hosts/": {
+        "directory": true
+      },
+      "addins/addin-db-004/addin-data/1/": {
+        "directory": true
+      },
+      "addins/addin-db-004/addin-dir-data/c__program files_windowsapps_trieflow.pixelquay.qualification_1.0.1.0_x64__zdhxetmajqhn8_bin_fa2dc29f.data": {
+        "bytes": 62405,
+        "sha256": "d033f4735e897a53d97fc3d21b4879670c505f9b5254ad58c9f640ded8b013bb"
+      },
+      "addins/addin-db-004/hosts/TintFable.addins": {
+        "bytes": 277,
+        "sha256": "d58f310a7c06cc398e1398f9185bb2742e3f315154bbe50e7abac560a721adf9"
+      },
+      "addins/addin-db-004/addin-data/1/DefaultEffects,1.0.1.maddin": {
+        "bytes": 1603,
+        "sha256": "c6f759c7ca75e0ab20821b570078a5303f387c70a7bc128bb76a8e57598b075d"
+      },
+      "addins/addin-db-004/addin-data/1/DefaultTools,1.0.1.maddin": {
+        "bytes": 1575,
+        "sha256": "24e1ca1fd89ea339cc6a0b0f7cc8c0c93dd340ca0691adb5ab7b3b5bfb422cc7"
+      },
+      "addins/addin-db-004/addin-data/1/Pinta,1.0.1.maddin": {
+        "bytes": 5327,
+        "sha256": "cf59908afca92a02c338847919ae741f4bfbb9dd3909f8be5a81bdc4d4714212"
+      }
+    },
+    "stages": {
+      "edited": {
+        "width": 64,
+        "height": 96,
+        "checked_pixels": 6144,
+        "bytes": 300,
+        "sha256": "c89fc791b04c669e4a6fe4eef223ca43e1950862d4b160d7076e53921a8237ac"
+      },
+      "exported": {
+        "width": 32,
+        "height": 48,
+        "checked_pixels": 1305,
+        "bytes": 143,
+        "sha256": "e228f977894cbce34af547a36af9a83393ce35e3ac17e392100c949d2ac6d2e7"
+      },
+      "reopened": {
+        "width": 48,
+        "height": 32,
+        "checked_pixels": 1536,
+        "bytes": 151,
+        "sha256": "1fd6cdec14ef5b23cacc348ad98270d9eda3a8874bc694c335e19da8b1481799"
+      }
+    },
+    "cleanup_removed": true
+  }
+}

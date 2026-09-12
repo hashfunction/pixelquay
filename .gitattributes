@@ -16,3 +16,4 @@ installer/windows/rebuild/libiconv/inputs/*.src.tar.zst -text
 installer/windows/rebuild/COPYING.LIBDATRIE -text -whitespace
 installer/windows/rebuild/001-local-marker.patch -whitespace
 installer/windows/rebuild/libiconv/001-local-markers.patch -whitespace
+installer/windows/source/*.json -text

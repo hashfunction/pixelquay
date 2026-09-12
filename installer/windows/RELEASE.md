@@ -9,15 +9,19 @@ https://tintfable.trieflow.com/privacy, https://tintfable.trieflow.com/support.
 The customer-facing release is TintFable 1.0.1 (package version 1.0.1.0).
 The assigned Store package identity remains `1659hashfunction.PixelQuay`; its
 existing publisher and application ID must be retained by the Store release
-controller. This source builds the separate disposable qualification identity
+controller. This source also builds the separate disposable qualification identity
 `Trieflow.PixelQuay.Qualification`, publisher `CN=PixelQuay-CI-Qualification`,
 application ID `PixelQuay`. Neither identity is renamed to TintFable. The GTK
 application ID, `%APPDATA%/PixelQuay` profile, saved recipe key, and Inno Setup
 AppId/install directory are also retained for update and data compatibility.
 
-The renamed Windows release remains unverified. The local macOS solution build and native
-headless tests do not prove GTK launch, Windows file picking, MSIX installation,
-Store certification, HiDPI, signed packaging or licensing clearance.
+Windows run `34684998708` verified TintFable's disposable installed package, actual
+rotate/save/recipe/export/reopen actions, pixel checks, normal zero-exit close and
+owned uninstall/profile cleanup. The dual-mode driver now also qualifies the assigned
+Store identity and retains its original unsigned MSIX only after the current source
+and public corresponding-source checks described in [STORE-EXPORT.md](STORE-EXPORT.md).
+That new assigned-identity run remains pending; local fixtures do not establish its
+Windows result or Store submission.
 
 From a Windows development shell with .NET 8, Python 3 and MSYS2 CLANG64 installed:
 

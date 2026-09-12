@@ -1,10 +1,10 @@
 # TintFable disposable MSIX qualification
 
-This path builds and installs a **CI-only** package from the complete verified Windows `release` directory. It does not assign or approximate a Microsoft Store identity. It now requires the ordinary installed image-edit/export/reopen workflow described below. It does not clear licenses, sign a release package, or authorize binary publication. The new consumer path still needs its first Windows execution.
+The default mode builds and installs the disposable qualification package from the complete verified Windows `release` directory. Windows run `34684998708`, public source `8556eb5e329d6fd857d13d1bfb561429f756a824`, passed the ordinary installed image-edit/export/reopen workflow, exact pixel and recipe checks, normal zero-exit close and owned cleanup. The driver now runs that same lifecycle again with the assigned Store identity before retaining an unsigned Store package. See [STORE-EXPORT.md](STORE-EXPORT.md) for the separate release receipt and current source/publication checks; this new dual-mode path still requires its fresh Windows run.
 
 Prior Windows run `34578052932` passed 899 tests, launched the unpackaged `release/bin/PixelQuay.exe` main window, and recorded 233 loaded modules plus 64 distinct native package owners. Its evidence explicitly says `msix_built=false`; it is input history rather than MSIX evidence.
 
-The fixed qualification identity is:
+The default qualification identity is:
 
 - package: `Trieflow.PixelQuay.Qualification`
 - publisher: `CN=PixelQuay-CI-Qualification`
@@ -14,7 +14,7 @@ The fixed qualification identity is:
 - executable: `bin\TintFable.exe`
 - capability: `runFullTrust`
 
-The manifest is created through Python's XML API and permits one `Windows.Desktop` dependency, one full-trust application, and one `runFullTrust` restricted capability. It has no associations, protocols, updater, registry declarations, COM extensions, or Store identity.
+The manifest is created through Python's XML API and permits one `Windows.Desktop` dependency, one full-trust application, and one `runFullTrust` restricted capability. It has no associations, protocols, updater, registry declarations or COM extensions. Store mode changes only the assigned package identity/publisher and manifest publisher display text/description; executable, application ID, version and capability remain the same.
 
 ## Package boundary
 

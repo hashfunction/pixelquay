@@ -1,15 +1,18 @@
 # Copyright 2026 Trieflow LLC. MIT licensed.
 # Exercise the real PixelQuay Install, UninstallAndVerify, and RemoveOwnedPackage
 # closures. Only AppX cmdlets and unrelated Windows/UI operations are adapted.
+param([ValidateSet('qualification','store')][string]$IdentityMode='qualification')
 $ErrorActionPreference = 'Stop'
 Set-StrictMode -Version Latest
-. (Join-Path $PSScriptRoot 'qualify-msix-install.ps1') -LibraryOnly
+$selectedFixtureMode=$IdentityMode
+. (Join-Path $PSScriptRoot 'qualify-msix-install.ps1') -LibraryOnly -IdentityMode $selectedFixtureMode
+if($IdentityMode -cne $selectedFixtureMode){throw 'Production loader changed the requested fixture identity mode'}
 $script:ActualCore = ${function:Invoke-PixelQuayQualificationCore}
 $global:PixelQuayRegistrationFixture = $null
 
 function global:Get-AppxPackage {
     [CmdletBinding()] param([string]$Name)
-    if ($Name -cne 'Trieflow.PixelQuay.Qualification') { throw 'Unscoped package query' }
+    if ($Name -cne $global:PixelQuayRegistrationFixture.owned.Name) { throw 'Unscoped package query' }
     $fixture = $global:PixelQuayRegistrationFixture
     if ($fixture.observationFailure) {
         $fixture.observationFailure = $false
@@ -25,6 +28,7 @@ function global:Add-AppxPackage {
     switch ($fixture.scenario) {
         'failed-add-race' { $fixture.registrations = @($fixture.raced); throw 'Add failed after another registration appeared' }
         'ambiguous-add' { $fixture.registrations = @($fixture.owned, $fixture.foreign) }
+        'wrong-family' { $fixture.registrations = @($fixture.foreign) }
         'wrong-architecture' { $fixture.registrations = @($fixture.foreign) }
         'missing-add' { $fixture.registrations = @() }
         'observation-failed' { $fixture.registrations = @($fixture.owned); $fixture.observationFailure = $true }
@@ -63,7 +67,7 @@ function Invoke-PixelQuayQualificationCore([Collections.IDictionary]$Operations)
     }
     $state.record = [pscustomobject]@{ sourceCommit = ('a' * 40); payload = [pscustomobject]$payload }
     $state.consumerDisplay.displayEvidence=@{restore_verified=$true}; $state.consumerReceipt=@{fixture=$true}; $state.consumerRemoved=$true; $state.cleanClose=$true
-    $Operations.Preflight = { if (@(Get-AppxPackage -Name 'Trieflow.PixelQuay.Qualification').Count) { throw 'Fixture must start empty' } }
+    $Operations.Preflight = { if (@(Get-AppxPackage -Name $global:PixelQuayRegistrationFixture.owned.Name).Count) { throw 'Fixture must start empty' } }
     foreach ($name in @('PrepareConsumerFixture','PrepareSignedCopy','CaptureInstalledStderr','ActivateAndVerify','ConsumerWorkflow','CloseCleanly','StopOwnedProcess','RemoveConsumerFixture','RemoveTrustedCertificate','RemovePersonalCertificate','RemoveTemporaryFiles')) {
         $Operations[$name] = {}
     }
@@ -84,17 +88,24 @@ function Invoke-PixelQuayQualificationCore([Collections.IDictionary]$Operations)
     return & $script:ActualCore $Operations
 }
 
-foreach ($scenario in @('failed-add-race','ambiguous-add','wrong-architecture','missing-add','observation-failed','owned','owned-with-foreign','remove-failed','normal-owned','normal-with-foreign')) {
+$scenarios=@('failed-add-race','ambiguous-add','wrong-architecture','missing-add','observation-failed','owned','owned-with-foreign','remove-failed','normal-owned','normal-with-foreign')
+if($IdentityMode -ceq 'store'){$scenarios+='wrong-family'}
+foreach ($scenario in $scenarios) {
     $temporary = Join-Path ([IO.Path]::GetTempPath()) ('pixelquay-registration-test-' + [guid]::NewGuid().ToString('N'))
     New-Item -ItemType Directory -Path $temporary | Out-Null
     try {
+        $identity=Get-PixelQuayIdentity $IdentityMode
+        $suffix=if($IdentityMode -ceq 'store'){'r3hxytd7jt6c4'}else{'fixture'}
         $owned = [pscustomobject]@{
-            Name='Trieflow.PixelQuay.Qualification'; Publisher='CN=PixelQuay-CI-Qualification'; Version='1.0.1.0'; Architecture='X64'
-            PackageFullName='Trieflow.PixelQuay.Qualification_1.0.1.0_x64__fixture'; PackageFamilyName='Trieflow.PixelQuay.Qualification_fixture'; InstallLocation=$temporary
+            Name=$identity.packageName; Publisher=$identity.publisher; Version='1.0.1.0'; Architecture='X64'
+            PackageFullName=($identity.packageName+'_1.0.1.0_x64__'+$suffix); PackageFamilyName=($identity.packageName+'_'+$suffix); InstallLocation=$temporary
         }
         $foreign = [pscustomobject]@{
             Name=$owned.Name; Publisher=$owned.Publisher; Version=$owned.Version; Architecture='Arm64'
-            PackageFullName='Trieflow.PixelQuay.Qualification_1.0.1.0_arm64__fixture'; PackageFamilyName=$owned.PackageFamilyName; InstallLocation=$temporary
+            PackageFullName=($identity.packageName+'_1.0.1.0_arm64__'+$suffix); PackageFamilyName=$owned.PackageFamilyName; InstallLocation=$temporary
+        }
+        if($scenario -ceq 'wrong-family') {
+            $foreign=$owned.PSObject.Copy();$foreign.PackageFamilyName=$identity.packageName+'_foreign';$foreign.PackageFullName=$identity.packageName+'_1.0.1.0_x64__foreign'
         }
         # The racing registration has the exact qualification tuple and full name.
         # A tuple match cannot establish ownership after our Add failed.
@@ -104,10 +115,11 @@ foreach ($scenario in @('failed-add-race','ambiguous-add','wrong-architecture','
             registrations=@(); removed=[Collections.Generic.List[string]]::new(); observationFailure=$false
         }
         $failure = $null
-        try { Invoke-PixelQuayInstallQualification unused unused unused $temporary | Out-Null } catch { $failure = $_.Exception.Message }
+        try { Invoke-PixelQuayInstallQualification unused unused unused $temporary -IdentityMode $IdentityMode | Out-Null } catch { $failure = $_.Exception.Message }
         $fixture = $global:PixelQuayRegistrationFixture
         $evidence = Get-Content (Join-Path $temporary 'installation-qualification.json') -Raw | ConvertFrom-Json
-        if ($scenario -in @('failed-add-race','ambiguous-add','wrong-architecture','missing-add','observation-failed')) {
+        if ($evidence.identity_mode -cne $IdentityMode -or $evidence.store_identity_used -ne ($IdentityMode -ceq 'store')) {throw 'Identity mode was lost in final evidence'}
+        if ($scenario -in @('failed-add-race','ambiguous-add','wrong-architecture','missing-add','observation-failed','wrong-family')) {
             if ($fixture.removed.Count) { throw "${scenario}: unowned or ambiguous registration was removed" }
             if ($scenario -ne 'missing-add' -and -not $fixture.registrations.Count) { throw "${scenario}: preserved registration disappeared" }
             if (-not $failure -or $evidence.installation_qualification_passed -or -not $evidence.primary_error) { throw "${scenario}: original failure was lost" }
@@ -123,7 +135,7 @@ foreach ($scenario in @('failed-add-race','ambiguous-add','wrong-architecture','
                 if (-not $failure -or $evidence.installation_qualification_passed -or -not $fixture.registrations.Count -or $evidence.cleanup_errors.Count -ne 1) { throw "${scenario}: residue/removal failure must fail and retain evidence" }
             }
         }
-        Write-Output "PASS actual PixelQuay registration ownership flow: $scenario"
+        Write-Output "PASS actual PixelQuay registration ownership flow ($IdentityMode): $scenario"
     } finally {
         Remove-Item -LiteralPath $temporary -Recurse -Force
     }
