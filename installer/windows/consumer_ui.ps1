@@ -122,6 +122,33 @@ function Save-PixelQuayFileNameFailure($Ui,$Scope,[long]$ExpectedFocus,[string]$
     $Ui.record.picker_failures.Add(@{stage=$Stage;title=$Scope.title;hwnd=$Scope.hwnd;pid=$Scope.process.Id;
         expected_focus=$ExpectedFocus;native=$native;choose_native=$choose;error=$message;observed_utc=[DateTime]::UtcNow.ToString('o')})
 }
+function Get-PixelQuayConsumerMonotonicMilliseconds {
+    return [Diagnostics.Stopwatch]::GetTimestamp()*1000.0/[Diagnostics.Stopwatch]::Frequency
+}
+function Wait-PixelQuayFileNameText($Ui,$Scope,[long]$Focus,[string]$Expected) {
+    if(-not $Ui.record.Contains('picker_readbacks')){$Ui.record.picker_readbacks=[Collections.Generic.List[object]]::new()}
+    if($Ui.record.picker_readbacks.Count -ge 16){throw 'Native picker readback evidence exceeded bound'}
+    $proof=@{title=$Scope.title;hwnd=$Scope.hwnd;pid=$Scope.process.Id;focus=$Focus;expected=$Expected;
+        timeout_ms=30000;observations=[Collections.Generic.List[object]]::new()}
+    $Ui.record.picker_readbacks.Add($proof)
+    $started=Get-PixelQuayConsumerMonotonicMilliseconds
+    # SendInput reports queued events, not application processing. A sent
+    # WM_GETTEXT can run before queued input. Observe only; never replay keys.
+    # Do not use the generic consumer wait, which catches observer exceptions:
+    # every FileNameText revalidates exact owner/focus before and after reading,
+    # and any native refusal must terminate this wait immediately.
+    for($attempt=1;$attempt -le 300;$attempt++) {
+        if((Get-PixelQuayConsumerMonotonicMilliseconds)-$started -ge $proof.timeout_ms){break}
+        $actual=[PixelQuayQualification.ConsumerNative]::FileNameText($Ui.process,$Ui.main,$Scope.process,$Scope.hwnd,$Scope.title,$Focus)
+        $elapsed=(Get-PixelQuayConsumerMonotonicMilliseconds)-$started
+        $proof.observations.Add(@{attempt=$attempt;elapsed_ms=$elapsed;value=$actual;observed_utc=[DateTime]::UtcNow.ToString('o')})
+        # Even exact text returned by a slow query after the deadline fails.
+        if($elapsed -ge $proof.timeout_ms){break}
+        if($actual -ceq $Expected){return $actual}
+        if($attempt -lt 300){Start-Sleep -Milliseconds 100}
+    }
+    throw 'Native picker did not retain exact local path text within the bounded observation'
+}
 function Set-PixelQuayPickerPath($Ui,[string]$Title,[string]$Path) {
     $scope=Wait-PixelQuayConsumer { Get-PixelQuayScope $Ui $Title -Picker } "owned native picker $Title"
     $focus=0;$stage='filename-mnemonic'
@@ -141,8 +168,7 @@ function Set-PixelQuayPickerPath($Ui,[string]$Title,[string]$Path) {
         $stage='type-filename'
         Send-PixelQuayFileNameText $Ui $scope $focus ($Path.Replace('/','\'))
         $stage='readback-filename'
-        $actual=[PixelQuayQualification.ConsumerNative]::FileNameText($Ui.process,$Ui.main,$scope.process,$scope.hwnd,$scope.title,$focus)
-        if ($actual -cne $Path.Replace('/','\')) { throw 'Native picker did not retain exact local path text' }
+        $actual=Wait-PixelQuayFileNameText $Ui $scope $focus ($Path.Replace('/','\'))
         $stage='capture-picker'
         Save-PixelQuayObservation $Ui $scope ('picker-'+$Ui.record.observations.Count)
         if($Title -ceq 'Export destination') {
