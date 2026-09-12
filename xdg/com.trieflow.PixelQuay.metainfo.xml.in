@@ -3,13 +3,13 @@
   <id>com.trieflow.PixelQuay</id>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>MIT</project_license>
-  <name>PixelQuay</name>
+  <name>TintFable</name>
   <summary>Edit images and paint digitally</summary>
   <description>
     <_p>
-      PixelQuay is an independent image editing, drawing and painting application with a simple
+      TintFable is an independent image editing, drawing and painting application with a simple
       yet powerful interface.
-      PixelQuay has a wide range of drawing tools, including: freehand, rectangles,
+      TintFable has a wide range of drawing tools, including: freehand, rectangles,
       circles and lines.
       It also has over 35 effects to apply to your images, and also has the
       ability to create unlimited layers to help organize your creativity.
@@ -21,11 +21,11 @@
     <kudo>HighContrast</kudo>
   </kudos>
   <developer_name>Trieflow LLC</developer_name>
-  <url type="bugtracker">https://pixelquay.trieflow.com/support</url>
-  <url type="faq">https://pixelquay.trieflow.com/support</url>
-  <url type="help">https://pixelquay.trieflow.com/support</url>
-  <url type="homepage">https://pixelquay.trieflow.com</url>
-  <url type="translate">https://pixelquay.trieflow.com/support</url>
+  <url type="bugtracker">https://tintfable.trieflow.com/support</url>
+  <url type="faq">https://tintfable.trieflow.com/support</url>
+  <url type="help">https://tintfable.trieflow.com/support</url>
+  <url type="homepage">https://tintfable.trieflow.com</url>
+  <url type="translate">https://tintfable.trieflow.com/support</url>
   <content_rating type="oars-1.0" />
   <translation type="gettext">pinta</translation>
   <provides>

@@ -20,6 +20,11 @@ public sealed class FileNameEvidence {
     public bool Exists, Visible, Enabled, Descendant, ReadOnly, HasFileNameId;
     public string Class;
 }
+public sealed class ConsumerGeometry {
+    // Raw native x,y,width,height values, without cropping or DPI conversion.
+    public int[] Window, Desktop, WorkArea;
+    public uint Dpi;
+}
 public static class ConsumerNative {
     public static bool FileNameReadOnly(long style) {
         // A visible child Edit necessarily has nonzero WS_VISIBLE/WS_CHILD
@@ -58,8 +63,13 @@ public static class ConsumerNative {
     delegate bool EnumCallback(IntPtr w, IntPtr data);
     [DllImport("user32.dll")] static extern bool GetWindowRect(IntPtr w, out RECT rect);
     [DllImport("user32.dll")] static extern int GetSystemMetrics(int index);
+    [DllImport("user32.dll")] static extern IntPtr MonitorFromWindow(IntPtr w,uint flags);
+    [DllImport("user32.dll",CharSet=CharSet.Unicode)] static extern bool GetMonitorInfoW(IntPtr monitor,ref MONITORINFO info);
+    [DllImport("user32.dll")] static extern uint GetDpiForWindow(IntPtr w);
+    [DllImport("user32.dll",SetLastError=true)] static extern bool MoveWindow(IntPtr w,int x,int y,int width,int height,bool repaint);
     [DllImport("user32.dll", SetLastError=true)] static extern uint SendInput(uint count, INPUT[] inputs, int size);
     [StructLayout(LayoutKind.Sequential)] public struct RECT { public int Left, Top, Right, Bottom; }
+    [StructLayout(LayoutKind.Sequential)] struct MONITORINFO { public uint Size;public RECT Monitor,Work;public uint Flags; }
     [StructLayout(LayoutKind.Sequential)] struct GUIINFO { public uint Size,Flags;public IntPtr Active,Focus,Capture,MenuOwner,MoveSize,Caret;public RECT CaretRect; }
     [StructLayout(LayoutKind.Sequential)] struct KEY { public ushort Vk, Scan; public uint Flags, Time; public UIntPtr Extra; }
     [StructLayout(LayoutKind.Sequential)] struct MOUSE { public int X,Y; public uint Data,Flags,Time; public UIntPtr Extra; }
@@ -135,13 +145,62 @@ public static class ConsumerNative {
             throw new InvalidOperationException("Bounded native filename readback failed");
         FileName(app,main,target,w,title,focus);return text.ToString();
     }
-    public static int[] Bounds(Process app,long main,Process target,long w,string title) {
-        Require(app,main,target,w,title,true); RECT r;
+    static bool Rectangle(int[] r) { return r!=null && r.Length==4 && r[2]>0 && r[3]>0; }
+    static bool Inside(int[] inner,int[] outer) {
+        return Rectangle(inner) && Rectangle(outer) && inner[0]>=outer[0] && inner[1]>=outer[1] &&
+            (long)inner[0]+inner[2]<=(long)outer[0]+outer[2] && (long)inner[1]+inner[3]<=(long)outer[1]+outer[3];
+    }
+    public static int[] VisibleBounds(ConsumerGeometry g) {
+        // CopyFromScreen uses unscaled coordinates. The observed Windows
+        // runner is 96 DPI; other coordinate contexts need separate proof.
+        if(g==null || g.Dpi!=96 || !Inside(g.Window,g.Desktop) || (long)g.Window[2]*g.Window[3]>16000000)
+            throw new InvalidOperationException("Owned window is not fully visible within bounded desktop: window="+
+                (g==null || g.Window==null?"unavailable":string.Join(",",g.Window))+" desktop="+
+                (g==null || g.Desktop==null?"unavailable":string.Join(",",g.Desktop))+" dpi="+(g==null?0:g.Dpi));
+        return new int[]{g.Window[0],g.Window[1],g.Window[2],g.Window[3],g.Desktop[0],g.Desktop[1],g.Desktop[2],g.Desktop[3]};
+    }
+    public static int[] PlacementPlan(ConsumerGeometry g) {
+        if(g==null || g.Dpi!=96 || !Inside(g.WorkArea,g.Desktop) || g.WorkArea[2]<1472 || g.WorkArea[3]<940)
+            throw new InvalidOperationException("Actual monitor work area cannot fit the readable native window");
+        return new int[]{checked(g.WorkArea[0]+(g.WorkArea[2]-1472)/2),checked(g.WorkArea[1]+(g.WorkArea[3]-940)/2),1472,940};
+    }
+    public static int[] PlacedBounds(ConsumerGeometry g) {
+        var bounds=VisibleBounds(g);
+        if(!Inside(g.Window,g.WorkArea) || g.Window[2]<1400 || g.Window[3]<850)
+            throw new InvalidOperationException("Actual placed window is too small or outside its monitor work area");
+        return bounds;
+    }
+    public static ConsumerGeometry Geometry(Process app,long main,Process target,long w,string title) {
+        Require(app,main,target,w,title,true);RECT r;
         if(!GetWindowRect((IntPtr)w,out r))throw new InvalidOperationException("Window bounds unavailable");
-        int x=GetSystemMetrics(76),y=GetSystemMetrics(77),width=GetSystemMetrics(78),height=GetSystemMetrics(79);
-        if(r.Left<x || r.Top<y || r.Right>x+width || r.Bottom>y+height || r.Right<=r.Left || r.Bottom<=r.Top || (long)(r.Right-r.Left)*(r.Bottom-r.Top)>16000000)
-            throw new InvalidOperationException("Owned window is not fully visible within bounded desktop");
-        return new int[]{r.Left,r.Top,r.Right-r.Left,r.Bottom-r.Top,x,y,width,height};
+        var info=new MONITORINFO { Size=checked((uint)Marshal.SizeOf<MONITORINFO>()) };
+        if(!GetMonitorInfoW(MonitorFromWindow((IntPtr)w,2),ref info))throw new InvalidOperationException("Actual monitor work area unavailable");
+        var result=new ConsumerGeometry {
+            Window=new int[]{r.Left,r.Top,checked(r.Right-r.Left),checked(r.Bottom-r.Top)},
+            Desktop=new int[]{GetSystemMetrics(76),GetSystemMetrics(77),GetSystemMetrics(78),GetSystemMetrics(79)},
+            WorkArea=new int[]{info.Work.Left,info.Work.Top,checked(info.Work.Right-info.Work.Left),checked(info.Work.Bottom-info.Work.Top)},Dpi=GetDpiForWindow((IntPtr)w)
+        };
+        Require(app,main,target,w,title,true);return result;
+    }
+    public static int[] Bounds(Process app,long main,Process target,long w,string title) {
+        return VisibleBounds(Geometry(app,main,target,w,title));
+    }
+    public static void DeliverPlacement(Action requireRoot,Func<bool> place) {
+        requireRoot();
+        if(!place())throw new InvalidOperationException("Native owned window placement failed");
+    }
+    public static void ValidatePlacementTarget(long main,long w,bool sameRetainedProcess,string windowClass) {
+        if(main==0 || w!=main || !sameRetainedProcess || windowClass!="gdkSurfaceToplevel")
+            throw new InvalidOperationException("Only the exact retained GTK root window may be placed");
+    }
+    public static void Place(Process app,long main,Process target,long w,string title) {
+        Action requireRoot=()=> {
+            Require(app,main,target,w,title,true);
+            ValidatePlacementTarget(main,w,app==target,Class(w));
+        };
+        requireRoot();
+        var plan=PlacementPlan(Geometry(app,main,target,w,title));
+        DeliverPlacement(requireRoot,()=>MoveWindow((IntPtr)w,plan[0],plan[1],plan[2],plan[3],true));
     }
     static INPUT Key(ushort vk,ushort scan,uint flags) { return new INPUT { Type=1, Value=new UNION { Key=new KEY { Vk=vk,Scan=scan,Flags=flags } } }; }
     public static void DeliverInput(Action requireTarget,Action requireFocus,Func<uint> deliver,uint count) {

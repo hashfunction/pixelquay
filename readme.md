@@ -1,10 +1,10 @@
-# PixelQuay
+# TintFable
 
-PixelQuay by Trieflow LLC is an independent layered image editor with named export recipes.
+TintFable by Trieflow LLC is an independent layered image editor with named export recipes.
 
-- Product: https://pixelquay.trieflow.com
-- Privacy: https://pixelquay.trieflow.com/privacy
-- Support: https://pixelquay.trieflow.com/support
+- Product: https://tintfable.trieflow.com
+- Privacy: https://tintfable.trieflow.com/privacy
+- Support: https://tintfable.trieflow.com/support
 
 Use **File → Export with Recipe…** (Ctrl+Alt+E) to create, name, save, select, rename or delete recipes. Choose a size, runtime-supported image format, filename suffix and destination folder. JPEG requires explicit quality (1–100). Quality is unavailable for other exporters. The preview shows the exact absolute output path. Replacement is off by default and must be explicitly enabled.
 
@@ -12,7 +12,7 @@ Exports flatten and resize a detached copy using bilinear resampling, keeping th
 
 Per-axis dimensions are capped at 32,767 and total pixels at 100 million. The incremental working-image estimate (two source surfaces and four output surfaces) must also fit 400 MB. Consequently a 100 MP requested image passes the size limit but fails the working-set limit. This budget does not guarantee native encoders' total process memory usage.
 
-Settings and add-ins use the separate PixelQuay application-data directory. Upstream settings are not automatically imported, and upstream add-in feeds are not registered. Paint.NET plug-in compatibility is not provided. No analytics or remote image processing is added by this fork.
+Settings and add-ins retain the established `PixelQuay` application-data directory and `pixelquay.export-recipes.v1` key so existing preferences and export recipes remain available after the TintFable rename. Upstream settings are not automatically imported, and upstream add-in feeds are not registered. Paint.NET plug-in compatibility is not provided. No analytics or remote image processing is added by this fork.
 
 Based on Pinta 3.1.2, commit `b3df1e579f6b3dd23193d2f6877deced20d8063b`, with complete upstream source history retained. Product identity and original artwork are by Trieflow LLC. Pinta contributors' MIT rights and Paint.NET 3.36 MIT source notices remain in `license-mit.txt` and `license-pdn.txt`. See `THIRD-PARTY-NOTICES.txt` and About for credits. Native/managed dependency inventories and full license texts must accompany a Windows release; see `installer/windows/RELEASE.md`.
 
@@ -39,7 +39,7 @@ First, install the required GTK-related dependencies:
 - From the CLANG64 terminal, run `pacman -S mingw-w64-clang-x86_64-libadwaita mingw-w64-clang-x86_64-webp-pixbuf-loader`.
   - For ARM64 Windows, use the `CLANGARM64` terminal and replace `clang-x86_64` with `clang-aarch64`.
 
-PixelQuay can then be built by opening `Pinta.sln` in [Visual Studio](https://visualstudio.microsoft.com/).
+TintFable can then be built by opening `Pinta.sln` in [Visual Studio](https://visualstudio.microsoft.com/).
 Ensure that .NET 8 is installed via the Visual Studio installer.
 
 For building on the command line:
@@ -53,7 +53,7 @@ For building on the command line:
 
 - Install .NET 8 and GTK4
   - `brew install dotnet-sdk libadwaita adwaita-icon-theme gettext webp-pixbuf-loader`
-  - For Apple Silicon, set `DYLD_LIBRARY_PATH=/opt/homebrew/lib` in the environment so that PixelQuay can load the GTK libraries
+  - For Apple Silicon, set `DYLD_LIBRARY_PATH=/opt/homebrew/lib` in the environment so that TintFable can load the GTK libraries
   - For Intel, you may need to set `DYLD_LIBRARY_PATH=/usr/local/lib` when using .NET 9 or higher
 - Build:
   - `dotnet build`
@@ -80,7 +80,11 @@ For building on the command line:
 
 Follow the instructions of the corresponding [pinta-virtual-dev-environment](https://github.com/janrothkegel/pinta-virtual-dev-environment) project
 
-## Getting help / contributing:
+## TintFable support
+
+For product help and issue reports, visit https://tintfable.trieflow.com/support.
+
+## Upstream Pinta resources and contributing:
 
 - You can get [technical help](https://github.com/PintaProject/Pinta/discussions).
 - You can report [bugs/issues](https://github.com/PintaProject/Pinta/issues).
@@ -91,7 +95,10 @@ Follow the instructions of the corresponding [pinta-virtual-dev-environment](htt
 - For details on notable changes of each release, take a look at the [CHANGELOG](https://github.com/PintaProject/Pinta/blob/master/CHANGELOG.md).
 - For details on patching, take a look at `patch-guidelines.md` in the repo.
 
-## Code signing policy
+## Upstream Pinta code signing policy
+
+The following retained upstream policy does not describe TintFable signing.
+
 - Free code signing on Windows provided by [SignPath.io](https://about.signpath.io/), certificate by [SignPath Foundation](https://signpath.org/).
 - Committers and approvers: [Pinta Maintainers](https://github.com/orgs/PintaProject/people)
 - Privacy policy: this program will not transfer any information to other networked systems unless specifically requested by the user or the person installing or operating it.

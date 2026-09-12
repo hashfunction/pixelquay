@@ -1,14 +1,14 @@
-PixelQuay 1.0.0 — Trieflow LLC
-Product: https://pixelquay.trieflow.com
-Privacy: https://pixelquay.trieflow.com/privacy
-Support: https://pixelquay.trieflow.com/support
+TintFable 1.0.1 — Trieflow LLC
+Product: https://tintfable.trieflow.com
+Privacy: https://tintfable.trieflow.com/privacy
+Support: https://tintfable.trieflow.com/support
 
-PixelQuay is derived from Pinta 3.1.2 (commit b3df1e579f6b3dd23193d2f6877deced20d8063b).
+TintFable is derived from Pinta 3.1.2 (commit b3df1e579f6b3dd23193d2f6877deced20d8063b).
 Copyright (c) 2010–2026 Pinta contributors. MIT license: license-mit.txt.
 Paint.NET 3.36-derived code and retained Paint.NET icons are MIT licensed:
 license-pdn.txt and preserved file headers. https://www.getpaint.net/
-Original PixelQuay additions and main application artwork:
-Copyright (c) 2026 Trieflow LLC. MIT licensed. branding/pixelquay.svg is the source.
+Original TintFable additions and main application artwork:
+Copyright (c) 2026 Trieflow LLC. MIT licensed. branding/tintfable.svg is the source.
 No endorsement by Pinta or Paint.NET is implied.
 
 RETAINED ICON ATTRIBUTION
@@ -20,7 +20,7 @@ Google Material Icons: Google, Apache License 2.0,
 https://github.com/google/material-design-icons
 Microsoft Fluent UI System Icons: Microsoft, MIT,
 https://github.com/microsoft/fluentui-system-icons
-The upstream Pinta application mark is replaced by original PixelQuay artwork.
+The upstream Pinta application mark is replaced by original TintFable artwork.
 
 MANAGED DEPENDENCIES
 Exact restored runtime packages are recorded in licenses/managed-packages.json.

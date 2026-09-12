@@ -11,6 +11,9 @@ $powerShell = (Get-Process -Id $PID).Path
 Invoke-Checked python @('installer/windows/test_msix_qualification.py')
 Invoke-Checked python @('installer/windows/test_consumer_workflow.py')
 Invoke-Checked $powerShell @('-NoLogo','-NoProfile','-File','installer/windows/test_consumer_input.ps1')
+Invoke-Checked $powerShell @('-NoLogo','-NoProfile','-File','installer/windows/test_consumer_geometry.ps1')
+Invoke-Checked $powerShell @('-NoLogo','-NoProfile','-File','installer/windows/test_consumer_geometry_record.ps1')
+Invoke-Checked $powerShell @('-NoLogo','-NoProfile','-File','installer/windows/test_consumer_display.ps1')
 Invoke-Checked $powerShell @('-NoLogo','-NoProfile','-File','installer/windows/test_consumer_picker.ps1')
 Invoke-Checked $powerShell @('-NoLogo','-NoProfile','-File','installer/windows/test_consumer_native_picker.ps1')
 Invoke-Checked $powerShell @('-NoLogo','-NoProfile','-File','installer/windows/test_unpacked_profile_lifecycle.ps1')
@@ -23,6 +26,6 @@ $sourceCommit = (git rev-parse HEAD).Trim()
 if ($LASTEXITCODE -ne 0 -or $sourceCommit -cne $env:GITHUB_SHA) { throw 'Source commit differs from this qualification run.' }
 $sdkVersion = '10.0.26100.0'
 $sdkDirectory = Join-Path ${env:ProgramFiles(x86)} "Windows Kits\10\bin\$sdkVersion\x64"
-$packageOutput = Join-Path $env:RUNNER_TEMP 'pixelquay-msix-package'
-Invoke-Checked python @('installer/windows/msix_qualification.py','--release','release','--artwork','branding/pixelquay.png','--source-root','.','--source-commit',$sourceCommit,'--makeappx',(Join-Path $sdkDirectory 'makeappx.exe'),'--sdk-version',$sdkVersion,'--output',$packageOutput)
-Invoke-Checked $powerShell @('-NoLogo','-NoProfile','-File','installer/windows/qualify-msix-install.ps1','-Package',(Join-Path $packageOutput 'PixelQuay.Qualification_1.0.0.0_x64.msix'),'-PackageRecord',(Join-Path $packageOutput 'package-record.json'),'-SignTool',(Join-Path $sdkDirectory 'signtool.exe'),'-Output','build-evidence/msix-install')
+$packageOutput = Join-Path $env:RUNNER_TEMP 'tintfable-msix-package'
+Invoke-Checked python @('installer/windows/msix_qualification.py','--release','release','--artwork','branding/tintfable.png','--source-root','.','--source-commit',$sourceCommit,'--makeappx',(Join-Path $sdkDirectory 'makeappx.exe'),'--sdk-version',$sdkVersion,'--output',$packageOutput)
+Invoke-Checked $powerShell @('-NoLogo','-NoProfile','-File','installer/windows/qualify-msix-install.ps1','-Package',(Join-Path $packageOutput 'TintFable.Qualification_1.0.1.0_x64.msix'),'-PackageRecord',(Join-Path $packageOutput 'package-record.json'),'-SignTool',(Join-Path $sdkDirectory 'signtool.exe'),'-Output','build-evidence/msix-install')

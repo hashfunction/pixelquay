@@ -61,18 +61,18 @@ internal sealed class AboutDialogAction : IActionHandler
 	{
 		using Adw.AboutWindow dialog = Adw.AboutWindow.New ();
 		dialog.TransientFor = chrome.MainWindow;
-		dialog.Title = Translations.GetString ("About PixelQuay");
-		dialog.ApplicationName = Translations.GetString ("PixelQuay");
+		dialog.Title = Translations.GetString ("About TintFable");
+		dialog.ApplicationName = Translations.GetString ("TintFable");
 		dialog.ApplicationIcon = Icons.Pinta;
 		dialog.Version = application_version;
-		dialog.Website = "https://pixelquay.trieflow.com";
+		dialog.Website = "https://tintfable.trieflow.com";
 		dialog.Comments = Translations.GetString ("Layered image editing with reusable export recipes");
 		dialog.Copyright = BuildCopyrightText ();
 		dialog.License = BuildLicenseText ();
 		dialog.Developers = authors;
 		dialog.TranslatorCredits = Translations.GetString ("translator-credits");
-		dialog.IssueUrl = "https://pixelquay.trieflow.com/support";
-		dialog.SupportUrl = "https://pixelquay.trieflow.com/support";
+		dialog.IssueUrl = "https://tintfable.trieflow.com/support";
+		dialog.SupportUrl = "https://tintfable.trieflow.com/support";
 		await dialog.PresentAsync ();
 	}
 
@@ -91,10 +91,10 @@ internal sealed class AboutDialogAction : IActionHandler
 		sb.AppendLine (Translations.GetString ("Released under the MIT X11 License."));
 		sb.AppendLine ();
 
-		sb.AppendLine ("PixelQuay is based on Pinta 3.1.2 (MIT), with changes by Trieflow LLC.");
+		sb.AppendLine ("TintFable is based on Pinta 3.1.2 (MIT), with changes by Trieflow LLC.");
 		sb.AppendLine ("https://github.com/PintaProject/Pinta");
 		sb.AppendLine ("Full license texts are included in the application licenses directory.");
-		sb.AppendLine ("Privacy: https://pixelquay.trieflow.com/privacy");
+		sb.AppendLine ("Privacy: https://tintfable.trieflow.com/privacy");
 		sb.AppendLine ();
 		sb.AppendLine (Translations.GetString ("Based on the work of Paint.NET:"));
 		sb.AppendLine ("http://www.getpaint.net/");

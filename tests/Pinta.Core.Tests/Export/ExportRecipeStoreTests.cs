@@ -8,6 +8,22 @@ namespace Pinta.Core.Tests;
 public sealed class ExportRecipeStoreTests
 {
 	[Test]
+	public void TintFableRetainsRecipesSavedUnderTheEstablishedPixelQuayKey ()
+	{
+		var settings = new RecipeSettings ();
+		const string saved = "{\"Version\":1,\"Recipes\":[{\"Id\":\"kept\",\"Name\":\"Portfolio web\",\"Width\":320,\"Height\":180,\"Extension\":\"png\",\"Quality\":null,\"Suffix\":\"-web\",\"Overwrite\":false}]}";
+		settings.PutSetting ("pixelquay.export-recipes.v1", saved);
+		var store = new ExportRecipeStore (settings);
+		var recipes = store.Load ();
+		Assert.That (recipes, Has.Count.EqualTo (1));
+		Assert.That (recipes [0].Name, Is.EqualTo ("Portfolio web"));
+		store.Save (recipes);
+		Assert.That (new ExportRecipeStore (settings).Load (), Is.EqualTo (recipes));
+		Assert.That (settings.GetSetting ("pixelquay.export-recipes.v1", ""), Does.Contain ("Portfolio web"));
+		Assert.That (settings.GetSetting ("tintfable.export-recipes.v1", "missing"), Is.EqualTo ("missing"));
+	}
+
+	[Test]
 	public void RoundTripsUnicodeInVersionedEnvelope ()
 	{
 		var settings = new RecipeSettings ();

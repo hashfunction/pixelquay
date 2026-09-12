@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256">
-  <title>PixelQuay</title>
-  <desc>Original PixelQuay pixel aperture and quay mark. Copyright 2026 Trieflow LLC. MIT licensed.</desc>
+  <title>TintFable</title>
+  <desc>Original TintFable pixel aperture mark. Copyright 2026 Trieflow LLC. MIT licensed.</desc>
   <rect width="256" height="256" rx="52" fill="#142e38"/>
   <path fill="#f6f3e9" fill-rule="evenodd" d="M56 54H184V182H56ZM84 82V154H156V82Z"/>
   <path fill="#43d9c4" d="M128 130H158V158H188V188H210V214H162V186H128Z"/>

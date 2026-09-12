@@ -10,6 +10,7 @@ namespace Pinta.Core;
 
 public sealed class ExportRecipeStore (ISettingsService settings)
 {
+	// Persisted before the TintFable rename; changing this would orphan saved recipes.
 	public const string SettingsKey = "pixelquay.export-recipes.v1";
 	private sealed record Envelope (int Version, ExportRecipe[] Recipes);
 	public string? LoadError { get; private set; }
@@ -28,7 +29,7 @@ public sealed class ExportRecipeStore (ISettingsService settings)
 			return ValidateCollection (envelope.Recipes);
 		} catch (Exception e) when (e is JsonException or ArgumentException) {
 			LoadError = e.Message;
-			Console.Error.WriteLine ($"PixelQuay could not load export recipes: {e.Message}");
+			Console.Error.WriteLine ($"TintFable could not load export recipes: {e.Message}");
 			return [];
 		}
 	}

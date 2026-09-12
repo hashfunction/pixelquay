@@ -1,4 +1,4 @@
-name: PixelQuay retained LGPL library proof
+name: TintFable retained LGPL library proof
 on:
   workflow_dispatch:
 permissions:
@@ -36,7 +36,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
-          name: PixelQuay-libdatrie-proof
+          name: TintFable-libdatrie-proof
           path: |
             build-evidence/libdatrie/*.json
             build-evidence/libdatrie/*.txt

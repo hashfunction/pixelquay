@@ -1,4 +1,4 @@
-# Disposable Windows CI installation qualification for PixelQuay.
+# Disposable Windows CI installation qualification for TintFable.
 # Copyright 2026 Trieflow LLC. MIT licensed.
 # Installation-flow structure adapted from ReticleQuay's MIT helper; the full
 # retained notice is in RETICLEQUAY-MIT.txt.
@@ -14,11 +14,12 @@ param(
 $ErrorActionPreference = 'Stop'
 Set-StrictMode -Version Latest
 . (Join-Path $PSScriptRoot 'consumer_ui.ps1')
+. (Join-Path $PSScriptRoot 'consumer_display.ps1')
 
 function Invoke-PixelQuayQualificationCore([Collections.IDictionary]$Operations) {
     $required = @(
         'Preflight','PrepareConsumerFixture','PrepareSignedCopy','Install','CaptureInstalledStderr','ActivateAndVerify','ConsumerWorkflow','CloseCleanly','UninstallAndVerify',
-        'StopOwnedProcess','RemoveConsumerFixture','RemoveOwnedPackage','RemoveTrustedCertificate','RemovePersonalCertificate','RemoveTemporaryFiles'
+        'StopOwnedProcess','RestoreConsumerDisplay','RemoveConsumerFixture','RemoveOwnedPackage','RemoveTrustedCertificate','RemovePersonalCertificate','RemoveTemporaryFiles'
     )
     foreach ($name in $required) {
         if (-not $Operations.Contains($name) -or $Operations[$name] -isnot [scriptblock]) {
@@ -36,7 +37,7 @@ function Invoke-PixelQuayQualificationCore([Collections.IDictionary]$Operations)
     } catch {
         $primaryError = $_.Exception.Message
     } finally {
-        foreach ($name in @('StopOwnedProcess','RemoveConsumerFixture','RemoveOwnedPackage','RemoveTrustedCertificate','RemovePersonalCertificate','RemoveTemporaryFiles')) {
+        foreach ($name in @('StopOwnedProcess','RestoreConsumerDisplay','RemoveConsumerFixture','RemoveOwnedPackage','RemoveTrustedCertificate','RemovePersonalCertificate','RemoveTemporaryFiles')) {
             try {
                 & $Operations[$name] | Out-Host
             } catch {
@@ -256,10 +257,11 @@ function Invoke-PixelQuayInstallQualification([string]$PackagePath, [string]$Rec
         processHandle = $null; processOwned = $false; allProcessesStopped = $true
         processLifetimes = [Collections.Generic.List[object]]::new()
         consumerStatePath = $null; consumerFixture = $null; consumerUi = $null; consumerReceipt = $null; consumerRemoved = $false
+        consumerDisplay = @{displayOriginalMode=$null;displayDevice=$null;displayRestoreRequired=$false;displayEvidence=$null}
     }
     $expectedIdentity = [ordered]@{
-        packageName='Trieflow.PixelQuay.Qualification'; publisher='CN=PixelQuay-CI-Qualification'; version='1.0.0.0'
-        architecture='x64'; applicationId='PixelQuay'; executable='bin\PixelQuay.exe'
+        packageName='Trieflow.PixelQuay.Qualification'; publisher='CN=PixelQuay-CI-Qualification'; version='1.0.1.0'
+        architecture='x64'; applicationId='PixelQuay'; executable='bin\TintFable.exe'
         deviceFamily='Windows.Desktop'; minVersion='10.0.19041.0'; maxVersionTested='10.0.26100.0'; capability='runFullTrust'
     }
 
@@ -298,7 +300,7 @@ function Invoke-PixelQuayInstallQualification([string]$PackagePath, [string]$Rec
         }
         $existing = @(Get-AppxPackage -Name $expectedIdentity.packageName -ErrorAction Stop)
         $state.preflightPackageFullNames = @($existing | ForEach-Object { [string]$_.PackageFullName })
-        if ($existing.Count -gt 0) { throw 'A matching PixelQuay qualification package is already installed; refusing to replace or remove it.' }
+        if ($existing.Count -gt 0) { throw 'A matching TintFable qualification package is already installed; refusing to replace or remove it.' }
 
     }.GetNewClosure()
 
@@ -317,12 +319,12 @@ function Invoke-PixelQuayInstallQualification([string]$PackagePath, [string]$Rec
         $temporaryCandidate = Join-Path $runnerTemp ('.pixelquay-install-' + [guid]::NewGuid().ToString('N'))
         New-Item -ItemType Directory -Path $temporaryCandidate -ErrorAction Stop | Out-Null
         $state.temporary = $temporaryCandidate
-        $state.signedCopy = Join-Path $state.temporary 'PixelQuay.Qualification.signed.msix'
+        $state.signedCopy = Join-Path $state.temporary 'TintFable.Qualification.signed.msix'
         [IO.File]::Copy($state.package, $state.signedCopy, $false)
-        $state.publicCertificate = Join-Path $state.temporary 'PixelQuay.Qualification.public.cer'
+        $state.publicCertificate = Join-Path $state.temporary 'TintFable.Qualification.public.cer'
         $state.certificate = New-SelfSignedCertificate -Type Custom -KeyUsage DigitalSignature -KeyExportPolicy NonExportable -KeySpec Signature `
             -CertStoreLocation 'Cert:\CurrentUser\My' -TextExtension @('2.5.29.37={text}1.3.6.1.5.5.7.3.3','2.5.29.19={text}') `
-            -Subject $expectedIdentity.publisher -FriendlyName 'PixelQuay ephemeral CI qualification' -NotAfter (Get-Date).AddHours(12)
+            -Subject $expectedIdentity.publisher -FriendlyName 'TintFable ephemeral CI qualification' -NotAfter (Get-Date).AddHours(12)
         Export-Certificate -Cert $state.certificate -FilePath $state.publicCertificate -Force | Out-Null
         $state.trustedCertificate = Import-Certificate -FilePath $state.publicCertificate -CertStoreLocation 'Cert:\LocalMachine\TrustedPeople'
         foreach ($arguments in @(
@@ -368,10 +370,10 @@ function Invoke-PixelQuayInstallQualification([string]$PackagePath, [string]$Rec
         $state.ownedPackageFullName = [string]$candidate.PackageFullName
         $state.installedByUs = $true
         $state.aumid = [string]$state.installed.PackageFamilyName + '!' + $expectedIdentity.applicationId
-        foreach ($relative in @('bin/PixelQuay.exe','bin/coreclr.dll','bin/hostfxr.dll','bin/PixelQuay.runtimeconfig.json')) {
+        foreach ($relative in @('bin/TintFable.exe','bin/coreclr.dll','bin/hostfxr.dll','bin/TintFable.runtimeconfig.json')) {
             $expected = Get-RecordPayloadEntry $state.record $relative
             $hash = Assert-FileMatchesRecord (Join-Path $state.installed.InstallLocation ($relative -replace '/', [IO.Path]::DirectorySeparatorChar)) $expected $relative
-            if ($relative -eq 'bin/PixelQuay.exe') { $state.executableSha256 = $hash }
+            if ($relative -eq 'bin/TintFable.exe') { $state.executableSha256 = $hash }
             if ($relative -eq 'bin/coreclr.dll') { $state.coreclrSha256 = $hash }
             if ($relative -eq 'bin/hostfxr.dll') { $state.hostfxrSha256 = $hash }
         }
@@ -381,7 +383,7 @@ function Invoke-PixelQuayInstallQualification([string]$PackagePath, [string]$Rec
         Add-PixelQuayActivationTypes
         $stdoutPath = Join-Path $state.output 'installed-native-stdout.txt'
         $stderrPath = Join-Path $state.output 'installed-native-stderr.txt'
-        $executable = Join-Path $state.installed.InstallLocation 'bin\PixelQuay.exe'
+        $executable = Join-Path $state.installed.InstallLocation 'bin\TintFable.exe'
         $state.allProcessesStopped=$false; $state.processOwned=$false
         $state.process = Start-Process -FilePath $executable -RedirectStandardOutput $stdoutPath -RedirectStandardError $stderrPath -PassThru -ErrorAction Stop
         $state.processHandle=$state.process.SafeHandle
@@ -424,7 +426,7 @@ function Invoke-PixelQuayInstallQualification([string]$PackagePath, [string]$Rec
         $state.process = [Diagnostics.Process]::GetProcessById([int]$processId)
         $state.processHandle=$state.process.SafeHandle
         if ($state.processHandle.IsInvalid -or $state.processHandle.IsClosed) { throw 'Broker process handle was not retained' }
-        $expectedExecutable=Join-Path $state.installed.InstallLocation 'bin\PixelQuay.exe'
+        $expectedExecutable=Join-Path $state.installed.InstallLocation 'bin\TintFable.exe'
         if ([PixelQuayQualification.NativePackageProbe]::GetFullName($state.process.Handle) -cne [string]$state.installed.PackageFullName -or
             (Get-CanonicalPath $state.process.Path) -cne (Get-CanonicalPath $expectedExecutable)) { throw 'Broker process identity differs' }
         $state.processOwned=$true; $state.processLifetimes.Add($state.process)
@@ -432,10 +434,10 @@ function Invoke-PixelQuayInstallQualification([string]$PackagePath, [string]$Rec
         do {
             Start-Sleep -Milliseconds 250
             $state.process.Refresh()
-            if ($state.process.HasExited) { throw "Activated PixelQuay exited during startup: $($state.process.ExitCode)" }
+            if ($state.process.HasExited) { throw "Activated TintFable exited during startup: $($state.process.ExitCode)" }
         } until ($state.process.MainWindowHandle -ne 0 -or [DateTime]::UtcNow -ge $deadline)
-        if ($state.process.MainWindowHandle -eq 0) { throw 'Activated PixelQuay did not create a main window.' }
-        if ($state.process.MainWindowTitle -cne 'PixelQuay') { throw "Unexpected activated main-window title: $($state.process.MainWindowTitle)" }
+        if ($state.process.MainWindowHandle -eq 0) { throw 'Activated TintFable did not create a main window.' }
+        if ($state.process.MainWindowTitle -cne 'TintFable') { throw "Unexpected activated main-window title: $($state.process.MainWindowTitle)" }
         $state.processPackageFullName = [PixelQuayQualification.NativePackageProbe]::GetFullName($state.process.Handle)
         if ($state.processPackageFullName -cne [string]$state.installed.PackageFullName) { throw 'Activated process does not own the exact installed package full name.' }
         $installRoot = Get-CanonicalPath $state.installed.InstallLocation
@@ -465,17 +467,17 @@ function Invoke-PixelQuayInstallQualification([string]$PackagePath, [string]$Rec
         $state.window = Get-WindowQualification $state.process $state.output
         Start-Sleep -Seconds 3
         $state.process.Refresh()
-        if ($state.process.HasExited -or $state.process.MainWindowHandle -eq 0) { throw 'Activated PixelQuay did not survive the stable-window interval.' }
+        if ($state.process.HasExited -or $state.process.MainWindowHandle -eq 0) { throw 'Activated TintFable did not survive the stable-window interval.' }
     }.GetNewClosure()
 
     $operations.ConsumerWorkflow = {
-        $state.consumerUi=Invoke-PixelQuayConsumerWorkflow $state.process $state.consumerStatePath $state.output
+        $state.consumerUi=Invoke-PixelQuayConsumerWorkflow $state.process $state.consumerStatePath $state.output $state.consumerDisplay
     }.GetNewClosure()
 
     $operations.CloseCleanly = {
-        if (-not $state.process.CloseMainWindow()) { throw 'Activated PixelQuay refused a normal main-window close request.' }
+        if (-not $state.process.CloseMainWindow()) { throw 'Activated TintFable refused a normal main-window close request.' }
         $exit=[PixelQuayQualification.ConsumerNative]::ExitCode($state.process,15000)
-        if ($null -eq $exit -or $exit -ne 0) { throw "Activated PixelQuay did not exit normally with zero: $exit" }
+        if ($null -eq $exit -or $exit -ne 0) { throw "Activated TintFable did not exit normally with zero: $exit" }
         foreach ($owned in $state.processLifetimes) {
             if ($null -eq [PixelQuayQualification.ConsumerNative]::ExitCode($owned,0)) { throw 'An owned process remains live after close' }
         }
@@ -500,6 +502,10 @@ function Invoke-PixelQuayInstallQualification([string]$PackagePath, [string]$Rec
             }
         }
         $state.allProcessesStopped=$true
+    }.GetNewClosure()
+
+    $operations.RestoreConsumerDisplay = {
+        Restore-PixelQuayConsumerDisplay $state.consumerDisplay
     }.GetNewClosure()
 
     $operations.RemoveConsumerFixture = {
@@ -575,6 +581,9 @@ function Invoke-PixelQuayInstallQualification([string]$PackagePath, [string]$Rec
     if ($result.installation_qualification_passed -and (-not $state.consumerReceipt -or -not $state.consumerRemoved -or -not $state.cleanClose)) {
         $evidenceErrors.Add('Successful qualification lacks consumer output/persistence/cleanup evidence')
     }
+    if ($result.installation_qualification_passed -and (-not $state.consumerDisplay.displayEvidence -or $state.consumerDisplay.displayEvidence.restore_verified -ne $true)) {
+        $evidenceErrors.Add('Successful qualification lacks verified original display restoration')
+    }
     $qualificationPassed = $result.installation_qualification_passed -and $unsignedUnchanged -and $evidenceErrors.Count -eq 0
     $evidence = [ordered]@{
         schema_version = 1
@@ -611,6 +620,7 @@ function Invoke-PixelQuayInstallQualification([string]$PackagePath, [string]$Rec
         consumer_fixture_removed = $state.consumerRemoved
         all_owned_processes_stopped = $state.allProcessesStopped
         consumer_images_and_recipe = $state.consumerReceipt
+        consumer_native_display = $state.consumerDisplay.displayEvidence
         upgrade_tested = $false
         wack_tested = $false
         store_identity_used = $false
@@ -625,7 +635,7 @@ function Invoke-PixelQuayInstallQualification([string]$PackagePath, [string]$Rec
         throw "Could not preserve qualification JSON: $($_.Exception.Message). Primary: $($result.primary_error); cleanup: $($result.cleanup_errors -join '; '); evidence: $($evidenceErrors -join '; ')"
     }
     if (-not $qualificationPassed) {
-        throw "PixelQuay installation qualification failed. Primary: $($result.primary_error); cleanup: $($result.cleanup_errors -join '; '); evidence: $($evidenceErrors -join '; ')"
+        throw "TintFable installation qualification failed. Primary: $($result.primary_error); cleanup: $($result.cleanup_errors -join '; '); evidence: $($evidenceErrors -join '; ')"
     }
     Write-Output 'PASS: broker-activated exact package, verified consumer image/recipe/reopen and owned modules/close, uninstalled, and cleaned owned fixtures/certificate state.'
 }

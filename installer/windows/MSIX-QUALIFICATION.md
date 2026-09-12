@@ -1,4 +1,4 @@
-# PixelQuay disposable MSIX qualification
+# TintFable disposable MSIX qualification
 
 This path builds and installs a **CI-only** package from the complete verified Windows `release` directory. It does not assign or approximate a Microsoft Store identity. It now requires the ordinary installed image-edit/export/reopen workflow described below. It does not clear licenses, sign a release package, or authorize binary publication. The new consumer path still needs its first Windows execution.
 
@@ -8,10 +8,10 @@ The fixed qualification identity is:
 
 - package: `Trieflow.PixelQuay.Qualification`
 - publisher: `CN=PixelQuay-CI-Qualification`
-- version: `1.0.0.0`
+- version: `1.0.1.0`
 - architecture: `x64`
 - application ID: `PixelQuay`
-- executable: `bin\PixelQuay.exe`
+- executable: `bin\TintFable.exe`
 - capability: `runFullTrust`
 
 The manifest is created through Python's XML API and permits one `Windows.Desktop` dependency, one full-trust application, and one `runFullTrust` restricted capability. It has no associations, protocols, updater, registry declarations, COM extensions, or Store identity.
@@ -21,9 +21,9 @@ The manifest is created through Python's XML API and permits one `Windows.Deskto
 `msix_qualification.py` rejects a preexisting output, links/reparse points, special files, unsafe Windows names, case/Unicode aliases, input changes, and missing self-contained runtime files. It requires:
 
 ```text
-release/bin/PixelQuay.exe
-release/bin/PixelQuay.dll
-release/bin/PixelQuay.runtimeconfig.json
+release/bin/TintFable.exe
+release/bin/TintFable.dll
+release/bin/TintFable.runtimeconfig.json
 release/bin/coreclr.dll
 release/bin/hostfxr.dll
 release/bin/native-files.json
@@ -34,7 +34,7 @@ Native inventory rows are rebound to their actual `release/bin`, `release/etc`, 
 
 These checks prove byte retention and provenance-record consistency. The inventory status remains `requires-release-license-review`; corresponding source, LGPL replacement mechanics, fonts/resources, codecs, supplemental notices, and every shipped dependency still require an independent release audit.
 
-The three Store-sized PNGs are deterministically resized from the original `branding/pixelquay.png`. Their dimensions and SHA-256 hashes, the original artwork hash, every release-input hash, and every final payload hash are recorded in `package-record.json`.
+The three Store-sized PNGs are deterministically resized from the original `branding/tintfable.png`. Their dimensions and SHA-256 hashes, the original artwork hash, every release-input hash, and every final payload hash are recorded in `package-record.json`.
 
 The builder requires the absolute `x64\makeappx.exe` path under an explicit Windows SDK version. It hashes the tool before every command and afterward, packs with `/v /h SHA256` and no semantic-validation bypass, unpacks into a fresh directory, and verifies:
 
@@ -58,11 +58,11 @@ pwsh -NoLogo -NoProfile -File installer/windows/test_qualify_msix_install.ps1
 $sourceCommit = (git rev-parse HEAD).Trim()
 $sdkVersion = '10.0.26100.0' # replace only with the workflow's exact selected installed SDK
 $sdkDirectory = Join-Path ${env:ProgramFiles(x86)} "Windows Kits\10\bin\$sdkVersion\x64"
-$packageOutput = Join-Path $env:RUNNER_TEMP 'pixelquay-msix-package'
+$packageOutput = Join-Path $env:RUNNER_TEMP 'tintfable-msix-package'
 
 python installer/windows/msix_qualification.py `
   --release release `
-  --artwork branding/pixelquay.png `
+  --artwork branding/tintfable.png `
   --source-root . `
   --source-commit $sourceCommit `
   --makeappx (Join-Path $sdkDirectory 'makeappx.exe') `
@@ -70,7 +70,7 @@ python installer/windows/msix_qualification.py `
   --output $packageOutput
 
 pwsh -NoLogo -NoProfile -File installer/windows/qualify-msix-install.ps1 `
-  -Package (Join-Path $packageOutput 'PixelQuay.Qualification_1.0.0.0_x64.msix') `
+  -Package (Join-Path $packageOutput 'TintFable.Qualification_1.0.1.0_x64.msix') `
   -PackageRecord (Join-Path $packageOutput 'package-record.json') `
   -SignTool (Join-Path $sdkDirectory 'signtool.exe') `
   -Output build-evidence/msix-install
@@ -86,7 +86,7 @@ Local implementation verification on macOS arm64 completed 16 cross-platform MSI
 
 It installs and queries the exact name, publisher, version, and x64 architecture. A first installed diagnostic launch redirects native stdout/stderr, verifies its package full name, requires a normal close, and fails on Fontconfig missing-configuration or fatal/exception output. It then launches through `IApplicationActivationManager` using the registered package-family AUMID. The returned process handle must produce `ERROR_INSUFFICIENT_BUFFER` and then success from `GetPackageFullName`, with the exact installed full name. The installed executable, `coreclr.dll`, `hostfxr.dll`, and runtime configuration must match their package-record hashes. Every loaded module must resolve either to the exact package installation root and payload hash or beneath the canonical Windows directory; packaged `coreclr.dll` must be observed at its exact path.
 
-The probe requires the `PixelQuay` main window, records up to 1,000 accessibility nodes, rejects named fatal/exception surfaces, notes whether actionable controls were positively exposed, attempts a screenshot, requires three seconds of stable window lifetime, and requests a normal zero-exit close. A title match alone never sets workflow acceptance. Missing actionable accessibility controls leaves `startup_limited=true` even when native startup passes.
+The current 1.0.1.0 probe requires the `TintFable` main window, records up to 1,000 accessibility nodes, rejects named fatal/exception surfaces, notes whether actionable controls were positively exposed, attempts a screenshot, requires three seconds of stable window lifetime, and requests a normal zero-exit close. A title match alone never sets workflow acceptance. Missing actionable accessibility controls leaves `startup_limited=true` even when native startup passes.
 
 Uninstall and exact registration removal are mandatory. Process, owned package, trusted certificate, personal certificate, and temporary signed-copy cleanup are attempted independently in all cases. Every cleanup error is retained beside the primary error and makes `installation_qualification_passed=false`. No PFX or private certificate is exported.
 

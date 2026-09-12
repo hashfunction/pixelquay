@@ -164,7 +164,7 @@ public static class OtherExtensions
 		StringBuilder details = new ();
 
 		details.AppendLine (Translations.GetString ("Could not open file: {0}", filename));
-		details.AppendLine (Translations.GetString ("PixelQuay supports the following palette formats:"));
+		details.AppendLine (Translations.GetString ("TintFable supports the following palette formats:"));
 
 		var extensions =
 			from format in supportedPalettes

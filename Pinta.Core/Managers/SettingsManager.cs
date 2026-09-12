@@ -114,6 +114,7 @@ public sealed class SettingsManager : ISettingsService
 	public string GetUserSettingsDirectory ()
 	{
 		var appdata_folder = Environment.GetFolderPath (Environment.SpecialFolder.ApplicationData, Environment.SpecialFolderOption.Create);
+		// TintFable retains the existing profile directory so updates preserve user data.
 		var settings_directory = Path.Combine (appdata_folder, "PixelQuay");
 
 		// If someone is getting this, they probably are going to need

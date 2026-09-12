@@ -1,12 +1,21 @@
-# PixelQuay Windows source handoff
+# TintFable Windows source handoff
 
 This source is based on Pinta 3.1.2, commit b3df1e579f6b3dd23193d2f6877deced20d8063b.
-PixelQuay executable: `PixelQuay.exe`; assembly: `PixelQuay.dll`; version: 1.0.0;
+TintFable executable: `TintFable.exe`; assembly: `TintFable.dll`; version: 1.0.1;
 application ID: `com.trieflow.PixelQuay`; publisher: Trieflow LLC.
-Canonical product, privacy and support: https://pixelquay.trieflow.com,
-https://pixelquay.trieflow.com/privacy, https://pixelquay.trieflow.com/support.
+Canonical product, privacy and support: https://tintfable.trieflow.com,
+https://tintfable.trieflow.com/privacy, https://tintfable.trieflow.com/support.
 
-Windows release remains unverified. The local macOS solution build and native
+The customer-facing release is TintFable 1.0.1 (package version 1.0.1.0).
+The assigned Store package identity remains `1659hashfunction.PixelQuay`; its
+existing publisher and application ID must be retained by the Store release
+controller. This source builds the separate disposable qualification identity
+`Trieflow.PixelQuay.Qualification`, publisher `CN=PixelQuay-CI-Qualification`,
+application ID `PixelQuay`. Neither identity is renamed to TintFable. The GTK
+application ID, `%APPDATA%/PixelQuay` profile, saved recipe key, and Inno Setup
+AppId/install directory are also retained for update and data compatibility.
+
+The renamed Windows release remains unverified. The local macOS solution build and native
 headless tests do not prove GTK launch, Windows file picking, MSIX installation,
 Store certification, HiDPI, signed packaging or licensing clearance.
 
@@ -17,7 +26,7 @@ dotnet restore Pinta.sln
 dotnet test Pinta.sln -c Release --no-restore
 dotnet publish Pinta/Pinta.csproj -p:BuildTranslations=true -p:MinGWFolder=C:\msys64\clang64 -c Release -r win-x64 --self-contained true -p:PublishDir=../release/bin/
 python installer/windows/inventory_managed.py --assets Pinta/obj/project.assets.json --output release/bin/licenses/managed-packages.json
-.\release\bin\PixelQuay.exe
+.\release\bin\TintFable.exe
 ```
 
 Install MSYS2's `mingw-w64-clang-x86_64-libadwaita` and
@@ -60,7 +69,7 @@ Recipe recovery acceptance: seed unreadable saved recipes, reopen the recipe dia
 and verify that Save/Delete are disabled and the recovery explanation is visible.
 The explicit **Back up unreadable recipes and start fresh** action must preserve
 the exact recipe JSON in a unique `export-recipes-recovery-*.json` file inside the
-PixelQuay settings directory before clearing the setting. A failed backup must
+established `PixelQuay` settings directory before clearing the setting. A failed backup must
 leave the original setting locked and unchanged. Retry rereads the application's
 current settings service; external file repairs require restarting the application.
 

@@ -6,19 +6,21 @@ $previousCi=$env:CI
 $adapted=Join-Path ([IO.Path]::GetTempPath()) ('pixelquay-preflight-adapter-'+[guid]::NewGuid().ToString('N')+'.ps1')
 $text=[IO.File]::ReadAllText($source).Replace('[Environment]::OSVersion.Platform -ne [PlatformID]::Win32NT -or $env:CI -ne ''true''','$env:CI -ne ''true''')
 . (Join-Path $PSScriptRoot 'consumer_ui.ps1')
+. (Join-Path $PSScriptRoot 'consumer_display.ps1')
 $text=$text.Replace(". (Join-Path `$PSScriptRoot 'consumer_ui.ps1')",'')
+$text=$text.Replace(". (Join-Path `$PSScriptRoot 'consumer_display.ps1')",'')
 [IO.File]::WriteAllText($adapted,$text)
 try {
   . $adapted -LibraryOnly
-  function global:Get-AppxPackage { [CmdletBinding()]param([string]$Name) return @() }
+  function global:Get-AppxPackage { [CmdletBinding()]param([string]$Name) if($Name -cne 'Trieflow.PixelQuay.Qualification'){throw 'Registration query changed compatibility identity'}; return @() }
   function Invoke-PixelQuayQualificationCore([Collections.IDictionary]$Operations) {
     & $Operations.Preflight | Out-Null
     $state=$Operations.Preflight.Module.SessionState.PSVariable.GetValue('state')
-    $state.consumerReceipt=@{fixture=$true}; $state.consumerRemoved=$true; $state.cleanClose=$true
+    $state.consumerDisplay.displayEvidence=@{restore_verified=$true}; $state.consumerReceipt=@{fixture=$true}; $state.consumerRemoved=$true; $state.cleanClose=$true
     [pscustomobject]@{installation_qualification_passed=$true;primary_error=$null;cleanup_errors=@()}
   }
   $env:CI='true'
-  foreach($variant in @('valid','zero','missing','empty','wrong-count','string','float','bool','extra','container-count')) {
+  foreach($variant in @('valid','zero','missing','empty','wrong-count','string','float','bool','extra','container-count','old-executable','old-version','renamed-package','renamed-app-id','renamed-publisher')) {
     $root=Join-Path ([IO.Path]::GetTempPath()) ('pixelquay-unpack-record-'+[guid]::NewGuid().ToString('N'))
     [IO.Directory]::CreateDirectory($root)|Out-Null
     try {
@@ -30,13 +32,18 @@ try {
       $record=[ordered]@{
         schemaVersion=1;qualificationIdentityOnly=$true;signed=$false;publicRelease=$false;licenseClearanceClaimed=$false;installationQualificationPassed=$false
         sourceCommit=('a'*40)
-        identity=[ordered]@{packageName='Trieflow.PixelQuay.Qualification';publisher='CN=PixelQuay-CI-Qualification';version='1.0.0.0';architecture='x64';applicationId='PixelQuay';executable='bin\PixelQuay.exe';deviceFamily='Windows.Desktop';minVersion='10.0.19041.0';maxVersionTested='10.0.26100.0';capability='runFullTrust'}
+        identity=[ordered]@{packageName='Trieflow.PixelQuay.Qualification';publisher='CN=PixelQuay-CI-Qualification';version='1.0.1.0';architecture='x64';applicationId='PixelQuay';executable='bin\TintFable.exe';deviceFamily='Windows.Desktop';minVersion='10.0.19041.0';maxVersionTested='10.0.26100.0';capability='runFullTrust'}
         makeAppx=[ordered]@{path=$make;sdkVersion='10.0.26100.0'}
         containerVerification=[ordered]@{verifiedPayloadFiles=1;package=[ordered]@{sha256=$sha}}
-        payload=[ordered]@{'bin/PixelQuay.exe'=[ordered]@{bytes=1;sha256=('b'*64)}}
+        payload=[ordered]@{'bin/TintFable.exe'=[ordered]@{bytes=1;sha256=('b'*64)}}
       }
       $record.unpackedVerification=[ordered]@{verifiedPayloadFiles=1}
       switch ($variant) {
+        'old-executable' { $record.identity.executable='bin\PixelQuay.exe' }
+        'old-version' { $record.identity.version='1.0.0.0' }
+        'renamed-package' { $record.identity.packageName='Trieflow.TintFable.Qualification' }
+        'renamed-app-id' { $record.identity.applicationId='TintFable' }
+        'renamed-publisher' { $record.identity.publisher='CN=TintFable-CI-Qualification' }
         'zero' { $record.unpackedVerification.verifiedPayloadFiles=0 }
         'missing' { $record.Remove('unpackedVerification') }
         'empty' { $record.unpackedVerification=[ordered]@{} }
@@ -53,6 +60,8 @@ try {
       try { Invoke-PixelQuayInstallQualification $package $recordPath $sign $out | Out-Null; $accepted=$true } catch { $failure=$_.Exception.Message }
       if ($variant -eq 'valid') {
         if (-not $accepted) { throw "Valid source payload/unpack count rejected: $failure" }
+      } elseif ($variant -in @('old-executable','old-version','renamed-package','renamed-app-id','renamed-publisher')) {
+        if ($accepted -or $failure -notmatch 'Qualification identity mismatch') { throw "Rename identity mismatch accepted or wrong failure: $variant $failure" }
       } elseif ($accepted -or $failure -notmatch 'unpack') { throw "Invalid $variant unpack evidence accepted or wrong failure: $failure" }
       Write-Output "PASS actual preflight unpack record: $variant"
     } finally { if(Test-Path $root){Remove-Item $root -Recurse -Force} }

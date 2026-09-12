@@ -36,8 +36,8 @@ internal sealed class MenuBarToggledAction : IActionHandler
 		// changes the option, not when the setting is loaded on startup!
 		await chrome.ShowMessageDialog (
 			chrome.MainWindow,
-			Translations.GetString ("Restart PixelQuay"),
-			Translations.GetString ("Please restart PixelQuay for the changes to take effect."));
+			Translations.GetString ("Restart TintFable"),
+			Translations.GetString ("Please restart TintFable for the changes to take effect."));
 	}
 }
 

@@ -12,6 +12,7 @@ import sys
 import tempfile
 import unittest
 import zipfile
+import xml.etree.ElementTree as ET
 
 import msix_qualification as msix
 import inventory_native
@@ -39,9 +40,9 @@ class QualificationFixture(unittest.TestCase):
 		(self.release / 'bin/licenses/managed').mkdir(parents=True)
 		(self.release / 'share/locale').mkdir(parents=True)
 		files = {
-			'bin/PixelQuay.exe': b'pixelquay executable',
-			'bin/PixelQuay.dll': b'pixelquay assembly',
-			'bin/PixelQuay.runtimeconfig.json': b'{"runtimeOptions":{}}',
+			'bin/TintFable.exe': b'pixelquay executable',
+			'bin/TintFable.dll': b'pixelquay assembly',
+			'bin/TintFable.runtimeconfig.json': b'{"runtimeOptions":{}}',
 			'bin/coreclr.dll': b'core clr',
 			'bin/hostfxr.dll': b'host fxr',
 			'bin/native.dll': b'native dependency',
@@ -77,7 +78,7 @@ class QualificationFixture(unittest.TestCase):
 		(self.release / 'bin/native-files.json').write_text(json.dumps(native), encoding='utf-8')
 		(self.release / 'bin/licenses/managed-packages.json').write_text(json.dumps(managed), encoding='utf-8')
 		self.artwork = self.root / 'pixelquay.png'
-		self.artwork.write_bytes((Path(__file__).resolve().parents[2] / 'branding/pixelquay.png').read_bytes())
+		self.artwork.write_bytes((Path(__file__).resolve().parents[2] / 'branding/tintfable.png').read_bytes())
 		self.commit = '1' * 40
 
 	def stage(self):
@@ -85,6 +86,24 @@ class QualificationFixture(unittest.TestCase):
 
 
 class ManifestTests(QualificationFixture):
+	def test_tintfable_manifest_renames_visible_contract_and_preserves_identity(self):
+		data=msix.create_manifest();root=ET.fromstring(data)
+		ns={'a':msix.APPX_NS,'uap':msix.UAP_NS}
+		self.assertEqual('TintFable',root.find('a:Properties/a:DisplayName',ns).text)
+		identity=root.find('a:Identity',ns)
+		self.assertEqual('Trieflow.PixelQuay.Qualification',identity.get('Name'))
+		self.assertEqual('CN=PixelQuay-CI-Qualification',identity.get('Publisher'))
+		self.assertEqual('1.0.1.0',identity.get('Version'))
+		application=root.find('a:Applications/a:Application',ns)
+		self.assertEqual('PixelQuay',application.get('Id'))
+		self.assertEqual(r'bin\TintFable.exe',application.get('Executable'))
+		self.assertEqual('TintFable',application.find('uap:VisualElements',ns).get('DisplayName'))
+		for original,changed in [(b'<DisplayName>TintFable</DisplayName>',b'<DisplayName>PixelQuay</DisplayName>'),
+				(b'DisplayName="TintFable"',b'DisplayName="PixelQuay"'),
+				(b'bin\\TintFable.exe',b'bin\\PixelQuay.exe'),(b'1.0.1.0',b'1.0.0.0'),
+				(b'Id="PixelQuay"',b'Id="TintFable"'),(b'Trieflow.PixelQuay.Qualification',b'Trieflow.TintFable.Qualification')]:
+			with self.subTest(changed=changed),self.assertRaises(ValueError):msix.validate_manifest(data.replace(original,changed))
+
 	def test_manifest_has_only_qualification_identity_and_required_capability(self):
 		manifest = msix.validate_manifest(msix.create_manifest())
 		self.assertEqual(msix.QUALIFICATION_IDENTITY, manifest)
@@ -97,7 +116,7 @@ class ManifestTests(QualificationFixture):
 		with self.assertRaisesRegex(ValueError, 'capabilit'):
 			msix.validate_manifest(data.replace(b'</Capabilities>', b'<rescap:Capability Name="internetClient"/></Capabilities>'))
 		with self.assertRaisesRegex(ValueError, 'executable'):
-			msix.validate_manifest(data.replace(b'bin\\PixelQuay.exe', b'other.exe'))
+			msix.validate_manifest(data.replace(b'bin\\TintFable.exe', b'other.exe'))
 		with self.assertRaisesRegex(ValueError, 'properties'):
 			msix.validate_manifest(data.replace(b'</Properties>', b'<DisplayName>PixelQuay</DisplayName></Properties>'))
 
@@ -342,7 +361,7 @@ class PackageVerificationTests(QualificationFixture):
 
 	def test_opc_decoding_rejects_aliases_traversal_and_malformed_names(self):
 		package, record = self.package()
-		for name in ('bin/%50ixelQuay.exe', 'bin%2FPixelQuay.exe', 'bin%5cPixelQuay.exe',
+		for name in ('bin/%54intFable.exe', 'bin%2FTintFable.exe', 'bin%5cTintFable.exe',
 			'bin/%2e%2e/escaped.txt', '%2Fabsolute.txt', 'share/bad%GG.txt',
 			'share/bad%.txt', 'share/bad%FF.txt', 'share/bad%00.txt'):
 			with self.subTest(name=name):
@@ -354,7 +373,7 @@ class PackageVerificationTests(QualificationFixture):
 					msix.verify_msix(changed, record['payload'])
 
 	def test_independent_zip_verifier_rejects_tamper_and_manifest_semantics(self):
-		package, record = self.package(('bin/PixelQuay.exe', b'tampered'))
+		package, record = self.package(('bin/TintFable.exe', b'tampered'))
 		with self.assertRaisesRegex(ValueError, 'hash|size'):
 			msix.verify_msix(package, record['payload'])
 		shutil.rmtree(self.root / 'stage')
@@ -368,7 +387,7 @@ class PackageVerificationTests(QualificationFixture):
 	def test_independent_zip_verifier_rejects_case_alias(self):
 		package, record = self.package()
 		with zipfile.ZipFile(package, 'a') as archive:
-			archive.writestr('BIN/PixelQuay.exe', b'alias')
+			archive.writestr('BIN/TintFable.exe', b'alias')
 		with self.assertRaisesRegex(ValueError, 'alias'):
 			msix.verify_msix(package, record['payload'])
 
@@ -421,7 +440,7 @@ class BuildFlowTests(QualificationFixture):
 		self.assertFalse(record['installationQualificationPassed'])
 		self.assertFalse(record['publicRelease'])
 		self.assertEqual(sha(self.makeappx.read_bytes()), record['makeAppx']['sha256'])
-		package = self.output / 'PixelQuay.Qualification_1.0.0.0_x64.msix'
+		package = self.output / 'TintFable.Qualification_1.0.1.0_x64.msix'
 		self.assertEqual(sha(package.read_bytes()), record['containerVerification']['package']['sha256'])
 
 	def test_build_rechecks_sdk_tool_and_refuses_existing_output(self):

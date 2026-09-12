@@ -352,9 +352,9 @@ public sealed class WorkspaceManager : IWorkspaceService
 	internal void ResetTitle ()
 	{
 		if (HasOpenDocuments)
-			chrome_manager.MainWindow.Title = $"{ActiveDocument.DisplayName}{(ActiveDocument.IsDirty ? "*" : "")} - PixelQuay";
+			chrome_manager.MainWindow.Title = $"{ActiveDocument.DisplayName}{(ActiveDocument.IsDirty ? "*" : "")} - TintFable";
 		else
-			chrome_manager.MainWindow.Title = "PixelQuay";
+			chrome_manager.MainWindow.Title = "TintFable";
 	}
 
 	public void SetActiveDocument (int index)
@@ -422,7 +422,7 @@ public sealed class WorkspaceManager : IWorkspaceService
 		StringBuilder body = new ();
 
 		body.AppendLine (Translations.GetString ("Could not open file: {0}", filename));
-		body.AppendLine (Translations.GetString ("PixelQuay supports the following file formats:"));
+		body.AppendLine (Translations.GetString ("TintFable supports the following file formats:"));
 
 		var extensions =
 			from format in image_formats.Formats

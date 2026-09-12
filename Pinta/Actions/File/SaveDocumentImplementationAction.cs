@@ -204,7 +204,7 @@ internal sealed class SaveDocumentImplmentationAction : IActionHandler
 
 			await chrome.ShowMessageDialog (
 				parent,
-				Translations.GetString ("PixelQuay does not support saving images in this file format."),
+				Translations.GetString ("TintFable does not support saving images in this file format."),
 				file.GetDisplayName ());
 
 			return false;

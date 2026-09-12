@@ -34,8 +34,8 @@ foreach ($item in @('icons','locale')) {
   if (Test-Path $from) { Copy-Item -Recurse -Force "$from/*" "release/share/$item"; Remove-Item -Recurse $from }
 }
 Copy-Item installer/macos/hicolor.index.theme release/share/icons/hicolor/index.theme
-$expected = 'release/bin/PixelQuay.exe'
-if (-not (Test-Path $expected)) { throw 'PixelQuay executable missing.' }
+$expected = 'release/bin/TintFable.exe'
+if (-not (Test-Path $expected)) { throw 'TintFable executable missing.' }
 Get-ChildItem -Recurse -Filter packages.lock.json | ForEach-Object {
   $relative = [IO.Path]::GetRelativePath((Get-Location).Path, $_.FullName)
   $target = Join-Path 'build-evidence/nuget-locks' $relative
@@ -54,7 +54,7 @@ $pixelProcessOwned=$true
   do {
     Start-Sleep -Milliseconds 500
     $process.Refresh()
-    if ($process.HasExited) { throw "PixelQuay exited during startup: $($process.ExitCode)" }
+    if ($process.HasExited) { throw "TintFable exited during startup: $($process.ExitCode)" }
   } until ($process.MainWindowHandle -ne 0 -or (Get-Date) -gt $deadline)
   if ($process.MainWindowHandle -eq 0) { throw 'No native main window appeared.' }
   $packageRoot = (Resolve-Path 'release').Path + [IO.Path]::DirectorySeparatorChar

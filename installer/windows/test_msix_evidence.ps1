@@ -3,7 +3,7 @@
 $ErrorActionPreference = 'Stop'
 Set-StrictMode -Version Latest
 . (Join-Path $PSScriptRoot 'qualify-msix-install.ps1') -LibraryOnly
-foreach ($scenario in @('missing','changed','changed-after-success','success','write-failure')) {
+foreach ($scenario in @('missing','changed','changed-after-success','success','missing-display','failed-display','write-failure')) {
     $probeRoot = Join-Path ([IO.Path]::GetTempPath()) ('pixelquay-evidence-test-' + [guid]::NewGuid().ToString('N'))
     New-Item -ItemType Directory -Path $probeRoot | Out-Null
     try {
@@ -16,8 +16,10 @@ foreach ($scenario in @('missing','changed','changed-after-success','success','w
             if ($scenario -eq 'missing') { Remove-Item -LiteralPath $captured.package }
             if ($scenario -in @('changed','changed-after-success')) { [IO.File]::WriteAllText($captured.package, 'changed bytes') }
             if ($scenario -eq 'write-failure') { [IO.File]::WriteAllText((Join-Path $probeRoot 'installation-qualification.json'), 'preserve existing evidence') }
-            if ($scenario -in @('success','changed-after-success')) {
-                $captured.consumerReceipt=@{fixture=$true}; $captured.consumerRemoved=$true; $captured.cleanClose=$true
+            if ($scenario -in @('success','changed-after-success','missing-display','failed-display')) {
+                $captured.consumerDisplay.displayEvidence=@{restore_verified=$true}; $captured.consumerReceipt=@{fixture=$true}; $captured.consumerRemoved=$true; $captured.cleanClose=$true
+                if ($scenario -eq 'missing-display') { $captured.consumerDisplay.displayEvidence=$null }
+                if ($scenario -eq 'failed-display') { $captured.consumerDisplay.displayEvidence.restore_verified=$false }
                 return [pscustomobject]@{ installation_qualification_passed=$true; primary_error=$null; cleanup_errors=@() }
             }
             return [pscustomobject]@{ installation_qualification_passed=$false; primary_error='original activation failure'; cleanup_errors=@('original uninstall failure') }
@@ -34,10 +36,14 @@ foreach ($scenario in @('missing','changed','changed-after-success','success','w
         $evidence = Get-Content -LiteralPath $evidencePath -Raw | ConvertFrom-Json
         if ($scenario -eq 'success') {
             if ($failure -or -not $evidence.installation_qualification_passed -or -not $evidence.unsigned_package_unchanged -or $evidence.evidence_errors.Count) { throw 'Unchanged success control did not pass.' }
+            if (-not $evidence.consumer_native_display.restore_verified) { throw 'Final receipt lost verified display restoration.' }
+        } elseif ($scenario -in @('missing-display','failed-display')) {
+            if (-not $failure -or $evidence.installation_qualification_passed -or -not $evidence.unsigned_package_unchanged -or
+                $evidence.evidence_errors.Count -ne 1 -or $evidence.evidence_errors[0] -notmatch 'original display restoration') { throw 'Missing or false display restoration evidence allowed success.' }
         } else {
             if (-not $failure -or $evidence.installation_qualification_passed -or $evidence.unsigned_package_unchanged -or $evidence.evidence_errors.Count -ne 1) { throw "Changed/missing source must fail in $scenario" }
             if ($scenario -ne 'changed-after-success' -and ($evidence.primary_error -ne 'original activation failure' -or $evidence.cleanup_errors[0] -ne 'original uninstall failure')) { throw 'Original primary/cleanup failures were lost.' }
         }
     } finally { Remove-Item -LiteralPath $probeRoot -Recurse -Force }
 }
-Write-Output 'PASS: five real final-hash and exclusive-evidence reporting scenarios.'
+Write-Output 'PASS: seven real final-hash, display restoration and exclusive-evidence reporting scenarios.'

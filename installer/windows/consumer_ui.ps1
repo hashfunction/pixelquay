@@ -121,9 +121,28 @@ function Set-PixelQuayPickerPath($Ui,[string]$Title,[string]$Path) {
     Send-PixelQuayFileNameKeys $Ui $scope $focus @(13)
     Wait-PixelQuayConsumer { $scope.hwnd -notin [PixelQuayQualification.ConsumerNative]::Windows($Ui.main) } 'native picker disappearance' | Out-Null
 }
+function Get-PixelQuayGeometry($Ui,$Scope,[string]$Stage) {
+    Assert-PixelQuayScope $Ui $Scope
+    if ($Ui.record.geometry.Count -ge 64) { throw 'Owned geometry evidence exceeded bound' }
+    $geometry=[PixelQuayQualification.ConsumerNative]::Geometry($Ui.process,$Ui.main,$Scope.process,$Scope.hwnd,$Scope.title)
+    $Ui.record.geometry.Add(@{stage=$Stage;hwnd=$Scope.hwnd;pid=$Scope.process.Id;title=$Scope.title;
+        window=$geometry.Window;desktop=$geometry.Desktop;work_area=$geometry.WorkArea;dpi=$geometry.Dpi})
+    return $geometry
+}
+function Set-PixelQuayMainPlacement($Ui,$Scope) {
+    $null=Get-PixelQuayGeometry $Ui $Scope 'before-placement'
+    [PixelQuayQualification.ConsumerNative]::Place($Ui.process,$Ui.main,$Scope.process,$Scope.hwnd,$Scope.title)
+    Wait-PixelQuayConsumer {
+        $geometry=[PixelQuayQualification.ConsumerNative]::Geometry($Ui.process,$Ui.main,$Scope.process,$Scope.hwnd,$Scope.title)
+        $null=[PixelQuayQualification.ConsumerNative]::PlacedBounds($geometry)
+        return $true
+    } 'actual readable owned window placement' | Out-Null
+    $null=Get-PixelQuayGeometry $Ui $Scope 'after-placement'
+}
 function Save-PixelQuayObservation($Ui,$Scope,[string]$Stage) {
     Assert-PixelQuayScope $Ui $Scope
-    $before=[PixelQuayQualification.ConsumerNative]::Bounds($Ui.process,$Ui.main,$Scope.process,$Scope.hwnd,$Scope.title)
+    $geometry=Get-PixelQuayGeometry $Ui $Scope $Stage
+    $before=[PixelQuayQualification.ConsumerNative]::VisibleBounds($geometry)
     $bitmap=[Drawing.Bitmap]::new($before[2],$before[3]); $graphics=[Drawing.Graphics]::FromImage($bitmap)
     $stream=[IO.MemoryStream]::new()
     try {
@@ -159,22 +178,29 @@ function Set-PixelQuayRecipeField($Ui,$Scope,[int]$Mnemonic,[string]$Text) {
     Send-PixelQuayKeys $Ui $Scope @(17,65)
     Send-PixelQuayText $Ui $Scope $Text
 }
-function Invoke-PixelQuayConsumerWorkflow([Diagnostics.Process]$Process,[string]$StatePath,[string]$Output) {
+function Invoke-PixelQuayConsumerWorkflow([Diagnostics.Process]$Process,[string]$StatePath,[string]$Output,[Collections.IDictionary]$DisplayState) {
     if (-not ('PixelQuayQualification.ConsumerNative' -as [type])) { Add-Type -Path (Join-Path $PSScriptRoot 'consumer_native.cs') }
     Add-Type -AssemblyName UIAutomationClient,UIAutomationTypes,System.Drawing
     $fixture=Get-Content -LiteralPath $StatePath -Raw | ConvertFrom-Json -AsHashtable
     $Process.Refresh(); $retained=$Process.SafeHandle
     if ($retained.IsClosed -or $retained.IsInvalid -or $Process.HasExited) { throw 'Broker lifetime is unavailable' }
     $ui=@{process=$Process;main=[long]$Process.MainWindowHandle;brokers=@{};output=$Output;
-        record=@{schema='pixelquay-consumer-workflow-v1';process_id=$Process.Id;phase='normal-consumer-ui-actions';picker_fields=[Collections.Generic.List[object]]::new();picker_trees=[Collections.Generic.List[object]]::new();observations=[Collections.Generic.List[object]]::new()}}
+        record=@{schema='pixelquay-consumer-workflow-v1';process_id=$Process.Id;phase='normal-consumer-ui-actions';geometry=[Collections.Generic.List[object]]::new();picker_fields=[Collections.Generic.List[object]]::new();picker_trees=[Collections.Generic.List[object]]::new();observations=[Collections.Generic.List[object]]::new()}}
     try {
-        $main=Get-PixelQuayMain $ui 'Unsaved Image 1 - PixelQuay'
-        $main=Open-PixelQuayImage $ui $main.title (Join-Path $fixture.root 'source.png') 'source.png - PixelQuay'
+        $main=Get-PixelQuayMain $ui 'Unsaved Image 1 - TintFable'
+        $null=Get-PixelQuayGeometry $ui $main 'before-display-preparation'
+        if ($null -eq $DisplayState) { throw 'Retained outer display restoration state is required' }
+        Start-PixelQuayConsumerDisplay $DisplayState
+        # The outer qualification owner restores the retained original mode
+        # after its normal-close/owned-process cleanup, including failures.
+        $main=Get-PixelQuayMain $ui 'Unsaved Image 1 - TintFable'
+        Set-PixelQuayMainPlacement $ui $main
+        $main=Open-PixelQuayImage $ui $main.title (Join-Path $fixture.root 'source.png') 'source.png - TintFable'
         Save-PixelQuayObservation $ui $main 'opened'
         Send-PixelQuayKeys $ui $main @(17,72)
-        $main=Get-PixelQuayMain $ui 'source.png* - PixelQuay'
+        $main=Get-PixelQuayMain $ui 'source.png* - TintFable'
         Save-PixelQuayObservation $ui $main 'rotated'
-        $main=Save-PixelQuayImage $ui $main.title (Join-Path $fixture.root 'edited.png') 'edited.png - PixelQuay'
+        $main=Save-PixelQuayImage $ui $main.title (Join-Path $fixture.root 'edited.png') 'edited.png - TintFable'
         $ui.record.edited=Invoke-PixelQuayFiles edited $StatePath
         Send-PixelQuayKeys $ui $main @(17,18,69)
         $recipe=Wait-PixelQuayConsumer { Get-PixelQuayScope $ui 'Export with Recipe' } 'recipe dialog'
@@ -187,7 +213,7 @@ function Invoke-PixelQuayConsumerWorkflow([Diagnostics.Process]$Process,[string]
         Send-PixelQuayKeys $ui $recipe @(32)
         Save-PixelQuayObservation $ui $recipe 'recipe-saved'
         Send-PixelQuayKeys $ui $recipe @(27)
-        $main=Get-PixelQuayMain $ui 'edited.png - PixelQuay'
+        $main=Get-PixelQuayMain $ui 'edited.png - TintFable'
         Send-PixelQuayKeys $ui $main @(17,18,69)
         $recipe=Wait-PixelQuayConsumer { Get-PixelQuayScope $ui 'Export with Recipe' } 'saved recipe reloaded in a new dialog'
         Save-PixelQuayObservation $ui $recipe 'recipe-reloaded'
@@ -204,11 +230,11 @@ function Invoke-PixelQuayConsumerWorkflow([Diagnostics.Process]$Process,[string]
         $completion=Wait-PixelQuayConsumer { Get-PixelQuayScope $ui '' -Completion } 'owned export completion dialog'
         Save-PixelQuayObservation $ui $completion 'export-completed'
         Send-PixelQuayKeys $ui $completion @(13)
-        $main=Get-PixelQuayMain $ui 'edited.png - PixelQuay'
-        $main=Open-PixelQuayImage $ui $main.title (Join-Path $fixture.root 'edited-proof.png') 'edited-proof.png - PixelQuay'
+        $main=Get-PixelQuayMain $ui 'edited.png - TintFable'
+        $main=Open-PixelQuayImage $ui $main.title (Join-Path $fixture.root 'edited-proof.png') 'edited-proof.png - TintFable'
         Save-PixelQuayObservation $ui $main 'reopened'
         Send-PixelQuayKeys $ui $main @(17,72)
-        $main=Save-PixelQuayImage $ui 'edited-proof.png* - PixelQuay' (Join-Path $fixture.root 'reopened.png') 'reopened.png - PixelQuay'
+        $main=Save-PixelQuayImage $ui 'edited-proof.png* - TintFable' (Join-Path $fixture.root 'reopened.png') 'reopened.png - TintFable'
         $ui.record.reopened=Invoke-PixelQuayFiles reopened $StatePath
         Save-PixelQuayObservation $ui $main 'reopened-witness'
         $ui.record.ui_actions_completed=$true
@@ -222,6 +248,7 @@ function Invoke-PixelQuayConsumerWorkflow([Diagnostics.Process]$Process,[string]
         } catch { $ui.record.failure_observation_error=$_.Exception.Message }
         throw
     } finally {
+        if ($null -ne $DisplayState) { $ui.record.native_display=$DisplayState.displayEvidence }
         foreach ($broker in $ui.brokers.Values) { $broker.Dispose() }
         try { Write-NewUtf8Json (Join-Path $Output 'consumer-workflow.json') $ui.record }
         catch {

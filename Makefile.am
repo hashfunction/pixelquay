@@ -18,7 +18,7 @@ PINTA_INSTALL_OPTS = \
 
 PINTA_ASSEMBLY_PC = $(srcdir)/$(PACKAGE_NAME).pc
 
-RELEASE_FILE = $(PACKAGE)-$(VERSION)
+RELEASE_FILE = TintFable-1.0.1
 
 #magic automake variables
 
@@ -32,24 +32,24 @@ all: publish
 
 # target: run - Launch the uninstalled copy
 run: build
-	$(DOTNET_CMD) build/bin/Pinta.dll
+	$(DOTNET_CMD) build/bin/TintFable.dll
 
 # target: help - Display callable targets.
 help:
 	egrep "^# target:" Makefile | sed 's/^# target:/make/'
 
-build/bin/Pinta.dll: Pinta.sln
+build/bin/TintFable.dll: Pinta.sln
 	cd $(srcdir) && $(DOTNET_CMD) build Pinta.sln $(PINTA_BUILD_OPTS)
 
-# target: build - Build Pinta.
-build: build/bin/Pinta.dll
+# target: build - Build TintFable.
+build: build/bin/TintFable.dll
 
 # Note we only publish the Pinta project, not the whole solution, to avoid races publishing to the same folder (#1241)
-publish/Pinta.dll: Pinta.sln
+publish/TintFable.dll: Pinta.sln
 	cd $(srcdir) && $(DOTNET_CMD) publish Pinta/Pinta.csproj $(PINTA_BUILD_OPTS) --self-contained false -p:PublishDir=$(abs_srcdir)/publish
 
-# target: publish - Build Pinta for deployment.
-publish: publish/Pinta.dll
+# target: publish - Build TintFable for deployment.
+publish: publish/TintFable.dll
 
 test: build
 	$(DOTNET_CMD) test Pinta.sln $(PINTA_BUILD_OPTS)

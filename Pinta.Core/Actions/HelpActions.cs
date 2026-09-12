@@ -50,7 +50,7 @@ public sealed class HelpActions
 
 		Website = new Command (
 			"website",
-			Translations.GetString ("PixelQuay Website"),
+			Translations.GetString ("TintFable Website"),
 			null,
 			Resources.Icons.HelpWebsite);
 
@@ -104,21 +104,21 @@ public sealed class HelpActions
 
 	private async void Bugs_Activated (object sender, EventArgs e)
 	{
-		await system.LaunchUri ("https://pixelquay.trieflow.com/support");
+		await system.LaunchUri ("https://tintfable.trieflow.com/support");
 	}
 
 	private async void DisplayHelp (object sender, EventArgs e)
 	{
-		await system.LaunchUri ("https://pixelquay.trieflow.com/support");
+		await system.LaunchUri ("https://tintfable.trieflow.com/support");
 	}
 
 	private async void Translate_Activated (object sender, EventArgs e)
 	{
-		await system.LaunchUri ("https://pixelquay.trieflow.com/support");
+		await system.LaunchUri ("https://tintfable.trieflow.com/support");
 	}
 
 	private async void Website_Activated (object sender, EventArgs e)
 	{
-		await system.LaunchUri ("https://pixelquay.trieflow.com");
+		await system.LaunchUri ("https://tintfable.trieflow.com");
 	}
 }

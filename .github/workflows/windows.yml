@@ -1,4 +1,4 @@
-name: PixelQuay Windows qualification
+name: TintFable Windows qualification
 on:
   workflow_dispatch:
   push:
@@ -48,7 +48,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
-          name: PixelQuay-Windows-qualification
+          name: TintFable-Windows-qualification
           path: |
             build-evidence/*.txt
             build-evidence/*.json
@@ -56,7 +56,7 @@ jobs:
             build-evidence/nuget-locks/**/packages.lock.json
             release/bin/native-files.json
             release/bin/licenses/managed-packages.json
-            ${{ runner.temp }}/pixelquay-msix-package/package-record.json
+            ${{ runner.temp }}/tintfable-msix-package/package-record.json
             build-evidence/msix-install/installation-qualification.json
             build-evidence/msix-install/loaded-modules.json
             build-evidence/msix-install/accessible-window-tree.json

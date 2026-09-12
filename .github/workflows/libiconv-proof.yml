@@ -1,4 +1,4 @@
-name: PixelQuay retained libiconv DLL proof
+name: TintFable retained libiconv DLL proof
 on:
   workflow_dispatch:
 permissions:
@@ -37,7 +37,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
-          name: PixelQuay-libiconv-proof
+          name: TintFable-libiconv-proof
           path: |
             build-evidence/libiconv/*.json
             build-evidence/libiconv/*.txt

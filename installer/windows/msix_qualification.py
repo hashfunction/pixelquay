@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build and independently verify a disposable PixelQuay qualification MSIX.
+"""Build and independently verify a disposable TintFable qualification MSIX.
 
 Copyright 2026 Trieflow LLC. MIT licensed. The installation-flow design retains
 attribution for the MIT ReticleQuay helper in RETICLEQUAY-MIT.txt.
@@ -34,19 +34,19 @@ ET.register_namespace('rescap', RESCAP_NS)
 QUALIFICATION_IDENTITY = {
 	'packageName': 'Trieflow.PixelQuay.Qualification',
 	'publisher': 'CN=PixelQuay-CI-Qualification',
-	'version': '1.0.0.0',
+	'version': '1.0.1.0',
 	'architecture': 'x64',
 	'applicationId': 'PixelQuay',
-	'executable': r'bin\PixelQuay.exe',
+	'executable': r'bin\TintFable.exe',
 	'deviceFamily': 'Windows.Desktop',
 	'minVersion': '10.0.19041.0',
 	'maxVersionTested': '10.0.26100.0',
 	'capability': 'runFullTrust',
 }
 REQUIRED_RELEASE_FILES = (
-	'bin/PixelQuay.exe',
-	'bin/PixelQuay.dll',
-	'bin/PixelQuay.runtimeconfig.json',
+	'bin/TintFable.exe',
+	'bin/TintFable.dll',
+	'bin/TintFable.runtimeconfig.json',
 	'bin/coreclr.dll',
 	'bin/hostfxr.dll',
 	'bin/native-files.json',
@@ -279,8 +279,8 @@ def create_manifest():
 	})
 	properties = ET.SubElement(package, f'{{{APPX_NS}}}Properties')
 	for name, value in (
-		('DisplayName', 'PixelQuay'), ('PublisherDisplayName', 'Trieflow LLC'),
-		('Description', 'PixelQuay qualification package'), ('Logo', r'Assets\StoreLogo.png'),
+		('DisplayName', 'TintFable'), ('PublisherDisplayName', 'Trieflow LLC'),
+		('Description', 'TintFable qualification package'), ('Logo', r'Assets\StoreLogo.png'),
 	):
 		ET.SubElement(properties, f'{{{APPX_NS}}}{name}').text = value
 	resources = ET.SubElement(package, f'{{{APPX_NS}}}Resources')
@@ -296,7 +296,7 @@ def create_manifest():
 		'EntryPoint': 'Windows.FullTrustApplication',
 	})
 	ET.SubElement(application, f'{{{UAP_NS}}}VisualElements', {
-		'DisplayName': 'PixelQuay', 'Description': 'PixelQuay qualification package',
+		'DisplayName': 'TintFable', 'Description': 'TintFable qualification package',
 		'BackgroundColor': '#142e38', 'Square150x150Logo': r'Assets\Square150x150Logo.png',
 		'Square44x44Logo': r'Assets\Square44x44Logo.png',
 	})
@@ -335,8 +335,8 @@ def validate_manifest(data):
 		raise ValueError('Unexpected qualification identity')
 	properties = _one(root, f'{{{APPX_NS}}}Properties', 'properties')
 	expected_properties = {
-		'DisplayName': 'PixelQuay', 'PublisherDisplayName': 'Trieflow LLC',
-		'Description': 'PixelQuay qualification package', 'Logo': r'Assets\StoreLogo.png',
+		'DisplayName': 'TintFable', 'PublisherDisplayName': 'Trieflow LLC',
+		'Description': 'TintFable qualification package', 'Logo': r'Assets\StoreLogo.png',
 	}
 	if len(properties) != len(expected_properties) \
 		or {child.tag.rsplit('}', 1)[-1]: child.text for child in properties} != expected_properties \
@@ -356,7 +356,7 @@ def validate_manifest(data):
 		raise ValueError('Unexpected manifest executable/application')
 	visual = _one(application, f'{{{UAP_NS}}}VisualElements', 'visual elements')
 	if len(application) != 1 or visual.attrib != {
-		'DisplayName': 'PixelQuay', 'Description': 'PixelQuay qualification package',
+		'DisplayName': 'TintFable', 'Description': 'TintFable qualification package',
 		'BackgroundColor': '#142e38', 'Square150x150Logo': r'Assets\Square150x150Logo.png',
 		'Square44x44Logo': r'Assets\Square44x44Logo.png',
 	} or len(visual):
@@ -641,7 +641,7 @@ def build_qualification(release, artwork, source_commit, makeappx, sdk_version, 
 		tool = _tool_record(makeappx, sdk_version)
 		stage = temporary / 'stage'
 		record = stage_release(release, artwork, stage, source_commit)
-		package = temporary / 'PixelQuay.Qualification_1.0.0.0_x64.msix'
+		package = temporary / 'TintFable.Qualification_1.0.1.0_x64.msix'
 		unpacked = temporary / 'unpacked'
 		commands = [
 			[str(makeappx), 'pack', '/d', str(stage), '/p', str(package), '/v', '/h', 'SHA256'],

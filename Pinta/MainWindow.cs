@@ -54,7 +54,7 @@ internal sealed class MainWindow
 		this.app = app;
 
 		// Set the human-readable application name, used by e.g. gtk_recent_manager_add_item().
-		GLib.Functions.SetApplicationName (Translations.GetString ("PixelQuay"));
+		GLib.Functions.SetApplicationName (Translations.GetString ("TintFable"));
 	}
 
 	/// <summary>
@@ -318,7 +318,7 @@ internal sealed class MainWindow
 				extension.Initialize ();
 			} catch (Exception e) {
 				// Translators: {0} is the name of an add-in.
-				string body = Translations.GetString ("The '{0}' add-in may not be compatible with this version of PixelQuay", args.ExtensionNode.Addin.Id);
+				string body = Translations.GetString ("The '{0}' add-in may not be compatible with this version of TintFable", args.ExtensionNode.Addin.Id);
 				_ = PintaCore.Chrome.ShowErrorDialog (
 					PintaCore.Chrome.MainWindow,
 					Translations.GetString ("Failed to initialize add-in"),
@@ -342,7 +342,7 @@ internal sealed class MainWindow
 		window_shell = new WindowShell (
 			app,
 			"PixelQuay.GenericWindow",
-			"PixelQuay",
+			"TintFable",
 			width,
 			height,
 			useMenuBar: IsUsingMenuBar (),

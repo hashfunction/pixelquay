@@ -52,7 +52,7 @@ function Invoke-PixelQuayQualificationCore([Collections.IDictionary]$Operations)
     $state.signedCopy = 'owned-pixelquay-test-copy.msix'
     $state.preflightPackageFullNames = @()
     $payload = [ordered]@{}
-    foreach ($relative in @('bin/PixelQuay.exe','bin/coreclr.dll','bin/hostfxr.dll','bin/PixelQuay.runtimeconfig.json')) {
+    foreach ($relative in @('bin/TintFable.exe','bin/coreclr.dll','bin/hostfxr.dll','bin/TintFable.runtimeconfig.json')) {
         $path = Join-Path $fixture.directory ($relative -replace '/', [IO.Path]::DirectorySeparatorChar)
         New-Item -ItemType Directory -Path (Split-Path $path -Parent) -Force | Out-Null
         [IO.File]::WriteAllText($path, "fixture:$relative")
@@ -62,7 +62,7 @@ function Invoke-PixelQuayQualificationCore([Collections.IDictionary]$Operations)
         }
     }
     $state.record = [pscustomobject]@{ sourceCommit = ('a' * 40); payload = [pscustomobject]$payload }
-    $state.consumerReceipt=@{fixture=$true}; $state.consumerRemoved=$true; $state.cleanClose=$true
+    $state.consumerDisplay.displayEvidence=@{restore_verified=$true}; $state.consumerReceipt=@{fixture=$true}; $state.consumerRemoved=$true; $state.cleanClose=$true
     $Operations.Preflight = { if (@(Get-AppxPackage -Name 'Trieflow.PixelQuay.Qualification').Count) { throw 'Fixture must start empty' } }
     foreach ($name in @('PrepareConsumerFixture','PrepareSignedCopy','CaptureInstalledStderr','ActivateAndVerify','ConsumerWorkflow','CloseCleanly','StopOwnedProcess','RemoveConsumerFixture','RemoveTrustedCertificate','RemovePersonalCertificate','RemoveTemporaryFiles')) {
         $Operations[$name] = {}
@@ -89,12 +89,12 @@ foreach ($scenario in @('failed-add-race','ambiguous-add','wrong-architecture','
     New-Item -ItemType Directory -Path $temporary | Out-Null
     try {
         $owned = [pscustomobject]@{
-            Name='Trieflow.PixelQuay.Qualification'; Publisher='CN=PixelQuay-CI-Qualification'; Version='1.0.0.0'; Architecture='X64'
-            PackageFullName='Trieflow.PixelQuay.Qualification_1.0.0.0_x64__fixture'; PackageFamilyName='Trieflow.PixelQuay.Qualification_fixture'; InstallLocation=$temporary
+            Name='Trieflow.PixelQuay.Qualification'; Publisher='CN=PixelQuay-CI-Qualification'; Version='1.0.1.0'; Architecture='X64'
+            PackageFullName='Trieflow.PixelQuay.Qualification_1.0.1.0_x64__fixture'; PackageFamilyName='Trieflow.PixelQuay.Qualification_fixture'; InstallLocation=$temporary
         }
         $foreign = [pscustomobject]@{
             Name=$owned.Name; Publisher=$owned.Publisher; Version=$owned.Version; Architecture='Arm64'
-            PackageFullName='Trieflow.PixelQuay.Qualification_1.0.0.0_arm64__fixture'; PackageFamilyName=$owned.PackageFamilyName; InstallLocation=$temporary
+            PackageFullName='Trieflow.PixelQuay.Qualification_1.0.1.0_arm64__fixture'; PackageFamilyName=$owned.PackageFamilyName; InstallLocation=$temporary
         }
         # The racing registration has the exact qualification tuple and full name.
         # A tuple match cannot establish ownership after our Add failed.

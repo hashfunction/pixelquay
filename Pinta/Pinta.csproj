@@ -2,8 +2,8 @@
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <AssemblyName>PixelQuay</AssemblyName>
-    <ApplicationIcon>PixelQuay.ico</ApplicationIcon>
+    <AssemblyName>TintFable</AssemblyName>
+    <ApplicationIcon>TintFable.ico</ApplicationIcon>
     <OutputPath>..\build\bin</OutputPath>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
 

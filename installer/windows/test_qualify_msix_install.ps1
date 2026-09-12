@@ -19,7 +19,7 @@ function New-FakeOperations([string]$PrimaryFailure, [string[]]$CleanupFailures,
             if ($PrimaryFailure -eq $operationName) { throw "primary:$operationName" }
         }.GetNewClosure()
     }
-    foreach ($name in @('StopOwnedProcess','RemoveConsumerFixture','RemoveOwnedPackage','RemoveTrustedCertificate','RemovePersonalCertificate','RemoveTemporaryFiles')) {
+    foreach ($name in @('StopOwnedProcess','RestoreConsumerDisplay','RemoveConsumerFixture','RemoveOwnedPackage','RemoveTrustedCertificate','RemovePersonalCertificate','RemoveTemporaryFiles')) {
         $operationName = $name
         $operations[$name] = {
             $global:PixelQuayQualificationTestCalls.Add($operationName)
@@ -34,7 +34,7 @@ $result = Invoke-PixelQuayQualificationCore -Operations (New-FakeOperations '' @
 Assert-True $result.installation_qualification_passed 'success path must pass'
 Assert-True (-not $result.primary_error) 'success path must have no primary error'
 Assert-True ($result.cleanup_errors.Count -eq 0) 'success path must have no cleanup errors'
-Assert-True (($global:PixelQuayQualificationTestCalls -join ',') -eq 'Preflight,PrepareConsumerFixture,PrepareSignedCopy,Install,CaptureInstalledStderr,ActivateAndVerify,ConsumerWorkflow,CloseCleanly,UninstallAndVerify,StopOwnedProcess,RemoveConsumerFixture,RemoveOwnedPackage,RemoveTrustedCertificate,RemovePersonalCertificate,RemoveTemporaryFiles') 'all qualification and cleanup steps must run in order'
+Assert-True (($global:PixelQuayQualificationTestCalls -join ',') -eq 'Preflight,PrepareConsumerFixture,PrepareSignedCopy,Install,CaptureInstalledStderr,ActivateAndVerify,ConsumerWorkflow,CloseCleanly,UninstallAndVerify,StopOwnedProcess,RestoreConsumerDisplay,RemoveConsumerFixture,RemoveOwnedPackage,RemoveTrustedCertificate,RemovePersonalCertificate,RemoveTemporaryFiles') 'all qualification and cleanup steps must run in order'
 
 $result = Invoke-PixelQuayQualificationCore -Operations (New-FakeOperations 'ActivateAndVerify' @('RemoveOwnedPackage','RemovePersonalCertificate'))
 Assert-True (-not $result.installation_qualification_passed) 'primary and cleanup failure must fail'
@@ -42,7 +42,7 @@ Assert-True ($result.primary_error -eq 'primary:ActivateAndVerify') 'primary fai
 Assert-True ($result.cleanup_errors.Count -eq 2) 'all cleanup failures must be retained'
 Assert-True (($result.cleanup_errors -join '|') -match 'RemoveOwnedPackage.*RemovePersonalCertificate') 'cleanup failures must identify their operations'
 Assert-True (-not ($global:PixelQuayQualificationTestCalls -contains 'CloseCleanly')) 'later primary operations must not run after failure'
-foreach ($cleanup in @('StopOwnedProcess','RemoveConsumerFixture','RemoveOwnedPackage','RemoveTrustedCertificate','RemovePersonalCertificate','RemoveTemporaryFiles')) {
+foreach ($cleanup in @('StopOwnedProcess','RestoreConsumerDisplay','RemoveConsumerFixture','RemoveOwnedPackage','RemoveTrustedCertificate','RemovePersonalCertificate','RemoveTemporaryFiles')) {
     Assert-True ($global:PixelQuayQualificationTestCalls -contains $cleanup) "cleanup operation $cleanup must still run"
 }
 
@@ -53,7 +53,7 @@ Assert-True ($result.cleanup_errors.Count -eq 1) 'cleanup-only failure must be r
 
 $result = Invoke-PixelQuayQualificationCore -Operations (New-FakeOperations 'Preflight' @())
 Assert-True (-not $result.installation_qualification_passed) 'preexisting-install/preflight failure must fail qualification'
-Assert-True (($global:PixelQuayQualificationTestCalls -join ',') -eq 'Preflight,StopOwnedProcess,RemoveConsumerFixture,RemoveOwnedPackage,RemoveTrustedCertificate,RemovePersonalCertificate,RemoveTemporaryFiles') 'preflight failure must skip mutation and still execute safe cleanup adapters'
+Assert-True (($global:PixelQuayQualificationTestCalls -join ',') -eq 'Preflight,StopOwnedProcess,RestoreConsumerDisplay,RemoveConsumerFixture,RemoveOwnedPackage,RemoveTrustedCertificate,RemovePersonalCertificate,RemoveTemporaryFiles') 'preflight failure must skip mutation and still execute safe cleanup adapters'
 
 $result = @(Invoke-PixelQuayQualificationCore -Operations (New-FakeOperations '' @() -Noisy))
 Assert-True ($result.Count -eq 1) 'native stdout must not contaminate the one structured result'
@@ -65,12 +65,12 @@ Assert-True ($result[0].primary_error -eq 'primary:ActivateAndVerify') 'native s
 Assert-True ($result[0].cleanup_errors.Count -eq 1) 'native stdout must not erase cleanup failure'
 
 $packageRoot = Join-Path ([IO.Path]::GetTempPath()) 'package'
-$insidePackage = Test-PathInside -Candidate (Join-Path $packageRoot 'bin/PixelQuay.exe') -Root $packageRoot
+$insidePackage = Test-PathInside -Candidate (Join-Path $packageRoot 'bin/TintFable.exe') -Root $packageRoot
 $siblingPackage = Test-PathInside -Candidate (Join-Path ([IO.Path]::GetTempPath()) 'package-other/foreign.dll') -Root $packageRoot
 Assert-True $insidePackage 'exact package descendant must be accepted'
 Assert-True (-not $siblingPackage) 'textual sibling prefix must not count as package path'
-$recordFixture = [pscustomobject]@{ payload = [pscustomobject]@{ 'bin/PixelQuay.exe' = [pscustomobject]@{ bytes=1; sha256=('a' * 64) } } }
-Assert-True ((Get-RecordPayloadEntry $recordFixture 'bin/PixelQuay.exe').bytes -eq 1) 'slash-qualified payload property must resolve exactly'
+$recordFixture = [pscustomobject]@{ payload = [pscustomobject]@{ 'bin/TintFable.exe' = [pscustomobject]@{ bytes=1; sha256=('a' * 64) } } }
+Assert-True ((Get-RecordPayloadEntry $recordFixture 'bin/TintFable.exe').bytes -eq 1) 'slash-qualified payload property must resolve exactly'
 $exclusiveDirectory = Join-Path ([IO.Path]::GetTempPath()) ('pixelquay-ps-test-' + [guid]::NewGuid().ToString('N'))
 New-Item -ItemType Directory -Path $exclusiveDirectory | Out-Null
 try {
@@ -94,4 +94,15 @@ Assert-True ($result.primary_error -ceq 'primary:ConsumerWorkflow') 'consumer fa
 Assert-True (-not ($global:PixelQuayQualificationTestCalls -contains 'CloseCleanly')) 'consumer failure cannot certify normal close'
 Assert-True (($global:PixelQuayQualificationTestCalls.IndexOf('StopOwnedProcess')) -lt ($global:PixelQuayQualificationTestCalls.IndexOf('RemoveConsumerFixture'))) 'process stop must precede fixture cleanup'
 
-Write-Output 'PASS: 7 installation orchestration scenarios plus path/evidence/native-helper checks.'
+$operations=New-FakeOperations 'ConsumerWorkflow' @()
+$operations.RestoreConsumerDisplay={ $global:PixelQuayQualificationTestCalls.Add('RestoreConsumerDisplay');throw 'restore failed' }
+$result=Invoke-PixelQuayQualificationCore -Operations $operations
+Assert-True ($result.primary_error -ceq 'primary:ConsumerWorkflow') 'display restoration must retain the consumer failure'
+Assert-True (($result.cleanup_errors -join ',') -match 'RestoreConsumerDisplay.*restore failed') 'display restoration failure must independently fail qualification'
+Assert-True ($global:PixelQuayQualificationTestCalls.IndexOf('RestoreConsumerDisplay') -gt $global:PixelQuayQualificationTestCalls.IndexOf('StopOwnedProcess')) 'display restore must run after owned process cleanup'
+Assert-True ($global:PixelQuayQualificationTestCalls -contains 'RemoveTemporaryFiles') 'restoration failure must not skip other cleanup'
+$operations=New-FakeOperations '' @()
+$operations.Remove('RestoreConsumerDisplay')
+$failed=$false;try{Invoke-PixelQuayQualificationCore -Operations $operations}catch{$failed=$_.Exception.Message -match 'Missing qualification operation: RestoreConsumerDisplay'}
+Assert-True ($failed -and $global:PixelQuayQualificationTestCalls.Count -eq 0) 'missing restoration adapter must refuse before any operation'
+Write-Output 'PASS: 9 installation orchestration scenarios plus path/evidence/native-helper checks.'

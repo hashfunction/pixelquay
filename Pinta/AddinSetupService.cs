@@ -58,7 +58,7 @@ public sealed class AddinSetupService : SetupService
 
 	public void RegisterRepositories (bool enable)
 	{
-		// PixelQuay does not register upstream third-party add-in feeds.
+		// TintFable does not register upstream third-party add-in feeds.
 		// Local add-ins remain an explicit advanced user action.
 	}
 
