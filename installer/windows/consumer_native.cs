@@ -14,11 +14,24 @@ public sealed class ConsumerTargetEvidence {
     public long[] Owners;
     public string ExpectedTitle, Title;
 }
+public sealed class FileNameAncestorEvidence {
+    public long Window, Parent;
+    public int ProcessId, ControlId;
+    public bool Descendant;
+    public string Class;
+}
 public sealed class FileNameEvidence {
     public long Window, Focus, ExpectedFocus, Active;
     public int DialogPid, FocusPid;
     public bool Exists, Visible, Enabled, Descendant, ReadOnly, HasFileNameId;
     public string Class;
+    // Read-only refusal diagnostics. They do not authorize a different focus route.
+    public long Style, FinalFocus, FinalActive;
+    public uint DialogThread, FocusThread;
+    public bool AncestryReachedDialog, AncestryTruncated, FinalFocusObserved;
+    public string ObservationStage;
+    public string[] FailedPredicates;
+    public FileNameAncestorEvidence[] Ancestors;
 }
 public sealed class ConsumerGeometry {
     // Raw native x,y,width,height values, without cropping or DPI conversion.
@@ -33,10 +46,26 @@ public static class ConsumerNative {
         return (style & 0x800)!=0;
     }
     public static void ValidateFileName(FileNameEvidence e) {
-        if(e.Window==0 || e.Focus==0 || (e.ExpectedFocus!=0 && e.Focus!=e.ExpectedFocus) || e.Active!=e.Window ||
-            e.DialogPid<=0 || e.FocusPid!=e.DialogPid || !e.Exists || !e.Visible || !e.Enabled || !e.Descendant ||
-            e.ReadOnly || !e.HasFileNameId || e.Class!="Edit")
-            throw new InvalidOperationException("Focused native filename control differs from the exact owned dialog");
+        var failures=new List<string>();
+        if(e.Window==0)failures.Add("window");
+        if(e.Focus==0)failures.Add("focus");
+        if(e.ExpectedFocus!=0 && e.Focus!=e.ExpectedFocus)failures.Add("retained_focus");
+        if(e.Active!=e.Window)failures.Add("active_window");
+        if(e.DialogPid<=0)failures.Add("dialog_pid");
+        if(e.FocusPid!=e.DialogPid)failures.Add("focus_pid");
+        if(!e.Exists)failures.Add("exists");
+        if(!e.Visible)failures.Add("visible");
+        if(!e.Enabled)failures.Add("enabled");
+        if(!e.Descendant)failures.Add("descendant");
+        if(e.ReadOnly)failures.Add("writable");
+        if(!e.HasFileNameId)failures.Add("filename_id_1148");
+        if(e.Class!="Edit")failures.Add("edit_class");
+        e.FailedPredicates=failures.ToArray();
+        if(failures.Count!=0) {
+            var error=new InvalidOperationException("Focused native filename control differs from the exact owned dialog: "+string.Join(",",failures));
+            error.Data["PixelQuay.FileNameEvidence"]=e;
+            throw error;
+        }
     }
     public static void Validate(ConsumerTargetEvidence e,bool foreground) {
         if(!e.AppLive || !e.TargetLive || !e.MainLive || !e.WindowLive || !e.Visible || !e.Enabled ||
@@ -122,20 +151,41 @@ public static class ConsumerNative {
         uint owner;uint thread=GetWindowThreadProcessId((IntPtr)w,out owner);
         var info=new GUIINFO { Size=checked((uint)Marshal.SizeOf<GUIINFO>()) };
         if(thread==0 || owner!=target.Id || !GetGUIThreadInfo(thread,ref info))throw new InvalidOperationException("Native filename focus unavailable");
-        long focus=info.Focus.ToInt64();bool filenameId=false;var seen=new HashSet<long>();
-        for(IntPtr child=info.Focus;child!=IntPtr.Zero && child!=(IntPtr)w && seen.Count<16 && seen.Add(child.ToInt64());child=GetParent(child)) {
-            if(!IsChild((IntPtr)w,child) || Pid(child.ToInt64())!=target.Id)throw new InvalidOperationException("Filename ancestor left owned dialog");
-            // The current Windows receipt identifies the native filename chain as 1148.
-            if(GetDlgCtrlID(child)==1148)filenameId=true;
-        }
+        long focus=info.Focus.ToInt64();uint focusOwner;
         var evidence=new FileNameEvidence {Window=w,Focus=focus,ExpectedFocus=expectedFocus,Active=info.Active.ToInt64(),DialogPid=target.Id,FocusPid=Pid(focus),
             Exists=IsWindow(info.Focus),Visible=IsWindowVisible(info.Focus),Enabled=IsWindowEnabled(info.Focus),Descendant=IsChild((IntPtr)w,info.Focus),
-            ReadOnly=FileNameReadOnly(GetWindowLongPtr(info.Focus,-16).ToInt64()),HasFileNameId=filenameId,Class=Class(focus)};
-        ValidateFileName(evidence);Require(app,main,target,w,title,true);
-        // Re-read focus after the ownership/style/ancestry queries, so the
-        // final send guard ends with the actual retained field still focused.
-        if(!GetGUIThreadInfo(thread,ref info) || info.Focus.ToInt64()!=focus || info.Active.ToInt64()!=w)
-            throw new InvalidOperationException("Native filename focus changed during observation");
+            Class=Class(focus),DialogThread=thread,FocusThread=GetWindowThreadProcessId(info.Focus,out focusOwner),
+            Ancestors=Array.Empty<FileNameAncestorEvidence>(),FailedPredicates=Array.Empty<string>()};
+        try {
+            evidence.ObservationStage="ancestor-chain";
+            var ancestors=new List<FileNameAncestorEvidence>();var seen=new HashSet<long>();IntPtr child=info.Focus;
+            for(;child!=IntPtr.Zero && child!=(IntPtr)w && seen.Count<16 && seen.Add(child.ToInt64());child=GetParent(child)) {
+                var ancestor=new FileNameAncestorEvidence {Window=child.ToInt64(),Parent=GetParent(child).ToInt64(),ProcessId=Pid(child.ToInt64()),
+                    ControlId=GetDlgCtrlID(child),Class=Class(child.ToInt64()),Descendant=IsChild((IntPtr)w,child)};
+                ancestors.Add(ancestor);evidence.Ancestors=ancestors.ToArray();
+                if(!ancestor.Descendant || ancestor.ProcessId!=target.Id)throw new InvalidOperationException("Filename ancestor left owned dialog");
+                // Keep the exact observed filename ID requirement; Save picker topology is still unproven.
+                if(ancestor.ControlId==1148)evidence.HasFileNameId=true;
+            }
+            evidence.AncestryReachedDialog=child==(IntPtr)w;
+            evidence.AncestryTruncated=child!=IntPtr.Zero && child!=(IntPtr)w && seen.Count>=16;
+            evidence.ObservationStage="style";
+            evidence.Style=GetWindowLongPtr(info.Focus,-16).ToInt64();
+            evidence.ReadOnly=FileNameReadOnly(evidence.Style);
+            evidence.ObservationStage="filename-validation";
+            ValidateFileName(evidence);Require(app,main,target,w,title,true);
+            // Re-read focus after ownership/style/ancestry queries. Diagnostics
+            // retain this second observation even when it refuses the send.
+            evidence.ObservationStage="final-focus-check";
+            evidence.FinalFocusObserved=GetGUIThreadInfo(thread,ref info);
+            evidence.FinalFocus=info.Focus.ToInt64();evidence.FinalActive=info.Active.ToInt64();
+            if(!evidence.FinalFocusObserved || evidence.FinalFocus!=focus || evidence.FinalActive!=w)
+                throw new InvalidOperationException("Native filename focus changed during observation");
+            evidence.ObservationStage="verified";
+        } catch(Exception error) {
+            error.Data["PixelQuay.FileNameEvidence"]=evidence;
+            throw;
+        }
         return evidence;
     }
     public static string FileNameText(Process app,long main,Process target,long w,string title,long focus) {

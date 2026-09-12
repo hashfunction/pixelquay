@@ -40,7 +40,7 @@ function New-ObservedFileName {
 }
 [PixelQuayQualification.ConsumerNative]::ValidateFileName((New-ObservedFileName))
 $focusCases=1
-foreach($change in @(@{Focus=0},@{ExpectedFocus=999},@{Active=999},@{FocusPid=99},@{Exists=$false},@{Visible=$false},@{Enabled=$false},@{Descendant=$false},@{ReadOnly=$true},@{HasFileNameId=$false},@{Class='SearchBox'})) {
+foreach($change in @(@{Window=0},@{DialogPid=0},@{Focus=0},@{ExpectedFocus=999},@{Active=999},@{FocusPid=99},@{Exists=$false},@{Visible=$false},@{Enabled=$false},@{Descendant=$false},@{ReadOnly=$true},@{HasFileNameId=$false},@{Class='SearchBox'})) {
     $e=New-ObservedFileName
     foreach($key in $change.Keys){$e.$key=$change[$key]}
     $failed=$false;try{[PixelQuayQualification.ConsumerNative]::ValidateFileName($e)}catch{$failed=$true}
@@ -93,3 +93,36 @@ foreach($operation in @(
     if($message -notlike '*Retained filename focus required*'){throw 'Filename API reached native calls without retained focus'}
 }
 'PASS target refusal and2 production filename APIs rejecting absent retained focus'
+# Failure evidence must survive the real C# -> PowerShell exception wrapper.
+$failedName=New-ObservedFileName;$failedName.Active=201;$failedName.HasFileNameId=$false
+$failure=$null
+try{[PixelQuayQualification.ConsumerNative]::ValidateFileName($failedName)}catch{$failure=$_}
+if($null -eq $failure){throw 'Invalid filename topology was accepted'}
+$ui=@{record=@{}}
+$scope=@{hwnd=200;title='Save Image File';process=@{Id=17}}
+Save-PixelQuayFileNameFailure $ui $scope 0 'observe-after-alt-n' $failure.Exception
+$serialized=$ui.record.picker_failures|ConvertTo-Json -Depth 12|ConvertFrom-Json
+if($serialized.native.Active -ne 201 -or $serialized.native.Window -ne 200 -or
+ ($serialized.native.FailedPredicates -join ',') -cne 'active_window,filename_id_1148' -or
+ $serialized.stage -cne 'observe-after-alt-n' -or $serialized.title -cne 'Save Image File'){
+ throw 'Exact failing native predicates were lost through exception serialization'
+}
+'PASS real filename refusal evidence survives C# exception wrapping and JSON serialization'
+
+# Replay diagnostic payloads, not claimed Windows topology: a foreign/non-1148
+# chain must stay rejected while its precise classes/IDs/style remain inspectable.
+$e=New-ObservedFileName;$e.HasFileNameId=$false;$e.Style=0x50000000;$e.DialogThread=31;$e.FocusThread=31
+$e.Ancestors=@(
+ [PixelQuayQualification.FileNameAncestorEvidence]@{Window=220;Parent=210;ProcessId=17;ControlId=1001;Descendant=$true;Class='Edit'},
+ [PixelQuayQualification.FileNameAncestorEvidence]@{Window=210;Parent=200;ProcessId=17;ControlId=1002;Descendant=$true;Class='ComboBox'}
+)
+$failure=$null;try{[PixelQuayQualification.ConsumerNative]::ValidateFileName($e)}catch{$failure=$_}
+if($null -eq $failure){throw 'Diagnostic alternate control IDs broadened filename acceptance'}
+$ui=@{record=@{}};Save-PixelQuayFileNameFailure $ui $scope 220 'observe-before-enter' $failure.Exception
+$saved=$ui.record|ConvertTo-Json -Depth 12|ConvertFrom-Json
+if($saved.picker_failures[0].native.Ancestors.Count -ne 2 -or $saved.picker_failures[0].native.Ancestors[0].ControlId -ne 1001 -or
+ $saved.picker_failures[0].native.Style -ne 0x50000000 -or $saved.picker_failures[0].native.FocusThread -ne 31){throw 'Bounded native chain/style/thread diagnostics were lost'}
+for($i=1;$i -lt 16;$i++){Save-PixelQuayFileNameFailure $ui $scope 220 'observe-before-enter' $failure.Exception}
+$refused=$false;try{Save-PixelQuayFileNameFailure $ui $scope 220 'observe-before-enter' $failure.Exception}catch{$refused=$true}
+if(-not $refused -or $ui.record.picker_failures.Count -ne 16){throw 'Filename evidence bound failed'}
+'PASS diagnostic chain/style/thread serialization and 16-record bound; alternate filename IDs remain refused'
