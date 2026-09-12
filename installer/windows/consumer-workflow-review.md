@@ -105,3 +105,21 @@ UIA-node replay of the production selection rejects duplicate fields, wrong
 control type, foreign PID, disabled/hidden fields and a Search field with the
 previous numeric ID. Eleven cases and seventeen native ownership cases pass
 locally; actual Windows picker/workflow completion remains required.
+
+## Native filename input after run 34675708778
+
+The actual Windows picker tree identifies the filename chain as ID 1148 but exposes it and its Open/Cancel buttons as UIA `Pane`, without `Edit`/`Button` controls. Only Search Box has an Edit provider. Therefore semantic label selection cannot drive this actual dialog. The exact run receipt is retained at `/private/tmp/pixelquay-34675708778-review/PixelQuay-Windows-qualification/pixelquay/pixelquay/build-evidence/msix-install/consumer-workflow.json`.
+
+The candidate uses the normal Alt+N filename mnemonic, then verifies actual GUI-thread focus is a visible, enabled, writable native Edit in the retained owned dialog and in the observed 1148 filename chain. It selects all, types the exact local path through the existing checked Unicode SendInput implementation, reads it back with a two-second bounded WM_GETTEXT, and presses Enter only after exact equality and unchanged focus/ownership. Search, foreign descendants, changed focus, readonly controls and wrong text are refused. No messages set app memory or file state; the only native message added reads the owned filename field. Independent image pixels, recipe persistence, export/reopen witness, normal stop and cleanup gates are unchanged.
+
+Primary API contracts: [GUITHREADINFO](https://learn.microsoft.com/en-us/windows/win32/api/winuser/ns-winuser-guithreadinfo), [GetGUIThreadInfo](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getguithreadinfo), [WM_GETTEXT](https://learn.microsoft.com/en-us/windows/win32/winmsg/wm-gettext), [SendMessageTimeoutW](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-sendmessagetimeoutw).
+
+Local verification: initial new guard test failed because the production guard did not exist; after the implementation, 17 existing ownership cases, 12 new focused-filename cases, x64 INPUT/GUITHREADINFO layout assertions, four real PowerShell picker sequencing/refusal cases, and 24 independent file/PNG/recipe/cleanup tests passed. Native execution remains pending; no consumer success is claimed.
+
+## Final filename input boundary correction
+
+Independent review of `80f8e67fe4d8643ce9843c5680e29e852ee79db1` reproduced a focus change after the PowerShell filename observation but during the generic send wrapper's final top-level scope check. The prior route could still deliver Enter to another child. The filename route now calls native `FileNameChord` / `FileNameTextInput` with the retained HWND, including Ctrl+A and Enter. The shared production delivery boundary validates top-level ownership, then filename focus, then calls SendInput. Generic callers retain their previous top-level ownership check. The filename observer also re-reads actual GUI-thread focus after the ownership/style/ancestry observations, before returning to the final send call.
+
+A zero `GetWindowLongPtr(GWL_STYLE)` result now fails closed before writability is inferred. A visible child Edit necessarily has nonzero window-style bits, so zero cannot establish a writable filename field; no stale GetLastError value is interpreted as success.
+
+Executable coverage uses the production C# delivery boundary to replay a focus change during its last target check, proves no input follows refusal, checks the successful order, generic behavior, partial/zero delivery and target failure, and verifies zero/read-only/writable style values. Both actual filename APIs reject absent retained focus before native calls. Seven PowerShell sequencing cases exercise the real filename wrappers with retained focus and refusal before Ctrl+A, text and Enter. These local replays do not claim actual Windows UI execution; the existing image/recipe/export/reopen/cleanup gates still require a new packaged run.

@@ -62,6 +62,14 @@ function Send-PixelQuayText($Ui,$Scope,[string]$Text) {
     Assert-PixelQuayScope $Ui $Scope
     [PixelQuayQualification.ConsumerNative]::Text($Ui.process,$Ui.main,$Scope.process,$Scope.hwnd,$Scope.title,$Text)
 }
+function Send-PixelQuayFileNameKeys($Ui,$Scope,[long]$Focus,[int[]]$Keys) {
+    Assert-PixelQuayScope $Ui $Scope
+    [PixelQuayQualification.ConsumerNative]::FileNameChord($Ui.process,$Ui.main,$Scope.process,$Scope.hwnd,$Scope.title,$Focus,$Keys)
+}
+function Send-PixelQuayFileNameText($Ui,$Scope,[long]$Focus,[string]$Text) {
+    Assert-PixelQuayScope $Ui $Scope
+    [PixelQuayQualification.ConsumerNative]::FileNameTextInput($Ui.process,$Ui.main,$Scope.process,$Scope.hwnd,$Scope.title,$Focus,$Text)
+}
 function Get-PixelQuayPickerControl($Ui,$Scope,[string]$Id,[string]$Type,[string[]]$Names=@()) {
     Assert-PixelQuayScope $Ui $Scope
     $root=[Windows.Automation.AutomationElement]::FromHandle([IntPtr]$Scope.hwnd)
@@ -96,22 +104,21 @@ function Assert-PixelQuayPickerElement($Ui,$Scope,$Element) {
 }
 function Set-PixelQuayPickerPath($Ui,[string]$Title,[string]$Path) {
     $scope=Wait-PixelQuayConsumer { Get-PixelQuayScope $Ui $Title -Picker } "owned native picker $Title"
-    # The observed native dialog has a labelled filename field. UIA IDs vary
-    # across Windows picker implementations; require its unique semantic label.
-    $filename=Get-PixelQuayPickerControl $Ui $scope '' 'Edit' -Names @('File name:','Folder:')
-    $Ui.record.picker_fields.Add(@{dialog=$scope.title;hwnd=$scope.hwnd;pid=$scope.process.Id;name=$filename.Current.Name;automation_id=$filename.Current.AutomationId})
-    $pattern=$filename.GetCurrentPattern([Windows.Automation.ValuePattern]::Pattern)
-    if($pattern.Current.IsReadOnly){throw 'Native filename field is read-only'}
-    Assert-PixelQuayScope $Ui $scope
-    Assert-PixelQuayPickerElement $Ui $scope $filename
-    $pattern.SetValue($Path.Replace('/','\'))
-    Assert-PixelQuayScope $Ui $scope
-    if ($pattern.Current.Value -cne $Path.Replace('/','\')) { throw 'Native picker did not retain exact local path text' }
+    # Run34675708778 exposes Win32 filename/buttons as UIA Pane without their
+    # edit/invoke providers. Use normal filename mnemonic/input with native
+    # focused Edit ancestry, read-only state and exact text readback instead.
+    Send-PixelQuayKeys $Ui $scope @(18,78)
+    $filename=[PixelQuayQualification.ConsumerNative]::FileName($Ui.process,$Ui.main,$scope.process,$scope.hwnd,$scope.title,0)
+    $focus=$filename.Focus
+    $Ui.record.picker_fields.Add(@{dialog=$scope.title;hwnd=$scope.hwnd;pid=$scope.process.Id;focus=$focus;class=$filename.Class;filename_control_id_verified=$filename.HasFileNameId;input='native Alt+N, Ctrl+A, Unicode text, Enter';readback='bounded WM_GETTEXT'})
+    Send-PixelQuayFileNameKeys $Ui $scope $focus @(17,65)
+    $null=[PixelQuayQualification.ConsumerNative]::FileName($Ui.process,$Ui.main,$scope.process,$scope.hwnd,$scope.title,$focus)
+    Send-PixelQuayFileNameText $Ui $scope $focus ($Path.Replace('/','\'))
+    $actual=[PixelQuayQualification.ConsumerNative]::FileNameText($Ui.process,$Ui.main,$scope.process,$scope.hwnd,$scope.title,$focus)
+    if ($actual -cne $Path.Replace('/','\')) { throw 'Native picker did not retain exact local path text' }
     Save-PixelQuayObservation $Ui $scope ('picker-'+$Ui.record.observations.Count)
-    $button=Get-PixelQuayPickerControl $Ui $scope '1' 'Button'
-    Assert-PixelQuayScope $Ui $scope
-    Assert-PixelQuayPickerElement $Ui $scope $button
-    $button.GetCurrentPattern([Windows.Automation.InvokePattern]::Pattern).Invoke()
+    $null=[PixelQuayQualification.ConsumerNative]::FileName($Ui.process,$Ui.main,$scope.process,$scope.hwnd,$scope.title,$focus)
+    Send-PixelQuayFileNameKeys $Ui $scope $focus @(13)
     Wait-PixelQuayConsumer { $scope.hwnd -notin [PixelQuayQualification.ConsumerNative]::Windows($Ui.main) } 'native picker disappearance' | Out-Null
 }
 function Save-PixelQuayObservation($Ui,$Scope,[string]$Stage) {

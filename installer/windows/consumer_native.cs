@@ -14,7 +14,25 @@ public sealed class ConsumerTargetEvidence {
     public long[] Owners;
     public string ExpectedTitle, Title;
 }
+public sealed class FileNameEvidence {
+    public long Window, Focus, ExpectedFocus, Active;
+    public int DialogPid, FocusPid;
+    public bool Exists, Visible, Enabled, Descendant, ReadOnly, HasFileNameId;
+    public string Class;
+}
 public static class ConsumerNative {
+    public static bool FileNameReadOnly(long style) {
+        // A visible child Edit necessarily has nonzero WS_VISIBLE/WS_CHILD
+        // style bits. Zero is unavailable data, never proof of writability.
+        if(style==0)throw new InvalidOperationException("Native filename style unavailable");
+        return (style & 0x800)!=0;
+    }
+    public static void ValidateFileName(FileNameEvidence e) {
+        if(e.Window==0 || e.Focus==0 || (e.ExpectedFocus!=0 && e.Focus!=e.ExpectedFocus) || e.Active!=e.Window ||
+            e.DialogPid<=0 || e.FocusPid!=e.DialogPid || !e.Exists || !e.Visible || !e.Enabled || !e.Descendant ||
+            e.ReadOnly || !e.HasFileNameId || e.Class!="Edit")
+            throw new InvalidOperationException("Focused native filename control differs from the exact owned dialog");
+    }
     public static void Validate(ConsumerTargetEvidence e,bool foreground) {
         if(!e.AppLive || !e.TargetLive || !e.MainLive || !e.WindowLive || !e.Visible || !e.Enabled ||
             e.Main==0 || e.Window==0 || e.AppPid<=0 || e.TargetPid<=0 || e.AppPid!=e.MainPid || e.TargetPid!=e.WindowPid ||
@@ -24,6 +42,12 @@ public static class ConsumerNative {
     [DllImport("user32.dll")] static extern bool IsWindow(IntPtr w);
     [DllImport("user32.dll")] static extern bool IsWindowVisible(IntPtr w);
     [DllImport("user32.dll")] static extern bool IsWindowEnabled(IntPtr w);
+    [DllImport("user32.dll")] static extern bool IsChild(IntPtr parent, IntPtr child);
+    [DllImport("user32.dll")] static extern IntPtr GetParent(IntPtr child);
+    [DllImport("user32.dll")] static extern int GetDlgCtrlID(IntPtr child);
+    [DllImport("user32.dll",EntryPoint="GetWindowLongPtrW",SetLastError=true)] static extern IntPtr GetWindowLongPtr(IntPtr child,int index);
+    [DllImport("user32.dll",SetLastError=true)] static extern bool GetGUIThreadInfo(uint thread,ref GUIINFO info);
+    [DllImport("user32.dll",CharSet=CharSet.Unicode,SetLastError=true)] static extern IntPtr SendMessageTimeoutW(IntPtr window,uint message,UIntPtr count,StringBuilder text,uint flags,uint timeout,out UIntPtr result);
     [DllImport("user32.dll")] static extern IntPtr GetWindow(IntPtr w, uint command);
     [DllImport("user32.dll")] static extern uint GetWindowThreadProcessId(IntPtr w, out uint pid);
     [DllImport("user32.dll")] static extern IntPtr GetForegroundWindow();
@@ -36,6 +60,7 @@ public static class ConsumerNative {
     [DllImport("user32.dll")] static extern int GetSystemMetrics(int index);
     [DllImport("user32.dll", SetLastError=true)] static extern uint SendInput(uint count, INPUT[] inputs, int size);
     [StructLayout(LayoutKind.Sequential)] public struct RECT { public int Left, Top, Right, Bottom; }
+    [StructLayout(LayoutKind.Sequential)] struct GUIINFO { public uint Size,Flags;public IntPtr Active,Focus,Capture,MenuOwner,MoveSize,Caret;public RECT CaretRect; }
     [StructLayout(LayoutKind.Sequential)] struct KEY { public ushort Vk, Scan; public uint Flags, Time; public UIntPtr Extra; }
     [StructLayout(LayoutKind.Sequential)] struct MOUSE { public int X,Y; public uint Data,Flags,Time; public UIntPtr Extra; }
     [StructLayout(LayoutKind.Explicit)] struct UNION { [FieldOffset(0)] public KEY Key; [FieldOffset(0)] public MOUSE Mouse; }
@@ -81,6 +106,35 @@ public static class ConsumerNative {
         for(int i=0;i<20;i++) { SetForegroundWindow((IntPtr)w); if(ForegroundWindow()==w) { Require(app,main,target,w,title,true); return; } Thread.Sleep(50); }
         throw new InvalidOperationException("Owned window could not become foreground");
     }
+    public static FileNameEvidence FileName(Process app,long main,Process target,long w,string title,long expectedFocus) {
+        Require(app,main,target,w,title,true);
+        if(Class(w)!="#32770")throw new InvalidOperationException("Expected actual native file dialog");
+        uint owner;uint thread=GetWindowThreadProcessId((IntPtr)w,out owner);
+        var info=new GUIINFO { Size=checked((uint)Marshal.SizeOf<GUIINFO>()) };
+        if(thread==0 || owner!=target.Id || !GetGUIThreadInfo(thread,ref info))throw new InvalidOperationException("Native filename focus unavailable");
+        long focus=info.Focus.ToInt64();bool filenameId=false;var seen=new HashSet<long>();
+        for(IntPtr child=info.Focus;child!=IntPtr.Zero && child!=(IntPtr)w && seen.Count<16 && seen.Add(child.ToInt64());child=GetParent(child)) {
+            if(!IsChild((IntPtr)w,child) || Pid(child.ToInt64())!=target.Id)throw new InvalidOperationException("Filename ancestor left owned dialog");
+            // The current Windows receipt identifies the native filename chain as 1148.
+            if(GetDlgCtrlID(child)==1148)filenameId=true;
+        }
+        var evidence=new FileNameEvidence {Window=w,Focus=focus,ExpectedFocus=expectedFocus,Active=info.Active.ToInt64(),DialogPid=target.Id,FocusPid=Pid(focus),
+            Exists=IsWindow(info.Focus),Visible=IsWindowVisible(info.Focus),Enabled=IsWindowEnabled(info.Focus),Descendant=IsChild((IntPtr)w,info.Focus),
+            ReadOnly=FileNameReadOnly(GetWindowLongPtr(info.Focus,-16).ToInt64()),HasFileNameId=filenameId,Class=Class(focus)};
+        ValidateFileName(evidence);Require(app,main,target,w,title,true);
+        // Re-read focus after the ownership/style/ancestry queries, so the
+        // final send guard ends with the actual retained field still focused.
+        if(!GetGUIThreadInfo(thread,ref info) || info.Focus.ToInt64()!=focus || info.Active.ToInt64()!=w)
+            throw new InvalidOperationException("Native filename focus changed during observation");
+        return evidence;
+    }
+    public static string FileNameText(Process app,long main,Process target,long w,string title,long focus) {
+        FileName(app,main,target,w,title,focus);
+        var text=new StringBuilder(4097);UIntPtr result;
+        if(SendMessageTimeoutW((IntPtr)focus,0x000D,(UIntPtr)text.Capacity,text,0x22,2000,out result)==IntPtr.Zero || result.ToUInt64()>=4096)
+            throw new InvalidOperationException("Bounded native filename readback failed");
+        FileName(app,main,target,w,title,focus);return text.ToString();
+    }
     public static int[] Bounds(Process app,long main,Process target,long w,string title) {
         Require(app,main,target,w,title,true); RECT r;
         if(!GetWindowRect((IntPtr)w,out r))throw new InvalidOperationException("Window bounds unavailable");
@@ -90,22 +144,42 @@ public static class ConsumerNative {
         return new int[]{r.Left,r.Top,r.Right-r.Left,r.Bottom-r.Top,x,y,width,height};
     }
     static INPUT Key(ushort vk,ushort scan,uint flags) { return new INPUT { Type=1, Value=new UNION { Key=new KEY { Vk=vk,Scan=scan,Flags=flags } } }; }
-    static void Send(Process app,long main,Process target,long w,string title,INPUT[] inputs) {
-        Require(app,main,target,w,title,true);
-        if(SendInput((uint)inputs.Length,inputs,Marshal.SizeOf<INPUT>())!=inputs.Length)throw new InvalidOperationException("Partial native input delivery");
+    public static void DeliverInput(Action requireTarget,Action requireFocus,Func<uint> deliver,uint count) {
+        requireTarget();
+        if(requireFocus!=null)requireFocus();
+        if(deliver()!=count)throw new InvalidOperationException("Partial native input delivery");
+    }
+    static void Send(Process app,long main,Process target,long w,string title,INPUT[] inputs,long expectedFocus=0) {
+        Action requireFocus=expectedFocus==0 ? (Action)null : () => FileName(app,main,target,w,title,expectedFocus);
+        DeliverInput(() => Require(app,main,target,w,title,true),requireFocus,
+            () => SendInput((uint)inputs.Length,inputs,Marshal.SizeOf<INPUT>()),(uint)inputs.Length);
         Thread.Sleep(100);
     }
-    public static void Chord(Process app,long main,Process target,long w,string title,int[] keys) {
+    static INPUT[] ChordInputs(int[] keys) {
         if(keys.Length<1 || keys.Length>3)throw new ArgumentException("Unbounded chord");
         var inputs=new INPUT[keys.Length*2];
         for(int i=0;i<keys.Length;i++) { if(keys[i]<1 || keys[i]>255)throw new ArgumentException("Invalid key"); inputs[i]=Key((ushort)keys[i],0,0); inputs[inputs.Length-1-i]=Key((ushort)keys[i],0,2); }
-        Send(app,main,target,w,title,inputs);
+        return inputs;
     }
-    public static void Text(Process app,long main,Process target,long w,string title,string text) {
+    static INPUT[] TextInputs(string text) {
         if(text.Length==0 || text.Length>4096 || text.IndexOf('\0')>=0)throw new ArgumentException("Unbounded text");
         var inputs=new INPUT[text.Length*2];
         for(int i=0;i<text.Length;i++) { inputs[2*i]=Key(0,text[i],4); inputs[2*i+1]=Key(0,text[i],6); }
-        Send(app,main,target,w,title,inputs);
+        return inputs;
+    }
+    public static void Chord(Process app,long main,Process target,long w,string title,int[] keys) {
+        Send(app,main,target,w,title,ChordInputs(keys));
+    }
+    public static void Text(Process app,long main,Process target,long w,string title,string text) {
+        Send(app,main,target,w,title,TextInputs(text));
+    }
+    public static void FileNameChord(Process app,long main,Process target,long w,string title,long expectedFocus,int[] keys) {
+        if(expectedFocus==0)throw new ArgumentException("Retained filename focus required");
+        Send(app,main,target,w,title,ChordInputs(keys),expectedFocus);
+    }
+    public static void FileNameTextInput(Process app,long main,Process target,long w,string title,long expectedFocus,string text) {
+        if(expectedFocus==0)throw new ArgumentException("Retained filename focus required");
+        Send(app,main,target,w,title,TextInputs(text),expectedFocus);
     }
 }
 }
