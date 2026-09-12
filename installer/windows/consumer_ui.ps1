@@ -62,7 +62,7 @@ function Send-PixelQuayText($Ui,$Scope,[string]$Text) {
     Assert-PixelQuayScope $Ui $Scope
     [PixelQuayQualification.ConsumerNative]::Text($Ui.process,$Ui.main,$Scope.process,$Scope.hwnd,$Scope.title,$Text)
 }
-function Get-PixelQuayPickerControl($Ui,$Scope,[string]$Id,[string]$Type) {
+function Get-PixelQuayPickerControl($Ui,$Scope,[string]$Id,[string]$Type,[string[]]$Names=@()) {
     Assert-PixelQuayScope $Ui $Scope
     $root=[Windows.Automation.AutomationElement]::FromHandle([IntPtr]$Scope.hwnd)
     if ($root.Current.NativeWindowHandle -ne $Scope.hwnd -or $root.Current.ProcessId -ne $Scope.process.Id) { throw 'Picker UIA root differs from owned HWND' }
@@ -70,7 +70,8 @@ function Get-PixelQuayPickerControl($Ui,$Scope,[string]$Id,[string]$Type) {
     if ($all.Count -gt 512) { throw 'Picker UIA tree exceeded bound' }
     $matches=@(for ($i=0;$i -lt $all.Count;$i++) {
         $element=$all.Item($i); $c=$element.Current
-        if ($c.AutomationId -ceq $Id -and $c.ControlType.ProgrammaticName -ceq "ControlType.$Type" -and $c.IsEnabled -and -not $c.IsOffscreen -and $c.ProcessId -eq $Scope.process.Id) { $element }
+        $identified=if($Names.Count){$c.Name -cin $Names}else{$c.AutomationId -ceq $Id}
+        if ($identified -and $c.ControlType.ProgrammaticName -ceq "ControlType.$Type" -and $c.IsEnabled -and -not $c.IsOffscreen -and $c.ProcessId -eq $Scope.process.Id) { $element }
     })
     if ($matches.Count -ne 1) { throw "Native picker control is missing or ambiguous: $Id/$Type" }
     $matches[0]
@@ -88,8 +89,12 @@ function Assert-PixelQuayPickerElement($Ui,$Scope,$Element) {
 }
 function Set-PixelQuayPickerPath($Ui,[string]$Title,[string]$Path) {
     $scope=Wait-PixelQuayConsumer { Get-PixelQuayScope $Ui $Title -Picker } "owned native picker $Title"
-    $filename=Get-PixelQuayPickerControl $Ui $scope '1001' 'Edit'
+    # The observed native dialog has a labelled filename field. UIA IDs vary
+    # across Windows picker implementations; require its unique semantic label.
+    $filename=Get-PixelQuayPickerControl $Ui $scope '' 'Edit' -Names @('File name:','Folder:')
+    $Ui.record.picker_fields.Add(@{dialog=$scope.title;hwnd=$scope.hwnd;pid=$scope.process.Id;name=$filename.Current.Name;automation_id=$filename.Current.AutomationId})
     $pattern=$filename.GetCurrentPattern([Windows.Automation.ValuePattern]::Pattern)
+    if($pattern.Current.IsReadOnly){throw 'Native filename field is read-only'}
     Assert-PixelQuayScope $Ui $scope
     Assert-PixelQuayPickerElement $Ui $scope $filename
     $pattern.SetValue($Path.Replace('/','\'))
@@ -147,7 +152,7 @@ function Invoke-PixelQuayConsumerWorkflow([Diagnostics.Process]$Process,[string]
     $Process.Refresh(); $retained=$Process.SafeHandle
     if ($retained.IsClosed -or $retained.IsInvalid -or $Process.HasExited) { throw 'Broker lifetime is unavailable' }
     $ui=@{process=$Process;main=[long]$Process.MainWindowHandle;brokers=@{};output=$Output;
-        record=@{schema='pixelquay-consumer-workflow-v1';process_id=$Process.Id;phase='normal-consumer-ui-actions';observations=[Collections.Generic.List[object]]::new()}}
+        record=@{schema='pixelquay-consumer-workflow-v1';process_id=$Process.Id;phase='normal-consumer-ui-actions';picker_fields=[Collections.Generic.List[object]]::new();observations=[Collections.Generic.List[object]]::new()}}
     try {
         $main=Get-PixelQuayMain $ui 'Unsaved Image 1 - PixelQuay'
         $main=Open-PixelQuayImage $ui $main.title (Join-Path $fixture.root 'source.png') 'source.png - PixelQuay'

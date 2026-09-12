@@ -91,3 +91,17 @@ Windows interaction, or complete native build is claimed from macOS. Root review
 and a fresh Windows run are still required. Only `consumer-*.json` and
 `consumer-*.png` were added to the MSIX artifact list; fixture images, profile
 payloads, binaries, packages, sites and parent release status are not published.
+
+## Native picker semantic label repair
+
+Run34674473214 reached the exact owned Open Image File dialog on Windows. Its
+actual screenshot shows the enabled File name field, but the hard-coded UIA
+1001/Edit lookup failed. That identifier was an unsupported assumption. The
+picker now requires exactly one visible, enabled, same-process Edit with the
+standard File name: or Folder: label inside the already-verified dialog. The
+primary button, ancestor rechecks, exact written path and all consumer checks
+remain unchanged. Observed label and actual AutomationId are retained. A real
+UIA-node replay of the production selection rejects duplicate fields, wrong
+control type, foreign PID, disabled/hidden fields and a Search field with the
+previous numeric ID. Eleven cases and seventeen native ownership cases pass
+locally; actual Windows picker/workflow completion remains required.
