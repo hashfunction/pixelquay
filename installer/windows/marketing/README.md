@@ -131,33 +131,58 @@ before text entry because the immediate post-Alt+N focus was the owned filename
 ComboBoxEx32 container, not its Edit. The original exact filename checks refused
 all three. Those failures do not prove a particular Windows autocomplete bug.
 
-The current screenshot driver replaces queued character injection for filename
-text with one normal Win32 `WM_SETTEXT` on the actual focused filename **Edit**.
-Immediately before and after this call it runs the qualified native filename
-observer, which proves the retained dialog/process, writable Edit class,
-filename-ID ancestry and exact focus HWND. It sends no broadcast, uses
-`SendMessageTimeoutW` with `SMTO_BLOCK|SMTO_ABORTIFHUNG|SMTO_ERRORONEXIT` and a
-1,000 ms timeout, and requires both successful dispatch and the Edit's TRUE
-result. There is no input retry. The driver then independently reads all text
-with the original bounded `WM_GETTEXT` and requires exact path equality before
-returning. The unchanged original picker helper repeats its complete readback
-before actual Enter/Choose. A receipt records the precise dialog, focus HWND,
-expected/actual path, delivery method and timeout. No file is written by this
-capture driver: ordinary app Open, Save, Export, and reopen operations still
-produce the independently checked output bytes.
+Run 34694221903 then recorded exact `C:\TintFable Demo\Cedar Coast.png`
+after `WM_SETTEXT` and the original `WM_GETTEXT` proof, but its actual **Confirm
+Save As** dialog still named **Cedar Coast - draft.png**. The modern Save dialog's
+selected filename therefore was not established by changing that Edit text alone.
+The capture removes that direct-control writer and uses ordinary **Ctrl+V** through
+the original `FileNameChord` final native ownership/focus boundary. It retains the
+original selection, full-path readback, Enter/Choose, output pixels and lifecycle.
 
-Capture key chords now retain a one-second settling interval after the original
-native guarded send, allowing normal mnemonic focus transitions before the
-strict observer. This interval does not authorize focus or suppress a refusal.
-The original helper source, qualified package, prior consumer evidence, output
-pixel/recipe oracles and lifecycle checks remain unchanged.
+The capture-only clipboard lease requires **zero native clipboard formats** while
+holding `OpenClipboard` before any mutation. A NULL owner alone is insufficient.
+A hidden message-only window in the capture process owns eagerly allocated,
+NUL-terminated `CF_UNICODETEXT`; memory transfers to Windows only after successful
+`SetClipboardData`. The clipboard is closed before paste so the Edit can read it.
+The lease checks exact owner, retained nonzero sequence and Unicode content before
+paste. After the same one-second capture chord settling, the original bounded complete-path
+readback runs while that data remains
+available, before restoring the original empty baseline. The unchanged picker
+helper repeats its full-path proof before submission.
 
-Portable tests reproduce the prior absence of a single native write/readback,
-then check one exact write, ownership refusals before/after, failed send, partial
-readback, no replay, one-shot chord settling, Unicode/length/NUL bounds and native
-HWND/broadcast rejection. The actual C# implementation compiles in those tests;
-its Win32 call and the complete new screenshot run remain pending Windows.
+Restoration rechecks owner, sequence and text under the clipboard lock. Changed
+or busy clipboard state is preserved and fails the capture; it is never cleared
+to force a pass. There is no clipboard open retry or input replay. Receipts retain
+owner/sequence, expected/actual path, completion/restoration and separate primary
+and cleanup errors. The owned hidden window is destroyed after restoration or a
+refusal, and has no visible/foreground interaction. A thread mismatch fails closed.
 
-Win32 references:
-https://learn.microsoft.com/en-us/windows/win32/winmsg/wm-settext
-https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-sendmessagetimeoutw
+Capture key chords retain the existing one-second settling interval after the
+original guarded send. This permits normal mnemonic focus transitions before the
+strict observer without authorizing focus or suppressing a refusal. No app source,
+qualified helper, package, data path, artwork or screenshot pixels are changed.
+
+`test_capture_filename.ps1` replays the production capture function: exactly one
+original guarded paste, initial/final focus refusal, nonempty/changed clipboard,
+failed paste, bounded readback refusal, restoration failure and preservation of
+simultaneous primary/cleanup errors, plus text/count bounds and chord settling.
+`test_capture_clipboard.ps1` compiles the actual C# implementation, replays its lease
+policy against a stateful native boundary, and on Windows also executes the real
+eager Unicode allocation/transfer/read/empty-baseline restoration. The portable
+lease fixture does not claim execution of Windows APIs. Fresh native capture,
+full original pixel/lifecycle checks and visual review remain required.
+
+Additional focused verification:
+
+```sh
+TMPDIR=/private/tmp ../../filequay/source/.tools/powershell-7.6.6/pwsh -NoProfile -File installer/windows/marketing/test_capture_clipboard.ps1
+```
+
+Microsoft documents [normal Edit clipboard operations](https://learn.microsoft.com/en-us/windows/win32/controls/edit-controls-text-operations),
+[Unicode clipboard format](https://learn.microsoft.com/en-us/windows/win32/dataxchg/standard-clipboard-formats),
+[clipboard opening and non-NULL ownership](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-openclipboard),
+[ownerless data](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getclipboardowner),
+[format counts](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-countclipboardformats),
+[eager memory ownership transfer](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-setclipboarddata)
+and [sequence changes](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getclipboardsequencenumber).
+The sequence is used for ownership comparisons, not polled as a notification API.

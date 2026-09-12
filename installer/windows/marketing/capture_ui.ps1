@@ -1,23 +1,39 @@
 # Copyright 2026 Trieflow LLC. MIT. Normal native UI only; large authored user content.
-# The qualified helper files remain unchanged. Only this separate screenshot
-# driver supplies the native filename control directly, with the same ownership
-# and complete text readback checks. Normal Open/Save/Choose still execute in-app.
-function Set-TintNativeFilename([long]$Window,[string]$Text) {
-    if(-not ('TintFableMarketing.Filename' -as [type])){Add-Type -Path (Join-Path $PSScriptRoot 'capture_filename.cs')}
-    [TintFableMarketing.Filename]::Set($Window,$Text)
+# Qualified helpers remain unchanged. Clipboard text reaches the actual native
+# filename Edit through the original focus-guarded Ctrl+V input boundary.
+function New-TintFilenameClipboard([string]$Text) {
+    if(-not ('TintFableMarketing.FilenameClipboard' -as [type])){Add-Type -Path (Join-Path $PSScriptRoot 'capture_clipboard.cs')}
+    [TintFableMarketing.FilenameClipboard]::Begin($Text)
 }
 function Send-PixelQuayFileNameText($Ui,$Scope,[long]$Focus,[string]$Text) {
     if($Text.Length -lt 1 -or $Text.Length -gt 4096 -or $Text.Contains([char]0)){throw 'Unbounded capture filename text'}
     if($Ui.record.Contains('capture_filename_writes') -and $Ui.record.capture_filename_writes.Count -ge 8){throw 'Capture filename write bound exceeded'}
     Assert-PixelQuayScope $Ui $Scope
     $null=[PixelQuayQualification.ConsumerNative]::FileName($Ui.process,$Ui.main,$Scope.process,$Scope.hwnd,$Scope.title,$Focus)
-    Set-TintNativeFilename $Focus $Text
-    Assert-PixelQuayScope $Ui $Scope
-    $null=[PixelQuayQualification.ConsumerNative]::FileName($Ui.process,$Ui.main,$Scope.process,$Scope.hwnd,$Scope.title,$Focus)
-    $actual=[PixelQuayQualification.ConsumerNative]::FileNameText($Ui.process,$Ui.main,$Scope.process,$Scope.hwnd,$Scope.title,$Focus)
-    if($actual -cne $Text){throw 'Native capture filename write did not retain exact text'}
     if(-not $Ui.record.Contains('capture_filename_writes')){$Ui.record.capture_filename_writes=[Collections.Generic.List[object]]::new()}
-    $Ui.record.capture_filename_writes.Add(@{title=$Scope.title;hwnd=$Scope.hwnd;focus=$Focus;expected=$Text;actual=$actual;delivery='WM_SETTEXT';timeout_ms=1000})
+    $proof=[ordered]@{title=$Scope.title;hwnd=$Scope.hwnd;focus=$Focus;expected=$Text;actual=$null;delivery='Ctrl+V/CF_UNICODETEXT';clipboard_owner=$null;clipboard_sequence=$null;clipboard_restored=$false;completed=$false;error=$null;cleanup_error=$null}
+    $Ui.record.capture_filename_writes.Add($proof)
+    $lease=$null;$failure=$null;$restoreFailure=$null
+    try {
+        $lease=New-TintFilenameClipboard $Text
+        $proof.clipboard_owner=$lease.Owner;$proof.clipboard_sequence=$lease.Sequence
+        $lease.Verify()
+        Assert-PixelQuayScope $Ui $Scope
+        [PixelQuayQualification.ConsumerNative]::FileNameChord($Ui.process,$Ui.main,$Scope.process,$Scope.hwnd,$Scope.title,$Focus,@(17,86))
+        Start-Sleep -Milliseconds 1000
+        # Keep eager data available until the unchanged bounded native readback
+        # proves the complete path. Neither paste nor a refused focus is replayed.
+        $proof.actual=Wait-PixelQuayFileNameText $Ui $Scope $Focus $Text
+    }catch{$failure=$_;$proof.error=$_.Exception.ToString()}
+    finally {
+        if($null -ne $lease){
+            try{$lease.RestoreEmpty();$proof.clipboard_restored=$true}
+            catch{$restoreFailure=$_;$proof.cleanup_error=$_.Exception.ToString()}
+        }
+    }
+    if($null -ne $failure){throw $failure}
+    if($null -ne $restoreFailure){throw $restoreFailure}
+    $proof.completed=$true
 }
 function Send-PixelQuayKeys($Ui,$Scope,[int[]]$Keys) {
     Assert-PixelQuayScope $Ui $Scope

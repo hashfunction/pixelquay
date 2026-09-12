@@ -21,7 +21,7 @@ jobs:
           python -m unittest discover -s installer/windows/marketing -p 'test_*.py' -v
           if ($LASTEXITCODE -ne 0) { throw 'Capture Python tests failed.' }
           $pwsh=(Get-Process -Id $PID).Path
-          foreach ($fixture in @('test_capture_helpers.ps1','test_capture_operations.ps1','test_capture_ui.ps1','test_capture_filename.ps1')) {
+          foreach ($fixture in @('test_capture_helpers.ps1','test_capture_operations.ps1','test_capture_ui.ps1','test_capture_filename.ps1','test_capture_clipboard.ps1')) {
             & $pwsh -NoProfile -File (Join-Path 'installer/windows/marketing' $fixture)
             if ($LASTEXITCODE -ne 0) { throw "Capture PowerShell test failed: $fixture" }
           }
