@@ -28,7 +28,7 @@ foreach($change in @(
 }
 # Actual UI wrapper must fail before native key/text code when scope validation refuses.
 function Assert-PixelQuayScope { throw 'foreign target' }
-foreach($operation in @({Send-PixelQuayKeys @{} @{} @(17,79)}, {Send-PixelQuayText @{} @{} 'C:\owned\image.png'}, {Send-PixelQuayFileNameKeys @{} @{} 220 @(13)}, {Send-PixelQuayFileNameText @{} @{} 220 'C:\owned\image.png'})) {
+foreach($operation in @({Send-PixelQuayKeys @{} @{} @(17,79)}, {Send-PixelQuayText @{} @{} 'C:\owned\image.png'}, {Send-PixelQuayFileNameKeys @{} @{} 220 @(13)}, {Send-PixelQuayFileNameText @{} @{} 220 'C:\owned\image.png'}, {Send-PixelQuayChooseSpace @{} @{} 220 'C:\owned' $null})) {
     $errorText=$null
     try{& $operation}catch{$errorText=$_.Exception.Message}
     if($errorText -cne 'foreign target'){throw 'Input wrapper did not refuse before native input'}
@@ -93,6 +93,46 @@ foreach($operation in @(
     if($message -notlike '*Retained filename focus required*'){throw 'Filename API reached native calls without retained focus'}
 }
 'PASS target refusal and2 production filename APIs rejecting absent retained focus'
+
+# Hypothetical native Choose metadata exercises the predicate; the real numeric
+# control ID must be queried on Windows, then retained across Tab and Space.
+function New-ChooseEvidence {
+ [PixelQuayQualification.ChooseButtonEvidence]@{Window=200;Filename=220;Button=230;Parent=200;DialogItem=230;NextTab=230;
+  Focus=230;Active=200;DialogPid=17;ButtonPid=17;ControlId=47;Class='Button';Label='Choose';
+  DialogThread=31;ButtonThread=31;Exists=$true;Visible=$true;Enabled=$true;Descendant=$true;CandidateCount=1;Style=0x50010001}
+}
+$choose=New-ChooseEvidence
+[PixelQuayQualification.ConsumerNative]::ValidateChooseButton($choose,'Export destination',$true,$choose)
+foreach($change in @(@{Window=0},@{Filename=0},@{Button=0},@{Parent=201},@{DialogItem=240},@{NextTab=240},@{Focus=220},@{Active=201},
+ @{DialogPid=0},@{ButtonPid=3},@{ControlId=0},@{Class='Edit'},@{Label='Cancel'},@{DialogThread=0},@{ButtonThread=32},@{Exists=$false},@{Visible=$false},@{Enabled=$false},@{Descendant=$false},@{CandidateCount=2},@{Style=0},@{Style=0x50010003})){
+ $bad=New-ChooseEvidence;foreach($key in $change.Keys){$bad.$key=$change[$key]}
+ $rejected=$false;try{[PixelQuayQualification.ConsumerNative]::ValidateChooseButton($bad,'Export destination',$true,$choose)}catch{$rejected=$true}
+ if(-not $rejected){throw "Unsafe Choose evidence accepted: $($change.Keys)"}
+}
+$before=New-ChooseEvidence;$before.Focus=220
+[PixelQuayQualification.ConsumerNative]::ValidateChooseButton($before,'Export destination',$false,$null)
+foreach($title in @('Save Image File','Open Image File','Export Destination')){
+ $rejected=$false;try{[PixelQuayQualification.ConsumerNative]::ValidateChooseButton($choose,$title,$true,$choose)}catch{$rejected=$true}
+ if(-not $rejected){throw 'Choose route accepted unrelated title'}
+}
+$changed=New-ChooseEvidence;$changed.ControlId=48
+$rejected=$false;try{[PixelQuayQualification.ConsumerNative]::ValidateChooseButton($changed,'Export destination',$true,$choose)}catch{$rejected=$true}
+if(-not $rejected){throw 'Changed retained button ID was accepted'}
+foreach($kind in @('replaced-hwnd','changed-thread','missing-retained')) {
+ $e=New-ChooseEvidence;$prior=$choose
+ if($kind -ceq 'replaced-hwnd'){$e.Button=240;$e.DialogItem=240;$e.NextTab=240;$e.Focus=240}
+ if($kind -ceq 'changed-thread'){$e.DialogThread=32;$e.ButtonThread=32}
+ if($kind -ceq 'missing-retained'){$prior=$null}
+ $rejected=$false;try{[PixelQuayQualification.ConsumerNative]::ValidateChooseButton($e,'Export destination',$true,$prior)}catch{$rejected=$true}
+ if(-not $rejected){throw 'Replacement/unretained Choose binding accepted'}
+}
+# Exercise the real final send seam: target succeeds, focus moves, no key packet.
+$script:boundaryEvents.Clear();$script:chooseFocus=230
+$chooseTarget=[Action]{$script:boundaryEvents.Add('target');$script:chooseFocus=220}
+$chooseFocus=[Action]{$script:boundaryEvents.Add('choose');$e=New-ChooseEvidence;$e.Focus=$script:chooseFocus;[PixelQuayQualification.ConsumerNative]::ValidateChooseButton($e,'Export destination',$true,$choose)}
+$rejected=$false;try{[PixelQuayQualification.ConsumerNative]::DeliverInput($chooseTarget,$chooseFocus,$deliver,2)}catch{$rejected=$true}
+if(-not $rejected -or ($script:boundaryEvents -join ',') -cne 'target,choose'){throw 'Moved Choose focus reached native Space'}
+'PASS source-labelled Choose ownership, 29 refusal cases and actual final focus boundary; numeric ID is fixture-only'
 # Failure evidence must survive the real C# -> PowerShell exception wrapper.
 $failedName=New-ObservedFileName;$failedName.Active=201;$failedName.HasFileNameId=$false
 $failure=$null
@@ -108,6 +148,13 @@ if($serialized.native.Active -ne 201 -or $serialized.native.Window -ne 200 -or
  throw 'Exact failing native predicates were lost through exception serialization'
 }
 'PASS real filename refusal evidence survives C# exception wrapping and JSON serialization'
+$bad=New-ChooseEvidence;$bad.Label='Cancel';$failure=$null
+try{[PixelQuayQualification.ConsumerNative]::ValidateChooseButton($bad,'Export destination',$true,$choose)}catch{$failure=$_}
+$ui=@{record=@{}};$scope=@{hwnd=200;title='Export destination';process=@{Id=17}}
+Save-PixelQuayFileNameFailure $ui $scope 220 'observe-focused-choose' $failure.Exception
+$saved=$ui.record|ConvertTo-Json -Depth 12|ConvertFrom-Json
+if($saved.picker_failures[0].choose_native.ControlId -ne 47 -or $saved.picker_failures[0].choose_native.Label -cne 'Cancel' -or $saved.picker_failures[0].native -ne $null){throw 'Native button identity/refusal did not survive exception JSON'}
+'PASS queried Choose failure evidence survives real exception wrapping and bounded JSON'
 
 # Replay diagnostic payloads, not claimed Windows topology: a foreign/non-1148
 # chain must stay rejected while its precise classes/IDs/style remain inspectable.

@@ -5,6 +5,7 @@ $ErrorActionPreference='Stop';Set-StrictMode -Version Latest
 Add-Type @'
 namespace PixelQuayQualification {
  public class ObservedName {public long Focus=220;public string Class="Edit";public bool HasFileNameId=true;}
+ public class ObservedChoice {public long Button=230;}
  public static class ConsumerNative {
   public static int Calls,FailAt,BoundaryCalls,FailBoundaryAt;public static string Readback;public static System.Collections.Generic.List<string> Events=new System.Collections.Generic.List<string>();
   public static ObservedName FileName(object app,long main,object target,long w,string title,long expected){Calls++;if(Calls==FailAt)throw new System.InvalidOperationException("focus changed");return new ObservedName();}
@@ -12,6 +13,17 @@ namespace PixelQuayQualification {
   static void Boundary(long expected){BoundaryCalls++;if(expected!=220 || BoundaryCalls==FailBoundaryAt)throw new System.InvalidOperationException("focus changed at native input");}
   public static void FileNameChord(object app,long main,object target,long w,string title,long expected,int[] keys){Boundary(expected);Events.Add("keys:"+string.Join(",",keys));}
   public static void FileNameTextInput(object app,long main,object target,long w,string title,long expected,string text){Boundary(expected);Events.Add("text:"+text);}
+  public static int ChooseCalls,FailChooseAt;public static bool FailChooseSend;
+  public static ObservedChoice ExportChoose(object app,long main,object target,long w,string title,long filename,string path,object retained,bool focused){
+   ChooseCalls++;Events.Add(focused?"observe-focused-choose":"observe-choose-before-tab");
+   if(ChooseCalls==FailChooseAt)throw new System.InvalidOperationException("Choose ownership differs");
+   if(title!="Export destination" || filename!=220 || path!=Readback || (focused && retained==null))throw new System.InvalidOperationException("Missing retained Choose state");
+   return new ObservedChoice();
+  }
+  public static void ExportChooseSpace(object app,long main,object target,long w,string title,long filename,string path,object retained){
+   Events.Add("choose-native-boundary");if(FailChooseSend)throw new System.InvalidOperationException("Choose focus moved before input");
+   if(retained==null)throw new System.InvalidOperationException("Missing Choose");Events.Add("keys:32");
+  }
 
   public static long[] Windows(long main)=>new long[]{main};
  }
@@ -48,6 +60,27 @@ foreach($case in @('pass','focus-after-alt-n','focus-before-text','focus-before-
  }
 }
 'PASS8 actual picker sequencing and native-boundary refusal cases; physical Windows execution pending'
+
+$scope.title='Export destination'
+foreach($case in @('pass','unproved-choose','tab-focus-boundary','wrong-focused-button','native-button-changed')) {
+ $script:events.Clear();[PixelQuayQualification.ConsumerNative]::Calls=0;[PixelQuayQualification.ConsumerNative]::FailAt=0
+ [PixelQuayQualification.ConsumerNative]::BoundaryCalls=0;[PixelQuayQualification.ConsumerNative]::FailBoundaryAt=if($case -ceq 'tab-focus-boundary'){3}else{0}
+ [PixelQuayQualification.ConsumerNative]::ChooseCalls=0;[PixelQuayQualification.ConsumerNative]::FailChooseAt=switch($case){'unproved-choose'{1};'wrong-focused-button'{2};default{0}}
+ [PixelQuayQualification.ConsumerNative]::FailChooseSend=$case -ceq 'native-button-changed';[PixelQuayQualification.ConsumerNative]::Readback=$path
+ $ui=@{process=@{Id=17};main=100;record=@{picker_fields=[Collections.Generic.List[object]]::new();observations=[Collections.Generic.List[object]]::new()}}
+ $failed=$false;try{Set-PixelQuayPickerPath $ui 'Export destination' $path}catch{$failed=$true}
+ if($case -ceq 'pass'){
+  if($failed -or ($script:events -join '|') -cne ('keys:18,78|keys:17,65|text:'+$path+'|capture|observe-choose-before-tab|keys:9|observe-focused-choose|choose-native-boundary|keys:32')){throw 'Exact ordinary folder Choose sequence differs'}
+  if($ui.record.picker_buttons.Count -ne 3){throw 'Actual queried button metadata/input receipt missing'}
+ }else{
+  if(-not $failed -or 'keys:32' -in $script:events -or 'keys:13' -in $script:events){throw 'Unproved Choose received activation'}
+  $expected=switch($case){'unproved-choose'{'observe-choose-before-tab'};'tab-focus-boundary'{'tab-to-choose'};'wrong-focused-button'{'observe-focused-choose'};'native-button-changed'{'activate-choose'}}
+  if($ui.record.picker_failures[0].stage -cne $expected){throw 'Choose refusal phase missing'}
+  if($case -ceq 'unproved-choose' -and 'keys:9' -in $script:events){throw 'Tab sent before query proved the Choose control'}
+ }
+}
+$scope.title='Open Image File'
+'PASS five actual folder Choose sequence/stop cases; queried Windows ID remains pending'
 
 # A diagnostic serialization/recording failure cannot mask the input refusal.
 $script:events.Clear();[PixelQuayQualification.ConsumerNative]::Calls=0;[PixelQuayQualification.ConsumerNative]::FailAt=1

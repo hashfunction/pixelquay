@@ -33,12 +33,40 @@ public sealed class FileNameEvidence {
     public string[] FailedPredicates;
     public FileNameAncestorEvidence[] Ancestors;
 }
+public sealed class NativeButtonEvidence {
+    public long Window, Parent, Style;
+    public int ProcessId, ControlId;
+    public string Class, Label;
+    public bool Exists, Visible, Enabled, Descendant;
+    public uint Thread;
+}
+public sealed class ChooseButtonEvidence {
+    public long Window, Filename, Button, Parent, DialogItem, NextTab, Focus, Active, Style, FinalFocus, FinalActive;
+    public int DialogPid, ButtonPid, ControlId, CandidateCount;
+    public string Class, Label, ObservationStage;
+    public uint DialogThread, ButtonThread;
+    public bool Exists, Visible, Enabled, Descendant, FinalFocusObserved;
+    public NativeButtonEvidence[] Candidates;
+}
 public sealed class ConsumerGeometry {
     // Raw native x,y,width,height values, without cropping or DPI conversion.
     public int[] Window, Desktop, WorkArea;
     public uint Dpi;
 }
 public static class ConsumerNative {
+    public static void ValidateChooseButton(ChooseButtonEvidence e,string title,bool focused,ChooseButtonEvidence retained) {
+        if(e==null || title!="Export destination" || e.Window==0 || e.Filename==0 || e.Button==0 || e.Button==e.Filename ||
+            e.Parent!=e.Window || e.DialogItem!=e.Button || e.NextTab!=e.Button || e.Active!=e.Window ||
+            e.Focus!=(focused?e.Button:e.Filename) || e.DialogPid<=0 || e.ButtonPid!=e.DialogPid || e.ControlId<=0 ||
+            e.DialogThread==0 || e.ButtonThread!=e.DialogThread || e.Class!="Button" || e.Label!="Choose" ||
+            !e.Exists || !e.Visible || !e.Enabled || !e.Descendant || e.CandidateCount!=1 ||
+            (e.Style&0x50010000)!=0x50010000 || (e.Style&15)>1 ||
+            (focused && retained==null) || (retained!=null && (e.Window!=retained.Window || e.Filename!=retained.Filename ||
+                e.Button!=retained.Button || e.ControlId!=retained.ControlId || e.DialogPid!=retained.DialogPid || e.DialogThread!=retained.DialogThread))) {
+            var error=new InvalidOperationException("Exact source-labelled native Choose button/focus ownership is unproven");
+            error.Data["PixelQuay.ChooseButtonEvidence"]=e;throw error;
+        }
+    }
     public static bool FileNameReadOnly(long style) {
         // A visible child Edit necessarily has nonzero WS_VISIBLE/WS_CHILD
         // style bits. Zero is unavailable data, never proof of writability.
@@ -108,6 +136,9 @@ public static class ConsumerNative {
     [DllImport("user32.dll")] static extern bool IsChild(IntPtr parent, IntPtr child);
     [DllImport("user32.dll")] static extern IntPtr GetParent(IntPtr child);
     [DllImport("user32.dll")] static extern int GetDlgCtrlID(IntPtr child);
+    [DllImport("user32.dll")] static extern IntPtr GetDlgItem(IntPtr dialog,int id);
+    [DllImport("user32.dll")] static extern IntPtr GetNextDlgTabItem(IntPtr dialog,IntPtr control,bool previous);
+    [DllImport("user32.dll")] static extern bool EnumChildWindows(IntPtr parent,EnumCallback cb,IntPtr data);
     [DllImport("user32.dll",EntryPoint="GetWindowLongPtrW",SetLastError=true)] static extern IntPtr GetWindowLongPtr(IntPtr child,int index);
     [DllImport("user32.dll",SetLastError=true)] static extern bool GetGUIThreadInfo(uint thread,ref GUIINFO info);
     [DllImport("user32.dll",CharSet=CharSet.Unicode,SetLastError=true)] static extern IntPtr SendMessageTimeoutW(IntPtr window,uint message,UIntPtr count,StringBuilder text,uint flags,uint timeout,out UIntPtr result);
@@ -225,6 +256,70 @@ public static class ConsumerNative {
         if(SendMessageTimeoutW((IntPtr)focus,0x000D,(UIntPtr)text.Capacity,text,0x22,2000,out result)==IntPtr.Zero || result.ToUInt64()>=4096)
             throw new InvalidOperationException("Bounded native filename readback failed");
         FileName(app,main,target,w,title,focus);return text.ToString();
+    }
+    static string BoundedControlText(long window,int limit) {
+        var text=new StringBuilder(limit+1);UIntPtr result;
+        if(SendMessageTimeoutW((IntPtr)window,0x000D,(UIntPtr)text.Capacity,text,0x22,2000,out result)==IntPtr.Zero || result.ToUInt64()>=(ulong)limit)
+            throw new InvalidOperationException("Bounded native control text unavailable");
+        return text.ToString();
+    }
+    public static ChooseButtonEvidence ExportChoose(Process app,long main,Process target,long w,string title,long filename,string path,ChooseButtonEvidence retained,bool focused) {
+        if(title!="Export destination" || filename==0 || string.IsNullOrEmpty(path) || path.Length>4096 || (focused && retained==null))
+            throw new ArgumentException("Retained export folder field and exact Choose route required");
+        Require(app,main,target,w,title,true);
+        var e=new ChooseButtonEvidence {Window=w,Filename=filename,DialogPid=target.Id,ObservationStage="folder-field",Candidates=Array.Empty<NativeButtonEvidence>()};
+        try {
+            uint owner; e.DialogThread=GetWindowThreadProcessId((IntPtr)w,out owner);
+            if(Class(w)!="#32770" || e.DialogThread==0 || owner!=target.Id)throw new InvalidOperationException("Owned native folder dialog changed");
+            if(!focused) {
+                var field=FileName(app,main,target,w,title,filename);
+                if(!IsObservedExportFolderName(field,title))throw new InvalidOperationException("Choose requires the observed direct folder Edit1152");
+            }
+            uint fieldOwner;uint fieldThread=GetWindowThreadProcessId((IntPtr)filename,out fieldOwner);
+            if(!IsWindow((IntPtr)filename) || !IsWindowVisible((IntPtr)filename) || !IsWindowEnabled((IntPtr)filename) ||
+                !IsChild((IntPtr)w,(IntPtr)filename) || GetParent((IntPtr)filename)!=(IntPtr)w || Class(filename)!="Edit" ||
+                GetDlgCtrlID((IntPtr)filename)!=1152 || fieldOwner!=target.Id || fieldThread!=e.DialogThread ||
+                FileNameReadOnly(GetWindowLongPtr((IntPtr)filename,-16).ToInt64()) || BoundedControlText(filename,4097)!=path)
+                throw new InvalidOperationException("Retained owned folder field/path changed before Choose");
+            e.ObservationStage="native-buttons";
+            var candidates=new List<NativeButtonEvidence>();int observed=0;Exception queryError=null;
+            EnumCallback cb=(child,data)=> {
+                if(++observed>512)return false;
+                try {
+                    if(GetParent(child)!=(IntPtr)w || Pid(child.ToInt64())!=target.Id || Class(child.ToInt64())!="Button")return true;
+                    if(candidates.Count>=16)throw new InvalidOperationException("Native dialog button inventory exceeded bound");
+                    uint childOwner;uint thread=GetWindowThreadProcessId(child,out childOwner);
+                    candidates.Add(new NativeButtonEvidence {Window=child.ToInt64(),Parent=GetParent(child).ToInt64(),ProcessId=(int)childOwner,
+                        ControlId=GetDlgCtrlID(child),Class=Class(child.ToInt64()),Label=BoundedControlText(child.ToInt64(),128),Thread=thread,
+                        Exists=IsWindow(child),Visible=IsWindowVisible(child),Enabled=IsWindowEnabled(child),Descendant=IsChild((IntPtr)w,child),Style=GetWindowLongPtr(child,-16).ToInt64()});
+                    return true;
+                }catch(Exception error){queryError=error;return false;}
+            };
+            EnumChildWindows((IntPtr)w,cb,IntPtr.Zero);GC.KeepAlive(cb);e.Candidates=candidates.ToArray();
+            if(queryError!=null)throw queryError;
+            if(observed>512)throw new InvalidOperationException("Native dialog child inventory exceeded bound");
+            foreach(var button in candidates)if(button.Label=="Choose") {
+                ++e.CandidateCount;e.Button=button.Window;e.Parent=button.Parent;e.ButtonPid=button.ProcessId;e.ControlId=button.ControlId;
+                e.Class=button.Class;e.Label=button.Label;e.ButtonThread=button.Thread;e.Exists=button.Exists;e.Visible=button.Visible;
+                e.Enabled=button.Enabled;e.Descendant=button.Descendant;e.Style=button.Style;
+            }
+            e.DialogItem=GetDlgItem((IntPtr)w,e.ControlId).ToInt64();e.NextTab=GetNextDlgTabItem((IntPtr)w,(IntPtr)filename,false).ToInt64();
+            var info=new GUIINFO {Size=checked((uint)Marshal.SizeOf<GUIINFO>())};
+            if(!GetGUIThreadInfo(e.DialogThread,ref info))throw new InvalidOperationException("Native Choose focus unavailable");
+            e.Focus=info.Focus.ToInt64();e.Active=info.Active.ToInt64();e.ObservationStage="button-validation";
+            ValidateChooseButton(e,title,focused,retained);Require(app,main,target,w,title,true);
+            e.ObservationStage="final-focus-check";e.FinalFocusObserved=GetGUIThreadInfo(e.DialogThread,ref info);
+            e.FinalFocus=info.Focus.ToInt64();e.FinalActive=info.Active.ToInt64();
+            if(!e.FinalFocusObserved || e.FinalFocus!=e.Focus || e.FinalActive!=w)throw new InvalidOperationException("Native Choose focus changed during observation");
+            e.ObservationStage="verified";return e;
+        }catch(Exception error){error.Data["PixelQuay.ChooseButtonEvidence"]=e;throw;}
+    }
+    public static void ExportChooseSpace(Process app,long main,Process target,long w,string title,long filename,string path,ChooseButtonEvidence retained) {
+        if(retained==null || retained.Button==0)throw new ArgumentException("Retained Choose button required");
+        var inputs=ChordInputs(new[]{32});
+        DeliverInput(()=>Require(app,main,target,w,title,true),()=>ExportChoose(app,main,target,w,title,filename,path,retained,true),
+            ()=>SendInput((uint)inputs.Length,inputs,Marshal.SizeOf<INPUT>()),(uint)inputs.Length);
+        Thread.Sleep(100);
     }
     static bool Rectangle(int[] r) { return r!=null && r.Length==4 && r[2]>0 && r[3]>0; }
     static bool Inside(int[] inner,int[] outer) {

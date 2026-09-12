@@ -70,6 +70,10 @@ function Send-PixelQuayFileNameText($Ui,$Scope,[long]$Focus,[string]$Text) {
     Assert-PixelQuayScope $Ui $Scope
     [PixelQuayQualification.ConsumerNative]::FileNameTextInput($Ui.process,$Ui.main,$Scope.process,$Scope.hwnd,$Scope.title,$Focus,$Text)
 }
+function Send-PixelQuayChooseSpace($Ui,$Scope,[long]$Filename,[string]$Path,$Choice) {
+    Assert-PixelQuayScope $Ui $Scope
+    [PixelQuayQualification.ConsumerNative]::ExportChooseSpace($Ui.process,$Ui.main,$Scope.process,$Scope.hwnd,$Scope.title,$Filename,$Path,$Choice)
+}
 function Get-PixelQuayPickerControl($Ui,$Scope,[string]$Id,[string]$Type,[string[]]$Names=@()) {
     Assert-PixelQuayScope $Ui $Scope
     $root=[Windows.Automation.AutomationElement]::FromHandle([IntPtr]$Scope.hwnd)
@@ -105,17 +109,18 @@ function Assert-PixelQuayPickerElement($Ui,$Scope,$Element) {
 function Save-PixelQuayFileNameFailure($Ui,$Scope,[long]$ExpectedFocus,[string]$Stage,[Exception]$Exception) {
     if(-not $Ui.record.Contains('picker_failures')){$Ui.record.picker_failures=[Collections.Generic.List[object]]::new()}
     if($Ui.record.picker_failures.Count -ge 16){throw 'Native picker failure evidence exceeded bound'}
-    $native=$null;$error=$Exception
+    $native=$null;$choose=$null;$error=$Exception
     # PowerShell wraps static C# exceptions. Retain the exact evidence attached
     # at the refusing native boundary, without making fresh input or UI queries.
     for($i=0;$i -lt 8 -and $null -ne $error;$i++){
-        if($error.Data.Contains('PixelQuay.FileNameEvidence')){$native=$error.Data['PixelQuay.FileNameEvidence'];break}
+        if($error.Data.Contains('PixelQuay.FileNameEvidence')){$native=$error.Data['PixelQuay.FileNameEvidence']}
+        if($error.Data.Contains('PixelQuay.ChooseButtonEvidence')){$choose=$error.Data['PixelQuay.ChooseButtonEvidence']}
         $error=$error.InnerException
     }
     $message=$Exception.Message
     if($message.Length -gt 4096){$message=$message.Substring(0,4096)}
     $Ui.record.picker_failures.Add(@{stage=$Stage;title=$Scope.title;hwnd=$Scope.hwnd;pid=$Scope.process.Id;
-        expected_focus=$ExpectedFocus;native=$native;error=$message;observed_utc=[DateTime]::UtcNow.ToString('o')})
+        expected_focus=$ExpectedFocus;native=$native;choose_native=$choose;error=$message;observed_utc=[DateTime]::UtcNow.ToString('o')})
 }
 function Set-PixelQuayPickerPath($Ui,[string]$Title,[string]$Path) {
     $scope=Wait-PixelQuayConsumer { Get-PixelQuayScope $Ui $Title -Picker } "owned native picker $Title"
@@ -128,7 +133,7 @@ function Set-PixelQuayPickerPath($Ui,[string]$Title,[string]$Path) {
         $stage='observe-after-alt-n'
         $filename=[PixelQuayQualification.ConsumerNative]::FileName($Ui.process,$Ui.main,$scope.process,$scope.hwnd,$scope.title,0)
         $focus=$filename.Focus
-        $Ui.record.picker_fields.Add(@{dialog=$scope.title;hwnd=$scope.hwnd;pid=$scope.process.Id;focus=$focus;class=$filename.Class;filename_control_id_verified=$filename.HasFileNameId;native=$filename;input='native Alt+N, Ctrl+A, Unicode text, Enter';readback='bounded WM_GETTEXT'})
+        $Ui.record.picker_fields.Add(@{dialog=$scope.title;hwnd=$scope.hwnd;pid=$scope.process.Id;focus=$focus;class=$filename.Class;filename_control_id_verified=$filename.HasFileNameId;native=$filename;input=if($Title -ceq 'Export destination'){'native Alt+N, Ctrl+A, Unicode text, Tab, focused Choose Space'}else{'native Alt+N, Ctrl+A, Unicode text, Enter'};readback='bounded WM_GETTEXT'})
         $stage='select-filename'
         Send-PixelQuayFileNameKeys $Ui $scope $focus @(17,65)
         $stage='observe-before-text'
@@ -140,10 +145,29 @@ function Set-PixelQuayPickerPath($Ui,[string]$Title,[string]$Path) {
         if ($actual -cne $Path.Replace('/','\')) { throw 'Native picker did not retain exact local path text' }
         $stage='capture-picker'
         Save-PixelQuayObservation $Ui $scope ('picker-'+$Ui.record.observations.Count)
-        $stage='observe-before-enter'
-        $null=[PixelQuayQualification.ConsumerNative]::FileName($Ui.process,$Ui.main,$scope.process,$scope.hwnd,$scope.title,$focus)
-        $stage='submit-filename'
-        Send-PixelQuayFileNameKeys $Ui $scope $focus @(13)
+        if($Title -ceq 'Export destination') {
+            # Enter in the observed SelectFolder Edit navigates into the folder.
+            # Query the actual source-labelled next Button and retain its native
+            # ID/HWND before ordinary Tab; do not invent a control ID or invoke it.
+            if(-not $Ui.record.Contains('picker_buttons')){$Ui.record.picker_buttons=[Collections.Generic.List[object]]::new()}
+            if($Ui.record.picker_buttons.Count -gt 12){throw 'Native picker button evidence exceeded bound'}
+            $stage='observe-choose-before-tab'
+            $choice=[PixelQuayQualification.ConsumerNative]::ExportChoose($Ui.process,$Ui.main,$scope.process,$scope.hwnd,$scope.title,$focus,$actual,$null,$false)
+            $Ui.record.picker_buttons.Add(@{stage=$stage;native=$choice;observed_utc=[DateTime]::UtcNow.ToString('o')})
+            $stage='tab-to-choose'
+            Send-PixelQuayFileNameKeys $Ui $scope $focus @(9)
+            $stage='observe-focused-choose'
+            $focused=[PixelQuayQualification.ConsumerNative]::ExportChoose($Ui.process,$Ui.main,$scope.process,$scope.hwnd,$scope.title,$focus,$actual,$choice,$true)
+            $Ui.record.picker_buttons.Add(@{stage=$stage;native=$focused;observed_utc=[DateTime]::UtcNow.ToString('o')})
+            $stage='activate-choose'
+            Send-PixelQuayChooseSpace $Ui $scope $focus $actual $choice
+            $Ui.record.picker_buttons.Add(@{stage=$stage;button=$choice.Button;input='native Space';observed_utc=[DateTime]::UtcNow.ToString('o')})
+        } else {
+            $stage='observe-before-enter'
+            $null=[PixelQuayQualification.ConsumerNative]::FileName($Ui.process,$Ui.main,$scope.process,$scope.hwnd,$scope.title,$focus)
+            $stage='submit-filename'
+            Send-PixelQuayFileNameKeys $Ui $scope $focus @(13)
+        }
         $stage='picker-disappearance'
         Wait-PixelQuayConsumer { $scope.hwnd -notin [PixelQuayQualification.ConsumerNative]::Windows($Ui.main) } 'native picker disappearance' | Out-Null
     } catch {
