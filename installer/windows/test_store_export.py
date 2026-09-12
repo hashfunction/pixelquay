@@ -232,7 +232,10 @@ class PublicationTests(unittest.TestCase):
             for args in (('init', '-q'), ('config', 'user.email', 'fixture@example.invalid'), ('config', 'user.name', 'Fixture'), ('add', '.'), ('commit', '-qm', 'fixture')):
                 subprocess.run(['git', '-C', str(source), *args], check=True, capture_output=True)
             commit = publication.git(source, 'rev-parse', 'HEAD').decode().strip()
-            archive = root / 'source.tar.gz'; subprocess.run(['git', '-C', str(source), 'archive', '--format=tar.gz', '--prefix=fixture/', '-o', str(archive), commit], check=True)
+            # Reproduce Windows' ambient conversion, but create the fixture as
+            # the public Linux archive host does. Git archive honors EOL config.
+            subprocess.run(['git', '-C', str(source), 'config', 'core.autocrlf', 'true'], check=True)
+            archive = root / 'source.tar.gz'; subprocess.run(['git', '-C', str(source), '-c', 'core.autocrlf=false', '-c', 'core.eol=lf', 'archive', '--format=tar.gz', '--prefix=fixture/', '-o', str(archive), commit], check=True)
             (source / 'file.ps1').unlink(); (source / 'source.json').unlink()
             subprocess.run(['git', '-C', str(source), '-c', 'core.autocrlf=true', 'checkout', '--', '.'], check=True)
             self.assertEqual(b'one\r\ntwo\r\n', (source / 'file.ps1').read_bytes())

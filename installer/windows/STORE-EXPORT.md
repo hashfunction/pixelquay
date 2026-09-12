@@ -135,3 +135,16 @@ and refusal fixture, and the unchanged native input/display/picker/profile suite
 Both live public manifests were independently fetched anonymously again and matched
 the exact committed bytes. `git diff --check` passed. No new native Windows result,
 Store-ready package, submission or marketing screenshot is claimed here.
+
+## Windows archive fixture follow-up
+
+Run `34688377817` built the application, then stopped in the new source archive
+fixture before either MSIX installation. Git on the Windows runner applies its
+ambient `core.autocrlf=true` to `git archive`; the fixture's `.gitattributes`
+archive bytes therefore differed from the committed Git blob. Root reproduced
+that exact failure locally using the same Git setting. The fixture archive now
+explicitly uses `core.autocrlf=false` and `core.eol=lf`, matching the public Linux
+archive host, while its real checkout is still required to contain CRLF text.
+The production source-download/blob verifier is unchanged, including refusal of
+changed, missing or extra source members. This is a test portability correction;
+the fresh full installed run remains required.
