@@ -68,6 +68,13 @@ function Get-PixelQuayPickerControl($Ui,$Scope,[string]$Id,[string]$Type,[string
     if ($root.Current.NativeWindowHandle -ne $Scope.hwnd -or $root.Current.ProcessId -ne $Scope.process.Id) { throw 'Picker UIA root differs from owned HWND' }
     $all=$root.FindAll([Windows.Automation.TreeScope]::Subtree,[Windows.Automation.Condition]::TrueCondition)
     if ($all.Count -gt 512) { throw 'Picker UIA tree exceeded bound' }
+    if ($Ui.ContainsKey('record')) {
+        $nodes=@(for($index=0;$index -lt $all.Count;$index++){
+            $node=$all.Item($index).Current
+            @{name=$node.Name;automation_id=$node.AutomationId;type=$node.ControlType.ProgrammaticName;pid=$node.ProcessId;enabled=$node.IsEnabled;offscreen=$node.IsOffscreen}
+        })
+        $Ui.record.picker_trees.Add(@{dialog=$Scope.title;hwnd=$Scope.hwnd;pid=$Scope.process.Id;requested_id=$Id;requested_names=$Names;requested_type=$Type;nodes=$nodes})
+    }
     $matches=@(for ($i=0;$i -lt $all.Count;$i++) {
         $element=$all.Item($i); $c=$element.Current
         $identified=if($Names.Count){$c.Name -cin $Names}else{$c.AutomationId -ceq $Id}
@@ -152,7 +159,7 @@ function Invoke-PixelQuayConsumerWorkflow([Diagnostics.Process]$Process,[string]
     $Process.Refresh(); $retained=$Process.SafeHandle
     if ($retained.IsClosed -or $retained.IsInvalid -or $Process.HasExited) { throw 'Broker lifetime is unavailable' }
     $ui=@{process=$Process;main=[long]$Process.MainWindowHandle;brokers=@{};output=$Output;
-        record=@{schema='pixelquay-consumer-workflow-v1';process_id=$Process.Id;phase='normal-consumer-ui-actions';picker_fields=[Collections.Generic.List[object]]::new();observations=[Collections.Generic.List[object]]::new()}}
+        record=@{schema='pixelquay-consumer-workflow-v1';process_id=$Process.Id;phase='normal-consumer-ui-actions';picker_fields=[Collections.Generic.List[object]]::new();picker_trees=[Collections.Generic.List[object]]::new();observations=[Collections.Generic.List[object]]::new()}}
     try {
         $main=Get-PixelQuayMain $ui 'Unsaved Image 1 - PixelQuay'
         $main=Open-PixelQuayImage $ui $main.title (Join-Path $fixture.root 'source.png') 'source.png - PixelQuay'
