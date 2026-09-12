@@ -126,3 +126,32 @@ for($i=1;$i -lt 16;$i++){Save-PixelQuayFileNameFailure $ui $scope 220 'observe-b
 $refused=$false;try{Save-PixelQuayFileNameFailure $ui $scope 220 'observe-before-enter' $failure.Exception}catch{$refused=$true}
 if(-not $refused -or $ui.record.picker_failures.Count -ne 16){throw 'Filename evidence bound failed'}
 'PASS diagnostic chain/style/thread serialization and 16-record bound; alternate filename IDs remain refused'
+
+# Actual Save Image File topology from Windows run34681764386. Only this
+# exact native filename chain may supplement the established classic1148 route.
+function New-ModernSaveEvidence {
+    $e=New-ObservedFileName;$e.AncestryReachedDialog=$true;$e.AncestryTruncated=$false
+    $e.Ancestors=@(
+      [PixelQuayQualification.FileNameAncestorEvidence]@{Window=220;Parent=221;ProcessId=17;ControlId=1001;Descendant=$true;Class='Edit'},
+      [PixelQuayQualification.FileNameAncestorEvidence]@{Window=221;Parent=222;ProcessId=17;ControlId=0;Descendant=$true;Class='ComboBox'},
+      [PixelQuayQualification.FileNameAncestorEvidence]@{Window=222;Parent=223;ProcessId=17;ControlId=0;Descendant=$true;Class='FloatNotifySink'},
+      [PixelQuayQualification.FileNameAncestorEvidence]@{Window=223;Parent=224;ProcessId=17;ControlId=0;Descendant=$true;Class='DirectUIHWND'},
+      [PixelQuayQualification.FileNameAncestorEvidence]@{Window=224;Parent=200;ProcessId=17;ControlId=0;Descendant=$true;Class='DUIViewWndClassName'}
+    );return $e
+}
+if(-not [PixelQuayQualification.ConsumerNative]::IsObservedModernSaveFileName((New-ModernSaveEvidence),'Save Image File')){throw 'Observed real Save filename chain rejected'}
+foreach($title in @('Open Image File','Save As','Foreign dialog')) {
+ if([PixelQuayQualification.ConsumerNative]::IsObservedModernSaveFileName((New-ModernSaveEvidence),$title)){throw 'Save filename route accepted another dialog'}
+}
+foreach($change in @(
+ {param($e) $e.Ancestors[0].ControlId=1002}, {param($e) $e.Ancestors[0].Window=999},
+ {param($e) $e.Ancestors[0].Parent=999}, {param($e) $e.Ancestors[1].Class='SearchBox'},
+ {param($e) $e.Ancestors[2].ProcessId=99}, {param($e) $e.Ancestors[3].Descendant=$false},
+ {param($e) $e.Ancestors[4].Parent=999}, {param($e) $e.Ancestors[1].ControlId=1001},
+ {param($e) $e.AncestryReachedDialog=$false}, {param($e) $e.AncestryTruncated=$true},
+ {param($e) $e.Ancestors=$e.Ancestors[0..3]}, {param($e) $e.Ancestors[1]=$null}
+)) {
+ $e=New-ModernSaveEvidence;& $change $e
+ if([PixelQuayQualification.ConsumerNative]::IsObservedModernSaveFileName($e,'Save Image File')){throw 'Mutated Save filename chain accepted'}
+}
+'PASS actual modern Save topology plus15 wrong-title/chain refusals; native rerun still required'

@@ -45,6 +45,23 @@ public static class ConsumerNative {
         if(style==0)throw new InvalidOperationException("Native filename style unavailable");
         return (style & 0x800)!=0;
     }
+    // Windows run34681764386: the modern Save dialog uses this exact native
+    // filename chain. A generic Edit1001 or any other dialog is insufficient.
+    public static bool IsObservedModernSaveFileName(FileNameEvidence e,string title) {
+        if(title!="Save Image File" || e==null || !e.AncestryReachedDialog || e.AncestryTruncated ||
+            e.Ancestors==null || e.Ancestors.Length!=5 || e.Focus==0 || e.Window==0 || e.DialogPid<=0)return false;
+        string[] classes={"Edit","ComboBox","FloatNotifySink","DirectUIHWND","DUIViewWndClassName"};
+        foreach(var node in e.Ancestors)if(node==null)return false;
+        var seen=new HashSet<long>();
+        for(int i=0;i<classes.Length;i++) {
+            var a=e.Ancestors[i];
+            if(a==null || a.Window==0 || a.Window==e.Window || !seen.Add(a.Window) ||
+                a.ProcessId!=e.DialogPid || !a.Descendant || a.Class!=classes[i] ||
+                a.ControlId!=(i==0?1001:0) || (i==0 && a.Window!=e.Focus) ||
+                a.Parent!=(i==classes.Length-1?e.Window:e.Ancestors[i+1].Window))return false;
+        }
+        return true;
+    }
     public static void ValidateFileName(FileNameEvidence e) {
         var failures=new List<string>();
         if(e.Window==0)failures.Add("window");
@@ -164,7 +181,7 @@ public static class ConsumerNative {
                     ControlId=GetDlgCtrlID(child),Class=Class(child.ToInt64()),Descendant=IsChild((IntPtr)w,child)};
                 ancestors.Add(ancestor);evidence.Ancestors=ancestors.ToArray();
                 if(!ancestor.Descendant || ancestor.ProcessId!=target.Id)throw new InvalidOperationException("Filename ancestor left owned dialog");
-                // Keep the exact observed filename ID requirement; Save picker topology is still unproven.
+                // Preserve the established classic filename ID; modern Save is checked after the complete chain.
                 if(ancestor.ControlId==1148)evidence.HasFileNameId=true;
             }
             evidence.AncestryReachedDialog=child==(IntPtr)w;
@@ -172,6 +189,7 @@ public static class ConsumerNative {
             evidence.ObservationStage="style";
             evidence.Style=GetWindowLongPtr(info.Focus,-16).ToInt64();
             evidence.ReadOnly=FileNameReadOnly(evidence.Style);
+            evidence.HasFileNameId=evidence.HasFileNameId || IsObservedModernSaveFileName(evidence,title);
             evidence.ObservationStage="filename-validation";
             ValidateFileName(evidence);Require(app,main,target,w,title,true);
             // Re-read focus after ownership/style/ancestry queries. Diagnostics

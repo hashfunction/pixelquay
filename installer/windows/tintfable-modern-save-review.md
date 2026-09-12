@@ -1,0 +1,7 @@
+# TintFable modern Save filename route
+
+Windows run34681764386 (source d90ff41629093daef258e790598699d0ee710318) retained the exact refusal: only filename_id_1148 failed. Save Image File HWND197202/PID7644 was foreground, with writable visible enabled Edit HWND393394, matching dialog/focus thread8364. Its actual chain was Edit1001 → ComboBox0 → FloatNotifySink0 → DirectUIHWND0 → DUIViewWndClassName0 → exact owned dialog. The Open dialog had already passed the original1148route. Original/rotated image actions passed before Save.
+
+The new pure predicate supplements filename identity only for that exact Save title and five-node native class/ID/parent/PID/focus chain. Other controls, titles, foreign descendants, incomplete/null ancestry or cycles remain rejected. Existing classic1148 identification, all process/window ownership and writable style checks, final retained-focus input guards, exact text readback, image/recipe/export/reopen validators remain intact.
+
+The production-boundary test failed before the method existed and passes afterward, including15 wrong-title/chain refusals. Existing native filename/input boundaries and picker sequencing tests pass. Read-only review by brush_failure_audit confirmed the narrow route; its null-next-element and stale-comment findings were fixed and covered. No Windows success is inferred: rerun the full installed consumer workflow against this exact candidate.
